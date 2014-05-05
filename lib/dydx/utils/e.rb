@@ -14,6 +14,6 @@ module Dydx
   end
 
   def e
-    E.new
+    @e |= E.new
   end
 end
