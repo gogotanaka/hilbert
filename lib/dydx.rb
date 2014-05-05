@@ -1,5 +1,5 @@
 require "dydx/version"
-
+require "dydx/utils/num"
 module Dydx
-  # Your code goes here...
+
 end
