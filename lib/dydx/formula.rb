@@ -1,9 +1,7 @@
 require "dydx/helper"
 module Dydx
   class Formula
-    include Operator::Base
     include Operator::General
-    include Operator::Interface
     include Helper
     attr_accessor :f, :g, :operator
 

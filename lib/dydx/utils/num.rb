@@ -1,13 +1,11 @@
-require "dydx/operator/base"
-require "dydx/operator/general"
-require "dydx/operator/interface"
 require "dydx/operator/num"
+
+require "dydx/helper"
 module Dydx
   class Num
-    include Operator::Base
     include Operator::Num
-    include Operator::General
-    include Operator::Interface
+
+    include Helper
     attr_accessor :n
 
     def initialize(n)

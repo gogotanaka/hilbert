@@ -1,15 +1,15 @@
+require "dydx/operator/general"
+
 module Dydx
   class Pi
-    # include Operator::Base
-    # include Operator::General
-    # include Operator::Interface
+    include Operator::General
 
     def d(sym=:x)
       _(0)
     end
 
     def to_s
-      'π'
+      'pi'
     end
   end
 

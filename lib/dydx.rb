@@ -11,11 +11,8 @@ require "dydx/fixnum"
 require "dydx/symbol"
 require "dydx/formula"
 
-
-require "dydx/operator/base"
-require "dydx/operator/general"
-require "dydx/operator/interface"
-require "dydx/operator/num"
+require 'bundler/setup'
+require 'dydx'
 module Dydx
 
 end

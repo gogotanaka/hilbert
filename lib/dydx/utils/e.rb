@@ -1,8 +1,12 @@
+require "dydx/operator/general"
+
+require "dydx/helper"
+
 module Dydx
   class E
-    # include Operator::Base
-    # include Operator::General
-    # include Operator::Interface
+    include Operator::General
+
+    include Helper
 
     def d(sym=:x)
       _(0)
