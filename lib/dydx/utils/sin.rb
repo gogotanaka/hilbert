@@ -15,6 +15,10 @@ module Dydx
   end
 
   def sin(x)
-    Sin.new(x)
+    if x == pi
+      _(0)
+    else
+      Sin.new(x)
+    end
   end
 end
