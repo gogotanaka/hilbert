@@ -20,6 +20,6 @@ module Dydx
   end
 
   def _(num)
-    Num.new(num)
+    eval("@n#{num} ||= Num.new(num)")
   end
 end
