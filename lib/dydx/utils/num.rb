@@ -1,9 +1,13 @@
+require "dydx/operator/base"
+require "dydx/operator/general"
+require "dydx/operator/interface"
+require "dydx/operator/num"
 module Dydx
   class Num
-    # include Operator::Base
-    # include Operator::Num
-    # include Operator::General
-    # include Operator::Interface
+    include Operator::Base
+    include Operator::Num
+    include Operator::General
+    include Operator::Interface
     attr_accessor :n
 
     def initialize(n)

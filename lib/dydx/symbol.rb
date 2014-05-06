@@ -1,3 +1,8 @@
+require "dydx/operator/base"
+require "dydx/operator/general"
+require "dydx/operator/interface"
+require "dydx/operator/num"
+
 module Dydx
   Symbol.class_eval do
     include Operator::Base
