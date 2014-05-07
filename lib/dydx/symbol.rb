@@ -1,7 +1,3 @@
-require "dydx/operator/general"
-
-require "dydx/helper"
-
 module Dydx
   Symbol.class_eval do
     include Operator::General

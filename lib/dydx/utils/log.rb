@@ -1,8 +1,8 @@
+require "dydx/operator/general"
+
 module Dydx
   class Log
-    # include Operator::Base
-    # include Operator::General
-    # include Operator::Interface
+    include Operator::General
 
     attr_accessor :f
 

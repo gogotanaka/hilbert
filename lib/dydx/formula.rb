@@ -1,4 +1,3 @@
-require "dydx/helper"
 module Dydx
   class Formula
     include Operator::General
