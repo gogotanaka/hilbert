@@ -25,28 +25,30 @@ describe Fixnum do
   end
 
   context 'With Fixnum' do
-    it{ expect((0 + 3).to_s).to eq('3') }
-    it{ expect((3 + 0).to_s).to eq('3') }
+    it{ expect(0 + 3).to eq(3) }
+    it{ expect(3 + 0).to eq(3) }
+    it{ expect(2 + 3).to eq(5) }
 
-    it{ expect((0 - 3).to_s).to eq('-3') }
-    it{ expect((3 - 0).to_s).to eq('3') }
+    it{ expect(0 - 3).to eq(-3) }
+    it{ expect(3 - 0).to eq(3) }
+    it{ expect(2 - 3).to eq(-1) }
 
-    it{ expect((0 * 3).to_s).to eq('0') }
-    it{ expect((3 * 0).to_s).to eq('0') }
-
-    it{ expect((1 * 3).to_s).to eq('3') }
-    it{ expect((3 * 1).to_s).to eq('3') }
+    it{ expect(0 * 3).to eq(0) }
+    it{ expect(3 * 0).to eq(0) }
+    it{ expect(1 * 3).to eq(3) }
+    it{ expect(3 * 1).to eq(3) }
+    it{ expect(3 * 2).to eq(6) }
 
     it{ expect((0 / 3).to_s).to eq('0') }
     it{ expect{(3 / 0).to_s}.to raise_error(ZeroDivisionError) }
-
-    it{ expect((1 / 3).to_s).to eq('( 1 / 3 )') }
     it{ expect((3 / 1).to_s).to eq('3') }
+    it{ expect((2 / 3).to_s).to eq('( 2 / 3 )') }
+
 
     it{ expect((0 ^ 3).to_s).to eq('0') }
     it{ expect((3 ^ 0).to_s).to eq('1') }
-
     it{ expect((1 ^ 3).to_s).to eq('1') }
     it{ expect((3 ^ 1).to_s).to eq('3') }
+    it{ expect((3 ^ 2).to_s).to eq('( 3 ^ 2 )') }
   end
 end
