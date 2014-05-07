@@ -8,7 +8,7 @@ module Dydx
       @f, @g, @operator = f, g, operator
     end
 
-    def d(sym=:x)
+    def differentiate(sym=:x)
       case @operator
       when :+
         f.d(sym) + g.d(sym)
@@ -27,6 +27,7 @@ module Dydx
         end
       end
     end
+    alias_method :d, :differentiate
 
     def to_s
       if is_a?(Formula) && subtraction? && f.is_0?

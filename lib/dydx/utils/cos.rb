@@ -15,6 +15,10 @@ module Dydx
   end
 
   def cos(x)
-    Cos.new(x)
+    if x == pi
+      _(-1)
+    else
+      Cos.new(x)
+    end
   end
 end

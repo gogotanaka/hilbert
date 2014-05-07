@@ -4,9 +4,10 @@ module Dydx
   class Pi
     include Operator::General
 
-    def d(sym=:x)
+    def differentiate(sym=:x)
       _(0)
     end
+    alias_method :d, :differentiate
 
     def to_s
       'pi'
