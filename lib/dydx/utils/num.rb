@@ -22,6 +22,10 @@ module Dydx
   end
 
   def _(num)
-    eval("@n#{num} ||= Num.new(num)")
+    if num >= 0
+      eval("@p#{num} ||= Num.new(num)")
+    else
+      eval("@n#{-1 * num} ||= Num.new(num)")
+    end
   end
 end
