@@ -31,7 +31,7 @@ module Dydx
     alias_method :d, :differentiate
 
     def to_s
-      if is_a?(Formula) && subtraction? && f.is_0?
+      if subtraction? && f.is_0?
         "( - #{g.to_s} )"
       else
         "( #{f.to_s} #{@operator} #{g.to_s} )"
