@@ -28,6 +28,8 @@ module Dydx
     elsif formula.is_a?(Formula) && formula.exponentiation?
       f, g = formula.f, formula.g
       g * log(f)
+    elsif formula.is_1?
+      _(0)
     elsif formula.is_a?(E)
       _(1)
     else
