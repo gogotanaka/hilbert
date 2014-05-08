@@ -3,6 +3,7 @@ require "dydx/operator/general"
 module Dydx
   class Log
     include Operator::General
+    include Helper
 
     attr_accessor :f
 
