@@ -1,5 +1,7 @@
 module Dydx
   class Cos
+    include Helper
+
     attr_accessor :x
     def initialize(x)
       @x = x
@@ -9,13 +11,16 @@ module Dydx
       "cos( #{x.to_s} )"
     end
 
-    # def d(sym=:x)
-    #   f.d(sym) / (f)
-    # end
+    def d(sym=:x)
+      f.d(sym) / (f)
+    end
   end
 
   def cos(x)
-    if x == pi
+    multiplier = x.is_multiple_of(pi)
+    if multiplier.is_a?(Num) && multiplier.n % 2 == 0
+      _(1)
+    elsif multiplier.is_a?(Num) && multiplier.n % 2 == 1
       _(-1)
     else
       Cos.new(x)
