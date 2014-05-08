@@ -1,6 +1,8 @@
+require 'dydx/operator/symbol'
+
 module Dydx
   Symbol.class_eval do
-    include Operator::General
+    include Operator::Symbol
 
     include Helper
 
