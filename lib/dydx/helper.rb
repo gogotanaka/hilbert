@@ -1,11 +1,11 @@
 module Dydx
   module Helper
     def is_0?
-      is_a?(Num) && n == 0
+      self == 0 || (is_a?(Num) && n == 0)
     end
 
     def is_1?
-      is_a?(Num) && n == 1
+      self == 1 || (is_a?(Num) && n == 1)
     end
 
     {

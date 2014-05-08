@@ -1,5 +1,7 @@
 module Dydx
   Fixnum.class_eval do
+    include Helper
+
     %w(+ - * / ^).each do |operator|
       define_method(operator) do |g|
         if g.is_a?(Symbol) ||
