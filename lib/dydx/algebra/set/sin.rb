@@ -13,7 +13,7 @@ module Dydx
         end
 
         def d(sym=:x)
-          cos(f) * f.d(sym)
+          cos(x) * x.d(sym)
         end
       end
     end

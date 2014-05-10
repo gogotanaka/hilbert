@@ -13,7 +13,7 @@ module Dydx
         end
 
         def d(sym=:x)
-          f.d(sym) / (f)
+          -1 * sin(x) * x.d(sym)
         end
       end
     end

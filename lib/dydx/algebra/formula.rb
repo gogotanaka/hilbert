@@ -30,7 +30,8 @@ module Dydx
       alias_method :d, :differentiate
 
       def to_s
-        if subtraction? && f.is_0?
+        if (subtraction? && f.is_0?) ||
+          (multiplication? && (f.is_minus1? || g.is_minus1?)  )
           "( - #{g.to_s} )"
         else
           "( #{f.to_s} #{@operator} #{g.to_s} )"
