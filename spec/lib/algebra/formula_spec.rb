@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dydx::Formula do
+describe Dydx::Algebra::Formula do
 
   context 'With Fixnum' do
     let(:formula) { (:x + :y) }

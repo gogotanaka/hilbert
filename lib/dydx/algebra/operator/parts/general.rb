@@ -1,50 +1,52 @@
 module Dydx
-  module Operator
-    module Parts
-      module General
-        def +(x)
-          if x.is_a?(Num) && x.n ==0
-            self
-          else
-            super(x)
+  module Algebra
+    module Operator
+      module Parts
+        module General
+          def +(x)
+            if x.is_a?(Num) && x.n ==0
+              self
+            else
+              super(x)
+            end
           end
-        end
 
-        def -(x)
-          if x.is_a?(Num) && x.n ==0
-            self
-          else
-            super(x)
+          def -(x)
+            if x.is_a?(Num) && x.n ==0
+              self
+            else
+              super(x)
+            end
           end
-        end
 
-        def *(x)
-          if x.is_a?(Num) && x.n ==0
-            x
-          elsif x.is_a?(Num) && x.n ==1
-            self
-          else
-            super(x)
+          def *(x)
+            if x.is_a?(Num) && x.n ==0
+              x
+            elsif x.is_a?(Num) && x.n ==1
+              self
+            else
+              super(x)
+            end
           end
-        end
 
-        def /(x)
-          if x.is_a?(Num) && x.n ==0
-            raise ZeroDivisionError
-          elsif x.is_a?(Num) && x.n ==1
-            self
-          else
-            super(x)
+          def /(x)
+            if x.is_a?(Num) && x.n ==0
+              raise ZeroDivisionError
+            elsif x.is_a?(Num) && x.n ==1
+              self
+            else
+              super(x)
+            end
           end
-        end
 
-        def ^(x)
-          if x.is_a?(Num) && x.n ==0
-            _(1)
-          elsif x.is_a?(Num) && x.n ==1
-            self
-          else
-            super(x)
+          def ^(x)
+            if x.is_a?(Num) && x.n ==0
+              _(1)
+            elsif x.is_a?(Num) && x.n ==1
+              self
+            else
+              super(x)
+            end
           end
         end
       end

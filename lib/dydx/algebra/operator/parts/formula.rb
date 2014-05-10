@@ -1,26 +1,28 @@
 module Dydx
-  module Operator
-    module Parts
-      module Formula
-        def *(x)
-          if exponentiation? &&
-            x.exponentiation? &&
-            f == x.f
+  module Algebra
+    module Operator
+      module Parts
+        module Formula
+          def *(x)
+            if exponentiation? &&
+              x.exponentiation? &&
+              f == x.f
 
-            f ^ (g + x.g)
-          else
-            super(x)
+              f ^ (g + x.g)
+            else
+              super(x)
+            end
           end
-        end
 
-        def /(x)
-          if exponentiation? &&
-            x.exponentiation? &&
-            f == x.f
+          def /(x)
+            if exponentiation? &&
+              x.exponentiation? &&
+              f == x.f
 
-            f ^ (g - x.g)
-          else
-            super(x)
+              f ^ (g - x.g)
+            else
+              super(x)
+            end
           end
         end
       end

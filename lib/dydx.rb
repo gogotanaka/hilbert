@@ -1,10 +1,8 @@
 require 'dydx/helper'
-require 'dydx/field'
-require 'dydx/formula'
-require 'dydx/operator'
+require 'dydx/algebra'
 
 module Dydx
-  include Field
+  include Algebra
   class Delta
     attr_accessor :var, :function
     def initialize(var, function)

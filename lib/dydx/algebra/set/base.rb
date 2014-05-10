@@ -1,7 +1,9 @@
 module Dydx
-  module Field
-    class Base
-      include Helper
+  module Algebra
+    module Set
+      class Base
+        include Helper
+      end
     end
   end
 end

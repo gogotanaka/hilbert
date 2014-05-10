@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dydx::Field::E do
+describe Dydx::Algebra::Set::E do
   it{ expect(e).to eq(e) }
   it{ expect(e.to_s).to eq('e') }
   it{ expect(e.d(:x).to_s).to eq(_(0).to_s) }

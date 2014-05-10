@@ -1,15 +1,15 @@
-require 'dydx/operator/common_parts'
-require 'dydx/operator/parts/formula'
+require 'dydx/algebra/operator/common_parts'
+require 'dydx/algebra/operator/parts/formula'
 
 module Dydx
-  module Operator
-    module Formula
-      include Parts::Base
-      include Parts::Formula
-      include Parts::General
-      include Parts::Interface
+  module Algebra
+    module Operator
+      module Formula
+        include Parts::Base
+        include Parts::Formula
+        include Parts::General
+        include Parts::Interface
+      end
     end
   end
-
-  class Formula; include Operator::Formula; end
 end

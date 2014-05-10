@@ -1,18 +1,16 @@
 module Dydx
-  module Field
-    class Pi < Base
-      def differentiate(sym=:x)
-        _(0)
-      end
-      alias_method :d, :differentiate
+  module Algebra
+    module Set
+      class Pi < Base
+        def differentiate(sym=:x)
+          _(0)
+        end
+        alias_method :d, :differentiate
 
-      def to_s
-        'pi'
+        def to_s
+          'pi'
+        end
       end
-    end
-
-    def pi
-      @pi ||= Pi.new
     end
   end
 end

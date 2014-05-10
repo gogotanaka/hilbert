@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dydx::Field::Sin do
+describe Dydx::Algebra::Set::Sin do
   it{ expect(sin(:x).to_s).to eq('sin( x )') }
   it{ expect(sin(pi)).to eq(_(0)) }
 end
