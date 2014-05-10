@@ -1,6 +1,20 @@
 # Dydx
+It always happens you want to differentiate with ruby. right?
 
-TODO: Write a gem description
+Dydx will eliminate the trouble.
+
+```
+d/dx(e ^ :x)
+=> ( e ^ x )
+
+ (:x ^ 2).d(:x)
+=> ( 2 * x )
+
+$y = cos(:x)
+=> ( - sin( x ) )
+```
+
+(That's wonderful!!!!! But, I feel there is no meaning ... )
 
 ## Installation
 
@@ -18,7 +32,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    include Dydx
 
 ## Contributing
 
