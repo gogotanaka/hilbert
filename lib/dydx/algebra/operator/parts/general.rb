@@ -4,7 +4,7 @@ module Dydx
       module Parts
         module General
           def +(x)
-            if x.is_a?(Num) && x.n ==0
+            if x.is_0?
               self
             else
               super(x)
@@ -12,7 +12,7 @@ module Dydx
           end
 
           def -(x)
-            if x.is_a?(Num) && x.n ==0
+            if x.is_0?
               self
             else
               super(x)
@@ -20,9 +20,9 @@ module Dydx
           end
 
           def *(x)
-            if x.is_a?(Num) && x.n ==0
+            if x.is_0?
               x
-            elsif x.is_a?(Num) && x.n ==1
+            elsif x.is_1?
               self
             else
               super(x)
@@ -30,9 +30,9 @@ module Dydx
           end
 
           def /(x)
-            if x.is_a?(Num) && x.n ==0
+            if x.is_0?
               raise ZeroDivisionError
-            elsif x.is_a?(Num) && x.n ==1
+            elsif x.is_1?
               self
             else
               super(x)
@@ -40,9 +40,9 @@ module Dydx
           end
 
           def ^(x)
-            if x.is_a?(Num) && x.n ==0
+            if x.is_0?
               _(1)
-            elsif x.is_a?(Num) && x.n ==1
+            elsif x.is_1?
               self
             else
               super(x)

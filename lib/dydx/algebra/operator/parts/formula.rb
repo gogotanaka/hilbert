@@ -3,25 +3,35 @@ module Dydx
     module Operator
       module Parts
         module Formula
-          def *(x)
-            if exponentiation? &&
-              x.exponentiation? &&
-              f == x.f
-
-              f ^ (g + x.g)
-            else
-              super(x)
+          %w(+ -).each do |operator|
+            define_method(operator) do |x|
+              if multiplication? && x.multiplication?
+                if f == x.f
+                  f * g.send(operator, x.g)
+                elsif g == x.g
+                  f.send(operator, x.f) * g
+                else
+                  super(x)
+                end
+              else
+                super(x)
+              end
             end
           end
 
-          def /(x)
-            if exponentiation? &&
-              x.exponentiation? &&
-              f == x.f
-
-              f ^ (g - x.g)
-            else
-              super(x)
+          %w(* /).each do |operator|
+            define_method(operator) do |x|
+              if exponentiation? && x.exponentiation?
+                if f == x.f
+                  f ^ g.send({'*'=>'+', '/'=>'-'}[operator], x.g)
+                elsif g == x.g
+                  f.send(operator, x.f) ^ g
+                else
+                  super(x)
+                end
+              else
+                super(x)
+              end
             end
           end
         end
