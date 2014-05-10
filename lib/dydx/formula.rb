@@ -1,7 +1,5 @@
-require 'dydx/operator/formula'
 module Dydx
   class Formula
-    include Operator::Formula
     include Helper
     attr_accessor :f, :g, :operator
 

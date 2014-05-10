@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dydx::Num do
+describe Dydx::Field::Num do
   it{ expect(_(1)).to eq(_(1)) }
   it{ expect(_(-1)).to eq(_(-1)) }
   it{ expect(_(1).to_s).to eq('1') }

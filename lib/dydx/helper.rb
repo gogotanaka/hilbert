@@ -9,7 +9,7 @@ module Dydx
     end
 
     def is_multiple_of(x)
-      is_multiple = if (self == 0) || (self == _(0))
+      is_multiple = if is_0?
         _(0)
       elsif self == x
         _(1)
