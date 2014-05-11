@@ -33,18 +33,18 @@ module Dydx
 
     def _(num)
       if num >= 0
-        eval("@p#{num} ||= Num.new(num)")
+        eval("$p#{num} ||= Num.new(num)")
       else
-        eval("@n#{-1 * num} ||= Num.new(num)")
+        eval("$n#{-1 * num} ||= Num.new(num)")
       end
     end
 
     def pi
-      @pi ||= Pi.new
+      $pi ||= Pi.new
     end
 
     def e
-      @e ||= E.new
+      $e ||= E.new
     end
 
     def log(formula)
