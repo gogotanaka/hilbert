@@ -1,15 +1,6 @@
 require 'dydx/algebra/formula'
 
-require 'dydx/algebra/set/base'
-require 'dydx/algebra/set/num'
-require 'dydx/algebra/set/fixnum'
-require 'dydx/algebra/set/symbol'
-require 'dydx/algebra/set/e'
-require 'dydx/algebra/set/pi'
-require 'dydx/algebra/set/log'
-require 'dydx/algebra/set/sin'
-require 'dydx/algebra/set/cos'
-require 'dydx/algebra/set/tan'
+require 'dydx/algebra/set'
 
 require 'dydx/algebra/operator/formula'
 require 'dydx/algebra/operator/symbol'
@@ -21,6 +12,21 @@ module Dydx
     include Set
     module Set
       Symbol.class_eval{ include Operator::Symbol }
+      Fixnum.class_eval do
+        %w(+ - * / ^).each do |operator|
+          define_method(operator) do |g|
+            if g.is_a?(Symbol) ||
+              g.is_a?(Formula) ||
+              g.is_a?(Base) ||
+              %w(/ ^).include?(operator)
+
+              Num.new(self).send(operator.to_sym, g)
+            else
+              (to_f.send(operator.to_sym, g)).to_i
+            end
+          end
+        end
+      end
       class Num;    include Operator::Num; end
       class E;      include Operator::General; end
       class Pi;     include Operator::General; end
@@ -30,61 +36,5 @@ module Dydx
       class Tan;    include Operator::General; end
     end
     class Formula;  include Operator::Formula; end
-
-    def _(num)
-      if num >= 0
-        eval("$p#{num} ||= Num.new(num)")
-      else
-        eval("$n#{-1 * num} ||= Num.new(num)")
-      end
-    end
-
-    def pi
-      $pi ||= Pi.new
-    end
-
-    def e
-      $e ||= E.new
-    end
-
-    def log(formula)
-      if formula.multiplication?
-        f, g = formula.f, formula.g
-        log(f) + log(g)
-      elsif formula.exponentiation?
-        f, g = formula.f, formula.g
-        g * log(f)
-      elsif formula.is_1?
-        _(0)
-      elsif formula.is_a?(E)
-        _(1)
-      else
-        Log.new(formula)
-      end
-    end
-
-    def sin(x)
-      multiplier = x.is_multiple_of(pi)
-      if multiplier.is_a?(Num)
-        _(0)
-      else
-        Sin.new(x)
-      end
-    end
-
-    def cos(x)
-      multiplier = x.is_multiple_of(pi)
-      if multiplier.is_a?(Num) && multiplier.n % 2 == 0
-        _(1)
-      elsif multiplier.is_a?(Num) && multiplier.n % 2 == 1
-        _(-1)
-      else
-        Cos.new(x)
-      end
-    end
-
-    def tan(x)
-      Tan.new(x)
-    end
   end
 end
