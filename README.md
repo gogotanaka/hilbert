@@ -1,17 +1,28 @@
 # Dydx
 It always happens you want to differentiate with ruby. right?
 
-Dydx will eliminate the trouble.
+Dydx will eliminate this. Like this
 
 ```
-d/dx(e ^ :x)
-=> ( e ^ x )
-
- (:x ^ 2).d(:x)
-=> ( 2 * x )
+( d/dx(e ^ :x) ).to_s
+=> "( e ^ x )"
 
 $y = cos(:x)
-=> ( - sin( x ) )
+(dy/dx).to_s
+=> "( - sin( x ) )"
+
+# pretermit '.to_s'
+
+d/dx(log(:x))
+=> "( 1 / x )"
+
+d/dx(:x^:n)
+=> "( n * ( x ^ ( n - 1 ) ) )"
+
+
+d/dx(:x^2)
+=> "( 2 * x )"
+
 ```
 
 (That's wonderful!!!!! But, I feel there is no meaning ... )
