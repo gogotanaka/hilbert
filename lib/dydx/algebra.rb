@@ -17,8 +17,7 @@ module Dydx
           define_method(operator) do |g|
             if g.is_a?(Symbol) ||
               g.is_a?(Formula) ||
-              g.is_a?(Base) ||
-              %w(/ ^).include?(operator)
+              g.is_a?(Base)
 
               Num.new(self).send(operator.to_sym, g)
             else
