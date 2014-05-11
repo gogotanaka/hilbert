@@ -20,6 +20,10 @@ module Dydx
               g.is_a?(Base)
 
               Num.new(self).send(operator.to_sym, g)
+            elsif operator == '^' && g.is_a?(Fixnum)
+              result = 1
+              g.times{ result *= self }
+              result
             else
               (to_f.send(operator.to_sym, g)).to_i
             end

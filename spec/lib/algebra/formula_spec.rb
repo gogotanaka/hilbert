@@ -65,4 +65,10 @@ describe Dydx::Algebra::Formula do
     it{ expect(d1.to_s).to eq('( ( x * 2 ) * ( x ^ ( ( x * 2 ) - 1 ) ) )') }
     it{ expect(d2.to_s).to eq('( ( x * 2 ) * ( x ^ ( ( x * 2 ) - 1 ) ) )') }
   end
+
+  $c = (:t ^ 2) / 2
+  let(:d1){ dc/dt }
+  let(:d2){ d/dt($c) }
+  it{ expect(d1.to_s).to eq('t') }
+  it{ expect(d2.to_s).to eq('t') }
 end

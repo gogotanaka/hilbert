@@ -16,6 +16,10 @@ module Dydx
         def to_s
           @n.to_s
         end
+
+        def ==(x)
+          x.is_a?(Num) && n == x.n
+        end
       end
     end
   end

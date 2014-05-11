@@ -44,6 +44,8 @@ module Dydx
           def ^(x)
             if (n == 0) || (n == 1)
               self
+            elsif x.is_a?(Num)
+              _(n ^ x.n)
             else
               super(x)
             end
