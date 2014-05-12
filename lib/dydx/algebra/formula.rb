@@ -37,6 +37,10 @@ module Dydx
           "( #{f.to_s} #{@operator} #{g.to_s} )"
         end
       end
+
+      def include?(x)
+        f == x || g == x
+      end
     end
   end
 end
