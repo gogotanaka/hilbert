@@ -13,13 +13,13 @@ module Dydx
                 else
                   super(x)
                 end
-              elsif ([self.operator, operator].sort == [:+, :-]) && ( f == x || g == x )
+              elsif ([self.operator, operator].sort == [:+, :-]) &&  include?(x)
                 if f == x
                   g
                 elsif g == x
                   f
                 end
-              elsif (self.operator == operator) && ( f == x || g == x )
+              elsif (self.operator == operator) && include?(x)
                 if f == x
                   f.send(operator, x).send(operator, g)
                 elsif g == x
@@ -41,13 +41,13 @@ module Dydx
                 else
                   super(x)
                 end
-              elsif ([self.operator, operator].sort == [:*, :/]) && ( f == x || g == x )
+              elsif ([self.operator, operator].sort == [:*, :/]) &&  include?(x)
                 if f == x
                   g
                 elsif g == x
                   f
                 end
-              elsif (self.operator == operator) && ( f == x || g == x )
+              elsif (self.operator == operator) && include?(x)
                 if f == x
                   f.send(operator, x).send(operator, g)
                 elsif g == x
