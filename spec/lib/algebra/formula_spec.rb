@@ -54,4 +54,9 @@ describe Dydx::Algebra::Formula do
     it{ expect(addition.include?(:x)).to be_true }
     it{ expect(addition.include?(:z)).to be_false }
   end
+
+  describe '#openable?' do
+    it{ expect((1 + :x).openable?(_(1))).to be_true }
+    it{ expect((1 + :x).openable?(:z)).to be_false }
+  end
 end

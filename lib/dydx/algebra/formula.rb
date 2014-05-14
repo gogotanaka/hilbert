@@ -41,6 +41,14 @@ module Dydx
       def include?(x)
         f == x || g == x
       end
+
+      def openable?(x)
+        if x.is_a?(Num) || x.is_a?(Fixnum)
+          f.class == x.class || g.class == x.class
+        else
+          false
+        end
+      end
     end
   end
 end
