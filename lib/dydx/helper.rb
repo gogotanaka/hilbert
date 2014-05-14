@@ -1,5 +1,13 @@
 module Dydx
   module Helper
+    OP_SYM_STR = {
+      addition:       :+,
+      subtraction:    :-,
+      multiplication: :*,
+      division:       :/,
+      exponentiation: :^
+    }
+
     def is_0?
       self == 0 || (is_a?(Num) && n == 0)
     end
@@ -25,14 +33,27 @@ module Dydx
       end
     end
 
-    {
-      addition:       :+,
-      subtraction:    :-,
-      multiplication: :*,
-      division:       :/,
-      exponentiation: :^
-    }.each do |operator_name, operator|
+    OP_SYM_STR.each do |operator_name, operator|
       define_method("#{operator_name}?") { @operator == operator }
+    end
+
+    def sym_to_str(sym)
+      OP_SYM_STR.key(sym)
+    end
+
+    def str_to_sym(str)
+      OP_SYM_STR[str]
+    end
+
+    def super_ope(operator)
+      case operator
+      when :+
+        :*
+      when :-
+        :/
+      when :*
+        :^
+      end
     end
   end
 end
