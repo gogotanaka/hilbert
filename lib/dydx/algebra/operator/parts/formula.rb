@@ -58,6 +58,14 @@ module Dydx
               end
             end
           end
+
+          def ^(x)
+            if (multiplication? || division?) && openable?(x)
+              (f ^ x).send(self.operator, (g ^ x))
+            else
+              super(x)
+            end
+          end
         end
       end
     end

@@ -22,4 +22,7 @@ describe Dydx::Algebra::Operator::Parts::Formula do
   it{ expect(((:x * :y) * :y).to_s).to eq('( x * ( y ^ 2 ) )') }
   it{ expect(((:x / :y) / :y).to_s).to eq('( x / ( y ^ 2 ) )') }
   it{ expect(((:y / :x) / :y).to_s).to eq('( 1 / x )') }
+
+  it{ expect(((:x * 2) ^ 2).to_s).to eq('( ( x ^ 2 ) * 4 )') }
+  it{ expect(((:x / 2) ^ 2).to_s).to eq('( ( x ^ 2 ) / 4 )') }
 end
