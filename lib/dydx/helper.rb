@@ -9,15 +9,44 @@ module Dydx
     }
 
     def is_0?
-      self == 0 || (is_a?(Num) && n == 0)
+      self == 0 || (is_a?(Num) && n == 0) || (subtrahend? && x.is_0?)
     end
 
     def is_1?
-      self == 1 || (is_a?(Num) && n == 1)
+      self == 1 || (is_a?(Num) && n == 1) || (divisor? && x.is_1?)
     end
 
     def is_minus1?
       self == -1 || (is_a?(Num) && n == -1)
+    end
+
+    def is_num?
+      if is_a?(Inverse)
+        x.is_num?
+      else
+        is_a?(Num) || is_a?(Fixnum)
+      end
+    end
+
+    def combinable?(x, operator)
+      case operator
+      when :*
+        is_0? ||
+        self == x ||
+        (is_num? && x.is_num?) ||
+        (addition? && (f == x || g == x)) ||
+        inverse?(x, :*)
+      when :+
+        like_term?(x)
+      end
+    end
+
+    def like_term?(x)
+      is_0? ||
+      self == x ||
+      (is_num? && x.is_num?) ||
+      (multiplication? && (f == x || g == x)) ||
+      inverse?(x, :+)
     end
 
     def is_multiple_of(x)
@@ -34,10 +63,13 @@ module Dydx
     end
 
     OP_SYM_STR.each do |operator_name, operator|
-      define_method("#{operator_name}?") { @operator == operator }
+      define_method("#{operator_name}?") do
+        @operator == operator
+        # is_a?(Inverse) && self.operator == operator
+      end
     end
 
-    def sym_to_str(sym)
+    def to_str(sym)
       OP_SYM_STR.key(sym)
     end
 
@@ -64,6 +96,14 @@ module Dydx
       else
         false
       end
+    end
+
+    def subtrahend?
+       is_a?(Inverse) && operator == :+
+    end
+
+    def divisor?
+       is_a?(Inverse) && operator == :*
     end
   end
 end
