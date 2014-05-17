@@ -1,7 +1,9 @@
 require 'dydx/algebra/formula'
+require 'dydx/algebra/inverse'
 
 require 'dydx/algebra/set'
 
+require 'dydx/algebra/operator/inverse'
 require 'dydx/algebra/operator/formula'
 require 'dydx/algebra/operator/symbol'
 require 'dydx/algebra/operator/num'
@@ -39,5 +41,10 @@ module Dydx
       class Tan;    include Operator::General; end
     end
     class Formula;  include Operator::Formula; end
+    class Inverse;  include Operator::Inverse; end
+
+    def inverse(x, operator)
+      Inverse.new(x, operator)
+    end
   end
 end

@@ -55,5 +55,15 @@ module Dydx
         :^
       end
     end
+
+    def inverse?(x, operator)
+      if is_a?(Algebra::Inverse)
+        self.operator == operator && self.x == x
+      elsif x.is_a?(Algebra::Inverse)
+        self == x.x
+      else
+        false
+      end
+    end
   end
 end
