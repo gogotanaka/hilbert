@@ -12,6 +12,13 @@ require 'dydx/algebra/set/tan'
 module Dydx
   module Algebra
     module Set
+      def e0
+        eval("$e0 ||= Num.new(0)")
+      end
+
+      def e1
+        eval("$e1 ||= Num.new(1)")
+      end
       def _(num)
         if num >= 0
           eval("$p#{num} ||= Num.new(num)")

@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Dydx::Algebra::Set::Num do
   it{ expect(_(1)).to eq(_(1)) }
   it{ expect(_(-1)).to eq(_(-1)) }
+  it{ expect(e0).to eq(e0) }
+  it{ expect(e1).to eq(e1) }
 
   describe '#to_s' do
     it{ expect(_(1).to_s).to eq('1') }
