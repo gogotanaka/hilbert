@@ -9,8 +9,8 @@ describe Dydx::Algebra::Formula do
   describe 'Calculate' do
     context 'With Fixnum' do
       let(:formula) { (:x + :y) }
-      it{ expect((formula + 0).to_s).to eq(formula.to_s) }
-      it{ expect((formula - 0).to_s).to eq(formula.to_s) }
+      it{ expect(formula + 0).to eq(formula + 0) }
+      it{ expect(formula - 0).to eq(formula - 0) }
       it{ expect((formula * 0).to_s).to eq('0') }
       it{ expect((formula * 1).to_s).to eq(formula.to_s) }
       it{ expect{(formula / 0).to_s}.to raise_error(ZeroDivisionError) }

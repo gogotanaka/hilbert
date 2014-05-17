@@ -49,6 +49,10 @@ module Dydx
           false
         end
       end
+
+      def ==(x)
+        to_s == x.to_s
+      end
     end
   end
 end
