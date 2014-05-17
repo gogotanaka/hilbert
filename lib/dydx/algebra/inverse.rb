@@ -18,6 +18,16 @@ module Dydx
         end
       end
 
+      def differentiate(sym=:x)
+        case operator
+        when :+
+          inverse(x.differentiate(sym), :+)
+        when :*
+          inverse(x.differentiate(sym) * inverse(x ^ 2, :*), :+)
+        end
+      end
+      alias_method :d, :differentiate
+
       def ==(x)
         to_s == x.to_s
       end
