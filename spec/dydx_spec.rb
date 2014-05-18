@@ -28,4 +28,12 @@ describe Dydx do
     it{ expect(d1.to_s).to eq('t') }
     it{ expect(d2.to_s).to eq('t') }
   end
+
+  context 'ex4' do
+    $f = 2 * (e ^ (2 * :z))
+    let(:d1){ df/dz }
+    let(:d2){ d/dz($f) }
+    it{ expect(d1.to_s).to eq('( 4 * ( e ^ ( 2 * z ) ) )') }
+    it{ expect(d2.to_s).to eq('( 4 * ( e ^ ( 2 * z ) ) )') }
+  end
 end

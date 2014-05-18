@@ -18,6 +18,8 @@ module Dydx
           # TODO:
           if f == sym
             g * (f ^ (g - 1))
+          elsif f == e
+            g.d(sym) * self
           else
             self * (g * log(f)).d(sym)
           end
@@ -26,8 +28,7 @@ module Dydx
       alias_method :d, :differentiate
 
       def to_s
-        if (subtraction? && f.is_0?) ||
-          (multiplication? && (f.is_minus1? || g.is_minus1?)  )
+        if (multiplication? && (f.is_minus1? || g.is_minus1?)  )
           "( - #{g.to_s} )"
         elsif multiplication? && g.divisor?
           "( #{f.to_s} / #{g.x.to_s} )"

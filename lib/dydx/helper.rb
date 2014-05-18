@@ -4,7 +4,6 @@ module Dydx
       addition:       :+,
       subtraction:    :-,
       multiplication: :*,
-      division:       :/,
       exponentiation: :^
     }
 
@@ -31,10 +30,8 @@ module Dydx
     def combinable?(x, operator)
       case operator
       when :*
-        is_0? ||
         self == x ||
         (is_num? && x.is_num?) ||
-        (addition? && (f == x || g == x)) ||
         inverse?(x, :*)
       when :+
         like_term?(x)
@@ -42,7 +39,6 @@ module Dydx
     end
 
     def like_term?(x)
-      is_0? ||
       self == x ||
       (is_num? && x.is_num?) ||
       (multiplication? && (f == x || g == x)) ||
@@ -64,7 +60,7 @@ module Dydx
 
     OP_SYM_STR.each do |operator_name, operator|
       define_method("#{operator_name}?") do
-        @operator == operator
+        (@operator == operator) && is_a?(Formula)
         # is_a?(Inverse) && self.operator == operator
       end
     end
