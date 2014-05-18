@@ -84,6 +84,26 @@ module Dydx
       end
     end
 
+    def sub_ope(operator)
+      case operator
+      when :*
+        :+
+      end
+    end
+
+    def inverse_ope(operator)
+      case operator
+      when :+
+        :-
+      when :*
+        :/
+      end
+    end
+
+    def commutative?(operator)
+      [:+, :*].include?(operator)
+    end
+
     def inverse?(x, operator)
       if is_a?(Algebra::Inverse)
         self.operator == operator && self.x == x
