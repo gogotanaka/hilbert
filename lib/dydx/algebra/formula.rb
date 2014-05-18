@@ -12,12 +12,8 @@ module Dydx
         case @operator
         when :+
           f.d(sym) + g.d(sym)
-        when :-
-          f.d(sym) - g.d(sym)
         when :*
           (f.d(sym) * g) + (f * g.d(sym))
-        when :/
-          ((f.d(sym) * g) - (f * g.d(sym)))/(g ^ _(2))
         when :^
           # TODO:
           if f == sym
@@ -33,6 +29,14 @@ module Dydx
         if (subtraction? && f.is_0?) ||
           (multiplication? && (f.is_minus1? || g.is_minus1?)  )
           "( - #{g.to_s} )"
+        elsif multiplication? && g.divisor?
+          "( #{f.to_s} / #{g.x.to_s} )"
+        elsif multiplication? && f.divisor?
+          "( #{g.to_s} / #{f.x.to_s} )"
+        elsif addition? && g.subtrahend?
+          "( #{f.to_s} - #{g.x.to_s} )"
+        elsif addition? && f.subtrahend?
+          "( #{g.to_s} - #{f.x.to_s} )"
         else
           "( #{f.to_s} #{@operator} #{g.to_s} )"
         end
@@ -43,11 +47,7 @@ module Dydx
       end
 
       def openable?(x)
-        if x.is_a?(Num) || x.is_a?(Fixnum)
-          f.class == x.class || g.class == x.class
-        else
-          false
-        end
+        x.is_num? && (f.is_num? || g.is_num?)
       end
 
       def ==(x)

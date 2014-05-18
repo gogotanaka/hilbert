@@ -8,14 +8,8 @@ module Dydx
               x
             elsif x.is_a?(Num)
               _(n + x.n)
-            else
-              super(x)
-            end
-          end
-
-          def -(x)
-            if x.is_a?(Num)
-              _(n - x.n)
+            elsif x.subtrahend? && x.x.is_a?(Num)
+              _(n - x.x.n)
             else
               super(x)
             end
@@ -28,14 +22,8 @@ module Dydx
               x
             elsif x.is_a?(Num)
               _(n * x.n)
-            else
-              super(x)
-            end
-          end
-
-          def /(x)
-            if (n == 0)
-              self
+            elsif x.divisor? && x.x.is_a?(Num)
+              _(n / x.x.n)
             else
               super(x)
             end

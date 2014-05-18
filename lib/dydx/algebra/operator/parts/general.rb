@@ -6,14 +6,8 @@ module Dydx
           def +(x)
             if x.is_0?
               self
-            else
-              super(x)
-            end
-          end
-
-          def -(x)
-            if x.is_0?
-              self
+            elsif inverse?(x, :+)
+              e0
             else
               super(x)
             end
@@ -24,16 +18,8 @@ module Dydx
               x
             elsif x.is_1?
               self
-            else
-              super(x)
-            end
-          end
-
-          def /(x)
-            if x.is_0?
-              raise ZeroDivisionError
-            elsif x.is_1?
-              self
+            elsif inverse?(x, :*)
+              e1
             else
               super(x)
             end

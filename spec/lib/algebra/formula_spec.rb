@@ -34,15 +34,15 @@ describe Dydx::Algebra::Formula do
     it{ expect(addition.d(:z).to_s).to eq('0') }
 
     it{ expect(subtraction.d(:x).to_s).to eq('1') }
-    it{ expect(subtraction.d(:y).to_s).to eq('-1') }
+    it{ expect(subtraction.d(:y).to_s).to eq('( - 1 )') }
     it{ expect(subtraction.d(:z).to_s).to eq('0') }
 
     it{ expect(multiplication.d(:x)).to eq(:y) }
     it{ expect(multiplication.d(:y)).to eq(:x) }
     it{ expect(multiplication.d(:z).to_s).to eq('0') }
 
-    it{ expect(division.d(:x).to_s).to eq("( y ^ -1 )") }
-    it{ expect(division.d(:y).to_s).to eq('( ( - x ) / ( y ^ 2 ) )') }
+    it{ expect(division.d(:x).to_s).to eq("( 1 / y )") }
+    it{ expect(division.d(:y).to_s).to eq('( - ( x / ( y ^ 2 ) ) )') }
     it{ expect(division.d(:z).to_s).to eq('0') }
 
     it{ expect(exponentiation.d(:x).to_s).to eq('( y * ( x ^ ( y - 1 ) ) )') }

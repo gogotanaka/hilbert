@@ -44,7 +44,13 @@ module Dydx
     class Inverse;  include Operator::Inverse; end
 
     def inverse(x, operator)
-      Inverse.new(x, operator)
+      if operator == :+ && x.is_0?
+        e0
+      elsif operator == :* && x.is_1?
+        e1
+      else
+        Inverse.new(x, operator)
+      end
     end
   end
 end

@@ -9,7 +9,7 @@ module Dydx
             elsif !x.is_a?(Inverse)
               x + self
             else
-              super()
+              super(x)
             end
           end
 
@@ -18,6 +18,15 @@ module Dydx
               e1
             else
               super(x)
+            end
+          end
+
+          def ^(x)
+            case operator
+            when :+
+              super(x)
+            when :*
+              inverse(self.x ^ x, :*)
             end
           end
         end

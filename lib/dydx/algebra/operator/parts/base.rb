@@ -3,19 +3,17 @@ module Dydx
     module Operator
       module Parts
         module Base
-          %w(+ - * / ^).each do |operator|
+          %w(+ * ^).each do |operator|
             define_method(operator) do |x|
               if self == x && operator != '^'
                 case operator
                 when '+'
                   _(2) * self
-                when '-'
-                  _(0)
                 when '*'
                   self ^ _(2)
-                when '/'
-                  _(1)
                 end
+              elsif x.subtrahend? && %w(* ^).include?(operator)
+                inverse(::Algebra::Formula.new(self, x.x, operator.to_sym), :+)
               else
                 ::Algebra::Formula.new(self, x, operator.to_sym)
               end
