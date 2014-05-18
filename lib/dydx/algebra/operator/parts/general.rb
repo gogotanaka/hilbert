@@ -35,6 +35,14 @@ module Dydx
                 else
                   super(x)
                 end
+              elsif x.is_a?(Inverse) && x.operator == operator && x.x.send("#{to_str(operator)}?")
+                if combinable?(x.x.f, operator)
+                  send(operator, inverse(x.x.f, operator)).send(operator, inverse(x.x.g, operator))
+                elsif combinable?(x.x.g, operator)
+                  send(operator, inverse(x.x.g, operator)).send(operator, inverse(x.x.f, operator))
+                else
+                  super(x)
+                end
               elsif [:*].include?(operator) && x.subtrahend?
                 inverse(::Algebra::Formula.new(self, x.x, operator.to_sym), :+)
               else

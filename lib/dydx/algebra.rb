@@ -48,6 +48,8 @@ module Dydx
         e0
       elsif operator == :* && x.is_1?
         e1
+      elsif x.is_a?(Inverse) && x.operator == operator
+        x.x
       else
         Inverse.new(x, operator)
       end
