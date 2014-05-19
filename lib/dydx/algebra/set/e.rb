@@ -3,7 +3,7 @@ module Dydx
     module Set
       class E < Base
         def differentiate(sym=:x)
-          _(0)
+          e0
         end
         alias_method :d, :differentiate
 

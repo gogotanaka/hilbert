@@ -43,9 +43,9 @@ module Dydx
           f, g = formula.f, formula.g
           g * log(f)
         elsif formula.is_1?
-          _(0)
+          e0
         elsif formula.is_a?(E)
-          _(1)
+          e1
         else
           Log.new(formula)
         end
@@ -54,7 +54,7 @@ module Dydx
       def sin(x)
         multiplier = x.is_multiple_of(pi)
         if multiplier.is_a?(Num)
-          _(0)
+          e0
         else
           Sin.new(x)
         end
@@ -63,7 +63,7 @@ module Dydx
       def cos(x)
         multiplier = x.is_multiple_of(pi)
         if multiplier.is_a?(Num) && multiplier.n % 2 == 0
-          _(1)
+          e1
         elsif multiplier.is_a?(Num) && multiplier.n % 2 == 1
           _(-1)
         else

@@ -5,7 +5,7 @@ module Dydx
         include Helper
 
         def differentiate(sym=:x)
-          _(0)
+          e0
         end
         alias_method :d, :differentiate
       end
