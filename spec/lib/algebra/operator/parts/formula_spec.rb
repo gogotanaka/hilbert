@@ -50,6 +50,7 @@ describe Dydx::Algebra::Operator::Parts::Formula do
   it{ expect(((:x * 2) ^ 2).to_s).to eq('( ( x ^ 2 ) * 4 )') }
   it{ expect(((:x / 2) ^ 2).to_s).to eq('( ( x ^ 2 ) / 4 )') }
 
-  it{ expect((2 ^ (:x * 2)).to_s).to eq('( ( x ^ 2 ) * 4 )') }
-  it{ expect((2 ^ (:x / 2)).to_s).to eq('( ( x ^ 2 ) / 4 )') }
+  # TODO:
+  it{ expect((2 ^ (:x * 2)).to_s).to eq('( 2 ^ ( x * 2 ) )') }
+  it{ expect((2 ^ (:x / 2)).to_s).to eq('( 2 ^ ( x / 2 ) )') }
 end
