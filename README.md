@@ -3,29 +3,52 @@ It always happens you want to differentiate with ruby. right?
 
 Dydx will eliminate this. Like this
 
+
 ```
-( d/dx(e ^ :x) ).to_s
+( d/dx(:x ^ 2) ).to_s
+=> "( 2 * x )"
+
+# pretermit '#to_s'
+
+d/dx(e ^ :x)
 => "( e ^ x )"
 
-$y = cos(:x)
-(dy/dx).to_s
-=> "( - sin( x ) )"
-
-# pretermit '.to_s'
-
-d/dx(log(:x))
-=> "( 1 / x )"
+d/dz(log(:z))
+=> "( 1 / z )"
 
 d/dx(:x^:n)
 => "( n * ( x ^ ( n - 1 ) ) )"
 
+```
 
-d/dx(:x^2)
-=> "( 2 * x )"
+you can do like ``` dy/dx ```, if you use global var.
+
+```
+$y = cos(:x)
+dy/dx
+=> "( - sin( x ) )"
+
+$x = :a * ( (:t ^ 2) / 2 )
+dx/dt
+=> "( a * t )"
+
+d/dt(dx/dt)
+=>"a"
 
 ```
 
-(That's wonderful!!!!! But, I feel there is no meaning ... )
+you can use method chaining.
+
+```
+((:x ^ 2) * :y).d(:x)
+=> "( ( 2 * x ) * y )"
+
+((:x ^ 2) * :y).d(:x).d(:y)
+=> "( 2 * x )"
+```
+
+
+(That's wonderful!!!!! ..............)
 
 ## Installation
 
