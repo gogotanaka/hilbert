@@ -8,11 +8,11 @@ module Dydx
     }
 
     def is_0?
-      self == 0 || (is_a?(Num) && n == 0) || (subtrahend? && x.is_0?)
+      self == 0 || (is_a?(Num) && n == 0)
     end
 
     def is_1?
-      self == 1 || (is_a?(Num) && n == 1) || (divisor? && x.is_1?)
+      self == 1 || (is_a?(Num) && n == 1)
     end
 
     def is_minus1?
