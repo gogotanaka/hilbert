@@ -21,8 +21,7 @@ module Dydx
 
   def method_missing(method, *args, &block)
     method_name = method.to_s
-    return super unless (method_name[0] == 'd' && method_name.size <= 2)
-    method_name.slice!(0)
-    Delta.new(method_name.empty? ? nil : method_name.to_sym, args.first)
+    return super unless method_name =~ /^d.?$/
+    Delta.new(method_name[1] ?  method_name[1].to_sym : nil, args.first)
   end
 end
