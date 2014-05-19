@@ -18,7 +18,7 @@ module Dydx
         end
 
         def ==(x)
-          x.is_a?(Num) && n == x.n
+          to_s == x.to_s
         end
       end
     end
