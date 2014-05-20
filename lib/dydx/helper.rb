@@ -72,28 +72,26 @@ module Dydx
 
     def super_ope(operator)
       case operator
-      when :+
-        :*
-      when :-
-        :/
-      when :*
-        :^
+      when :+ then :*
+      when :- then :/
+      when :* then :^
       end
     end
 
     def sub_ope(operator)
       case operator
-      when :*
-        :+
+      when :* then :+
+      when :/ then :-
+      when :^ then :*
       end
     end
 
     def inverse_ope(operator)
       case operator
-      when :+
-        :-
-      when :*
-        :/
+      when :+ then :-
+      when :- then :+
+      when :* then :/
+      when :/ then :*
       end
     end
 

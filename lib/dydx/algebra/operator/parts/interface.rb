@@ -6,12 +6,10 @@ module Dydx
           %w(+ - * / ^).map(&:to_sym).each do |operator|
             define_method(operator) do |x|
               x = ::Set::Num.new(x) if x.is_a?(Fixnum)
-              case operator
-              when :-
-                self + inverse(x, :+)
-              when :/
-                raise ZeroDivisionError if x.is_0?
-                self * inverse(x, :*)
+              if operator == :/ && x.is_0?
+                raise ZeroDivisionError
+              elsif [:-, :/].include?(operator)
+                send(inverse_ope(operator), inverse(x, inverse_ope(operator)))
               else
                 super(x)
               end
