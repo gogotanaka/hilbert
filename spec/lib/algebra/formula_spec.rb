@@ -56,7 +56,8 @@ describe Dydx::Algebra::Formula do
   end
 
   describe '#openable?' do
-    it{ expect((1 + :x).openable?(_(1))).to be_true }
-    it{ expect((1 + :x).openable?(:z)).to be_false }
+    it{ expect((:x + :y).openable?(:*, :x)).to be_true }
+    it{ expect((:x + :y).openable?(:*, :y)).to be_true }
+    it{ expect((:x + :y).openable?(:*, :z)).to be_false }
   end
 end

@@ -46,7 +46,7 @@ module Dydx
           end
 
           def ^(x)
-            if multiplication? && openable?(x)
+            if multiplication? && openable?(:^, x)
               (f ^ x).send(self.operator, (g ^ x))
             else
               super(x)

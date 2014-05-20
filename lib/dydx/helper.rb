@@ -23,14 +23,49 @@ module Dydx
       (is_a?(Num) || is_a?(Fixnum)) || (is_a?(Inverse) && x.is_num?)
     end
 
+    def super_ope(operator)
+      case operator
+      when :+ then :*
+      when :- then :/
+      when :* then :^
+      when :/ then :|
+      end
+    end
+
+    def sub_ope(operator)
+      case operator
+      when :* then :+
+      when :/ then :-
+      when :^ then :*
+      when :| then :/
+      end
+    end
+
+    def inverse_ope(operator)
+      case operator
+      when :+ then :-
+      when :- then :+
+      when :* then :/
+      when :/ then :*
+      when :^ then :|
+      when :| then :^
+      end
+    end
+
+    def distributive?(ope1, ope2)
+      [super_ope(ope1), inverse_ope(super_ope(ope1))].include?(ope2)
+    end
+
     def combinable?(x, operator)
       case operator
+      when :+
+        like_term?(x)
       when :*
         self == x ||
         (is_num? && x.is_num?) ||
         inverse?(x, :*)
-      when :+
-        like_term?(x)
+      when :^
+        (is_num? && x.is_num?) || is_0? || is_1?
       end
     end
 
@@ -38,6 +73,7 @@ module Dydx
       self == x ||
       (is_num? && x.is_num?) ||
       (multiplication? && (f == x || g == x)) ||
+      (x.multiplication? && (x.f == self || x.g == self)) ||
       inverse?(x, :+)
     end
 
@@ -68,31 +104,6 @@ module Dydx
 
     def str_to_sym(str)
       OP_SYM_STR[str]
-    end
-
-    def super_ope(operator)
-      case operator
-      when :+ then :*
-      when :- then :/
-      when :* then :^
-      end
-    end
-
-    def sub_ope(operator)
-      case operator
-      when :* then :+
-      when :/ then :-
-      when :^ then :*
-      end
-    end
-
-    def inverse_ope(operator)
-      case operator
-      when :+ then :-
-      when :- then :+
-      when :* then :/
-      when :/ then :*
-      end
     end
 
     def commutative?(operator)

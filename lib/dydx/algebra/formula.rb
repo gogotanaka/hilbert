@@ -47,8 +47,9 @@ module Dydx
         f == x || g == x
       end
 
-      def openable?(x)
-        x.is_num? && (f.is_num? || g.is_num?)
+      def openable?(operator, x)
+        distributive?(self.operator, operator) &&
+        (f.combinable?(x, operator) || g.combinable?(x, operator))
       end
 
       # TODO: interchangeable
