@@ -20,11 +20,7 @@ module Dydx
     end
 
     def is_num?
-      if is_a?(Inverse)
-        x.is_num?
-      else
-        is_a?(Num) || is_a?(Fixnum)
-      end
+      (is_a?(Num) || is_a?(Fixnum)) || (is_a?(Inverse) && x.is_num?)
     end
 
     def combinable?(x, operator)
@@ -46,12 +42,13 @@ module Dydx
     end
 
     def is_multiple_of(x)
-      is_multiple = if is_0?
-        _(0)
+      if is_0?
+        e0
       elsif self == x
-        _(1)
-      elsif is_a?(Formula) &&
-        (f == x || g == x)
+        e1
+      # elsif is_num? && x.is_num? && (self % x == 0)
+      #   _(n / x.n)
+      elsif multiplication? && (f == x || g == x)
         f == x ? g : f
       else
         false
