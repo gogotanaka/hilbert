@@ -13,7 +13,7 @@ module Dydx
                 else
                   super(x)
                 end
-              elsif send("#{to_str(super_ope(operator))}?") && x.send("#{to_str(super_ope(operator))}?")
+              elsif formula?(super_ope(operator)) && x.formula?(super_ope(operator))
                 return super(x) if !common_factors(x) || (operator == :* && common_factors(x)[0] != common_factors(x)[1])
                 w1, w2 = common_factors(x)
                 case operator
@@ -51,25 +51,6 @@ module Dydx
             else
               super(x)
             end
-          end
-
-          def to_str(operator)
-            {
-              addition:       :+,
-              multiplication: :*,
-              exponentiation: :^
-            }.key(operator)
-          end
-
-          def to_str_inv(operator)
-            {
-              subtrahend: :+,
-              divisor:    :*
-            }.key(operator)
-          end
-
-          def rest(f_or_g)
-            ([:f, :g] - [f_or_g]).first
           end
         end
       end

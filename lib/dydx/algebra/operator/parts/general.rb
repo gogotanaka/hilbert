@@ -50,14 +50,6 @@ module Dydx
               end
             end
           end
-
-          def to_str(operator)
-            {
-              addition:       :+,
-              multiplication: :*,
-              exponentiation: :^
-            }.key(operator)
-          end
         end
       end
     end
