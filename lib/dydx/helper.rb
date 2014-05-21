@@ -134,5 +134,11 @@ module Dydx
     def formula?(operator)
       is_a?(Formula) && (@operator == operator)
     end
+
+    Symbol.class_eval do
+      def commutative?
+        [:+, :*].include?(self)
+      end
+    end
   end
 end

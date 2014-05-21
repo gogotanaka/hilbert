@@ -14,28 +14,32 @@ module Dydx
                   super(x)
                 end
               elsif formula?(super_ope(operator)) && x.formula?(super_ope(operator))
-                return super(x) if !common_factors(x) || (operator == :* && common_factors(x)[0] != common_factors(x)[1])
                 w1, w2 = common_factors(x)
+                return super(x) unless (w1 && w2) && (super_ope(operator).commutative? || w1 == w2)
+
                 case operator
                 when :+
                   send(w1).send(super_ope(operator), send(rest(w1)).send(operator, x.send(rest(w2))))
                 when :*
-                  if w1 == :f
+                  case w1
+                  when :f
                     send(w1).send(super_ope(operator), send(rest(w1)).send(sub_ope(operator), x.send(rest(w2))))
-                  elsif w1 == :g
+                  when :g
                     send(w1).send(super_ope(operator), send(rest(w1)).send(operator, x.send(rest(w2)))).commutate!
                   end
                 end
               elsif formula?(super_ope(operator)) && x.inverse?(operator) && x.x.formula?(super_ope(operator))
-                return super(x) if !common_factors(x.x) || (operator == :* && common_factors(x.x)[0] != common_factors(x.x)[1])
                 w1, w2 = common_factors(x.x)
+                return super(x) unless (w1 && w2) && (super_ope(operator).commutative? || w1 == w2)
+
                 case operator
                 when :+
                   send(w1).send(super_ope(operator), send(rest(w1)).send(inverse_ope(operator), x.x.send(rest(w2))))
                 when :*
-                  if w1 == :f
+                  case w1
+                  when :f
                     send(w1).send(super_ope(operator), send(rest(w1)).send(inverse_ope(sub_ope(operator)), x.x.send(rest(w2))))
-                  elsif w1 == :g
+                  when :g
                     send(w1).send(super_ope(operator), send(rest(w1)).send(inverse_ope(operator), x.x.send(rest(w2)))).commutate!
                   end
                 end
