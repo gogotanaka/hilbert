@@ -21,7 +21,7 @@ $y = e ^ x
 
 ```
 
-You may wonder why undefined `x` and `z` are handleable?
+You may wonder why undefined `x` , `e` and `z` are handleable?
 
 `method_missing` solve this problem by converting undefine variable into internal class object.
 
@@ -56,27 +56,27 @@ I show some differential calculus.
 ```
 # pretermit '#to_s'
 
-d/dz(log(:z))
+d/dz(log(z))
 => "( 1 / z )"
 
-d/dx(:x^:n)
+d/dx(x^n)
 => "( n * ( x ^ ( n - 1 ) ) )"
 
-$y = cos(:x)
+$y = cos(x)
 dy/dx
 => "( - sin( x ) )"
 
-$x = :a * ( (:t ^ 2) / 2 )
+$x = a * ( (t ^ 2) / 2 )
 dx/dt
 => "( a * t )"
 
 d/dt(dx/dt)
 =>"a"
 
-((:x ^ 2) * :y).d(:x)
+((x ^ 2) * y).d(x)
 => "( ( 2 * x ) * y )"
 
-((:x ^ 2) * :y).d(:x).d(:y)
+((x ^ 2) * y).d(x).d(y)
 => "( 2 * x )"
 
 ```
