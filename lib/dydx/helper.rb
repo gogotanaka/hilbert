@@ -115,8 +115,10 @@ module Dydx
       ([:f, :g] - [f_or_g]).first
     end
 
-    def commutative?(operator)
-      [:+, :*].include?(operator)
+    def commutative?
+    end
+
+    def distributable?(operator)
     end
 
     def inverse?(operator, x=nil)
@@ -127,14 +129,6 @@ module Dydx
       else
         false
       end
-    end
-
-    def subtrahend?
-       is_a?(Inverse) && operator == :+
-    end
-
-    def divisor?
-       is_a?(Inverse) && operator == :*
     end
 
     def formula?(operator)

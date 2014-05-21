@@ -19,9 +19,9 @@ module Dydx
                 end
               elsif x.is_a?(Num)
                 _(n.send(operator, x.n))
-              elsif operator == :+ && x.subtrahend? && x.x.is_a?(Num)
+              elsif operator == :+ && x.inverse?(:+) && x.x.is_a?(Num)
                 _(n - x.x.n)
-              elsif operator == :* && x.divisor? && x.x.is_a?(Num)
+              elsif operator == :* && x.inverse?(:*) && x.x.is_a?(Num)
                 _(n / x.x.n)
               else
                 super(x)

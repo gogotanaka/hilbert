@@ -43,7 +43,7 @@ module Dydx
                 else
                   super(x)
                 end
-              elsif [:*].include?(operator) && x.subtrahend?
+              elsif [:*].include?(operator) && x.inverse?(:+)
                 inverse(::Algebra::Formula.new(self, x.x, operator.to_sym), :+)
               else
                 super(x)

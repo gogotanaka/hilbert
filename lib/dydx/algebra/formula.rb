@@ -30,13 +30,13 @@ module Dydx
       def to_s
         if (multiplication? && (f.is_minus1? || g.is_minus1?)  )
           "( - #{g.to_s} )"
-        elsif multiplication? && g.divisor?
+        elsif multiplication? && g.inverse?(:*)
           "( #{f.to_s} / #{g.x.to_s} )"
-        elsif multiplication? && f.divisor?
+        elsif multiplication? && f.inverse?(:*)
           "( #{g.to_s} / #{f.x.to_s} )"
-        elsif addition? && g.subtrahend?
+        elsif addition? && g.inverse?(:+)
           "( #{f.to_s} - #{g.x.to_s} )"
-        elsif addition? && f.subtrahend?
+        elsif addition? && f.inverse?(:+)
           "( #{g.to_s} - #{f.x.to_s} )"
         else
           "( #{f.to_s} #{@operator} #{g.to_s} )"
