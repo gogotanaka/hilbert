@@ -2,7 +2,7 @@ module Dydx
   module Algebra
     class Formula
       include Helper
-      attr_accessor :f, :g, :operator
+      attr_accessor :f, :operator, :g
 
       def initialize(f, g, operator)
         @f, @g, @operator = f, g, operator
