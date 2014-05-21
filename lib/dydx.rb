@@ -21,7 +21,12 @@ module Dydx
 
   def method_missing(method, *args, &block)
     method_name = method.to_s
-    return super unless method_name =~ /^d.?$/
-    Delta.new(method_name[1] ?  method_name[1].to_sym : nil, args.first)
+    if method_name =~ /^d.?$/
+      Delta.new(method_name[1] ?  method_name[1].to_sym : nil, args.first)
+    elsif method_name =~ /^[a-z]$/
+      method_name.to_sym
+    else
+      super
+    end
   end
 end
