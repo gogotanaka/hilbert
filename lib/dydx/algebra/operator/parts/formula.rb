@@ -26,7 +26,7 @@ module Dydx
                     send(w1).send(super_ope(operator), send(rest(w1)).send(operator, x.send(rest(w2)))).commutate!
                   end
                 end
-              elsif send("#{to_str(super_ope(operator))}?") && x.send("#{to_str_inv(operator)}?") && x.x.send("#{to_str(super_ope(operator))}?")
+              elsif formula?(super_ope(operator)) && x.inverse?(operator) && x.x.formula?(super_ope(operator))
                 return super(x) if !common_factors(x.x) || (operator == :* && common_factors(x.x)[0] != common_factors(x.x)[1])
                 w1, w2 = common_factors(x.x)
                 case operator

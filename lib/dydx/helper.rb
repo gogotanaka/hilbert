@@ -119,9 +119,9 @@ module Dydx
       [:+, :*].include?(operator)
     end
 
-    def inverse?(operator, x)
+    def inverse?(operator, x=nil)
       if is_a?(Algebra::Inverse)
-        self.operator == operator && self.x == x
+        self.operator == operator && (self.x == x || x.nil?)
       elsif x.is_a?(Algebra::Inverse)
         self == x.x
       else
