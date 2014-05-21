@@ -65,11 +65,11 @@ module Dydx
         (is_num? && x.is_num?) ||
         (multiplication? && (f == x || g == x)) ||
         (x.multiplication? && (x.f == self || x.g == self)) ||
-        inverse?(x, :+)
+        inverse?(:+, x)
       when :*
         self == x ||
         (is_num? && x.is_num?) ||
-        inverse?(x, :*)
+        inverse?(:*, x)
       when :^
         (is_num? && x.is_num?) || is_0? || is_1?
       end
@@ -119,7 +119,7 @@ module Dydx
       [:+, :*].include?(operator)
     end
 
-    def inverse?(x, operator)
+    def inverse?(operator, x)
       if is_a?(Algebra::Inverse)
         self.operator == operator && self.x == x
       elsif x.is_a?(Algebra::Inverse)

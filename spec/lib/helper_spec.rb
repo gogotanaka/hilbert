@@ -60,8 +60,8 @@ describe Helper do
   it{ expect(multiplication.multiplication?).to be_true }
   it{ expect(exponentiation.exponentiation?).to be_true }
 
-  it{ expect(inverse(:x, :+).inverse?(:x, :+)).to be_true }
-  it{ expect(:x.inverse?(inverse(:x, :+), :+)).to be_true }
-  it{ expect(inverse(:x, :*).inverse?(:x, :*)).to be_true }
-  it{ expect(:x.inverse?(inverse(:x, :*), :*)).to be_true }
+  it{ expect(inverse(:x, :+).inverse?(:+, :x)).to be_true }
+  it{ expect(:x.inverse?(:+, inverse(:x, :+))).to be_true }
+  it{ expect(inverse(:x, :*).inverse?(:*, :x)).to be_true }
+  it{ expect(:x.inverse?(:*, inverse(:x, :*))).to be_true }
 end

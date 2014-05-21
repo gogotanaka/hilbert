@@ -23,9 +23,9 @@ module Dydx
                 when :* then self ^ _(2)
                 when :^ then super(x)
                 end
-              elsif operator == :+ && inverse?(x, :+)
+              elsif operator == :+ && inverse?(:+, x)
                 e0
-              elsif operator == :* && inverse?(x, :*)
+              elsif operator == :* && inverse?(:*, x)
                 e1
               elsif [:+, :*].include?(operator) && x.send("#{to_str(operator)}?")
                 if combinable?(x.f, operator)

@@ -5,7 +5,7 @@ module Dydx
         module Inverse
           %w(+ * ^).map(&:to_sym).each do |operator|
             define_method(operator) do |x|
-              if inverse?(x, operator)
+              if inverse?(operator, x)
                 case operator
                 when :+ then e0
                 when :* then e1
