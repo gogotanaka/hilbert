@@ -27,7 +27,7 @@ module Dydx
                 e0
               elsif operator == :* && inverse?(:*, x)
                 e1
-              elsif [:+, :*].include?(operator) && x.send("#{to_str(operator)}?")
+              elsif [:+, :*].include?(operator) && x.formula?(operator)
                 if combinable?(x.f, operator)
                   send(operator, x.f).send(operator, x.g)
                 elsif combinable?(x.g, operator)
@@ -35,7 +35,7 @@ module Dydx
                 else
                   super(x)
                 end
-              elsif x.is_a?(Inverse) && x.operator == operator && x.x.send("#{to_str(operator)}?")
+              elsif x.is_a?(Inverse) && x.operator == operator && x.x.formula?(operator)
                 if combinable?(x.x.f, operator)
                   send(operator, inverse(x.x.f, operator)).send(operator, inverse(x.x.g, operator))
                 elsif combinable?(x.x.g, operator)

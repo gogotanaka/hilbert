@@ -96,21 +96,6 @@ module Dydx
       end
     end
 
-    def to_str(sym)
-      OP_SYM_STR.key(sym)
-    end
-
-    def str_to_sym(str)
-      OP_SYM_STR[str]
-    end
-
-    def to_str_inv(operator)
-      {
-        subtrahend: :+,
-        divisor:    :*
-      }.key(operator)
-    end
-
     def rest(f_or_g)
       ([:f, :g] - [f_or_g]).first
     end
