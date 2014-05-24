@@ -9,11 +9,11 @@ describe Dydx:Integrand do
   it{ expect(integrand.var).to eq(:x) }
   it{ expect{integrand[4, 3]}.to raise_error(ArgumentError) }
 
-  let(:integrand_2) do
+  let(:integrand2) do
     $f = nil
     f(x) <= x * x
     integrand = S(f(x), dx)
   end
 
-  it{ expect(integrand_2[0, 1]).to eq(0.3333333333333334) }
+  it{ expect(integrand2[0, 1]).to eq(0.3333333333333334) }
 end
