@@ -1,5 +1,6 @@
 require 'dydx/helper'
 require 'dydx/algebra'
+require 'dydx/function'
 
 module Dydx
   include Algebra
@@ -16,6 +17,19 @@ module Dydx
       elsif delta.function
         delta.function.differentiate(delta.var)
       end
+    end
+  end
+
+  def f(*vars)
+    if $f
+      raise ArgumentError, "invalid number of values (#{vars.count} for #{$f.vars.count})" unless $f.vars.count == vars.count
+      string = $f.algebra.to_s
+      $f.vars.each_with_index do |var, i|
+        string.gsub!(var.to_s, vars[i].to_s)
+      end
+      eval(string)
+    else
+      $f = Function.new(*vars)
     end
   end
 
