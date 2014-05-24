@@ -14,5 +14,13 @@ module Dydx
       @algebra.differentiate(sym)
     end
     alias_method :d, :differentiate
+
+    def to_s
+      algebra.to_s
+    end
+
+    def ==(function)
+      to_s == function.to_s
+    end
   end
 end

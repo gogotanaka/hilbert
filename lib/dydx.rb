@@ -6,21 +6,23 @@ require 'dydx/integrand'
 
 module Dydx
   include Algebra
-  def f(*vars)
-    if $f
-      raise ArgumentError, "invalid number of values (#{vars.count} for #{$f.vars.count})" unless $f.vars.count == vars.count
-      return $f if $f.vars == vars
-      if $f.algebra
-        string = $f.algebra.to_s
-        $f.vars.each_with_index do |var, i|
-          string.gsub!(var.to_s, vars[i].to_s)
+  %w(f g h).each do |functioner|
+    define_method(functioner) do |*vars|
+      if function = eval("$#{functioner}")
+        raise ArgumentError, "invalid number of values (#{vars.count} for #{function.vars.count})" unless function.vars.count == vars.count
+        return function if function.vars == vars
+        if function.algebra
+          string = function.algebra.to_s
+          function.vars.each_with_index do |var, i|
+            string.gsub!(var.to_s, vars[i].to_s)
+          end
+          eval(string)
+        else
+          function
         end
-        eval(string)
       else
-        $f
+        eval("$#{functioner} = Function.new(*vars)")
       end
-    else
-      $f = Function.new(*vars)
     end
   end
 
