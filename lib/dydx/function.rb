@@ -11,7 +11,8 @@ module Dydx
     end
 
     def differentiate(sym=:x)
-      @algebra.differentiate(x)
+      @algebra.differentiate(sym)
     end
+    alias_method :d, :differentiate
   end
 end

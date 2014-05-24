@@ -1,6 +1,7 @@
 require 'dydx/helper'
 require 'dydx/algebra'
 require 'dydx/function'
+require 'dydx/integrand'
 
 module Dydx
   include Algebra
@@ -23,6 +24,7 @@ module Dydx
   def f(*vars)
     if $f
       raise ArgumentError, "invalid number of values (#{vars.count} for #{$f.vars.count})" unless $f.vars.count == vars.count
+      return $f if $f.vars == vars
       if $f.algebra
         string = $f.algebra.to_s
         $f.vars.each_with_index do |var, i|
@@ -37,6 +39,10 @@ module Dydx
     end
   end
 
+  def S(function, delta)
+    Integrand.new(function, delta.var)
+  end
+
   def method_missing(method, *args, &block)
     method_name = method.to_s
     if method_name =~ /^d.?$/
@@ -45,6 +51,14 @@ module Dydx
       method_name.to_sym
     else
       super
+    end
+  end
+
+  Float.class_eval do
+    def ^(x)
+      result = 1.0
+      x.times{ result *= self }
+      result
     end
   end
 end
