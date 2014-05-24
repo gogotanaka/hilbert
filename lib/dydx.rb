@@ -1,26 +1,11 @@
 require 'dydx/helper'
 require 'dydx/algebra'
+require 'dydx/delta'
 require 'dydx/function'
 require 'dydx/integrand'
 
 module Dydx
   include Algebra
-  class Delta
-    attr_accessor :var, :function
-    def initialize(var, function)
-      @var      = var
-      @function = function
-    end
-
-    def /(delta)
-      if var
-        eval("$#{var}").differentiate(delta.var)
-      elsif delta.function
-        delta.function.differentiate(delta.var)
-      end
-    end
-  end
-
   def f(*vars)
     if $f
       raise ArgumentError, "invalid number of values (#{vars.count} for #{$f.vars.count})" unless $f.vars.count == vars.count
