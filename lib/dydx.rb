@@ -6,6 +6,7 @@ require 'dydx/integrand'
 
 module Dydx
   include Algebra
+  # TODO: Refactor
   %w(f g h).each do |functioner|
     define_method(functioner) do |*vars|
       if function = eval("$#{functioner}")
@@ -13,6 +14,11 @@ module Dydx
         return function if function.vars == vars
         if function.algebra
           string = function.algebra.to_s
+                     .gsub('cos', 'Math.cos')
+                     .gsub('sin', 'Math.sin')
+                     .gsub('log', 'Math.log')
+                     .gsub('e', 'Math::E')
+                     .gsub('pi', 'Math::Pi')
           function.vars.each_with_index do |var, i|
             string.gsub!(var.to_s, vars[i].to_s)
           end
@@ -42,14 +48,6 @@ module Dydx
       method_name.to_sym
     else
       super
-    end
-  end
-
-  Float.class_eval do
-    def ^(x)
-      result = 1.0
-      x.times{ result *= self }
-      result
     end
   end
 end

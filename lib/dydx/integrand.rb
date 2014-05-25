@@ -13,8 +13,8 @@ module Dydx
       h = (b - a) / n
       sum = 0.0
       xi = ->(i){ a + h * i }
-      n.times do |i|
-        sum += ( f(xi.(i)) + 4.0 * f(xi.(i) + h / 2.0 ) + f(xi.(i) + h) )
+      n.to_i.times do |i|
+        sum += ( f(xi.(i)) + 4.0 * f(xi.(i) + h / 2.0 ) + f(xi.(i) + h) ) rescue binding.pry
       end
       ( h * sum ) / 6.0
     end
