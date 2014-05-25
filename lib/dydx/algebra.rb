@@ -54,5 +54,9 @@ module Dydx
         Inverse.new(x, operator)
       end
     end
+
+    def -@
+      inverse(self, :+)
+    end
   end
 end
