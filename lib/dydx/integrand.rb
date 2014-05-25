@@ -14,7 +14,7 @@ module Dydx
       sum = 0.0
       xi = ->(i){ a + h * i }
       n.to_i.times do |i|
-        sum += ( f(xi.(i)) + 4.0 * f(xi.(i) + h / 2.0 ) + f(xi.(i) + h) ) rescue binding.pry
+        sum += ( f(xi.(i)) + 4.0 * f(xi.(i) + h / 2.0 ) + f(xi.(i) + h) )
       end
       ( h * sum ) / 6.0
     end
