@@ -30,7 +30,7 @@ describe Dydx:Integrand do
   it 'ex5' do
     $f = nil
     f(x) <= log(x)
-    expect(S(f(x), dx)[0, 1]).to eq(- Float::INFINITY)
+    expect(S(f(x), dx)[0, 1]).to eq(-oo)
   end
 
   it 'ex6' do

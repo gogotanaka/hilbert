@@ -49,7 +49,7 @@ describe Float do
       it{ expect(3.0 * 2.0).to eq(6.0) }
 
       it{ expect(0.0 / 3.0).to eq(0.0) }
-      it{ expect(3.0 / 0.0).to eq(Float::INFINITY) }
+      it{ expect(3.0 / 0.0).to eq(oo) }
       it{ expect(3.0 / 1.0).to eq(3.0) }
       # TODO:
       it{ expect(2.0 / 3.0).to eq(0.6666666666666666) }

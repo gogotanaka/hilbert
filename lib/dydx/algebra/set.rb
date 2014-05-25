@@ -36,6 +36,10 @@ module Dydx
         $e ||= E.new
       end
 
+      def oo
+        Float::INFINITY
+      end
+
       def log(formula)
         if formula.multiplication?
           f, g = formula.f, formula.g
