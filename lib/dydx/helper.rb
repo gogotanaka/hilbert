@@ -47,11 +47,11 @@ module Dydx
     end
 
     def is_1?
-      self == 1 || (is_a?(Num) && n == 1)
+      [1, 1.0].include?(self) || (is_a?(Num) && n.is_1?)
     end
 
     def is_minus1?
-      self == -1 || (is_a?(Num) && n == -1)
+      [1, -1.0].include?(self)|| (is_a?(Num) && n.is_minus1?)
     end
 
     def distributive?(ope1, ope2)
