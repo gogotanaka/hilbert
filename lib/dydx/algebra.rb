@@ -13,6 +13,7 @@ module Dydx
   module Algebra
     include Set
     module Set
+      # TODO: Refactor
       Symbol.class_eval{ include Operator::Symbol }
       Fixnum.class_eval do
         %w(+ - * / ^).each do |operator|
@@ -22,12 +23,25 @@ module Dydx
               g.is_a?(Base)
 
               Num.new(self).send(operator.to_sym, g)
-            elsif operator == '^' && g.is_a?(Fixnum)
-              result = 1
-              g.times{ result *= self }
-              result
+            elsif operator == '^' && g.is_a?(Fixnum) || g.is_a?(Float)
+              self ** g
+            elsif operator == '^' && g.is_a?(Num)
+              self ** g.n
             else
               (to_f.send(operator.to_sym, g)).to_i
+            end
+          end
+        end
+      end
+      Float.class_eval do
+        %w(^).each do |operator|
+          define_method(operator) do |g|
+            if g.is_a?(Fixnum) || g.is_a?(Float)
+              self ** g
+            elsif g.is_a?(Num)
+              self ** g.n
+            else
+              Num.new(self).send(operator.to_sym, g)
             end
           end
         end

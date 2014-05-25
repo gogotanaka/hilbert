@@ -39,11 +39,11 @@ module Dydx
     end
 
     def is_num?
-      (is_a?(Num) || is_a?(Fixnum)) || (is_a?(Inverse) && x.is_num?)
+      (is_a?(Num) || is_a?(Fixnum) || is_a?(Float)) || (is_a?(Inverse) && x.is_num?)
     end
 
     def is_0?
-      self == 0 || (is_a?(Num) && n == 0)
+      [0, 0.0].include?(self) || (is_a?(Num) && n.is_0?)
     end
 
     def is_1?
