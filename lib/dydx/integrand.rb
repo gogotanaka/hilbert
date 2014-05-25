@@ -10,6 +10,10 @@ module Dydx
       f = function
       a, b = [a, b].map(&:to_f)
       raise ArgumentError, 'b should be greater than a' if a > b
+      # HOT FIX: should implement Infinity class
+      a = - 1000 if a == - Float::INFINITY
+      b = 1000 if b == Float::INFINITY
+
       h = (b - a) / n
       sum = 0.0
       xi = ->(i){ a + h * i }

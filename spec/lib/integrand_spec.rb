@@ -47,4 +47,10 @@ describe Dydx:Integrand do
     f(x) <= (1.0 / ( ( 2.0 * Math::PI ) ^ 0.5 ) ) * ( e ^ (- (x ^ 2) / 2) )
     expect(S(f(x), dx)[-1000, 1000, 1000]).to eq(0.9952054164466917)
   end
+
+  it 'ex8' do
+    $f = nil
+    f(x) <= (1.0 / ( ( 2.0 * pi ) ^ 0.5 ) ) * ( e ^ (- (x ^ 2) / 2) )
+    expect(S(f(x), dx)[-oo, oo, 1000]).to eq(0.9952054164466917)
+  end
 end

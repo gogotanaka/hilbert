@@ -18,7 +18,7 @@ module Dydx
                      .gsub('sin', 'Math.sin')
                      .gsub('log', 'Math.log')
                      .gsub('e', 'Math::E')
-                     .gsub('pi', 'Math::Pi')
+                     .gsub('pi', 'Math::PI')
           function.vars.each_with_index do |var, i|
             string.gsub!(var.to_s, vars[i].to_s)
           end
