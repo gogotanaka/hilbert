@@ -49,7 +49,7 @@ describe Fixnum do
       it{ expect(3 * 2).to eq(6) }
 
       it{ expect((0 / 3).to_s).to eq('0') }
-      it{ expect{(3 / 0).to_s}.to raise_error(FloatDomainError) }
+      it{ expect{(3 / 0).to_s}.to raise_error(ZeroDivisionError) }
       it{ expect((3 / 1).to_s).to eq('3') }
       # TODO:
       it{ expect((2 / 3).to_s).to eq('0') }

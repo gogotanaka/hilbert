@@ -16,6 +16,18 @@ module Dydx
       # TODO: Refactor
       Symbol.class_eval{ include Operator::Symbol }
       Fixnum.class_eval do
+        alias_method :addition, :+
+        alias_method :subtraction, :-
+        alias_method :multiplication, :*
+        alias_method :division, :/
+        alias_method :exponentiation, :**
+        ope_to_str = {
+          addition: :+,
+          subtraction: :-,
+          multiplication: :*,
+          division: :/,
+          exponentiation: :^
+        }
         %w(+ - * / ^).each do |operator|
           define_method(operator) do |g|
             if g.is_a?(Symbol) ||
@@ -23,25 +35,35 @@ module Dydx
               g.is_a?(Base)
 
               Num.new(self).send(operator.to_sym, g)
-            elsif operator == '^' && g.is_a?(Fixnum) || g.is_a?(Float)
-              self ** g
-            elsif operator == '^' && g.is_a?(Num)
-              self ** g.n
             else
-              (to_f.send(operator.to_sym, g)).to_i
+              send(ope_to_str.key(operator.to_sym), g)
             end
           end
         end
       end
+
       Float.class_eval do
-        %w(^).each do |operator|
+        alias_method :addition, :+
+        alias_method :subtraction, :-
+        alias_method :multiplication, :*
+        alias_method :division, :/
+        alias_method :exponentiation, :**
+        ope_to_str = {
+          addition: :+,
+          subtraction: :-,
+          multiplication: :*,
+          division: :/,
+          exponentiation: :^
+        }
+        %w(+ - * / ^).each do |operator|
           define_method(operator) do |g|
-            if g.is_a?(Fixnum) || g.is_a?(Float)
-              self ** g
-            elsif g.is_a?(Num)
-              self ** g.n
-            else
+            if g.is_a?(Symbol) ||
+              g.is_a?(Formula) ||
+              g.is_a?(Base)
+
               Num.new(self).send(operator.to_sym, g)
+            else
+              send(ope_to_str.key(operator.to_sym), g)
             end
           end
         end
