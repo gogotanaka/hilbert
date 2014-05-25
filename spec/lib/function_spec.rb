@@ -25,4 +25,9 @@ describe Dydx:Function do
   it{ expect(g(a, b) <= f(a + b, b)).to eq(g(a, b)) }
   it{ expect(g(a, b)).to eq($g) }
   it{ expect(g(2, 3)).to eq(15) }
+
+  it{ expect(h(a, b, c) <= d/db(g(a, b))).to eq(h(a, b, c)) }
+  it{ expect(h(a, b, c) <= d/db(g(a, b))).to eq($h) }
+  it{ expect(h(a, b, c)).to eq(( ( 2 * b ) + a )) }
+  it{ expect(h(a, b, c).algebra).to eq(( ( 2 * b ) + a )) }
 end
