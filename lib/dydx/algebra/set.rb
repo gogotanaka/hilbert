@@ -1,6 +1,7 @@
 require 'dydx/algebra/set/base'
 require 'dydx/algebra/set/num'
 require 'dydx/algebra/set/fixnum'
+require 'dydx/algebra/set/float'
 require 'dydx/algebra/set/symbol'
 require 'dydx/algebra/set/e'
 require 'dydx/algebra/set/pi'

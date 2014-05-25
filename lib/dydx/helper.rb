@@ -39,11 +39,11 @@ module Dydx
     end
 
     def is_num?
-      (is_a?(Num) || is_a?(Fixnum)) || (is_a?(Inverse) && x.is_num?)
+      (is_a?(Num) || is_a?(Fixnum) || is_a?(Float)) || (is_a?(Inverse) && x.is_num?)
     end
 
     def is_0?
-      self == 0 || (is_a?(Num) && n == 0)
+      [0, 0.0].include?(self) || (is_a?(Num) && n.is_0?)
     end
 
     def is_1?
@@ -94,21 +94,6 @@ module Dydx
         is_a?(Formula) && (@operator == operator)
         # is_a?(Inverse) && self.operator == operator
       end
-    end
-
-    def to_str(sym)
-      OP_SYM_STR.key(sym)
-    end
-
-    def str_to_sym(str)
-      OP_SYM_STR[str]
-    end
-
-    def to_str_inv(operator)
-      {
-        subtrahend: :+,
-        divisor:    :*
-      }.key(operator)
     end
 
     def rest(f_or_g)

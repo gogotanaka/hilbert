@@ -16,7 +16,9 @@ module Dydx
           (f.d(sym) * g) + (f * g.d(sym))
         when :^
           # TODO:
-          if f == sym
+          if g.is_num?
+            f.d(sym) * g * (f ^ (g - 1) )
+          elsif f == sym
             g * (f ^ (g - 1))
           elsif f == e
             g.d(sym) * self
