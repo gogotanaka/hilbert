@@ -44,6 +44,10 @@ module Dydx
     Delta.new
   end
 
+  def reset
+    $f, $g, $h = nil, nil, nil
+  end
+
   def method_missing(method, *args, &block)
     method_name = method.to_s
     if method_name =~ /^d.$/
