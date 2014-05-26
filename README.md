@@ -184,6 +184,6 @@ Or install it yourself as:
 run `bundle exec rake spec`
 
 ```
-Finished in 0.11282 seconds
-231 examples, 0 failures
+Finished in 3.23 seconds
+309 examples, 0 failures
 ```
