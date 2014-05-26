@@ -3,6 +3,75 @@ It always happens you want to differentiate some formulas with ruby. right?.....
 
 After `inlcude Dydx` , ruby become like other language.
 
+## Dydx is new math DSL in Ruby
+
+I'm going to add for more explanation.
+
+
+
+```ruby:
+require 'dydx'
+include Dydx
+
+f(x) <= x ^ 2
+
+f(3)
+# => 9
+
+f(x).to_s
+# => "( x ^ 2 )"
+
+f(x) == eval('f(x).to_s')
+# => true
+
+g(x) <= d/dx(f(x))
+
+g(3)
+# => 6
+
+# => '2 * x'
+
+S(f(x), dx)[0, 1]
+# => 0.3333333333333334
+
+( d/dx(log(x)) ).to_s
+# => "( 1 / x )"
+
+( d/dx(cos(x)) ).to_s
+# => "( - sin( x ) )"
+
+( d/dx(e ^ x) ).to_s
+# => "( e ^ x )"
+
+f(x) <= sin(x)
+S(f(x), dx)[0, Math::PI/2]
+# => 1.000000000021139
+
+f(x) <= (1.0 / ( ( 2.0 * pi ) ^ 0.5 ) ) * ( e ^ (- (x ^ 2) / 2) )
+S(f(x), dx)[-oo, oo]
+# => 0.9952054164466917
+
+f(x) <= x ^ 2
+
+f(a + b).to_s
+# => "( ( a + b ) ^ 2 )"
+
+g(a, b) <= f(a + b)
+
+g(a, b).to_s
+# => "( ( a + b ) ^ 2 )"
+
+g(2, 2)
+# => 16
+
+( d/da(g(a, b)) ).to_s
+=> "( 2 * ( a + b ) )"
+```
+
+
+
+
+
 ```
 require 'dydx'
 include Dydx
