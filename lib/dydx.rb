@@ -13,12 +13,16 @@ module Dydx
         raise ArgumentError, "invalid number of values (#{vars.count} for #{function.vars.count})" unless function.vars.count == vars.count
         return function if function.vars == vars
         if function.algebra
-          string = function.algebra.to_s
-                     .gsub('cos', 'Math.cos')
-                     .gsub('sin', 'Math.sin')
-                     .gsub('log', 'Math.log')
-                     .gsub('e', 'Math::E')
-                     .gsub('pi', 'Math::PI')
+          if vars.all?{|v| v.is_a?(Numeric)}
+            string = function.algebra.to_s
+                       .gsub('cos', 'Math.cos')
+                       .gsub('sin', 'Math.sin')
+                       .gsub('log', 'Math.log')
+                       .gsub('e', 'Math::E')
+                       .gsub('pi', 'Math::PI')
+          else
+            string = function.algebra.to_s
+          end
           function.vars.each_with_index do |var, i|
             string.gsub!(var.to_s, vars[i].to_s)
           end

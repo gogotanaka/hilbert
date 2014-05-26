@@ -125,5 +125,9 @@ module Dydx
         [:+, :*].include?(self)
       end
     end
+
+    def ==(x)
+      to_s == x.to_s
+    end
   end
 end

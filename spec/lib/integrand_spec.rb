@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Dydx:Integrand do
   it 'ex1' do
+    $f = nil
     f(x, y) <= x * y
     integrand = S(f(x, y), dx)
     expect(integrand.function).to eq(f(x, y))

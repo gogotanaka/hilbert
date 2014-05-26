@@ -30,4 +30,10 @@ describe Dydx:Function do
   it{ expect(h(a, b, c) <= d/db(g(a, b))).to eq($h) }
   it{ expect(h(a, b, c)).to eq(( ( 2 * b ) + a )) }
   it{ expect(h(a, b, c).algebra).to eq(( ( 2 * b ) + a )) }
+
+  it 'ex.4' do
+    $f = nil
+    f(x) <= log(x)
+    expect(f(a)).to eq(log(a))
+  end
 end
