@@ -43,8 +43,8 @@ module Dydx
                 else
                   super(x)
                 end
-              elsif [:*].include?(operator) && x.inverse?(:+)
-                inverse(::Algebra::Formula.new(self, x.x, operator.to_sym), :+)
+              elsif operator == :* && x.inverse?(:+)
+                -(self * x.x)
               else
                 super(x)
               end
