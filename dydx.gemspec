@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["gogotanaka"]
   spec.email         = ["qlli.illb@gmail.com"]
   spec.homepage      = "https://github.com/gogotanaka"
-  spec.summary       = %q{We can enjoy the derivative.}
-  spec.description   = %q{It is possible to use the differential using the Symbol and Fixnum by including the Dydx. And, we can use the natural logarithm and log.}
+  spec.summary       = %q{We can enjoy the math.}
+  spec.description   = %q{Dydx is new math DSL in Ruby. The most important thing in this DSL is we can handle math in the same sense sense of the math on paper.}
 
   spec.license       = "MIT"
 
