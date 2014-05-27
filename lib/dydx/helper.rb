@@ -62,6 +62,7 @@ module Dydx
       case operator
       when :+
         (is_num? && x.is_num?) ||
+        (formula?(:*) && (f.is_num? || g.is_num?)) && x.is_num? ||
         like_term?(x) ||
         inverse?(:+, x)
       when :*
@@ -108,9 +109,6 @@ module Dydx
 
     def rest(f_or_g)
       ([:f, :g] - [f_or_g]).first
-    end
-
-    def commutative?
     end
 
     def distributable?(operator)
