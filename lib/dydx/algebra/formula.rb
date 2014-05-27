@@ -5,6 +5,7 @@ module Dydx
       attr_accessor :f, :operator, :g
 
       def initialize(f, g, operator)
+        g, f = f, g if g.is_num? && operator.commutative?
         @f, @g, @operator = f, g, operator
       end
 

@@ -47,12 +47,12 @@ describe Dydx::Algebra::Operator::Parts::Formula do
   it{ expect((:y - (:x - :y)).to_s).to eq('( ( 2 * y ) - x )') }
   it{ expect((:y - (:y - :x)).to_s).to eq('x') }
 
-  it{ expect(((:x * 2) ^ 2).to_s).to eq('( ( x ^ 2 ) * 4 )') }
+  it{ expect(((:x * 2) ^ 2).to_s).to eq('( 4 * ( x ^ 2 ) )') }
   it{ expect(((:x / 2) ^ 2).to_s).to eq('( ( x ^ 2 ) / 4 )') }
 
-  it{ expect((3*x + 4*(x^2)+ 4*x).to_s).to eq('( ( x * 7 ) + ( 4 * ( x ^ 2 ) ) )') }
+  it{ expect((3*x + 4*(x^2)+ 4*x).to_s).to eq('( ( 7 * x ) + ( 4 * ( x ^ 2 ) ) )') }
 
   # TODO:
-  it{ expect((2 ^ (:x * 2)).to_s).to eq('( 2 ^ ( x * 2 ) )') }
+  it{ expect((2 ^ (:x * 2)).to_s).to eq('( 2 ^ ( 2 * x ) )') }
   it{ expect((2 ^ (:x / 2)).to_s).to eq('( 2 ^ ( x / 2 ) )') }
 end

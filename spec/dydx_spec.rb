@@ -17,8 +17,8 @@ describe Dydx do
     $b = (:x ^ (:x * 2))
     let(:d1){ db/dx }
     let(:d2){ d/dx($b) }
-    it{ expect(d1.to_s).to eq('( ( x * 2 ) * ( x ^ ( ( x * 2 ) - 1 ) ) )') }
-    it{ expect(d2.to_s).to eq('( ( x * 2 ) * ( x ^ ( ( x * 2 ) - 1 ) ) )') }
+    it{ expect(d1.to_s).to eq('( ( 2 * x ) * ( x ^ ( ( 2 * x ) - 1 ) ) )') }
+    it{ expect(d2.to_s).to eq('( ( 2 * x ) * ( x ^ ( ( 2 * x ) - 1 ) ) )') }
   end
 
   context 'ex3' do
