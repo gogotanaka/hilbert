@@ -1,3 +1,3 @@
 module Dydx
-  VERSION = "0.1.25"
+  VERSION = "0.1.28"
 end
