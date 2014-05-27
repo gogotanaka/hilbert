@@ -9,12 +9,9 @@ module Dydx
       end
 
       def to_s
-        # sym = {'*'=>'/', '+'=>'-'}[operator.to_s]
         case operator
-        when :+
-          "( - #{x} )"
-        when :*
-          "( 1 / #{x} )"
+        when :+ then "( - #{x} )"
+        when :* then "( 1 / #{x} )"
         end
       end
 
@@ -27,10 +24,6 @@ module Dydx
         end
       end
       alias_method :d, :differentiate
-
-      def ==(x)
-        to_s == x.to_s
-      end
     end
   end
 end
