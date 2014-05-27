@@ -11,10 +11,8 @@ module Dydx
 
       def differentiate(sym=:x)
         case @operator
-        when :+
-          f.d(sym) + g.d(sym)
-        when :*
-          (f.d(sym) * g) + (f * g.d(sym))
+        when :+ then f.d(sym) + g.d(sym)
+        when :* then (f.d(sym) * g) + (f * g.d(sym))
         when :^
           # TODO:
           if g.is_num?
@@ -31,18 +29,14 @@ module Dydx
       alias_method :d, :differentiate
 
       def to_s
-        if (multiplication? && (f.is_minus1? || g.is_minus1?)  )
+        if (formula?(:*) && (f.is_minus1? || g.is_minus1?)  )
           "( - #{g.to_s} )"
-        elsif multiplication? && g.inverse?(:*)
-          "( #{f.to_s} / #{g.x.to_s} )"
-        elsif multiplication? && f.inverse?(:*)
-          "( #{g.to_s} / #{f.x.to_s} )"
-        elsif addition? && g.inverse?(:+)
-          "( #{f.to_s} - #{g.x.to_s} )"
-        elsif addition? && f.inverse?(:+)
-          "( #{g.to_s} - #{f.x.to_s} )"
+        elsif g.inverse?(operator)
+          "( #{f.to_s} #{inverse_ope(operator)} #{g.x.to_s} )"
+        elsif f.inverse?(operator)
+          "( #{g.to_s} #{inverse_ope(operator)} #{f.x.to_s} )"
         else
-          "( #{f.to_s} #{@operator} #{g.to_s} )"
+          "( #{f.to_s} #{operator} #{g.to_s} )"
         end
       end
 

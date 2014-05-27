@@ -4,7 +4,7 @@ module Dydx
       module Parts
         module Symbol
           def *(x)
-            if x.exponentiation? &&
+            if x.formula?(:^) &&
               self == x.f
 
               self ^ (1 + x.g)
