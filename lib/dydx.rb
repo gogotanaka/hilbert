@@ -61,7 +61,7 @@ module Dydx
     string.gsub!('cos', 'Math.cos')
     string.gsub!('sin', 'Math.sin')
     string.gsub!('log', 'Math.log')
-    string.gsub!(/ e /, ' Math::E ')
+    string.gsub!(' e ', ' Math::E ')
     string.gsub!('pi', 'Math::PI')
     string
   end
