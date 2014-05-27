@@ -16,10 +16,6 @@ module Dydx
         def to_s
           @n.to_s
         end
-
-        def ==(x)
-          to_s == x.to_s
-        end
       end
     end
   end
