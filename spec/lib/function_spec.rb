@@ -28,8 +28,8 @@ describe Dydx:Function do
 
   it{ expect(h(a, b, c) <= d/db(g(a, b))).to eq(h(a, b, c)) }
   it{ expect(h(a, b, c) <= d/db(g(a, b))).to eq($h) }
-  it{ expect(h(a, b, c)).to eq(( ( 2 * b ) + a )) }
-  it{ expect(h(a, b, c).algebra).to eq(( ( 2 * b ) + a )) }
+  it{ expect(h(a, b, c)).to eq(( a + ( 2 * b ) )) }
+  it{ expect(h(a, b, c).algebra).to eq(( a + ( 2 * b ) )) }
 
   it 'ex.4' do
     $f = nil
