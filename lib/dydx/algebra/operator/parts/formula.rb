@@ -13,6 +13,8 @@ module Dydx
                 else
                   super(x)
                 end
+              elsif formula?(sub_ope(operator)) && openable?(operator, x)
+                f.send(operator, x).send(sub_ope(operator), g.send(operator, x))
               elsif formula?(super_ope(operator)) && x.formula?(super_ope(operator))
                 w1, w2 = common_factors(x)
                 return super(x) unless (w1 && w2) && (super_ope(operator).commutative? || w1 == w2)
@@ -49,11 +51,13 @@ module Dydx
             end
           end
 
-          def ^(x)
-            if multiplication? && openable?(:^, x)
-              (f ^ x).send(self.operator, (g ^ x))
-            else
-              super(x)
+          %w(^).map(&:to_sym).each do |operator|
+            define_method(operator) do |x|
+              if formula?(sub_ope(operator)) && openable?(operator, x)
+                f.send(operator, x).send(sub_ope(operator), g.send(operator, x))
+              else
+                super(x)
+              end
             end
           end
         end

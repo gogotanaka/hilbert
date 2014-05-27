@@ -47,6 +47,11 @@ describe Dydx::Algebra::Operator::Parts::Formula do
   it{ expect((:y - (:x - :y)).to_s).to eq('( ( 2 * y ) - x )') }
   it{ expect((:y - (:y - :x)).to_s).to eq('x') }
 
+  it{ expect((x + 3) * 2).to eq(x * 2 + 6) }
+  # it{ expect((x - 3) * 2).to eq(x * 2 - 6) }
+  it{ expect((x + 3) * 2).to eq(x * 2 + 6) }
+  it{ expect((x + 3) * 2).to eq(x * 2 + 6) }
+
   it{ expect(((:x * 2) ^ 2).to_s).to eq('( 4 * ( x ^ 2 ) )') }
   it{ expect(((:x / 2) ^ 2).to_s).to eq('( ( x ^ 2 ) / 4 )') }
 
