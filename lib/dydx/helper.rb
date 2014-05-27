@@ -61,10 +61,8 @@ module Dydx
     def combinable?(x, operator)
       case operator
       when :+
-        self == x ||
         (is_num? && x.is_num?) ||
-        (multiplication? && (f == x || g == x)) ||
-        (x.multiplication? && (x.f == self || x.g == self)) ||
+        like_term?(x) ||
         inverse?(:+, x)
       when :*
         self == x ||
@@ -73,6 +71,18 @@ module Dydx
       when :^
         (is_num? && x.is_num?) || is_0? || is_1?
       end
+    end
+
+    def like_term?(x)
+      boolean = if self == x
+      elsif formula?(:*) && include?(x)
+      elsif x.formula?(:*) && x.include?(self)
+      elsif ((formula?(:*) && formula?(:*)) && (([f, g] & [x.f, x.g]).any?{|x| x.is_a?(Symbol)}))
+      else
+        true
+      end
+
+     !boolean
     end
 
     def is_multiple_of(x)

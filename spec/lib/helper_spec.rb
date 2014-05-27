@@ -25,6 +25,11 @@ describe Helper do
     it{ expect((:x * :y).is_multiple_of(:z)).to be_false }
   end
 
+  context '#like_term?' do
+    it{ expect(x.like_term?(x)).to be_true }
+    it{ expect((2 * x).like_term?((3 * x))).to be_true }
+  end
+
   context '#combinable?' do
     it{ expect(:x.combinable?(:x, :+)).to be_true }
     it{ expect(:x.combinable?(2 * :x, :+)).to be_true }
