@@ -6,7 +6,6 @@ require 'dydx/integrand'
 
 module Dydx
   include Algebra
-  # TODO: Refactor
   %w(f g h).each do |functioner|
     define_method(functioner) do |*vars|
       function = eval("$#{functioner}")
@@ -58,7 +57,7 @@ module Dydx
   end
 
   def rename_for_calc(string)
-    # need more refactoring...
+    # TODO: need more refactoring...
     string.gsub!('cos', 'Math.cos')
     string.gsub!('sin', 'Math.sin')
     string.gsub!('log', 'Math.log')
