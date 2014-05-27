@@ -1,115 +1,95 @@
-# Dydx
-It always happens you want to differentiate some formulas with ruby. right?.....
+# Dydx is new math DSL in Ruby
+
+### Since you report a bug, I will fix it within 24 hours.
+
+The most important thing in this DSL is
+
+we can handle math in the same sense sense of the math on paper.
+
+ex. limit, trigonometric functions and logarithmic.
+
 
 After `inlcude Dydx` , ruby become like other language.
 
-## Dydx is new math DSL in Ruby
-
-I'm going to add for more explanation.
-
-
-
+## Outline
 ```ruby:
 require 'dydx'
 include Dydx
 
+# Define the function. syntax is not good enough...
 f(x) <= x ^ 2
 
 f(3)
-# => 9
+=> 9
 
 f(x).to_s
-# => "( x ^ 2 )"
+=> "( x ^ 2 )"
 
 f(x) == eval('f(x).to_s')
-# => true
+=> true
 
+# Differentiate
 g(x) <= d/dx(f(x))
 
 g(3)
-# => 6
+=> 6
 
-# => '2 * x'
+g(x).to_s
+=> '2 * x'
 
+# Integrate
 S(f(x), dx)[0, 1]
-# => 0.3333333333333334
+=> 0.3333333333333334
+```
+
+
+#### limit, trigonometric functions and logarithmic.
+```ruby:
+
+f(z) <= log(z)
+S(f(z), dz)[0,1]
+=> -Infinity
 
 ( d/dx(log(x)) ).to_s
-# => "( 1 / x )"
+=> "( 1 / x )"
 
 ( d/dx(cos(x)) ).to_s
-# => "( - sin( x ) )"
+=> "( - sin( x ) )"
 
 ( d/dx(e ^ x) ).to_s
-# => "( e ^ x )"
+=> "( e ^ x )"
 
 f(x) <= sin(x)
 S(f(x), dx)[0, Math::PI/2]
-# => 1.000000000021139
+=> 1.000000000021139
 
+# standard normal distribution;
 f(x) <= (1.0 / ( ( 2.0 * pi ) ^ 0.5 ) ) * ( e ^ (- (x ^ 2) / 2) )
 S(f(x), dx)[-oo, oo]
-# => 0.9952054164466917
+=> 0.9952054164466917
+```
 
+#### it's like a magic...
+
+```ruby:
 f(x) <= x ^ 2
 
 f(a + b).to_s
-# => "( ( a + b ) ^ 2 )"
+=> "( ( a + b ) ^ 2 )"
 
+#↓it"s magic!!!
 g(a, b) <= f(a + b)
 
 g(a, b).to_s
-# => "( ( a + b ) ^ 2 )"
+=> "( ( a + b ) ^ 2 )"
 
 g(2, 2)
-# => 16
+=> 16
 
 ( d/da(g(a, b)) ).to_s
 => "( 2 * ( a + b ) )"
-```
 
-
-
-
-
-```
-require 'dydx'
-include Dydx
-
-# There are three types of differential interface
-
-( d/dx(x^2) ).to_s
-=> "( 2 * x )"
-
-log(z).d(z).to_s
-=> "( 1 / z )"
-
-$y = e ^ x
-(dy/dx).to_s
-=> "( e ^ x )"
-
-```
-
-You may wonder why undefined `x` , `e` and `z` are handleable?
-
-`method_missing` solve this problem by converting undefine variable into internal class object.
-
-Like this.
-
-```
- x + x
-=> #<Dydx::Algebra::Formula:0x007fb0a4039fb0 @f=#<Dydx::Algebra::Set::Num:0x007fb0a48169e0 @n=2>, @operator=:*, @g=:x>
-
-e
-=> #<Dydx::Algebra::Set::E:0x007fb0a383e9f0>
-
-log(sin(x))
-=> #<Dydx::Algebra::Set::Log:0x007fe7cd971528 @f=#<Dydx::Algebra::Set::Sin:0x007fe7cd971550 @x=:x>>
-```
-
-And this DSL has strong simplify.
-
-```
+# simplify
 ((x * y) + (z * x)).to_s
 => "( x * ( y + z ) )"
 
@@ -120,38 +100,30 @@ And this DSL has strong simplify.
 => "( 2 * x )"
 ```
 
-I show some differential calculus.
+
+## Documents
+I'm going to write now...cominng soon....
+
+### Module, class configuration
 
 ```
-# pretermit '#to_s'
-
-d/dz(log(z))
-=> "( 1 / z )"
-
-d/dx(x^n)
-=> "( n * ( x ^ ( n - 1 ) ) )"
-
-$y = cos(x)
-dy/dx
-=> "( - sin( x ) )"
-
-$x = a * ( (t ^ 2) / 2 )
-dx/dt
-=> "( a * t )"
-
-d/dt(dx/dt)
-=>"a"
-
-((x ^ 2) * y).d(x)
-=> "( ( 2 * x ) * y )"
-
-((x ^ 2) * y).d(x).d(y)
-=> "( 2 * x )"
-
+Dydx
+  |- Algebra
+  |      |- Set
+  |      |   |- Num
+  |      |   |- ....
+  |      |
+  |      |- Operator
+  |      |   |- Interface
+  |      |   |- ....
+  |      |
+  |      |- Formula
+  |      |- inverse
+  |
+  |- Function
+  |- Delta
+  |- Integrand
 ```
-
-
-(That's wonderful!!!!! ..............)
 
 ## Installation
 
