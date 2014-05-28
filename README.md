@@ -1,4 +1,4 @@
-# Dydx is new math DSL in Ruby
+# Dydx is new MATH Language on Ruby.
 
 ### Since you report a bug, I will fix it within 24 hours.
 
@@ -8,6 +8,8 @@ we can handle math in the same sense sense of the math on paper.
 
 ex. limit, trigonometric functions and logarithmic.
 
+## Mathematicians should enjoy math even using PC.
+(to say nothing of using paper.)
 
 After `inlcude Dydx` , ruby become like other language.
 
@@ -25,7 +27,7 @@ f(3)
 f(x).to_s
 => "( x ^ 2 )"
 
-f(x) == eval('f(x).to_s')
+f(x) == eval(f(x).to_s)
 => true
 
 # Differentiate
@@ -77,7 +79,7 @@ f(x) <= x ^ 2
 f(a + b).to_s
 => "( ( a + b ) ^ 2 )"
 
-#↓it"s magic!!!
+#↓it's like a magic!!!
 g(a, b) <= f(a + b)
 
 g(a, b).to_s
