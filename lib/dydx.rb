@@ -6,33 +6,18 @@ require 'dydx/integrand'
 
 module Dydx
   include Algebra
-  # TODO: Refactor
   %w(f g h).each do |functioner|
     define_method(functioner) do |*vars|
-      if function = eval("$#{functioner}")
-        raise ArgumentError, "invalid number of values (#{vars.count} for #{function.vars.count})" unless function.vars.count == vars.count
-        return function if function.vars == vars
-        if function.algebra
-          if vars.all?{|v| v.is_a?(Numeric)}
-            string = function.algebra.to_s
-                       .gsub('cos', 'Math.cos')
-                       .gsub('sin', 'Math.sin')
-                       .gsub('log', 'Math.log')
-                       .gsub('e', 'Math::E')
-                       .gsub('pi', 'Math::PI')
-          else
-            string = function.algebra.to_s
-          end
-          function.vars.each_with_index do |var, i|
-            string.gsub!(var.to_s, vars[i].to_s)
-          end
-          eval(string)
-        else
-          function
-        end
-      else
-        eval("$#{functioner} = Function.new(*vars)")
-      end
+      function = eval("$#{functioner}")
+      return eval("$#{functioner} = Function.new(*vars)") unless function
+
+      raise ArgumentError, "invalid number of values (#{vars.count} for #{function.vars.count})" unless function.vars.count == vars.count
+      return function if function.vars == vars
+      return function unless function.algebra
+
+      string = substitute(vars, function)
+      string = rename_for_calc(string) if all_vars_num?(vars)
+      eval(string)
     end
   end
 
@@ -57,5 +42,27 @@ module Dydx
     else
       super
     end
+  end
+
+  private
+
+  def substitute(vars, function)
+    string = function.algebra.to_s
+    function.vars.each_with_index { |var, i| string.gsub!(var.to_s, vars[i].to_s) }
+    string
+  end
+
+  def all_vars_num?(vars)
+    vars.all? { |v| v.is_a?(Numeric) }
+  end
+
+  def rename_for_calc(string)
+    # TODO: need more refactoring...
+    string.gsub!('cos', 'Math.cos')
+    string.gsub!('sin', 'Math.sin')
+    string.gsub!('log', 'Math.log')
+    string.gsub!(' e ', ' Math::E ')
+    string.gsub!('pi', 'Math::PI')
+    string
   end
 end
