@@ -1,6 +1,3 @@
-require 'dydx/algebra/operator/common_parts'
-require 'dydx/algebra/operator/parts/general'
-
 module Dydx
   module Algebra
     module Operator

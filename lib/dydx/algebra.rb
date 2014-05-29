@@ -1,20 +1,13 @@
+require 'dydx/algebra/set'
+require 'dydx/algebra/operator'
 require 'dydx/algebra/formula'
 require 'dydx/algebra/inverse'
-
-require 'dydx/algebra/set'
-
-require 'dydx/algebra/operator/inverse'
-require 'dydx/algebra/operator/formula'
-require 'dydx/algebra/operator/symbol'
-require 'dydx/algebra/operator/num'
-require 'dydx/algebra/operator/general'
 
 module Dydx
   module Algebra
     include Set
     module Set
       # TODO: Refactor
-      Symbol.class_eval{ include Operator::Symbol }
       Fixnum.class_eval do
         alias_method :addition, :+
         alias_method :subtraction, :-
@@ -68,6 +61,7 @@ module Dydx
           end
         end
       end
+      Symbol.class_eval{ include Operator::General }
       class Num;    include Operator::Num; end
       class E;      include Operator::General; end
       class Pi;     include Operator::General; end

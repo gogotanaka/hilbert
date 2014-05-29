@@ -1,3 +1,6 @@
 require 'dydx/algebra/operator/parts/base'
 require 'dydx/algebra/operator/parts/general'
 require 'dydx/algebra/operator/parts/interface'
+require 'dydx/algebra/operator/parts/formula'
+require 'dydx/algebra/operator/parts/inverse'
+require 'dydx/algebra/operator/parts/num'
