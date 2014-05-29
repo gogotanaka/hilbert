@@ -22,20 +22,12 @@ module Dydx
       :| => :^
     }
 
-    def super_ope(operator)
-      SUPER_OPE_RELATION[operator]
-    end
-
-    def sub_ope(operator)
-      SUPER_OPE_RELATION.invert[operator]
-    end
-
     def inverse_ope(operator)
       INVERSE_OPE_RELATION[operator]
     end
 
     def inverse_super_ope(operator)
-      inverse_ope(super_ope(operator))
+      inverse_ope(operator.super)
     end
 
     def is_num?
@@ -55,7 +47,7 @@ module Dydx
     end
 
     def distributive?(ope1, ope2)
-      [super_ope(ope1), inverse_super_ope(ope1)].include?(ope2)
+      [ope1.super, ope1.inverse_super].include?(ope2)
     end
 
     def combinable?(x, operator)
@@ -131,6 +123,18 @@ module Dydx
     Symbol.class_eval do
       def commutative?
         [:+, :*].include?(self)
+      end
+
+      def super
+        SUPER_OPE_RELATION[self] || self
+      end
+
+      def sub
+        SUPER_OPE_RELATION.invert[self] || self
+      end
+
+      def inverse_super
+        inverse_super_ope(self) || self
       end
     end
 

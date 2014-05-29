@@ -35,8 +35,8 @@ module Dydx
                 else
                   super(x)
                 end
-              elsif [:+, :*].include?(operator) && x.formula?(super_ope(operator)) && self == x.f
-                send(super_ope(operator), (1 + x.g))
+              elsif [:+, :*].include?(operator) && x.formula?(operator.super) && self == x.f
+                send(operator.super, (1 + x.g))
               elsif x.is_a?(Inverse) && x.operator == operator && x.x.formula?(operator)
                 if combinable?(x.x.f, operator)
                   send(operator, inverse(x.x.f, operator)).send(operator, inverse(x.x.g, operator))
