@@ -6,6 +6,7 @@ require 'dydx/algebra/set/symbol'
 require 'dydx/algebra/set/e'
 require 'dydx/algebra/set/pi'
 require 'dydx/algebra/set/log'
+require 'dydx/algebra/set/log2'
 require 'dydx/algebra/set/sin'
 require 'dydx/algebra/set/cos'
 require 'dydx/algebra/set/tan'
@@ -53,6 +54,25 @@ module Dydx
           e1
         else
           Log.new(formula)
+        end
+      end
+
+      def log2(formula)
+        # TODO: refactor with log function.
+        if formula.multiplication?
+          f, g = formula.f, formula.g
+          log2(f) + log2(g)
+        elsif formula.exponentiation?
+          f, g = formula.f, formula.g
+          g * log2(f)
+        elsif formula.is_1?
+          e0
+        elsif formula.is_a?(Num)
+          (formula.n == 2) ? e1 : log2(formula.n)
+        elsif formula == 2
+          e1
+        else
+          Log2.new(formula)
         end
       end
 
