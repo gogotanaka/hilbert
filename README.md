@@ -8,8 +8,8 @@ we can handle math in the same sense sense of the math on paper.
 
 ex. limit, trigonometric functions and logarithmic.
 
-## Mathematicians should enjoy math even using PC.
-(to say nothing of using paper.)
+## We should enjoy MATH even using PC.
+(to say nothing of using pen.)
 
 After `inlcude Dydx` , ruby become like other language.
 
@@ -63,12 +63,12 @@ S(f(z), dz)[0,1]
 
 f(x) <= sin(x)
 S(f(x), dx)[0, Math::PI/2]
-=> 1.000000000021139
+=> 1.0
 
 # standard normal distribution;
 f(x) <= (1.0 / ( ( 2.0 * pi ) ^ 0.5 ) ) * ( e ^ (- (x ^ 2) / 2) )
 S(f(x), dx)[-oo, oo]
-=> 0.9952054164466917
+=> 1.0
 ```
 
 #### it's like a magic...
@@ -158,6 +158,6 @@ Or install it yourself as:
 run `bundle exec rake spec`
 
 ```
-Finished in 3.23 seconds
-309 examples, 0 failures
+Finished in 3.76 seconds
+325 examples, 0 failures
 ```
