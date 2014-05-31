@@ -66,6 +66,8 @@ module Dydx
       class E;      include Operator::General; end
       class Pi;     include Operator::General; end
       class Log;    include Operator::General; end
+      class Log2;   include Operator::General; end
+      class Log10;  include Operator::General; end
       class Sin;    include Operator::General; end
       class Cos;    include Operator::General; end
       class Tan;    include Operator::General; end
