@@ -8,6 +8,10 @@ module Dydx
           self == sym ? e1 : e0
         end
         alias_method :d, :differentiate
+
+        def subst(hash = {})
+          hash[self] || self
+        end
       end
     end
   end

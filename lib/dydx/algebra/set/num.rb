@@ -16,6 +16,10 @@ module Dydx
         def to_s
           @n.to_s
         end
+
+        def subst(hash = {})
+          n.to_f
+        end
       end
     end
   end

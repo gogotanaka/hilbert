@@ -40,6 +40,10 @@ module Dydx
         end
       end
 
+      def subst(hash = {})
+        f.subst(hash).send(operator, g.subst(hash))
+      end
+
       def include?(x)
         f == x || g == x
       end

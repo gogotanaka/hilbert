@@ -15,6 +15,13 @@ module Dydx
         end
       end
 
+      def subst(hash = {})
+        case operator
+        when :+ then x.subst(hash) * -1
+        when :* then x.subst(hash) ** -1
+        end
+      end
+
       def differentiate(sym=:x)
         case operator
         when :+

@@ -10,6 +10,10 @@ module Dydx
         def to_s
           'pi'
         end
+
+        def subst(hash = {})
+          Math::PI
+        end
       end
     end
   end
