@@ -20,6 +20,7 @@ module Dydx
       def e1
         eval("$e1 ||= Num.new(1)")
       end
+
       def _(num)
         if num >= 0
           eval("$p#{num} ||= Num.new(num)")
@@ -40,6 +41,7 @@ module Dydx
         Float::INFINITY
       end
 
+      # TODO: Method has too many lines. [13/10]
       def log(formula)
         if formula.multiplication?
           f, g = formula.f, formula.g
@@ -67,9 +69,9 @@ module Dydx
 
       def cos(x)
         multiplier = x.is_multiple_of(pi)
-        if multiplier.is_a?(Num) && multiplier.n % 2 == 0
+        if multiplier.is_a?(Num) && multiplier.n.even?
           e1
-        elsif multiplier.is_a?(Num) && multiplier.n % 2 == 1
+        elsif multiplier.is_a?(Num) && multiplier.n.odd?
           _(-1)
         else
           Cos.new(x)

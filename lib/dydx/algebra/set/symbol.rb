@@ -4,7 +4,7 @@ module Dydx
       Symbol.class_eval do
         include Helper
 
-        def differentiate(sym=:x)
+        def differentiate(sym = :x)
           self == sym ? e1 : e0
         end
         alias_method :d, :differentiate

@@ -9,7 +9,7 @@ module Dydx
         end
 
         def to_s
-          "tan( #{x.to_s} )"
+          "tan( #{x} )"
         end
       end
     end

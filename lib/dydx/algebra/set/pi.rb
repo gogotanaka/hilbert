@@ -2,7 +2,7 @@ module Dydx
   module Algebra
     module Set
       class Pi < Base
-        def differentiate(sym=:x)
+        def differentiate(_sym = :x)
           _(0)
         end
         alias_method :d, :differentiate

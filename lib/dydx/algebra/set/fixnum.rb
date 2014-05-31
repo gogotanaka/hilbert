@@ -4,7 +4,7 @@ module Dydx
       Fixnum.class_eval do
         include Helper
 
-        def differentiate(sym=:x)
+        def differentiate(_sym = :x)
           e0
         end
         alias_method :d, :differentiate

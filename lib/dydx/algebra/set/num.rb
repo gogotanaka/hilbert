@@ -8,7 +8,7 @@ module Dydx
           @n = n
         end
 
-        def differentiate(sym=:x)
+        def differentiate(_sym = :x)
           e0
         end
         alias_method :d, :differentiate

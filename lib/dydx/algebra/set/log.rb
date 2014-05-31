@@ -8,13 +8,13 @@ module Dydx
           @f = f
         end
 
-        def differentiate(sym=:x)
+        def differentiate(sym = :x)
           f.d(sym) / (f)
         end
         alias_method :d, :differentiate
 
         def to_s
-          "log( #{f.to_s} )"
+          "log( #{f} )"
         end
       end
     end

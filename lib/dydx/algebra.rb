@@ -61,7 +61,7 @@ module Dydx
           end
         end
       end
-      Symbol.class_eval{ include Operator::General }
+      Symbol.class_eval { include Operator::General }
       class Num;    include Operator::Num; end
       class E;      include Operator::General; end
       class Pi;     include Operator::General; end
@@ -73,6 +73,7 @@ module Dydx
     class Formula;  include Operator::Formula; end
     class Inverse;  include Operator::Inverse; end
 
+    # TODO: Cyclomatic complexity for inverse is too high. [7/6]
     def inverse(x, operator)
       if operator == :+ && x.is_0?
         e0

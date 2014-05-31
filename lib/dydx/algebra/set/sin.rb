@@ -9,10 +9,10 @@ module Dydx
         end
 
         def to_s
-          "sin( #{x.to_s} )"
+          "sin( #{x} )"
         end
 
-        def differentiate(sym=:x)
+        def differentiate(sym = :x)
           cos(x) * x.d(sym)
         end
         alias_method :d, :differentiate
