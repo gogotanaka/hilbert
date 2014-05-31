@@ -15,17 +15,17 @@ describe Dydx:Integrand do
 
   it 'ex2' do
     f(x) <= x * x
-    expect(S(f(x), dx)[0, 1]).to eq(0.3333333333333334)
+    expect(S(f(x), dx)[0, 1]).to eq(0.33333333)
   end
 
   it 'ex3' do
     f(x) <= sin(x)
-    expect(S(f(x), dx)[0, Math::PI/2]).to eq(1.000000000021139)
+    expect(S(f(x), dx)[0, Math::PI/2]).to eq(1.0)
   end
 
   it 'ex4' do
     f(x) <= cos(x)
-    expect(S(f(x), dx)[0, Math::PI]).to eq(7.440786129085082e-17)
+    expect(S(f(x), dx)[0, Math::PI]).to eq(0.0)
   end
 
   it 'ex5' do
@@ -38,16 +38,16 @@ describe Dydx:Integrand do
     expect(f(0)).to eq(1)
     expect(f(1)).to eq(1.0/Math::E)
     expect(f(1000)).to eq(0)
-    expect(S(f(x), dx)[-1000, 1000, 3000]).to eq(1.7724538506374117)
+    expect(S(f(x), dx)[-1000, 1000, 3000]).to eq(1.77239273)
   end
 
   it 'ex7' do
     f(x) <= (1.0 / ( ( 2.0 * Math::PI ) ^ 0.5 ) ) * ( e ^ (- (x ^ 2) / 2) )
-    expect(S(f(x), dx)[-1000, 1000, 1000]).to eq(0.9952054164466917)
+    expect(S(f(x), dx)[-1000, 1000]).to eq(1.0)
   end
 
   it 'ex8' do
-    f(x) <= (1.0 / ( ( 2.0 * pi ) ^ 0.5 ) ) * ( e ^ (- (x ^ 2) / 2) )
-    expect(S(f(x), dx)[-oo, oo, 1000]).to eq(0.9952054164466917)
+    f(x) <= (1.0 / ( ( 2.0 * Math::PI ) ^ 0.5 ) ) * ( e ^ (- (x ^ 2) / 2) )
+    expect(S(f(x), dx)[-oo, oo]).to eq(1.0)
   end
 end
