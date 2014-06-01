@@ -20,3 +20,6 @@ Void:
 
 SpaceInsideParens:
   Enabled: false
+
+SpaceAroundOperators:
+  Enabled: false
