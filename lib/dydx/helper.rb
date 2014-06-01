@@ -141,5 +141,10 @@ module Dydx
     def ==(x)
       to_s == x.to_s
     end
+
+    # Refactor
+    def **(x)
+      self ^ (x)
+    end
   end
 end

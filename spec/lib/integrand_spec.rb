@@ -20,12 +20,12 @@ describe Dydx:Integrand do
 
   it 'ex3' do
     f(x) <= sin(x)
-    expect(S(f(x), dx)[0, Math::PI/2]).to eq(1.0)
+    expect(S(f(x), dx)[0, pi / 2]).to eq(1.0)
   end
 
   it 'ex4' do
     f(x) <= cos(x)
-    expect(S(f(x), dx)[0, Math::PI]).to eq(0.0)
+    expect(S(f(x), dx)[0, pi]).to eq(0.0)
   end
 
   it 'ex5' do
