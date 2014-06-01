@@ -1,13 +1,12 @@
-require "bundler/gem_tasks"
-require "rspec/core/rake_task"
+require 'bundler/gem_tasks'
+require 'rspec/core/rake_task'
 require 'bundler/setup'
 
-desc "run spec"
+desc 'run spec'
 
-#do `rake spec`
+# do `rake spec`
 RSpec::Core::RakeTask.new(:spec) do |t|
-  t.rspec_opts = ["-c", "-fs"]
+  t.rspec_opts = %w(-c, -fs)
 end
 
 task default: :spec
-
