@@ -29,9 +29,9 @@ describe Dydx::Algebra::Formula do
   end
 
   describe '#subst' do
-    it{ expect((x + y).subst(x: 3, y: 3)).to eq(6) }
-    it{ expect((x + y).subst(x: 3)).to eq(3 + y) }
-    it{ expect((x + y + pi).subst(x: 3, y: 3).to_f).to eq(Math::PI + 6) }
+    it { expect((x + y).subst(x: 3, y: 3)).to eq(6) }
+    it { expect((x + y).subst(x: 3)).to eq(3 + y) }
+    it { expect((x + y + pi).subst(x: 3, y: 3).to_f).to eq(Math::PI + 6) }
   end
 
   describe '#differentiate' do
