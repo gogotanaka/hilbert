@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+# HOTFIX: Refactor by using context or describe
 describe Dydx::Algebra::Set do
   it{ expect(_(1)).to eq(_(1)) }
   it{ expect(_(-1)).to eq(_(-1)) }
@@ -30,8 +30,6 @@ describe Dydx::Algebra::Set do
   it{ expect(cos(2 * pi)).to eq(1) }
 
   describe '#to_s' do
-
-
     it{ expect(e.to_s).to eq('e') }
 
     it{ expect(1.to_s).to eq('1') }
@@ -47,7 +45,6 @@ describe Dydx::Algebra::Set do
     it{ expect(tan(x).to_s).to eq('tan( x )') }
 
     it{ expect(x.to_s).to eq('x') }
-
   end
 
   describe '#==' do
