@@ -7,6 +7,7 @@ describe Dydx do
 
   it 'demo' do
     f(x, y) <= x + x*y + y
+    expect(f(x, y)).to eq(x * (1 + y) + y)
     expect(f(a, 2)).to eq(3*a + 2)
     expect(f(1, a + b)).to eq(1 + 2 * ( a + b ))
     expect(f(1, 2)).to eq(5)

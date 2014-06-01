@@ -19,29 +19,31 @@ require 'dydx'
 include Dydx
 
 # Define the function. syntax is not good enough...
-f(x) <= x ^ 2
+f(x, y) <= x + x*y + y
 
-f(3)
-=> 9
-
-f(x).to_s
-=> "( x ^ 2 )"
-
-f(x) == eval(f(x).to_s)
+# simplify
+f(x, y) == x * (1 + y) + y
 => true
 
+#part substitution
+f(a, 2) == 3*a + 2
+=> true
+
+f(1, a + b) == 1 + 2 * ( a + b )
+=> true
+
+
 # Differentiate
-g(x) <= d/dx(f(x))
+d/dx(f(x, y)) == 1 + y
+=> true
 
-g(3)
-=> 6
+g(x) <= sin(x)
 
-g(x).to_s
-=> '2 * x'
+d/dx(g(x)) == cos(x)
 
 # Integrate
-S(f(x), dx)[0, 1]
-=> 0.3333333333333334
+S(g(x), dx)[0, pi/2]
+=> 1.0
 ```
 
 
@@ -52,56 +54,20 @@ f(z) <= log(z)
 S(f(z), dz)[0,1]
 => -Infinity
 
-( d/dx(log(x)) ).to_s
-=> "( 1 / x )"
+d/dx(log(x)) == 1 / x
+=> true
 
-( d/dx(cos(x)) ).to_s
-=> "( - sin( x ) )"
+d/dx(cos(x)) == -cos(x)
+=> true
 
-( d/dx(e ^ x) ).to_s
-=> "( e ^ x )"
-
-f(x) <= sin(x)
-S(f(x), dx)[0, Math::PI/2]
-=> 1.0
+d/dx(e ^ x) == e ^ x
+=> true
 
 # standard normal distribution;
 f(x) <= (1.0 / ( ( 2.0 * pi ) ^ 0.5 ) ) * ( e ^ (- (x ^ 2) / 2) )
 S(f(x), dx)[-oo, oo]
 => 1.0
 ```
-
-#### it's like a magic...
-
-```ruby:
-f(x) <= x ^ 2
-
-f(a + b).to_s
-=> "( ( a + b ) ^ 2 )"
-
-#↓it's like a magic!!!
-g(a, b) <= f(a + b)
-
-g(a, b).to_s
-=> "( ( a + b ) ^ 2 )"
-
-g(2, 2)
-=> 16
-
-( d/da(g(a, b)) ).to_s
-=> "( 2 * ( a + b ) )"
-
-# simplify
-((x * y) + (z * x)).to_s
-=> "( x * ( y + z ) )"
-
-((x ^ y) / (x ^ z)).to_s
-=> "( x ^ ( y - z ) )"
-
-(x + x).to_s
-=> "( 2 * x )"
-```
-
 
 ## Documents
 I'm going to write now...cominng soon....
@@ -111,14 +77,11 @@ I'm going to write now...cominng soon....
 ```
 Dydx
   |- Algebra
-  |      |- Set
-  |      |   |- Num
-  |      |   |- ....
-  |      |
   |      |- Operator
   |      |   |- Interface
   |      |   |- ....
   |      |
+  |      |- Set
   |      |- Formula
   |      |- inverse
   |
