@@ -29,7 +29,7 @@ module Dydx
         end
       end
 
-      def differentiate(sym=:x)
+      def differentiate(sym = :x)
         case operator
         when :+
           inverse(x.differentiate(sym), :+)

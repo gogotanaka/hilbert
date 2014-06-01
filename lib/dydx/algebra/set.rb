@@ -14,12 +14,12 @@ module Dydx
         include Helper
 
         # TODO: Pi should not have attr_accessor
-        def self.included(klass)
+        def self.included(_klass)
           attr_accessor :n, :x
           alias_method :d, :differentiate
         end
 
-        def initialize(x=nil)
+        def initialize(x = nil)
           case self
           when Num
             @n = x
@@ -33,12 +33,12 @@ module Dydx
           when Num   then n.to_s
           when Pi    then 'pi'
           when E     then 'e'
-          when Sin   then "sin( #{x.to_s} )"
-          when Cos   then "cos( #{x.to_s} )"
-          when Tan   then "tan( #{x.to_s} )"
-          when Log   then "log( #{x.to_s} )"
-          when Log10 then "log10( #{x.to_s} )"
-          when Log2  then "log2( #{x.to_s} )"
+          when Sin   then "sin( #{x} )"
+          when Cos   then "cos( #{x} )"
+          when Tan   then "tan( #{x} )"
+          when Log   then "log( #{x} )"
+          when Log10 then "log10( #{x} )"
+          when Log2  then "log2( #{x} )"
           end
         end
 
@@ -47,7 +47,7 @@ module Dydx
           when Num    then n.to_f
           when Pi     then Math::PI
           when E      then Math::E
-          when Symbol then raise ArgumentError
+          when Symbol then fail ArgumentError
           when Sin    then Math.sin(x.to_f)
           when Cos    then Math.cos(x.to_f)
           when Tan    then Math.tan(x.to_f)
@@ -140,11 +140,11 @@ module Dydx
       Fixnum.class_eval do
         include Helper
 
-        def subst(hash = {})
+        def subst(_hash = {})
           self
         end
 
-        def differentiate(sym=:x)
+        def differentiate(_sym = :x)
           e0
         end
         alias_method :d, :differentiate
@@ -178,11 +178,11 @@ module Dydx
       Float.class_eval do
         include Helper
 
-        def subst(hash = {})
+        def subst(_hash = {})
           self
         end
 
-        def differentiate(sym=:x)
+        def differentiate(_sym = :x)
           e0
         end
         alias_method :d, :differentiate
@@ -216,11 +216,11 @@ module Dydx
       Rational.class_eval do
         include Helper
 
-        def subst(hash = {})
+        def subst(_hash = {})
           self
         end
 
-        def differentiate(sym=:x)
+        def differentiate(_sym = :x)
           e0
         end
         alias_method :d, :differentiate
@@ -252,11 +252,11 @@ module Dydx
       end
 
       def e0
-        eval("$e0 ||= Num.new(0)")
+        eval('$e0 ||= Num.new(0)')
       end
 
       def e1
-        eval("$e1 ||= Num.new(1)")
+        eval('$e1 ||= Num.new(1)')
       end
 
       def _(num)
