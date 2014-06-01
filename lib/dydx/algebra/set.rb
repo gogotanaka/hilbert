@@ -4,6 +4,9 @@ require 'dydx/algebra/operator/formula'
 require 'dydx/algebra/operator/num'
 require 'dydx/algebra/operator/general'
 
+require 'dydx/algebra/formula'
+require 'dydx/algebra/inverse'
+
 module Dydx
   module Algebra
     module Set

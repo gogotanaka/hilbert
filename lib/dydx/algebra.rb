@@ -1,6 +1,4 @@
 require 'dydx/algebra/set'
-require 'dydx/algebra/formula'
-require 'dydx/algebra/inverse'
 
 module Dydx
   module Algebra
