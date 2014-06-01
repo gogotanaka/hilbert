@@ -18,6 +18,10 @@ describe Dydx::Algebra::Set::Num do
     it{ expect(_(1) == _(1)).to be_true }
   end
 
+  describe '#subst' do
+    it{ expect(_(1).subst).to eq(1) }
+  end
+
   describe 'Calculate' do
   end
 end

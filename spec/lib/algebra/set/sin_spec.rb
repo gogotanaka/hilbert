@@ -11,4 +11,8 @@ describe Dydx::Algebra::Set::Sin do
   end
   describe 'Calculate' do
   end
+
+  describe '#subst' do
+    it{ expect(sin(x).subst(x: 3)).to eq(sin(3)) }
+  end
 end

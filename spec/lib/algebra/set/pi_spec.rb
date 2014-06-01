@@ -11,6 +11,10 @@ describe Dydx::Algebra::Set::Pi do
     it{ expect(pi.d(:x).to_s).to eq(_(0).to_s) }
   end
 
+  describe '#subst' do
+    it{ expect(pi.subst).to eq(pi) }
+  end
+
   describe 'Calculate' do
     context 'With Fixnum' do
       it{ expect(pi + 0).to eq(pi) }

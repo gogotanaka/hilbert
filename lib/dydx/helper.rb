@@ -141,9 +141,5 @@ module Dydx
     def ==(x)
       to_s == x.to_s
     end
-
-    def to_f
-      subst
-    end
   end
 end

@@ -1,5 +1,4 @@
 require 'dydx/algebra/set'
-require 'dydx/algebra/operator'
 require 'dydx/algebra/formula'
 require 'dydx/algebra/inverse'
 
@@ -61,16 +60,6 @@ module Dydx
           end
         end
       end
-      Symbol.class_eval{ include Operator::General }
-      class Num;    include Operator::Num; end
-      class E;      include Operator::General; end
-      class Pi;     include Operator::General; end
-      class Log;    include Operator::General; end
-      class Log2;   include Operator::General; end
-      class Log10;  include Operator::General; end
-      class Sin;    include Operator::General; end
-      class Cos;    include Operator::General; end
-      class Tan;    include Operator::General; end
     end
     class Formula;  include Operator::Formula; end
     class Inverse;  include Operator::Inverse; end

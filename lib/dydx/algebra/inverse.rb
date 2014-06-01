@@ -22,6 +22,13 @@ module Dydx
         end
       end
 
+      def to_f
+        case operator
+        when :+ then x.to_f * -1
+        when :* then x.to_f ** -1
+        end
+      end
+
       def differentiate(sym=:x)
         case operator
         when :+
