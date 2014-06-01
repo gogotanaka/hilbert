@@ -133,6 +133,7 @@ module Dydx
         include Operator::General
       end
 
+      # FIX: Numeric
       Fixnum.class_eval do
         include Helper
 
@@ -209,6 +210,44 @@ module Dydx
         end
       end
 
+      Rational.class_eval do
+        include Helper
+
+        def subst(hash = {})
+          self
+        end
+
+        def differentiate(sym=:x)
+          e0
+        end
+        alias_method :d, :differentiate
+
+        alias_method :addition, :+
+        alias_method :subtraction, :-
+        alias_method :multiplication, :*
+        alias_method :division, :/
+        alias_method :exponentiation, :**
+        ope_to_str = {
+          addition: :+,
+          subtraction: :-,
+          multiplication: :*,
+          division: :/,
+          exponentiation: :^
+        }
+        %w(+ - * / ^).each do |operator|
+          define_method(operator) do |g|
+            if g.is_a?(Symbol) ||
+              g.is_a?(Formula) ||
+              g.is_a?(Base)
+
+              Num.new(self).send(operator.to_sym, g)
+            else
+              send(ope_to_str.key(operator.to_sym), g)
+            end
+          end
+        end
+      end
+
       def e0
         eval("$e0 ||= Num.new(0)")
       end
@@ -216,12 +255,9 @@ module Dydx
       def e1
         eval("$e1 ||= Num.new(1)")
       end
+
       def _(num)
-        if num >= 0
-          eval("$p#{num} ||= Num.new(num)")
-        else
-          eval("$n#{-1 * num} ||= Num.new(num)")
-        end
+        Num.new(num)
       end
 
       def pi
