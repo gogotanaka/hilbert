@@ -15,9 +15,12 @@ module Dydx
       return function if function.vars == vars
       return function unless function.algebra
 
-      string = substitute(vars, function)
-      string = rename_for_calc(string) if all_vars_num?(vars)
-      eval(string)
+      subst_hash = Hash[*[function.vars, vars].transpose.flatten]
+      begin
+        function.algebra.subst(subst_hash).to_f
+      rescue ArgumentError
+        function.algebra.subst(subst_hash)
+      end
     end
   end
 

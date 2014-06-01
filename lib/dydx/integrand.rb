@@ -7,13 +7,14 @@ module Dydx
     end
 
     def [](a, b, n = 1000)
-      raise ArgumentError, 'b should be greater than a' if a > b
-      f = function
       # HOT FIX: should implement Infinity class
       a = - 1000 if a == - Float::INFINITY
       b = 1000 if b == Float::INFINITY
 
       a, b = [a, b].map(&:to_f)
+      raise ArgumentError, 'b should be greater than a' if a > b
+      f = function
+
       n = [n, (b - a) * 2].max
       n += 1 if n.to_i.odd?
       h = (b - a) / n

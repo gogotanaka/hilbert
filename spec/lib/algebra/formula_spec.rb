@@ -28,6 +28,12 @@ describe Dydx::Algebra::Formula do
     it{ expect( (addition * multiplication).to_s ).to eq('( ( x + y ) * ( x * y ) )') }
   end
 
+  describe '#subst' do
+    it{ expect((x + y).subst(x: 3, y: 3)).to eq(6) }
+    it{ expect((x + y).subst(x: 3)).to eq(3 + y) }
+    it{ expect((x + y + pi).subst(x: 3, y: 3).to_f).to eq(Math::PI + 6) }
+  end
+
   describe '#differentiate' do
     it{ expect(addition.d(:x)).to eq(1) }
     it{ expect(addition.d(:y)).to eq(1) }
