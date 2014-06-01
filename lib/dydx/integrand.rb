@@ -6,20 +6,32 @@ module Dydx
       @var = var
     end
 
-    def [](a, b, n = 100)
-      a, b = [a, b].map(&:to_f)
-      fail ArgumentError, 'b should be greater than a' if a > b
+    def [](a, b, n = 1000)
       # HOT FIX: should implement Infinity class
       a = - 1000 if a == - Float::INFINITY
       b = 1000 if b == Float::INFINITY
 
+      a, b = [a, b].map(&:to_f)
+      raise ArgumentError, 'b should be greater than a' if a > b
+      $int_f = function
+
+      n = [n, (b - a) * 2].max
+      n += 1 if n.to_i.odd?
       h = (b - a) / n
-      sum = 0.0
-      xi = ->(i) { a + h * i }
-      n.to_i.times do |i|
-        sum += (f(xi.(i)) + 4.0 * f(xi.(i) + h / 2.0) + f(xi.(i) + h))
-      end
-      (h * sum) / 6.0
+      x = ->(i){ a + h * i }
+
+      odd_sum = (1..n - 1).to_a.select(&:odd?).inject(0) { |sum, i| sum += f(x.(i))}
+      even_sum = (1..n - 1).to_a.select(&:even?).inject(0) { |sum, i| sum += f(x.(i))}
+      round_8( (h / 3) * (f(a) + f(b) + 2 * even_sum + 4 * odd_sum) )
+    end
+
+    def f(vars)
+      int_f(vars)
+    end
+
+    def round_8(num)
+      return num if num.abs == Float::INFINITY
+      (num * 10 ** 8).round * 10.0 ** (-8)
     end
   end
 end

@@ -41,6 +41,14 @@ module Dydx
         end
       end
 
+      def subst(hash = {})
+        f.subst(hash).send(operator, g.subst(hash))
+      end
+
+      def to_f
+        f.to_f.send(operator, g.to_f)
+      end
+
       def include?(x)
         f == x || g == x
       end
@@ -50,9 +58,14 @@ module Dydx
         (f.combinable?(x, operator) || g.combinable?(x, operator))
       end
 
-      # TODO: interchangeable
       def ==(x)
-        to_s == x.to_s
+        if to_s == x.to_s
+          true
+        else
+          result = commutate!.to_s == x.to_s
+          commutate!
+          result
+        end
       end
 
       def common_factors(formula)

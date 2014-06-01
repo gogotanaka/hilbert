@@ -6,7 +6,7 @@ require 'dydx/integrand'
 
 module Dydx
   include Algebra
-  %w(f g h).each do |functioner|
+  %w(f g h int_f).each do |functioner|
     define_method(functioner) do |*vars|
       function = eval("$#{functioner}")
       return eval("$#{functioner} = Function.new(*vars)") unless function
@@ -15,9 +15,12 @@ module Dydx
       return function if function.vars == vars
       return function unless function.algebra
 
-      string = substitute(vars, function)
-      string = rename_for_calc(string) if all_vars_num?(vars)
-      eval(string)
+      subst_hash = Hash[*[function.vars, vars].transpose.flatten]
+      begin
+        function.algebra.subst(subst_hash).to_f
+      rescue ArgumentError
+        eval(function.algebra.subst(subst_hash).to_s)
+      end
     end
   end
 
