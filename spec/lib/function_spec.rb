@@ -25,9 +25,9 @@ describe Dydx::Function do
     expect(f(2, x)).to eq(2 * x)
     expect(f(2, 3)).to eq(6)
     expect(f(a + b, c)).to eq((a + b) * c)
-    expect(d / dx(f(x, y))).to eq(y)
-    expect(d / dy(f(x, y))).to eq(x)
-    expect(d / dz(f(x, y))).to eq(0)
+    expect(d/dx(f(x, y))).to eq(y)
+    expect(d/dy(f(x, y))).to eq(x)
+    expect(d/dz(f(x, y))).to eq(0)
   end
 
   it 'ex3' do
@@ -40,7 +40,7 @@ describe Dydx::Function do
 
   it 'ex4' do
     f(a, b) <= (a + b) * b
-    h(a, b, c) <= d / db(f(a, b))
+    h(a, b, c) <= d/db(f(a, b))
     expect(h(a, b, c)).to eq(( a + ( 2 * b ) ))
     expect(h(a, b, c).algebra).to eq(( a + ( 2 * b ) ))
   end
@@ -51,7 +51,7 @@ describe Dydx::Function do
     expect(f(0)).to eq(-oo)
     expect(f(y)).to eq(log(y))
 
-    g(x) <= d / dx(f(x))
+    g(x) <= d/dx(f(x))
     expect(g(1)).to eq(1)
   end
 
@@ -61,7 +61,7 @@ describe Dydx::Function do
     expect(f(pi / 2)).to eq(1)
     expect(f(y)).to eq(sin(y))
 
-    g(x) <= d / dx(f(x))
+    g(x) <= d/dx(f(x))
     expect(g(pi)).to eq(-1)
   end
 end
