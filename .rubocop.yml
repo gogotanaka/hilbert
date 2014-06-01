@@ -17,3 +17,6 @@ OpMethod:
 
 Void:
   Enabled: false
+
+SpaceInsideParens:
+  Enabled: false
