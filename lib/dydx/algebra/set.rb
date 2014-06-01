@@ -9,14 +9,10 @@ module Dydx
     module Set
       module Base
         include Helper
+
+        # TODO: Pi should not have attr_accessor
         def self.included(klass)
-          klass.class_eval do
-            if klass == Num
-              attr_accessor :n
-            else
-              attr_accessor :x
-            end
-          end
+          attr_accessor :n, :x
           alias_method :d, :differentiate
         end
 
@@ -86,47 +82,47 @@ module Dydx
 
       class Num
         include Base
-        include Operator::Num;
+        include Operator::Num
       end
 
       class Pi
         include Base
-        include Operator::General;
+        include Operator::General
       end
 
       class E
         include Base
-        include Operator::General;
+        include Operator::General
       end
 
       class Sin
         include Base
-        include Operator::General;
+        include Operator::General
       end
 
       class Cos
         include Base
-        include Operator::General;
+        include Operator::General
       end
 
       class Tan
         include Base
-        include Operator::General;
+        include Operator::General
       end
 
       class Log
         include Base
-        include Operator::General;
+        include Operator::General
       end
 
       class Log10
         include Base
-        include Operator::General;
+        include Operator::General
       end
 
       class Log2
         include Base
-        include Operator::General;
+        include Operator::General
       end
 
       Symbol.class_eval do
@@ -141,6 +137,31 @@ module Dydx
           e0
         end
         alias_method :d, :differentiate
+
+        alias_method :addition, :+
+        alias_method :subtraction, :-
+        alias_method :multiplication, :*
+        alias_method :division, :/
+        alias_method :exponentiation, :**
+        ope_to_str = {
+          addition: :+,
+          subtraction: :-,
+          multiplication: :*,
+          division: :/,
+          exponentiation: :^
+        }
+        %w(+ - * / ^).each do |operator|
+          define_method(operator) do |g|
+            if g.is_a?(Symbol) ||
+              g.is_a?(Formula) ||
+              g.is_a?(Base)
+
+              Num.new(self).send(operator.to_sym, g)
+            else
+              send(ope_to_str.key(operator.to_sym), g)
+            end
+          end
+        end
       end
 
       Float.class_eval do
@@ -150,6 +171,31 @@ module Dydx
           e0
         end
         alias_method :d, :differentiate
+
+        alias_method :addition, :+
+        alias_method :subtraction, :-
+        alias_method :multiplication, :*
+        alias_method :division, :/
+        alias_method :exponentiation, :**
+        ope_to_str = {
+          addition: :+,
+          subtraction: :-,
+          multiplication: :*,
+          division: :/,
+          exponentiation: :^
+        }
+        %w(+ - * / ^).each do |operator|
+          define_method(operator) do |g|
+            if g.is_a?(Symbol) ||
+              g.is_a?(Formula) ||
+              g.is_a?(Base)
+
+              Num.new(self).send(operator.to_sym, g)
+            else
+              send(ope_to_str.key(operator.to_sym), g)
+            end
+          end
+        end
       end
 
       def e0

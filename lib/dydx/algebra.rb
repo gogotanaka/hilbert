@@ -5,62 +5,7 @@ require 'dydx/algebra/inverse'
 module Dydx
   module Algebra
     include Set
-    module Set
-      # TODO: Refactor
-      Fixnum.class_eval do
-        alias_method :addition, :+
-        alias_method :subtraction, :-
-        alias_method :multiplication, :*
-        alias_method :division, :/
-        alias_method :exponentiation, :**
-        ope_to_str = {
-          addition: :+,
-          subtraction: :-,
-          multiplication: :*,
-          division: :/,
-          exponentiation: :^
-        }
-        %w(+ - * / ^).each do |operator|
-          define_method(operator) do |g|
-            if g.is_a?(Symbol) ||
-              g.is_a?(Formula) ||
-              g.is_a?(Base)
 
-              Num.new(self).send(operator.to_sym, g)
-            else
-              send(ope_to_str.key(operator.to_sym), g)
-            end
-          end
-        end
-      end
-
-      Float.class_eval do
-        alias_method :addition, :+
-        alias_method :subtraction, :-
-        alias_method :multiplication, :*
-        alias_method :division, :/
-        alias_method :exponentiation, :**
-        ope_to_str = {
-          addition: :+,
-          subtraction: :-,
-          multiplication: :*,
-          division: :/,
-          exponentiation: :^
-        }
-        %w(+ - * / ^).each do |operator|
-          define_method(operator) do |g|
-            if g.is_a?(Symbol) ||
-              g.is_a?(Formula) ||
-              g.is_a?(Base)
-
-              Num.new(self).send(operator.to_sym, g)
-            else
-              send(ope_to_str.key(operator.to_sym), g)
-            end
-          end
-        end
-      end
-    end
     class Formula;  include Operator::Formula; end
     class Inverse;  include Operator::Inverse; end
 
