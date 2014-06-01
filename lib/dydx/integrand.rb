@@ -13,7 +13,7 @@ module Dydx
 
       a, b = [a, b].map(&:to_f)
       raise ArgumentError, 'b should be greater than a' if a > b
-      f = function
+      $int_f = function
 
       n = [n, (b - a) * 2].max
       n += 1 if n.to_i.odd?
@@ -23,6 +23,10 @@ module Dydx
       odd_sum = (1..n - 1).to_a.select(&:odd?).inject(0) { |sum, i| sum += f(x.(i))}
       even_sum = (1..n - 1).to_a.select(&:even?).inject(0) { |sum, i| sum += f(x.(i))}
       round_8( (h / 3) * (f(a) + f(b) + 2 * even_sum + 4 * odd_sum) )
+    end
+
+    def f(vars)
+      int_f(vars)
     end
 
     def round_8(num)

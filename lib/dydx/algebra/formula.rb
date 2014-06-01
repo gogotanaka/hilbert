@@ -57,9 +57,14 @@ module Dydx
         (f.combinable?(x, operator) || g.combinable?(x, operator))
       end
 
-      # TODO: interchangeable
       def ==(x)
-        to_s == x.to_s
+        if to_s == x.to_s
+          true
+        else
+          result = commutate!.to_s == x.to_s
+          commutate!
+          result
+        end
       end
 
       def common_factors(formula)
