@@ -55,37 +55,40 @@ describe Dydx::Algebra::Set do
   end
 
   describe '#subst' do
-    it{ expect(_(1).subst).to eq(1) }
+    it{ expect(1.subst).to eq(1) }
+    it{ expect(1.0.subst).to eq(1.0) }
+    it{ expect(e.subst).to eq(e) }
     it{ expect(pi.subst).to eq(pi) }
     it{ expect(sin(x).subst(x: 3)).to eq(sin(3)) }
+    it{ expect(cos(x).subst(x: pi)).to eq(-1) }
+    it{ expect(tan(0).subst(x: pi)).to eq(0) }
+    it{ expect(log(x).subst(x: e)).to eq(1) }
+    it{ expect(log10(x).subst(x: 7)).to eq(log10(7)) }
+    it{ expect(log2(2).subst(x: 2)).to eq(1) }
     it{ expect(x.subst(x: 2)).to eq(2) }
     it{ expect(x.subst(y: 2)).to eq(x) }
   end
 
   describe '#differentiate' do
-    it { expect(cos(:x).d.to_s).to eq('( - sin( x ) )') }
+    it { expect(e.d).to eq(0) }
+    it { expect((e ^ x).d).to eq(e ^ x) }
+    it { expect((e ^ (x + y)).d).to eq(e ^ ( x + y )) }
 
-    it { expect(e.d(:x).to_s).to eq(_(0).to_s) }
-    it { expect((e ^ :x).d(:x).to_s).to eq('( e ^ x )') }
-    it { expect((e ^ (:x + :y)).d(:x).to_s).to eq('( e ^ ( x + y ) )') }
+    it { expect(pi.d(x)).to eq(0) }
 
-    it { expect(3.d(x)).to eq(0) }
+    it { expect(1.d).to eq(0) }
+    it { expect(3.d).to eq(0) }
+    it { expect(3.0.d).to eq(0) }
 
-    it { expect(3.0.d(:x).to_s).to eq('0') }
+    it { expect(sin(x).d).to eq(cos(x)) }
+    it { expect(cos(x).d).to eq(- sin(x)) }
+    it { expect(tan(x).d).to eq(1 / cos(x) ^ 2) }
 
-    it { expect(log10(:x).d(:x).to_s).to eq('( 1 / ( x * log( 10 ) ) )') }
+    it { expect(log(x).d).to eq(1 / x) }
+    it { expect(log10(x).d).to eq(1 / ( x * log( 10 ) )) }
+    it { expect(log2(x).d).to eq(1 / ( x * log( 2 ) )) }
 
-    it { expect(log2(:x).d(:x).to_s).to eq('( 1 / ( x * log( 2 ) ) )') }
-
-    it { expect(log(:x).d(:x).to_s).to eq('( 1 / x )') }
-
-    it{ expect(_(1).d(:x).to_s).to eq(_(0).to_s) }
-
-    it{ expect(pi.d(:x).to_s).to eq(_(0).to_s) }
-
-    it{ expect(sin(:x).d.to_s).to eq('cos( x )') }
-
-    it{ expect(:x.d(:x).to_s).to eq('1') }
+    it{ expect(x.d(x)).to eq(1) }
   end
 
   describe 'Calculate' do

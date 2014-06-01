@@ -60,9 +60,12 @@ module Dydx
             self
           when Symbol
             hash[self] || self
-          when Sin, Cos, Tan, Log, Log10, Log2
-            @x = @x.subst(hash)
-            self
+          when Sin    then sin(x.subst(hash))
+          when Cos    then cos(x.subst(hash))
+          when Tan    then tan(x.subst(hash))
+          when Log    then log(x.subst(hash))
+          when Log10  then log10(x.subst(hash))
+          when Log2   then log2(x.subst(hash))
           end
         end
 
@@ -133,6 +136,10 @@ module Dydx
       Fixnum.class_eval do
         include Helper
 
+        def subst(hash = {})
+          self
+        end
+
         def differentiate(sym=:x)
           e0
         end
@@ -166,6 +173,10 @@ module Dydx
 
       Float.class_eval do
         include Helper
+
+        def subst(hash = {})
+          self
+        end
 
         def differentiate(sym=:x)
           e0
@@ -300,7 +311,11 @@ module Dydx
       end
 
       def tan(x)
-        Tan.new(x)
+        if x == 0
+          0
+        else
+          Tan.new(x)
+        end
       end
     end
   end
