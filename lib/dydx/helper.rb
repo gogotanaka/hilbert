@@ -34,8 +34,8 @@ module Dydx
       (is_a?(Num) || is_a?(Fixnum) || is_a?(Float)) || (is_a?(Inverse) && x.num?)
     end
 
-    def is_0?
-      [0, 0.0].include?(self) || (is_a?(Num) && n.is_0?)
+    def zero?
+      [0, 0.0].include?(self) || (is_a?(Num) && n.zero?)
     end
 
     def is_1?
@@ -63,7 +63,7 @@ module Dydx
         (num? && x.num?) ||
         inverse?(:*, x)
       when :^
-        (num? && x.num?) || is_0? || is_1?
+        (num? && x.num?) || zero? || is_1?
       end
     end
 
@@ -82,7 +82,7 @@ module Dydx
 
     # TODO: Cyclomatic complexity for combinable? is too high. [7/6]
     def is_multiple_of(x)
-      if is_0?
+      if zero?
         e0
       elsif self == x
         e1

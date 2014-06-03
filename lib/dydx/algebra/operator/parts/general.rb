@@ -5,7 +5,7 @@ module Dydx
         module General
           %w(+ * ^).map(&:to_sym).each do |operator|
             define_method(operator) do |x|
-              if x.is_0?
+              if x.zero?
                 case operator
                 when :+ then self
                 when :* then x

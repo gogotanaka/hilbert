@@ -9,7 +9,7 @@ module Dydx
 
     # TODO: Cyclomatic complexity for inverse is too high. [7/6]
     def inverse(x, operator)
-      if operator == :+ && x.is_0?
+      if operator == :+ && x.zero?
         e0
       elsif operator == :* && x.is_1?
         e1

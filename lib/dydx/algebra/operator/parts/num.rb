@@ -5,7 +5,7 @@ module Dydx
         module Num
           %w(+ * ^).map(&:to_sym).each do |operator|
             define_method(operator) do |x|
-              if is_0?
+              if zero?
                 case operator
                 when :+ then x
                 when :* then e0
