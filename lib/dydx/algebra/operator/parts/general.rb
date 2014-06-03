@@ -11,7 +11,7 @@ module Dydx
                 when :* then x
                 when :^ then e1
                 end
-              elsif x.is_1?
+              elsif x.one?
                 case operator
                 when :+ then super(x)
                 when :* then self

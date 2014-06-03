@@ -38,8 +38,8 @@ module Dydx
       [0, 0.0].include?(self) || (is_a?(Num) && n.zero?)
     end
 
-    def is_1?
-      [1, 1.0].include?(self) || (is_a?(Num) && n.is_1?)
+    def one?
+      [1, 1.0].include?(self) || (is_a?(Num) && n.one?)
     end
 
     def is_minus1?
@@ -63,7 +63,7 @@ module Dydx
         (num? && x.num?) ||
         inverse?(:*, x)
       when :^
-        (num? && x.num?) || zero? || is_1?
+        (num? && x.num?) || zero? || one?
       end
     end
 

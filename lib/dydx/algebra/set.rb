@@ -283,7 +283,7 @@ module Dydx
         elsif formula.exponentiation?
           f, g = formula.f, formula.g
           g * log(f)
-        elsif formula.is_1?
+        elsif formula.one?
           e0
         elsif formula.is_a?(E)
           e1
@@ -300,7 +300,7 @@ module Dydx
         elsif formula.exponentiation?
           f, g = formula.f, formula.g
           g * log2(f)
-        elsif formula.is_1?
+        elsif formula.one?
           e0
         elsif formula.is_a?(Num)
           (formula.n == 2) ? e1 : log2(formula.n)
@@ -319,7 +319,7 @@ module Dydx
         elsif formula.exponentiation?
           f, g = formula.f, formula.g
           g * log10(f)
-        elsif formula.is_1?
+        elsif formula.one?
           e0
         elsif formula.is_a?(Num)
           (formula.n == 10) ? e1 : log10(formula.n)

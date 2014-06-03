@@ -11,7 +11,7 @@ module Dydx
     def inverse(x, operator)
       if operator == :+ && x.zero?
         e0
-      elsif operator == :* && x.is_1?
+      elsif operator == :* && x.one?
         e1
       elsif x.is_a?(Inverse) && x.operator == operator
         x.x
