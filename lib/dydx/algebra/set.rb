@@ -136,8 +136,7 @@ module Dydx
         include Operator::General
       end
 
-      # FIX: Numeric
-      Fixnum.class_eval do
+      numeric_proc = Proc.new do
         include Helper
 
         def subst(_hash = {})
@@ -175,81 +174,9 @@ module Dydx
         end
       end
 
-      Float.class_eval do
-        include Helper
-
-        def subst(_hash = {})
-          self
-        end
-
-        def differentiate(_sym = :x)
-          e0
-        end
-        alias_method :d, :differentiate
-
-        alias_method :addition, :+
-        alias_method :subtraction, :-
-        alias_method :multiplication, :*
-        alias_method :division, :/
-        alias_method :exponentiation, :**
-        ope_to_str = {
-          addition: :+,
-          subtraction: :-,
-          multiplication: :*,
-          division: :/,
-          exponentiation: :^
-        }
-        %w(+ - * / ^).each do |operator|
-          define_method(operator) do |g|
-            if g.is_a?(Symbol) ||
-              g.is_a?(Formula) ||
-              g.is_a?(Base)
-
-              Num.new(self).send(operator.to_sym, g)
-            else
-              send(ope_to_str.key(operator.to_sym), g)
-            end
-          end
-        end
-      end
-
-      Rational.class_eval do
-        include Helper
-
-        def subst(_hash = {})
-          self
-        end
-
-        def differentiate(_sym = :x)
-          e0
-        end
-        alias_method :d, :differentiate
-
-        alias_method :addition, :+
-        alias_method :subtraction, :-
-        alias_method :multiplication, :*
-        alias_method :division, :/
-        alias_method :exponentiation, :**
-        ope_to_str = {
-          addition: :+,
-          subtraction: :-,
-          multiplication: :*,
-          division: :/,
-          exponentiation: :^
-        }
-        %w(+ - * / ^).each do |operator|
-          define_method(operator) do |g|
-            if g.is_a?(Symbol) ||
-              g.is_a?(Formula) ||
-              g.is_a?(Base)
-
-              Num.new(self).send(operator.to_sym, g)
-            else
-              send(ope_to_str.key(operator.to_sym), g)
-            end
-          end
-        end
-      end
+      Float.class_eval(&numeric_proc)
+      Fixnum.class_eval(&numeric_proc)
+      Rational.class_eval(&numeric_proc)
 
       def e0
         eval('$e0 ||= Num.new(0)')

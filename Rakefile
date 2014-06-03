@@ -5,8 +5,6 @@ require 'bundler/setup'
 desc 'run spec'
 
 # do `rake spec`
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.rspec_opts = %w(-c, -fs)
-end
+RSpec::Core::RakeTask.new(:spec)
 
 task default: :spec
