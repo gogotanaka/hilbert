@@ -30,7 +30,7 @@ module Dydx
       alias_method :d, :differentiate
 
       def to_s
-        if formula?(:*) && (f.is_minus1? || g.is_minus1?)
+        if formula?(:*) && (f.minus1? || g.minus1?)
           "( - #{g} )"
         elsif g.inverse?(operator)
           "( #{f} #{inverse_ope(operator)} #{g.x} )"

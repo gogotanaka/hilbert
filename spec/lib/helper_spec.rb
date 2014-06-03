@@ -9,8 +9,8 @@ describe Helper do
     it { expect(1.one?).to be_true }
     it { expect(_(1).one?).to be_true }
     it { expect(inverse(1, :*).one?).to be_true }
-    it { expect(-1.is_minus1?).to be_true }
-    it { expect(_(-1).is_minus1?).to be_true }
+    it { expect(-1.minus1?).to be_true }
+    it { expect(_(-1).minus1?).to be_true }
   end
 
   context '#is_multiple_of' do
