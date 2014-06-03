@@ -10,7 +10,7 @@ module Dydx
       self
     end
 
-    def differentiate(sym=:x)
+    def differentiate(sym = :x)
       @algebra.differentiate(sym)
     end
     alias_method :d, :differentiate

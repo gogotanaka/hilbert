@@ -7,6 +7,7 @@ module Dydx
     class Formula;  include Operator::Formula; end
     class Inverse;  include Operator::Inverse; end
 
+    # TODO: Cyclomatic complexity for inverse is too high. [7/6]
     def inverse(x, operator)
       if operator == :+ && x.is_0?
         e0

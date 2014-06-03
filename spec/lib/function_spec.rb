@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dydx:Function do
+describe Dydx::Function do
   before(:each) do
     reset
   end
@@ -10,8 +10,8 @@ describe Dydx:Function do
     expect(f(x, y)).to eq($f)
     expect(f(x, y).algebra).to be_nil
     expect(f(x, y).vars).to eq([:x, :y])
-    expect{f(x, y, z)}.to raise_error(ArgumentError)
-    expect{f(x)}.to raise_error(ArgumentError)
+    expect { f(x, y, z) }.to raise_error(ArgumentError)
+    expect { f(x) }.to raise_error(ArgumentError)
   end
 
   it 'ex2' do

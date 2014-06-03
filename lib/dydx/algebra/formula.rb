@@ -9,14 +9,15 @@ module Dydx
         @f, @g, @operator = f, g, operator
       end
 
-      def differentiate(sym=:x)
+      # TODO: Cylomatic complexity for differentiate is too high. [7/6]
+      def differentiate(sym = :x)
         case @operator
         when :+ then f.d(sym) + g.d(sym)
         when :* then (f.d(sym) * g) + (f * g.d(sym))
         when :^
           # TODO:
           if g.is_num?
-            f.d(sym) * g * (f ^ (g - 1) )
+            f.d(sym) * g * (f ^ (g - 1))
           elsif f == sym
             g * (f ^ (g - 1))
           elsif f == e
@@ -29,14 +30,14 @@ module Dydx
       alias_method :d, :differentiate
 
       def to_s
-        if (formula?(:*) && (f.is_minus1? || g.is_minus1?)  )
-          "( - #{g.to_s} )"
+        if formula?(:*) && (f.is_minus1? || g.is_minus1?)
+          "( - #{g} )"
         elsif g.inverse?(operator)
-          "( #{f.to_s} #{inverse_ope(operator)} #{g.x.to_s} )"
+          "( #{f} #{inverse_ope(operator)} #{g.x} )"
         elsif f.inverse?(operator)
-          "( #{g.to_s} #{inverse_ope(operator)} #{f.x.to_s} )"
+          "( #{g} #{inverse_ope(operator)} #{f.x} )"
         else
-          "( #{f.to_s} #{operator} #{g.to_s} )"
+          "( #{f} #{operator} #{g} )"
         end
       end
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dydx:Integrand do
+describe Dydx::Integrand do
   before(:each) do
     reset
   end
@@ -10,7 +10,7 @@ describe Dydx:Integrand do
     integrand = S(f(x, y), dx)
     expect(integrand.function).to eq(f(x, y))
     expect(integrand.var).to eq(:x)
-    expect{integrand[4, 3]}.to raise_error(ArgumentError)
+    expect { integrand[4, 3] }.to raise_error(ArgumentError)
   end
 
   it 'ex2' do
@@ -36,7 +36,7 @@ describe Dydx:Integrand do
   it 'ex6' do
     f(x) <= e ^ (- (x ^ 2))
     expect(f(0)).to eq(1)
-    expect(f(1)).to eq(1.0/Math::E)
+    expect(f(1)).to eq(1.0 / Math::E)
     expect(f(1000)).to eq(0)
     expect(S(f(x), dx)[-1000, 1000, 3000]).to eq(1.77239273)
   end

@@ -7,7 +7,7 @@ module Dydx
             define_method(operator) do |x|
               x = ::Set::Num.new(x) if x.is_a?(Fixnum)
               if operator == :/ && x.is_0?
-                raise ZeroDivisionError
+                fail ZeroDivisionError
               elsif [:-, :/].include?(operator)
                 send(inverse_ope(operator), inverse(x, inverse_ope(operator)))
               else

@@ -43,13 +43,14 @@ module Dydx
     end
 
     def is_minus1?
-      [1, -1.0].include?(self)|| (is_a?(Num) && n.is_minus1?)
+      [1, -1.0].include?(self) || (is_a?(Num) && n.is_minus1?)
     end
 
     def distributive?(ope1, ope2)
       [ope1.super, ope1.inverse_super].include?(ope2)
     end
 
+    # TODO: Cyclomatic complexity for combinable? is too high. [17/6]
     def combinable?(x, operator)
       case operator
       when :+
@@ -66,18 +67,20 @@ module Dydx
       end
     end
 
+    # TODO: Cyclomatic complexity for combinable? is too high. [9/6]
     def like_term?(x)
       boolean = if self == x
-      elsif formula?(:*) && include?(x)
-      elsif x.formula?(:*) && x.include?(self)
-      elsif ((formula?(:*) && formula?(:*)) && (([f, g] & [x.f, x.g]).any?{|x| x.is_a?(Symbol)}))
-      else
-        true
-      end
+                elsif formula?(:*) && include?(x)
+                elsif x.formula?(:*) && x.include?(self)
+                elsif (formula?(:*) && formula?(:*)) && (([f, g] & [x.f, x.g]).any? { |x| x.is_a?(Symbol) })
+                else
+                  true
+                end
 
-     !boolean
+      !boolean
     end
 
+    # TODO: Cyclomatic complexity for combinable? is too high. [7/6]
     def is_multiple_of(x)
       if is_0?
         e0
@@ -103,10 +106,10 @@ module Dydx
       ([:f, :g] - [f_or_g]).first
     end
 
-    def distributable?(operator)
+    def distributable?(_operator)
     end
 
-    def inverse?(operator, x=nil)
+    def inverse?(operator, x = nil)
       if is_a?(Algebra::Inverse)
         self.operator == operator && (self.x == x || x.nil?)
       elsif x.is_a?(Algebra::Inverse)

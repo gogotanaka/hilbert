@@ -1,7 +1,7 @@
 module Dydx
   class Delta
     attr_accessor :var, :function
-    def initialize(var=nil, function=nil)
+    def initialize(var = nil, function = nil)
       @var      = var
       @function = function
     end

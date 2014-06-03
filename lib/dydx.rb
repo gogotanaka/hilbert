@@ -11,7 +11,7 @@ module Dydx
       function = eval("$#{functioner}")
       return eval("$#{functioner} = Function.new(*vars)") unless function
 
-      raise ArgumentError, "invalid number of values (#{vars.count} for #{function.vars.count})" unless function.vars.count == vars.count
+      fail ArgumentError, "invalid number of values (#{vars.count} for #{function.vars.count})" unless function.vars.count == vars.count
       return function if function.vars == vars
       return function unless function.algebra
 
