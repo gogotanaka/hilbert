@@ -30,8 +30,8 @@ module Dydx
       inverse_ope(operator.super)
     end
 
-    def is_num?
-      (is_a?(Num) || is_a?(Fixnum) || is_a?(Float)) || (is_a?(Inverse) && x.is_num?)
+    def num?
+      (is_a?(Num) || is_a?(Fixnum) || is_a?(Float)) || (is_a?(Inverse) && x.num?)
     end
 
     def is_0?
@@ -54,16 +54,16 @@ module Dydx
     def combinable?(x, operator)
       case operator
       when :+
-        (is_num? && x.is_num?) ||
-        (formula?(:*) && (f.is_num? || g.is_num?)) && x.is_num? ||
+        (num? && x.num?) ||
+        (formula?(:*) && (f.num? || g.num?)) && x.num? ||
         like_term?(x) ||
         inverse?(:+, x)
       when :*
         self == x ||
-        (is_num? && x.is_num?) ||
+        (num? && x.num?) ||
         inverse?(:*, x)
       when :^
-        (is_num? && x.is_num?) || is_0? || is_1?
+        (num? && x.num?) || is_0? || is_1?
       end
     end
 
@@ -86,7 +86,7 @@ module Dydx
         e0
       elsif self == x
         e1
-      # elsif is_num? && x.is_num? && (self % x == 0)
+      # elsif num? && x.num? && (self % x == 0)
       #   _(n / x.n)
       elsif multiplication? && (f == x || g == x)
         f == x ? g : f

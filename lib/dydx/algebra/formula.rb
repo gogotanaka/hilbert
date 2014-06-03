@@ -5,7 +5,7 @@ module Dydx
       attr_accessor :f, :operator, :g
 
       def initialize(f, g, operator)
-        g, f = f, g if g.is_num? && operator.commutative?
+        g, f = f, g if g.num? && operator.commutative?
         @f, @g, @operator = f, g, operator
       end
 
@@ -16,7 +16,7 @@ module Dydx
         when :* then (f.d(sym) * g) + (f * g.d(sym))
         when :^
           # TODO:
-          if g.is_num?
+          if g.num?
             f.d(sym) * g * (f ^ (g - 1))
           elsif f == sym
             g * (f ^ (g - 1))
