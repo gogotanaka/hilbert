@@ -3,14 +3,14 @@ require 'spec_helper'
 describe Helper do
   include Helper
   context '#is_n?' do
-    it { expect(0.is_0?).to be_true }
-    it { expect(_(0).is_0?).to be_true }
-    it { expect(inverse(0, :+).is_0?).to be_true }
-    it { expect(1.is_1?).to be_true }
-    it { expect(_(1).is_1?).to be_true }
-    it { expect(inverse(1, :*).is_1?).to be_true }
-    it { expect(-1.is_minus1?).to be_true }
-    it { expect(_(-1).is_minus1?).to be_true }
+    it { expect(0.zero?).to be_true }
+    it { expect(_(0).zero?).to be_true }
+    it { expect(inverse(0, :+).zero?).to be_true }
+    it { expect(1.one?).to be_true }
+    it { expect(_(1).one?).to be_true }
+    it { expect(inverse(1, :*).one?).to be_true }
+    it { expect(-1.minus1?).to be_true }
+    it { expect(_(-1).minus1?).to be_true }
   end
 
   context '#is_multiple_of' do

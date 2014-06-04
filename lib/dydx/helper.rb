@@ -30,20 +30,20 @@ module Dydx
       inverse_ope(operator.super)
     end
 
-    def is_num?
-      (is_a?(Num) || is_a?(Fixnum) || is_a?(Float)) || (is_a?(Inverse) && x.is_num?)
+    def num?
+      (is_a?(Num) || is_a?(Fixnum) || is_a?(Float)) || (is_a?(Inverse) && x.num?)
     end
 
-    def is_0?
-      [0, 0.0].include?(self) || (is_a?(Num) && n.is_0?)
+    def zero?
+      [0, 0.0].include?(self) || (is_a?(Num) && n.zero?)
     end
 
-    def is_1?
-      [1, 1.0].include?(self) || (is_a?(Num) && n.is_1?)
+    def one?
+      [1, 1.0].include?(self) || (is_a?(Num) && n.one?)
     end
 
-    def is_minus1?
-      [1, -1.0].include?(self) || (is_a?(Num) && n.is_minus1?)
+    def minus1?
+      [1, -1.0].include?(self) || (is_a?(Num) && n.minus1?)
     end
 
     def distributive?(ope1, ope2)
@@ -54,16 +54,16 @@ module Dydx
     def combinable?(x, operator)
       case operator
       when :+
-        (is_num? && x.is_num?) ||
-        (formula?(:*) && (f.is_num? || g.is_num?)) && x.is_num? ||
+        (num? && x.num?) ||
+        (formula?(:*) && (f.num? || g.num?)) && x.num? ||
         like_term?(x) ||
         inverse?(:+, x)
       when :*
         self == x ||
-        (is_num? && x.is_num?) ||
+        (num? && x.num?) ||
         inverse?(:*, x)
       when :^
-        (is_num? && x.is_num?) || is_0? || is_1?
+        (num? && x.num?) || zero? || one?
       end
     end
 
@@ -82,11 +82,11 @@ module Dydx
 
     # TODO: Cyclomatic complexity for combinable? is too high. [7/6]
     def is_multiple_of(x)
-      if is_0?
+      if zero?
         e0
       elsif self == x
         e1
-      # elsif is_num? && x.is_num? && (self % x == 0)
+      # elsif num? && x.num? && (self % x == 0)
       #   _(n / x.n)
       elsif multiplication? && (f == x || g == x)
         f == x ? g : f
