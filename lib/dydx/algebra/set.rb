@@ -260,21 +260,42 @@ module Dydx
         end
       end
 
+      # TODO: We should hundle Rational num
       def sin(x)
-        multiplier = x.is_multiple_of(pi)
-        if multiplier.is_a?(Num)
-          e0
+        if x.multiple_of?(pi)
+          if (x / pi).is_a?(Num)
+            case (x / pi) % 2
+            when 0 then 0
+            when 1 then 0
+            else
+              Sin.new(x)
+            end
+          elsif (x / pi) == (_(1) / _(2))
+            1
+          elsif (x / pi) == (_(3) / _(2))
+            -1
+          else
+            Sin.new(x)
+          end
         else
           Sin.new(x)
         end
       end
 
       def cos(x)
-        multiplier = x.is_multiple_of(pi)
-        if multiplier.is_a?(Num) && multiplier.n.even?
-          e1
-        elsif multiplier.is_a?(Num) && multiplier.n.odd?
-          _(-1)
+        if x.multiple_of?(pi)
+          if (x / pi).is_a?(Num)
+            case (x / pi) % 2
+            when 0 then 1
+            when 1 then -1
+            else
+              Cos.new(x)
+            end
+          elsif [(_(1) / _(2)), (_(3) / _(2))].include? (x / pi)
+            0
+          else
+            Cos.new(x)
+          end
         else
           Cos.new(x)
         end

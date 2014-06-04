@@ -40,7 +40,7 @@ describe Dydx::Algebra::Formula do
     it { expect(addition.d(:z)).to eq(0) }
 
     it { expect(subtraction.d(:x)).to eq(1) }
-    it { expect(subtraction.d(:y)).to eq('( - 1 )') }
+    it { expect(subtraction.d(:y)).to eq(-1) }
     it { expect(subtraction.d(:z)).to eq(0) }
 
     it { expect(multiplication.d(:x)).to eq(:y) }
