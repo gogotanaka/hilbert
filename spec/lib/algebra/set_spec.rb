@@ -221,5 +221,13 @@ describe Dydx::Algebra::Set do
       it { expect((:x ^ 0).to_s).to eq('1') }
       it { expect(:x ^ 1).to eq(:x) }
     end
+
+    context 'Num with Num' do
+      it { expect(_(1) + _(2)).to eq(3) }
+      it { expect(_(1) - _(2)).to eq(-1) }
+      it { expect(_(1) * _(2)).to eq(2) }
+      it { expect((_(1) / _(2)).to_s).to eq('( 1 / 2 )') }
+      it { expect(_(1) % _(2)).to eq(1) }
+    end
   end
 end

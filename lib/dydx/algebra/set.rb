@@ -153,14 +153,17 @@ module Dydx
         alias_method :multiplication, :*
         alias_method :division, :/
         alias_method :exponentiation, :**
+        alias_method :modulation, :%
+
         ope_to_str = {
           addition: :+,
           subtraction: :-,
           multiplication: :*,
           division: :/,
-          exponentiation: :^
+          exponentiation: :^,
+          modulation: :%
         }
-        %w(+ - * / ^).each do |operator|
+        %w(+ - * / ^ %).each do |operator|
           define_method(operator) do |g|
             if g.is_a?(Symbol) ||
               g.is_a?(Formula) ||

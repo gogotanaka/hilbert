@@ -5,7 +5,13 @@ module Dydx
         module Num
           %w(+ * ^).map(&:to_sym).each do |operator|
             define_method(operator) do |x|
-              if zero?
+              if x.is_a?(Num)
+                _(n.send(operator, x.n))
+              elsif operator == :+ && x.inverse?(:+) && x.x.is_a?(Num)
+                _(n - x.x.n)
+              elsif operator == :* && x.inverse?(:*) && x.x.is_a?(Num) && n % x.x.n == 0
+                _(n / x.x.n)
+              elsif zero?
                 case operator
                 when :+ then x
                 when :* then e0
@@ -17,16 +23,15 @@ module Dydx
                 when :* then x
                 when :^ then e1
                 end
-              elsif x.is_a?(Num)
-                _(n.send(operator, x.n))
-              elsif operator == :+ && x.inverse?(:+) && x.x.is_a?(Num)
-                _(n - x.x.n)
-              elsif operator == :* && x.inverse?(:*) && x.x.is_a?(Num)
-                _(n / x.x.n)
               else
                 super(x)
               end
             end
+          end
+
+          def %(num)
+            fail ArgumentError, "#{num} should be Num class object" unless num.is_a?(Num)
+            _(n % num.n)
           end
         end
       end
