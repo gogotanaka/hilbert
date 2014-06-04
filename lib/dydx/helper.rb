@@ -81,18 +81,11 @@ module Dydx
     end
 
     # TODO: Cyclomatic complexity for combinable? is too high. [7/6]
-    def is_multiple_of(x)
-      if zero?
-        e0
-      elsif self == x
-        e1
-      # elsif num? && x.num? && (self % x == 0)
-      #   _(n / x.n)
-      elsif multiplication? && (f == x || g == x)
-        f == x ? g : f
-      else
-        false
-      end
+    def multiple_of?(x)
+      zero? ||
+      self == x ||
+      (num? && x.num? && self % x == 0) ||
+      (formula?(:*) && (f == x || g == x))
     end
 
     OP_SYM_STR.each do |operator_name, operator|
