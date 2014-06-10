@@ -63,15 +63,10 @@ module Dydx
 
     # TODO: Cyclomatic complexity for combinable? is too high. [9/6]
     def like_term?(x)
-      boolean = if self == x
-                elsif formula?(:*) && include?(x)
-                elsif x.formula?(:*) && x.include?(self)
-                elsif (formula?(:*) && formula?(:*)) && (([f, g] & [x.f, x.g]).any? { |x| x.is_a?(Symbol) })
-                else
-                  true
-                end
-
-      !boolean
+      self == x                         ||
+      formula?(:*) && include?(x)       ||
+      x.formula?(:*) && x.include?(self)||
+      (formula?(:*) && formula?(:*) && !([f, g] & [x.f, x.g]).empty?)
     end
 
     # TODO: Cyclomatic complexity for combinable? is too high. [7/6]
