@@ -13,7 +13,7 @@ module Dydx
 
       a, b = [a, b].map(&:to_f)
       fail ArgumentError, 'b should be greater than a' if a > b
-      $int_f = function
+      $temp_cal_f = function
 
       n = [n, (b - a) * 2].max
       n += 1 if n.to_i.odd?
@@ -26,7 +26,7 @@ module Dydx
     end
 
     def f(vars)
-      int_f(vars)
+      temp_cal_f(vars)
     end
 
     def round_8(num)

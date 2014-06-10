@@ -6,7 +6,7 @@ require 'dydx/integrand'
 
 module Dydx
   include Algebra
-  %w(f g h int_f).each do |functioner|
+  %w(f g h temp_cal_f).each do |functioner|
     define_method(functioner) do |*vars|
       function = eval("$#{functioner}")
       return eval("$#{functioner} = Function.new(*vars)") unless function
