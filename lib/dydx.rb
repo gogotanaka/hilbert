@@ -12,8 +12,7 @@ module Dydx
       return eval("$#{functioner} = Function.new(*vars)") unless function
 
       fail ArgumentError, "invalid number of values (#{vars.count} for #{function.vars.count})" unless function.vars.count == vars.count
-      return function if function.vars == vars
-      return function unless function.algebra
+      return function if function.vars == vars || !function.algebra
 
       subst_hash = Hash[*[function.vars, vars].transpose.flatten]
       begin
@@ -45,27 +44,5 @@ module Dydx
     else
       super
     end
-  end
-
-  private
-
-  def substitute(vars, function)
-    string = function.algebra.to_s
-    function.vars.each_with_index { |var, i| string.gsub!(var.to_s, vars[i].to_s) }
-    string
-  end
-
-  def all_vars_num?(vars)
-    vars.all? { |v| v.is_a?(Numeric) }
-  end
-
-  def rename_for_calc(string)
-    # TODO: need more refactoring...
-    string.gsub!('cos', 'Math.cos')
-    string.gsub!('sin', 'Math.sin')
-    string.gsub!('log', 'Math.log')
-    string.gsub!(' e ', ' Math::E ')
-    string.gsub!('pi', 'Math::PI')
-    string
   end
 end
