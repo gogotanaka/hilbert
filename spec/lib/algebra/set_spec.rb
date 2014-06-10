@@ -48,7 +48,7 @@ describe Dydx::Algebra::Set do
   end
 
   describe '#==' do
-    it { expect(_(1) == _(1)).to be_true }
+    it { expect(_(1) == _(1)).to be true }
   end
 
   describe '#subst' do

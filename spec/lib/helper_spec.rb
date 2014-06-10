@@ -3,14 +3,14 @@ require 'spec_helper'
 describe Helper do
   include Helper
   context '#is_n?' do
-    it { expect(0.zero?).to be_true }
-    it { expect(_(0).zero?).to be_true }
-    it { expect(inverse(0, :+).zero?).to be_true }
-    it { expect(1.one?).to be_true }
-    it { expect(_(1).one?).to be_true }
-    it { expect(inverse(1, :*).one?).to be_true }
-    it { expect(-1.minus1?).to be_true }
-    it { expect(_(-1).minus1?).to be_true }
+    it { expect(0.zero?).to be true }
+    it { expect(_(0).zero?).to be true }
+    it { expect(inverse(0, :+).zero?).to be true }
+    it { expect(1.one?).to be true }
+    it { expect(_(1).one?).to be true }
+    it { expect(inverse(1, :*).one?).to be true }
+    it { expect(-1.minus1?).to be true }
+    it { expect(_(-1).minus1?).to be true }
   end
 
   context '#multiple_of?' do
@@ -29,8 +29,8 @@ describe Helper do
   end
 
   context '#like_term?' do
-    it { expect(x.like_term?(x)).to be_true }
-    it { expect((2 * x).like_term?((3 * x))).to be_true }
+    it { expect(x.like_term?(x)).to be true }
+    it { expect((2 * x).like_term?((3 * x))).to be true }
   end
 
   context '#combinable?' do
