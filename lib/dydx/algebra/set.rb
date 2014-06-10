@@ -207,10 +207,10 @@ module Dydx
 
       # TODO: Method has too many lines. [13/10]
       def log(formula)
-        if formula.multiplication?
+        if formula.formula?(:*)
           f, g = formula.f, formula.g
           log(f) + log(g)
-        elsif formula.exponentiation?
+        elsif formula.formula?(:^)
           f, g = formula.f, formula.g
           g * log(f)
         elsif formula.one?
@@ -224,10 +224,10 @@ module Dydx
 
       def log2(formula)
         # TODO: refactor with log function.
-        if formula.multiplication?
+        if formula.formula?(:*)
           f, g = formula.f, formula.g
           log2(f) + log2(g)
-        elsif formula.exponentiation?
+        elsif formula.formula?(:^)
           f, g = formula.f, formula.g
           g * log2(f)
         elsif formula.one?
@@ -243,10 +243,10 @@ module Dydx
 
       def log10(formula)
         # TODO: refactor with log function.
-        if formula.multiplication?
+        if formula.formula?(:*)
           f, g = formula.f, formula.g
           log10(f) + log10(g)
-        elsif formula.exponentiation?
+        elsif formula.formula?(:^)
           f, g = formula.f, formula.g
           g * log10(f)
         elsif formula.one?

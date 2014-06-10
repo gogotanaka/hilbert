@@ -1,11 +1,5 @@
 module Dydx
   module Helper
-    OP_SYM_STR = {
-      addition:       :+,
-      multiplication: :*,
-      exponentiation: :^
-    }
-
     SUPER_OPE_RELATION = {
       :+ => :*,
       :- => :/,
@@ -86,13 +80,6 @@ module Dydx
       self == x ||
       (num? && x.num? && self % x == 0) ||
       (formula?(:*) && (f == x || g == x))
-    end
-
-    OP_SYM_STR.each do |operator_name, operator|
-      define_method("#{operator_name}?") do
-        is_a?(Formula) && (@operator == operator)
-        # is_a?(Inverse) && self.operator == operator
-      end
     end
 
     def rest(f_or_g)

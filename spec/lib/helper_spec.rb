@@ -58,16 +58,6 @@ describe Helper do
     it { expect(distributive?(:^, :*)).to be_false }
   end
 
-  let(:addition)       { (:x + :y) }
-  let(:subtraction)    { (:x - :y) }
-  let(:multiplication) { (:x * :y) }
-  let(:division)       { (:x / :y) }
-  let(:exponentiation) { (:x ^ :y) }
-
-  it { expect(addition.addition?).to be_true }
-  it { expect(multiplication.multiplication?).to be_true }
-  it { expect(exponentiation.exponentiation?).to be_true }
-
   it { expect(inverse(:x, :+).inverse?(:+, :x)).to be_true }
   it { expect(:x.inverse?(:+, inverse(:x, :+))).to be_true }
   it { expect(inverse(:x, :*).inverse?(:*, :x)).to be_true }

@@ -1,6 +1,7 @@
 module Dydx
   class Integrand
     attr_accessor :function, :var
+
     def initialize(function, var)
       @function = function
       @var = var
