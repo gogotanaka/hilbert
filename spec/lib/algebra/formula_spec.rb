@@ -57,13 +57,13 @@ describe Dydx::Algebra::Formula do
   end
 
   describe '#include?' do
-    it { expect(addition.include?(:x)).to be_true }
-    it { expect(addition.include?(:z)).to be_false }
+    it { expect(addition.include?(:x)).to be true }
+    it { expect(addition.include?(:z)).to be false }
   end
 
   describe '#openable?' do
-    it { expect((:x + :y).openable?(:*, :x)).to be_true }
-    it { expect((:x + :y).openable?(:*, :y)).to be_true }
-    it { expect((:x + :y).openable?(:*, :z)).to be_false }
+    it { expect((:x + :y).openable?(:*, :x)).to be true }
+    it { expect((:x + :y).openable?(:*, :y)).to be true }
+    it { expect((:x + :y).openable?(:*, :z)).to be false }
   end
 end

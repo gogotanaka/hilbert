@@ -34,32 +34,32 @@ describe Helper do
   end
 
   context '#combinable?' do
-    it { expect(:x.combinable?(:x, :+)).to be_true }
-    it { expect(:x.combinable?(2 * :x, :+)).to be_true }
-    it { expect((2 * :x).combinable?(:x, :+)).to be_true }
-    it { expect((2 * :x).combinable?(2 * :x, :+)).to be_true }
-    it { expect(:x.combinable?(:y, :+)).to be_false }
-    it { expect(1.combinable?(2, :+)).to be_true }
-    it { expect(:x.combinable?(:x, :*)).to be_true }
-    it { expect(:x.combinable?(:y, :*)).to be_false }
-    it { expect(1.combinable?(2, :*)).to be_true }
-    it { expect(0.combinable?(:x, :^)).to be_true }
-    it { expect(1.combinable?(:y, :^)).to be_true }
+    it { expect(:x.combinable?(:x, :+)).to be true }
+    it { expect(:x.combinable?(2 * :x, :+)).to be true }
+    it { expect((2 * :x).combinable?(:x, :+)).to be true }
+    it { expect((2 * :x).combinable?(2 * :x, :+)).to be true }
+    it { expect(:x.combinable?(:y, :+)).to be false }
+    it { expect(1.combinable?(2, :+)).to be true }
+    it { expect(:x.combinable?(:x, :*)).to be true }
+    it { expect(:x.combinable?(:y, :*)).to be false }
+    it { expect(1.combinable?(2, :*)).to be true }
+    it { expect(0.combinable?(:x, :^)).to be true }
+    it { expect(1.combinable?(:y, :^)).to be true }
   end
 
   context '#distributive?' do
-    it { expect(distributive?(:+, :*)).to be_true }
-    it { expect(distributive?(:+, :/)).to be_true }
-    it { expect(distributive?(:-, :*)).to be_true }
-    it { expect(distributive?(:-, :/)).to be_true }
-    it { expect(distributive?(:*, :^)).to be_true }
-    it { expect(distributive?(:/, :^)).to be_true }
-    it { expect(distributive?(:*, :+)).to be_false }
-    it { expect(distributive?(:^, :*)).to be_false }
+    it { expect(distributive?(:+, :*)).to be true }
+    it { expect(distributive?(:+, :/)).to be true }
+    it { expect(distributive?(:-, :*)).to be true }
+    it { expect(distributive?(:-, :/)).to be true }
+    it { expect(distributive?(:*, :^)).to be true }
+    it { expect(distributive?(:/, :^)).to be true }
+    it { expect(distributive?(:*, :+)).to be false }
+    it { expect(distributive?(:^, :*)).to be false }
   end
 
-  it { expect(inverse(:x, :+).inverse?(:+, :x)).to be_true }
-  it { expect(:x.inverse?(:+, inverse(:x, :+))).to be_true }
-  it { expect(inverse(:x, :*).inverse?(:*, :x)).to be_true }
-  it { expect(:x.inverse?(:*, inverse(:x, :*))).to be_true }
+  it { expect(inverse(:x, :+).inverse?(:+, :x)).to be true }
+  it { expect(:x.inverse?(:+, inverse(:x, :+))).to be true }
+  it { expect(inverse(:x, :*).inverse?(:*, :x)).to be true }
+  it { expect(:x.inverse?(:*, inverse(:x, :*))).to be true }
 end
