@@ -58,8 +58,8 @@ describe Helper do
     it { expect(distributive?(:^, :*)).to be false }
   end
 
-  it { expect(inverse(:x, :+).inverse?(:+, :x)).to be true }
-  it { expect(:x.inverse?(:+, inverse(:x, :+))).to be true }
-  it { expect(inverse(:x, :*).inverse?(:*, :x)).to be true }
-  it { expect(:x.inverse?(:*, inverse(:x, :*))).to be true }
+  it { expect(inverse(x, :+).inverse?(:+, x)).to be true }
+  it { expect(x.inverse?(:+, inverse(x, :+))).to be true }
+  it { expect(inverse(x, :*).inverse?(:*, x)).to be true }
+  it { expect(x.inverse?(:*, inverse(x, :*))).to be true }
 end

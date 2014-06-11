@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Dydx::Integrand do
-  before(:each) do
-    reset
-  end
+  before { reset }
 
   it 'ex1' do
     f(x, y) <= x * y

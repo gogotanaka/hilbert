@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Dydx::Function do
-  before(:each) do
-    reset
-  end
+  before { reset }
 
   it 'ex1' do
     expect(f(x, y)).to eq(f(x, y))
