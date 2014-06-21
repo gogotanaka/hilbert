@@ -37,7 +37,7 @@ module Dydx
     end
 
     def minus1?
-      [1, -1.0].include?(self) || (is_a?(Num) && n.minus1?)
+      [-1, -1.0].include?(self) || (is_a?(Num) && n.minus1?)
     end
 
     def distributive?(ope1, ope2)
