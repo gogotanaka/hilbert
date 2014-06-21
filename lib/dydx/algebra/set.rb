@@ -175,7 +175,7 @@ module Dydx
               g.is_a?(Formula) ||
               g.is_a?(Base)
 
-              Num.new(self).send(operator.to_sym, g)
+              _(self).send(operator.to_sym, g)
             else
               send(ope_to_str.key(operator.to_sym), g)
             end
@@ -188,11 +188,11 @@ module Dydx
       Rational.class_eval(&numeric_proc)
 
       def e0
-        eval('$e0 ||= Num.new(0)')
+        eval('$e0 ||= _(0)')
       end
 
       def e1
-        eval('$e1 ||= Num.new(1)')
+        eval('$e1 ||= _(1)')
       end
 
       def _(num)

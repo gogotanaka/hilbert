@@ -5,7 +5,7 @@ module Dydx
         module Interface
           %w(+ - * / ^ %).map(&:to_sym).each do |operator|
             define_method(operator) do |x|
-              x = ::Set::Num.new(x) if x.is_a?(Fixnum)
+              x = _(x) if x.is_a?(Numeric)
               if operator == :/ && x.zero?
                 fail ZeroDivisionError
               elsif [:-, :/].include?(operator)
