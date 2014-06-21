@@ -230,4 +230,34 @@ describe Dydx::Algebra::Set do
       it { expect(_(1) % _(2)).to eq(1) }
     end
   end
+
+  describe Dydx::Algebra::Set::Num do
+    describe :< do
+      it { expect(_(1) < _(2)).to be(true) }
+      it { expect(_(1) < 2).to be(true) }
+      it { expect(_(2) < _(1)).to be(false) }
+      it { expect(_(2) < 1).to be(false) }
+    end
+
+    describe :<= do
+      it { expect(_(1) <= _(2)).to be(true) }
+      it { expect(_(1) <= 2).to be(true) }
+      it { expect(_(2) <= _(1)).to be(false) }
+      it { expect(_(2) <= 1).to be(false) }
+    end
+
+    describe :> do
+      it { expect(_(1) > _(2)).to be(false) }
+      it { expect(_(1) > 2).to be(false) }
+      it { expect(_(2) > _(1)).to be(true) }
+      it { expect(_(2) > 1).to be(true) }
+    end
+
+    describe :>= do
+      it { expect(_(1) >= _(2)).to be(false) }
+      it { expect(_(1) >= 2).to be(false) }
+      it { expect(_(2) >= _(1)).to be(true) }
+      it { expect(_(2) >= 1).to be(true) }
+    end
+  end
 end

@@ -89,6 +89,12 @@ module Dydx
       class Num
         include Base
         include Operator::Num
+        %w(> >= < <=).each do |operator|
+          define_method(operator) do |x|
+            x = x.n if x.is_a?(Num)
+            n.send(operator, x)
+          end
+        end
       end
 
       class Pi
