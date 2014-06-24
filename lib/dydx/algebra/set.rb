@@ -166,10 +166,10 @@ module Dydx
           subtraction: :-,
           multiplication: :*,
           division: :/,
-          exponentiation: :^,
+          exponentiation: :**,
           modulation: :%
         }
-        %w(+ - * / ^ %).each do |operator|
+        %w(+ - * / ** %).each do |operator|
           define_method(operator) do |g|
             if g.is_a?(Symbol) ||
               g.is_a?(Formula) ||
@@ -221,7 +221,7 @@ module Dydx
         if formula.formula?(:*)
           f, g = formula.f, formula.g
           log(f) + log(g)
-        elsif formula.formula?(:^)
+        elsif formula.formula?(:**)
           f, g = formula.f, formula.g
           g * log(f)
         elsif formula.one?
@@ -238,7 +238,7 @@ module Dydx
         if formula.formula?(:*)
           f, g = formula.f, formula.g
           log2(f) + log2(g)
-        elsif formula.formula?(:^)
+        elsif formula.formula?(:**)
           f, g = formula.f, formula.g
           g * log2(f)
         elsif formula.one?
@@ -257,7 +257,7 @@ module Dydx
         if formula.formula?(:*)
           f, g = formula.f, formula.g
           log10(f) + log10(g)
-        elsif formula.formula?(:^)
+        elsif formula.formula?(:**)
           f, g = formula.f, formula.g
           g * log10(f)
         elsif formula.one?

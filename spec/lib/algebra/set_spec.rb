@@ -11,17 +11,17 @@ describe Dydx::Algebra::Set do
 
   it { expect(log10(1)).to eq(e0) }
   it { expect(log10(10)).to eq(e1) }
-  it { expect(log10(10 ^ n)).to eq(n) }
-  it { expect(log10(3 ^ n)).to eq(n * log10( 3 )) }
+  it { expect(log10(10 ** n)).to eq(n) }
+  it { expect(log10(3 ** n)).to eq(n * log10( 3 )) }
 
   it { expect(log2(1)).to eq(e0) }
   it { expect(log2(2)).to eq(e1) }
-  it { expect(log2(2 ^ n)).to eq(n) }
-  it { expect(log2(3 ^ n)).to eq(n * log2( 3 )) }
+  it { expect(log2(2 ** n)).to eq(n) }
+  it { expect(log2(3 ** n)).to eq(n * log2( 3 )) }
 
   it { expect(log(1)).to eq(0) }
   it { expect(log(e)).to eq(1) }
-  it { expect(log(e ^ n)).to eq(n) }
+  it { expect(log(e ** n)).to eq(n) }
 
   it { expect(sin(pi)).to eq(0) }
 
@@ -68,8 +68,8 @@ describe Dydx::Algebra::Set do
 
   describe '#differentiate' do
     it { expect(e.d).to eq(0) }
-    it { expect((e ^ x).d).to eq(e ^ x) }
-    it { expect((e ^ (x + y)).d).to eq(e ^ ( x + y )) }
+    it { expect((e ** x).d).to eq(e ** x) }
+    it { expect((e ** (x + y)).d).to eq(e ** ( x + y )) }
 
     it { expect(pi.d(x)).to eq(0) }
 
@@ -79,7 +79,7 @@ describe Dydx::Algebra::Set do
 
     it { expect(sin(x).d).to eq(cos(x)) }
     it { expect(cos(x).d).to eq(- sin(x)) }
-    it { expect(tan(x).d).to eq(1 / cos(x) ^ 2) }
+    it { expect(tan(x).d).to eq(1 / cos(x) ** 2) }
 
     it { expect(log(x).d).to eq(1 / x) }
     it { expect(log10(x).d).to eq(1 / ( x * log( 10 ) )) }
@@ -96,7 +96,7 @@ describe Dydx::Algebra::Set do
       it { expect(e * 1).to eq(e) }
       it { expect { (e / 0).to_s }.to raise_error(ZeroDivisionError) }
       it { expect(e / 1).to eq(e) }
-      it { expect((e ^ 0).to_s).to eq('1') }
+      it { expect((e ** 0).to_s).to eq('1') }
     end
 
     context 'Fixnum with Formula' do
@@ -107,8 +107,8 @@ describe Dydx::Algebra::Set do
       it { expect(1 * formula).to eq(formula) }
       it { expect(0 / formula).to eq(0) }
       it { expect(1 / formula).to eq( 1 / ( x + y ) ) }
-      it { expect(0 ^ formula).to eq(0) }
-      it { expect(1 ^ formula).to eq(1) }
+      it { expect(0 ** formula).to eq(0) }
+      it { expect(1 ** formula).to eq(1) }
     end
 
     context 'Fixnum with Symbol' do
@@ -118,8 +118,8 @@ describe Dydx::Algebra::Set do
       it { expect(1 * x).to eq(x) }
       it { expect(0 / x).to eq(0) }
       it { expect(1 / x).to eq( 1 / x ) }
-      it { expect(0 ^ x).to eq(0) }
-      it { expect(1 ^ x).to eq(1) }
+      it { expect(0 ** x).to eq(0) }
+      it { expect(1 ** x).to eq(1) }
     end
 
     context 'Fixnum with Fixnum' do
@@ -143,11 +143,11 @@ describe Dydx::Algebra::Set do
       # TODO:
       it { expect((2 / 3).to_s).to eq('0') }
 
-      it { expect((0 ^ 3).to_s).to eq('0') }
-      it { expect((3 ^ 0).to_s).to eq('1') }
-      it { expect((1 ^ 3).to_s).to eq('1') }
-      it { expect((3 ^ 1).to_s).to eq('3') }
-      it { expect((3 ^ 2).to_s).to eq('9') }
+      it { expect((0 ** 3).to_s).to eq('0') }
+      it { expect((3 ** 0).to_s).to eq('1') }
+      it { expect((1 ** 3).to_s).to eq('1') }
+      it { expect((3 ** 1).to_s).to eq('3') }
+      it { expect((3 ** 2).to_s).to eq('9') }
     end
 
     context 'Float with Formula' do
@@ -158,8 +158,8 @@ describe Dydx::Algebra::Set do
       it { expect((1.0 * formula).to_s).to eq(formula.to_s) }
       it { expect((0.0 / formula).to_s).to eq('0') }
       it { expect((1.0 / formula).to_s).to eq('( 1 / ( x + y ) )') }
-      it { expect((0.0 ^ formula).to_s).to eq('0') }
-      it { expect((1.0 ^ formula).to_s).to eq('1') }
+      it { expect((0.0 ** formula).to_s).to eq('0') }
+      it { expect((1.0 ** formula).to_s).to eq('1') }
     end
 
     context 'Float with Symbol' do
@@ -169,8 +169,8 @@ describe Dydx::Algebra::Set do
       it { expect(1.0 * :x).to eq(:x) }
       it { expect((0.0 / :x).to_s).to eq('0') }
       it { expect((1.0 / :x).to_s).to eq('( 1 / x )') }
-      it { expect((0.0 ^ :x).to_s).to eq('0') }
-      it { expect((1.0 ^ :x).to_s).to eq('1') }
+      it { expect((0.0 ** :x).to_s).to eq('0') }
+      it { expect((1.0 ** :x).to_s).to eq('1') }
     end
 
     context 'Float with Float' do
@@ -194,11 +194,11 @@ describe Dydx::Algebra::Set do
       # TODO:
       it { expect(2.0 / 3.0).to eq(0.6666666666666666) }
 
-      it { expect(0.0 ^ 3.0).to eq(0.0) }
-      it { expect(3.0 ^ 0.0).to eq(1.0) }
-      it { expect(1.0 ^ 3.0).to eq(1.0) }
-      it { expect(3.0 ^ 1.0).to eq(3.0) }
-      it { expect(3.0 ^ 2.0).to eq(9.0) }
+      it { expect(0.0 ** 3.0).to eq(0.0) }
+      it { expect(3.0 ** 0.0).to eq(1.0) }
+      it { expect(1.0 ** 3.0).to eq(1.0) }
+      it { expect(3.0 ** 1.0).to eq(3.0) }
+      it { expect(3.0 ** 2.0).to eq(9.0) }
     end
 
     context 'Pi with Fixnum' do
@@ -208,7 +208,7 @@ describe Dydx::Algebra::Set do
       it { expect(pi * 1).to eq(pi) }
       it { expect { (pi / 0).to_s }.to raise_error(ZeroDivisionError) }
       it { expect(pi / 1).to eq(pi) }
-      it { expect((pi ^ 0).to_s).to eq('1') }
+      it { expect((pi ** 0).to_s).to eq('1') }
     end
 
     context 'Symbol with Fixnum' do
@@ -218,8 +218,8 @@ describe Dydx::Algebra::Set do
       it { expect(x * 1).to eq(x) }
       it { expect { x / 0 }.to raise_error(ZeroDivisionError) }
       it { expect(x / 1).to eq(x) }
-      it { expect(x ^ 0).to eq(1) }
-      it { expect(x ^ 1).to eq(x) }
+      it { expect(x ** 0).to eq(1) }
+      it { expect(x ** 1).to eq(x) }
     end
 
     context 'Num with Num' do

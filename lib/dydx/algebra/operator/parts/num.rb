@@ -3,7 +3,7 @@ module Dydx
     module Operator
       module Parts
         module Num
-          %w(+ * ^).map(&:to_sym).each do |operator|
+          %w(+ * **).map(&:to_sym).each do |operator|
             define_method(operator) do |x|
               if x.is_a?(Num)
                 _(n.send(operator, x.n))
@@ -15,13 +15,13 @@ module Dydx
                 case operator
                 when :+ then x
                 when :* then e0
-                when :^ then e0
+                when :** then e0
                 end
               elsif one?
                 case operator
                 when :+ then super(x)
                 when :* then x
-                when :^ then e1
+                when :** then e1
                 end
               else
                 super(x)

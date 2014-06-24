@@ -60,7 +60,7 @@ d/dx(log(x)) == 1 / x
 d/dx(cos(x)) == -cos(x)
 => true
 
-d/dx(e ^ x) == e ^ x
+d/dx(e ** x) == e ** x
 => true
 
 # standard normal distribution;

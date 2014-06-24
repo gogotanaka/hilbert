@@ -51,7 +51,7 @@ module Dydx
             end
           end
 
-          %w(^).map(&:to_sym).each do |operator|
+          %w(**).map(&:to_sym).each do |operator|
             define_method(operator) do |x|
               if formula?(operator.sub) && openable?(operator, x)
                 f.send(operator, x).send(operator.sub, g.send(operator, x))

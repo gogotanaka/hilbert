@@ -3,25 +3,25 @@ module Dydx
     module Operator
       module Parts
         module General
-          %w(+ * ^).map(&:to_sym).each do |operator|
+          %w(+ * **).map(&:to_sym).each do |operator|
             define_method(operator) do |x|
               if x.zero?
                 case operator
                 when :+ then self
                 when :* then x
-                when :^ then e1
+                when :** then e1
                 end
               elsif x.one?
                 case operator
                 when :+ then super(x)
                 when :* then self
-                when :^ then self
+                when :** then self
                 end
               elsif self == x
                 case operator
                 when :+ then _(2) * self
-                when :* then self ^ _(2)
-                when :^ then super(x)
+                when :* then self ** _(2)
+                when :** then super(x)
                 end
               elsif operator == :+ && inverse?(:+, x)
                 e0

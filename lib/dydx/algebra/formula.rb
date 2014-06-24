@@ -14,12 +14,12 @@ module Dydx
         case @operator
         when :+ then f.d(sym) + g.d(sym)
         when :* then (f.d(sym) * g) + (f * g.d(sym))
-        when :^
+        when :**
           # TODO:
           if g.num?
-            f.d(sym) * g * (f ^ (g - 1))
+            f.d(sym) * g * (f ** (g - 1))
           elsif f == sym
-            g * (f ^ (g - 1))
+            g * (f ** (g - 1))
           elsif f == e
             g.d(sym) * self
           else

@@ -3,7 +3,7 @@ module Dydx
     SUPER_OPE_RELATION = {
       :+ => :*,
       :- => :/,
-      :* => :^,
+      :* => :**,
       :/ => :|
     }
 
@@ -12,8 +12,8 @@ module Dydx
       :- => :+,
       :* => :/,
       :/ => :*,
-      :^ => :|,
-      :| => :^
+      :** => :|,
+      :| => :**
     }
 
     def inverse_ope(operator)
@@ -60,7 +60,7 @@ module Dydx
         self == x ||
         (num? && x.num?) ||
         inverse?(:*, x)
-      when :^
+      when :**
         (num? && x.num?) || zero? || one?
       end
     end
@@ -126,7 +126,7 @@ module Dydx
 
     # Refactor
     def **(x)
-      self ^ (x)
+      self ** (x)
     end
   end
 end

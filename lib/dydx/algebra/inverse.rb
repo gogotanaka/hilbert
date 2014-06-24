@@ -34,7 +34,7 @@ module Dydx
         when :+
           inverse(x.differentiate(sym), :+)
         when :*
-          inverse(x.differentiate(sym) * inverse(x ^ 2, :*), :+)
+          inverse(x.differentiate(sym) * inverse(x ** 2, :*), :+)
         end
       end
       alias_method :d, :differentiate
