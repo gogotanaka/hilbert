@@ -9,7 +9,7 @@ module Dydx
               if operator == :/ && x.zero?
                 fail ZeroDivisionError
               elsif [:-, :/].include?(operator)
-                send(inverse_ope(operator), inverse(x, inverse_ope(operator)))
+                send(operator.inv, inverse(x, operator.inv))
               else
                 super(x)
               end

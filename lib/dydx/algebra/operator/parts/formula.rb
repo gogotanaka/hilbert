@@ -36,13 +36,13 @@ module Dydx
 
                 case operator
                 when :+
-                  send(w1).send(operator.super, send(rest(w1)).send(inverse_ope(operator), x.x.send(rest(w2))))
+                  send(w1).send(operator.super, send(rest(w1)).send(operator.inv, x.x.send(rest(w2))))
                 when :*
                   case w1
                   when :f
-                    send(w1).send(operator.super, send(rest(w1)).send(inverse_ope(operator.sub), x.x.send(rest(w2))))
+                    send(w1).send(operator.super, send(rest(w1)).send(operator.sub.inv, x.x.send(rest(w2))))
                   when :g
-                    send(w1).send(operator.super, send(rest(w1)).send(inverse_ope(operator), x.x.send(rest(w2)))).commutate!
+                    send(w1).send(operator.super, send(rest(w1)).send(operator.inv, x.x.send(rest(w2)))).commutate!
                   end
                 end
               else

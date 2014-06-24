@@ -33,9 +33,9 @@ module Dydx
         if formula?(:*) && (f.minus1? || g.minus1?)
           "( - #{g} )"
         elsif g.inverse?(operator)
-          "( #{f} #{inverse_ope(operator)} #{g.x} )"
+          "( #{f} #{operator.inv} #{g.x} )"
         elsif f.inverse?(operator)
-          "( #{g} #{inverse_ope(operator)} #{f.x} )"
+          "( #{g} #{operator.inv} #{f.x} )"
         elsif formula?(:*) && !rationals.empty?
           terms = [f, g]
           terms.delete(rationals.first)
