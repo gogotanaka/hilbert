@@ -25,7 +25,11 @@ module Dydx
     end
 
     def num?
-      (is_a?(Num) || is_a?(Fixnum) || is_a?(Float)) || (is_a?(Inverse) && x.num?)
+      is_a?(Num) || is_a?(Numeric)
+    end
+
+    def to_numeric
+      is_a?(Num) ? n : self
     end
 
     def zero?

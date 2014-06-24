@@ -181,6 +181,11 @@ module Dydx
             end
           end
         end
+        if self == Rational
+          def to_s
+            "( #{numerator} / #{denominator} )"
+          end
+        end
       end
 
       Float.class_eval(&numeric_proc)

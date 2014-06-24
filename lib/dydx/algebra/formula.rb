@@ -36,6 +36,10 @@ module Dydx
           "( #{f} #{inverse_ope(operator)} #{g.x} )"
         elsif f.inverse?(operator)
           "( #{g} #{inverse_ope(operator)} #{f.x} )"
+        elsif formula?(:*) && !rationals.empty?
+          terms = [f, g]
+          terms.delete(rationals.first)
+          "( #{(terms.first * rationals.first.n.numerator)} / #{rationals.first.n.denominator} )"
         else
           "( #{f} #{operator} #{g} )"
         end
@@ -56,6 +60,10 @@ module Dydx
       def openable?(operator, x)
         distributive?(self.operator, operator) &&
         (f.combinable?(x, operator) || g.combinable?(x, operator))
+      end
+
+      def rationals
+        [f, g].select{ |term| term.num? && term.n.is_a?(Rational) }
       end
 
       def ==(x)
