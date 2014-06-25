@@ -99,6 +99,10 @@ module Dydx
         [:+, :*].include?(self)
       end
 
+      def associative?
+        [:+, :*].include?(self)
+      end
+
       def super
         SUPER_OPE_RELATION[self] || self
       end

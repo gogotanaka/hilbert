@@ -17,6 +17,24 @@ module Dydx
           end
         end
 
+        module Associative
+          %w(+ * **).map(&:to_sym).each do |operator|
+            define_method(operator) do |x|
+              if operator.associative? && x.formula?(operator)
+                if combinable?(x.f, operator)
+                  send(operator, x.f).send(operator, x.g)
+                elsif combinable?(x.g, operator)
+                  send(operator, x.g).send(operator, x.f)
+                else
+                  super(x)
+                end
+              else
+                super(x)
+              end
+            end
+          end
+        end
+
         module General1
           %w(+ * **).map(&:to_sym).each do |operator|
             define_method(operator) do |x|
@@ -44,15 +62,7 @@ module Dydx
                 when :* then e1
                 end
               elsif [:+, :*].include?(operator)
-                if x.formula?(operator)
-                  if combinable?(x.f, operator)
-                    send(operator, x.f).send(operator, x.g)
-                  elsif combinable?(x.g, operator)
-                    send(operator, x.g).send(operator, x.f)
-                  else
-                    super(x)
-                  end
-                elsif x.formula?(operator.super) && self == x.f
+                if x.formula?(operator.super) && self == x.f
                   send(operator.super, (1 + x.g))
                 else
                   super(x)
@@ -87,6 +97,7 @@ module Dydx
         module General
           include General2
           include General1
+          include Associative
           include Interface
         end
       end
