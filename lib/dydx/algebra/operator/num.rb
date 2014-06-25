@@ -5,7 +5,6 @@ module Dydx
         include Parts::Base
         include Parts::Num
         include Parts::General
-        include Parts::Interface
       end
     end
   end

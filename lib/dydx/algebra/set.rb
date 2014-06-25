@@ -1,4 +1,9 @@
-require 'dydx/algebra/operator/parts'
+require 'dydx/algebra/operator/parts/base'
+require 'dydx/algebra/operator/parts/general'
+require 'dydx/algebra/operator/parts/formula'
+require 'dydx/algebra/operator/parts/inverse'
+require 'dydx/algebra/operator/parts/num'
+
 require 'dydx/algebra/operator/inverse'
 require 'dydx/algebra/operator/formula'
 require 'dydx/algebra/operator/num'

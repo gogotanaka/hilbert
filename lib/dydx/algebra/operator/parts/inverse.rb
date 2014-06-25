@@ -10,9 +10,9 @@ module Dydx
                 when :+ then e0
                 when :* then e1
                 end
-              elsif !x.is_a?(Inverse) && operator == :+
+              elsif operator.eql?(:+) && !x.is_a?(Inverse)
                 x + self
-              elsif self.operator == :* && operator == :**
+              elsif operator.eql?(:**) && self.operator.eql?(:*)
                 inverse(self.x ** x, :*)
               else
                 super(x)
