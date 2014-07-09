@@ -20,11 +20,23 @@ module Dydx
         module Associative
           %w(+ * **).map(&:to_sym).each do |operator|
             define_method(operator) do |x|
-              if operator.associative? && x.formula?(operator)
-                if combinable?(x.f, operator)
-                  send(operator, x.f).send(operator, x.g)
-                elsif combinable?(x.g, operator)
-                  send(operator, x.g).send(operator, x.f)
+              if operator.associative?
+                if x.formula?(operator)
+                  if combinable?(x.f, operator)
+                    send(operator, x.f).send(operator, x.g)
+                  elsif combinable?(x.g, operator)
+                    send(operator, x.g).send(operator, x.f)
+                  else
+                    super(x)
+                  end
+                elsif x.is_a?(Inverse) && x.operator == operator && x.x.formula?(operator)
+                  if combinable?(x.x.f, operator)
+                    send(operator, inverse(x.x.f, operator)).send(operator, inverse(x.x.g, operator))
+                  elsif combinable?(x.x.g, operator)
+                    send(operator, inverse(x.x.g, operator)).send(operator, inverse(x.x.f, operator))
+                  else
+                    super(x)
+                  end
                 else
                   super(x)
                 end
@@ -79,14 +91,6 @@ module Dydx
             define_method(operator) do |x|
               if operator == :* && x.inverse?(:+)
                 -(self * x.x)
-              elsif x.is_a?(Inverse) && x.operator == operator && x.x.formula?(operator)
-                if combinable?(x.x.f, operator)
-                  send(operator, inverse(x.x.f, operator)).send(operator, inverse(x.x.g, operator))
-                elsif combinable?(x.x.g, operator)
-                  send(operator, inverse(x.x.g, operator)).send(operator, inverse(x.x.f, operator))
-                else
-                  super(x)
-                end
               else
                 super(x)
               end
