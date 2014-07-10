@@ -2,11 +2,27 @@ module Dydx
   module Algebra
     class Formula
       include Helper
-      attr_accessor :f, :operator, :g
+      attr_accessor :operator, :terms
 
-      def initialize(f, g, operator)
-        g, f = f, g if g.num? && operator.commutative?
-        @f, @g, @operator = f, g, operator
+      def initialize(operator, *terms)
+        @operator, @terms = operator, terms
+        commutate! if (terms[1].num? && operator.commutative?)
+      end
+
+      def f
+        @terms[0]
+      end
+
+      def g
+        @terms[1]
+      end
+
+      def f=(x)
+        @terms[0] = x
+      end
+
+      def g=(x)
+        @terms[1] = x
       end
 
       # TODO: Cylomatic complexity for differentiate is too high. [7/6]
@@ -90,7 +106,7 @@ module Dydx
       end
 
       def commutate!
-        @f, @g = @g, @f
+        @terms.reverse!
         self
       end
     end
