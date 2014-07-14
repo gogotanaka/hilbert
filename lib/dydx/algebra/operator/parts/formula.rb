@@ -3,60 +3,81 @@ module Dydx
     module Operator
       module Parts
         module Formula
-          %w(+ *).map(&:to_sym).each do |operator|
-            define_method(operator) do |x|
-              if self.operator == operator
-                if f.combinable?(x, operator)
-                  f.send(operator, x).send(operator, g)
-                elsif g.combinable?(x, operator)
-                  g.send(operator, x).send(operator, f)
+          %w(+ *).map(&:to_sym).each do |op|
+            define_method(op) do |rtr|
+              if self.operator == op
+                if f.combinable?(rtr, op)
+                  _(
+                    _(trs[0], op, rtr), op, trs[1]
+                  )
+                elsif g.combinable?(rtr, op)
+                  _(
+                    _(trs[1], op, rtr), op, trs[0]
+                  )
                 else
-                  super(x)
+                  super(rtr)
                 end
-              elsif formula?(operator.sub) && openable?(operator, x)
-                f.send(operator, x).send(operator.sub, g.send(operator, x))
-              elsif formula?(operator.super) && x.formula?(operator.super)
-                w1, w2 = common_factors(x)
-                return super(x) unless (w1 && w2) && (operator.super.commutative? || w1 == w2)
+              elsif formula?(op.sub) && openable?(op, rtr)
+                _(
+                  _(trs[0], op, rtr), op.sub, _(trs[1], op, rtr)
+                )
+              elsif formula?(op.super) && rtr.formula?(op.super)
+                cmn_fct = (trs & rtr.trs).first
+                return super(rtr) unless cmn_fct
 
-                case operator
-                when :+
-                  send(w1).send(operator.super, send(rest(w1)).send(operator, x.send(rest(w2))))
-                when :*
-                  case w1
-                  when :f
-                    send(w1).send(operator.super, send(rest(w1)).send(operator.sub, x.send(rest(w2))))
-                  when :g
-                    send(w1).send(operator.super, send(rest(w1)).send(operator, x.send(rest(w2)))).commutate!
+                if op.super.commutative?
+                  _(
+                    cmn_fct, op.super, _(delete(cmn_fct), op, rtr.delete(cmn_fct))
+                  )
+                else
+                  return super(rtr) if index(cmn_fct) != rtr.index(cmn_fct)
+
+                  case index(cmn_fct)
+                  when 0
+                    _(
+                      cmn_fct, op.super, _(delete(cmn_fct), op.sub, rtr.delete(cmn_fct))
+                    )
+                  when 1
+                    _(
+                      _(delete(cmn_fct), op, rtr.delete(cmn_fct)), op.super, cmn_fct
+                    )
                   end
                 end
-              elsif formula?(operator.super) && x.inverse?(operator) && x.x.formula?(operator.super)
-                w1, w2 = common_factors(x.x)
-                return super(x) unless (w1 && w2) && (operator.super.commutative? || w1 == w2)
+              elsif formula?(op.super) && rtr.inverse?(op) && rtr.x.formula?(op.super)
+                cmn_fct = (trs & rtr.x.trs).first
+                return super(rtr) unless cmn_fct
 
-                case operator
-                when :+
-                  send(w1).send(operator.super, send(rest(w1)).send(operator.inv, x.x.send(rest(w2))))
-                when :*
-                  case w1
-                  when :f
-                    send(w1).send(operator.super, send(rest(w1)).send(operator.sub.inv, x.x.send(rest(w2))))
-                  when :g
-                    send(w1).send(operator.super, send(rest(w1)).send(operator.inv, x.x.send(rest(w2)))).commutate!
+                if op.super.commutative?
+                  _(
+                    cmn_fct, op.super, _(delete(cmn_fct), op.inv, rtr.x.delete(cmn_fct))
+                  )
+                else
+                  return super(rtr) if index(cmn_fct) != rtr.x.index(cmn_fct)
+                  case index(cmn_fct)
+                  when 0
+                    _(
+                      cmn_fct, op.super, _(delete(cmn_fct), op.sub.inv, rtr.x.delete(cmn_fct))
+                    )
+                  when 1
+                    _(
+                      _(delete(cmn_fct), op.inv, rtr.x.delete(cmn_fct)), op.super, cmn_fct
+                    )
                   end
                 end
               else
-                super(x)
+                super(rtr)
               end
             end
           end
 
-          %w(**).map(&:to_sym).each do |operator|
-            define_method(operator) do |x|
-              if formula?(operator.sub) && openable?(operator, x)
-                f.send(operator, x).send(operator.sub, g.send(operator, x))
+          %w(**).map(&:to_sym).each do |op|
+            define_method(op) do |rtr|
+              if formula?(op.sub) && openable?(op, rtr)
+                _(
+                  _(trs[0], op, rtr), op.sub, _(trs[1], op, rtr)
+                )
               else
-                super(x)
+                super(rtr)
               end
             end
           end

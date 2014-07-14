@@ -205,10 +205,6 @@ module Dydx
         eval('$e1 ||= _(1)')
       end
 
-      def _(num)
-        Num.new(num)
-      end
-
       def pi
         $pi ||= Pi.new
       end

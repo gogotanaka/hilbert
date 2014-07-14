@@ -25,6 +25,10 @@ module Dydx
         @terms[1] = x
       end
 
+      def trs
+        terms
+      end
+
       # TODO: Cylomatic complexity for differentiate is too high. [7/6]
       def differentiate(sym = :x)
         case @operator
@@ -108,6 +112,15 @@ module Dydx
       def commutate!
         @terms.reverse!
         self
+      end
+
+      def index(tr)
+        trs.index(tr)
+      end
+
+      def delete(tr)
+        trs.delete(tr)
+        trs.count.one? ? trs.first : self
       end
     end
   end

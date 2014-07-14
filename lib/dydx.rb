@@ -35,6 +35,17 @@ module Dydx
     $f, $g, $h = nil, nil, nil
   end
 
+  def _(*args)
+    case args.count
+    when 1
+      num = args.first
+      Num.new(num)
+    when 3
+      ltr, op, rtr = args
+      ltr.send(op, rtr)
+    end
+  end
+
   def method_missing(method, *args, &block)
     method_name = method.to_s
     if method_name =~ /^d.$/
