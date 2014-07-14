@@ -96,19 +96,6 @@ module Dydx
         end
       end
 
-      def common_factors(formula)
-        nil unless formula.is_a?(Formula)
-        if f == formula.f
-          [:f, :f]
-        elsif g == formula.g
-          [:g, :g]
-        elsif f == formula.g
-          [:f, :g]
-        elsif g == formula.f
-          [:g, :f]
-        end
-      end
-
       def commutate!
         @terms.reverse!
         self
