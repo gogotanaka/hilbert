@@ -2,7 +2,12 @@ module Q
   module Api
     module VectorApi
       def execute(nums)
-        "c(#{nums.join(', ')})"
+        case $type
+        when :R
+          "c(#{nums.join(', ')})"
+        when :Ruby
+          "Vector[#{nums.join(', ')}]"
+        end
       end
       module_function :execute
     end

@@ -15,9 +15,14 @@ describe Q do
   describe 'Matrix' do
     it do
       expect(
-        Q.compile('(1 2 3; 4 5 6)')
+        Q.to_r.compile('(1 2 3; 4 5 6)')
       ).to eq(
         "matrix(c(1, 2, 3, 4, 5, 6), 2, 3, byrow = TRUE)"
+      )
+      expect(
+        Q.to_ruby.compile('(1 2 3; 4 5 6)')
+      ).to eq(
+        "Matrix[[1, 2, 3], [4, 5, 6]]"
       )
     end
   end
@@ -25,9 +30,14 @@ describe Q do
   describe 'Vector' do
     it do
       expect(
-        Q.compile('(1 2 3)')
+        Q.to_r.compile('(1 2 3)')
       ).to eq(
         "c(1, 2, 3)"
+      )
+      expect(
+        Q.to_ruby.compile('(1 2 3)')
+      ).to eq(
+        "Vector[1, 2, 3]"
       )
     end
   end
