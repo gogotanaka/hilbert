@@ -24,37 +24,69 @@ module Q
             end
           end
         end
+      end
 
-        def get_value(token_with_num)
-          token_with_num =~ /\d+/
-          num = $&.to_i
-          values[num]
+      def get_value(token_with_num)
+        num = to_num(token_with_num)
+        values[num]
+      end
+
+      def squash_with_prn(token_with_num, value)
+        num = to_num(token_with_num)
+        3.times do
+          @lexeds.delete_at(num - 1)
         end
+        @lexeds.insert(num - 1, {R: "%R%|||#{value}|||"})
+      end
 
-        def tokens
-          @lexeds.map { |lexed| lexed.keys.first }
+      def squash_to_cont(token_with_num, count)
+        num = to_num(token_with_num)
+        value = ''
+        count.times do
+          value += values[num]
+          @lexeds.delete_at(num)
         end
+        @lexeds.insert(num, {CONT: value})
+      end
 
-        def token_with_nums
-          @lexeds.map.with_index { |lexed, i| ":#{lexed.keys.first}#{i}" }
-        end
+      def tokens
+        @lexeds.map { |lexed| lexed.keys.first }
+      end
 
-        def values
-          @lexeds.map { |lexed| lexed.values.first }
-        end
+      def token_with_nums
+        @lexeds.map.with_index { |lexed, i| ":#{lexed.keys.first}#{i}" }
+      end
 
-        def token_str
-          token_with_nums.join
-        end
+      def values
+        @lexeds.map { |lexed| lexed.values.first }
+      end
 
-        def [](index)
-          @lexeds[index]
-        end
+      def token_str
+        token_with_nums.join
+      end
 
-        def split(separator)
-          values.chunk { |e| e == separator }.reject { |sep,ans| sep }.map { |sep,ans| ans }
+      def [](index)
+        @lexeds[index]
+      end
+
+      def split(separator)
+        values.chunk { |e| e == separator }.reject { |sep,ans| sep }.map { |sep,ans| ans }
+      end
+
+      def fix_r_txt
+        @lexeds.map do |hash|
+          if hash[:R]
+            hash[:R] =~ /\%R\%\|\|\|(.+)\|\|\|/
+            hash[:R] = $1
+          end
+          hash
         end
       end
+
+      private def to_num(token_with_num)
+          token_with_num =~ /\d+/
+          num = $&.to_i
+        end
     end
   end
 end

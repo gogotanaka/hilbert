@@ -1,6 +1,8 @@
 module Q
   module Lexer
     class ContLexer < Base
+      rule(/\%R\%\|\|\|.+\|\|\|/) { :R }
+      rule(/('|")\w+('|")/) { :STR }
       rule(/[0-9]+/) { :NUM }
       rule(/\:/) { :CLN }
       rule(/\;/) { :SCLN }
@@ -9,7 +11,7 @@ module Q
       rule(/[ \t\f]/)
 
       rule(/\r\n/) { :NLIN }
-      rule(/\w/) { :STR }
+      rule(/\w+/) { :OTHER }
     end
   end
 end
