@@ -9,7 +9,7 @@ module Q
   module Parser
     def execute(lexed)
 
-      loop do
+      until lexed.tokens.count == 1
         case lexed.token_str
         when /:LPRN\d(:CONT\d):RPRN\d/
           cont_token_with_num = $1
@@ -29,16 +29,16 @@ module Q
           case cont_lexed.token_str
           when /(:OTHER\d:CLN\d(:STR\d|:NUM\d|:R\d):CMA)*(:OTHER\d:CLN\d(:STR\d|:NUM\d|:R\d))/
             cont = ListParser.execute(cont_lexed)
+            lexed.squash_with_prn(cont_token_with_num, cont)
           end
         end
 
         if lexed.token_str =~ /(:CONT\d|:R\d)(:CONT\d|:R\d)/
           lexed.squash_to_cont($1, 2)
         end
-
-
       end
-
+      lexed.fix_r_txt
+      lexed.values.first
     end
     module_function :execute
   end

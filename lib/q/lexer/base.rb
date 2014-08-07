@@ -75,8 +75,7 @@ module Q
 
       def fix_r_txt
         @lexeds.map do |hash|
-          if hash[:R]
-            hash[:R] =~ /\%R\%\|\|\|(.+)\|\|\|/
+          if hash[:R] && hash[:R] =~ /\%R\%\|\|\|(.+)\|\|\|/
             hash[:R] = $1
           end
           hash
