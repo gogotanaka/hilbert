@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.1.2'
+
 gem 'dydx'
-# Specify your gem's dependencies in q_lang.gemspec
 gemspec
