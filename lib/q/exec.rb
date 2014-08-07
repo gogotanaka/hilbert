@@ -5,7 +5,7 @@ module Q
         filename = args.first
         file = open_file(filename)
         string = read_file(file)
-        p Q.compile(string)
+        print(Kconv.tosjis(Q.compile(string)), '\n')
         file.close
       end
 
