@@ -8,6 +8,8 @@ module Q
 
       rule(/[ \t\f]/)
 
+      rule(/(\r|\n)+/) { :NLIN }
+
       rule(/[^\(\)\{\}]+/) { :CONT }
     end
   end

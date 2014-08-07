@@ -1,5 +1,5 @@
 module Q
-  module API
+  module Api
     module MatrixApi
       def execute(rows)
         row_count = rows.count

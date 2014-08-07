@@ -1,3 +1,5 @@
+require 'strscan'
+
 module Q
   module Lexer
     class Base
@@ -77,6 +79,8 @@ module Q
         @lexeds.map do |hash|
           if hash[:R] && hash[:R] =~ /\%R\%\|\|\|(.+)\|\|\|/
             hash[:R] = $1
+          elsif hash[:CONT] && hash[:CONT] =~ /\%R\%\|\|\|(.+)\|\|\|/
+            hash[:CONT] = $1
           end
           hash
         end

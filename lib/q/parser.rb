@@ -1,15 +1,16 @@
+require 'q/api'
+
+require 'q/lexer/cont_lexer'
+
 require 'q/parser/base'
 require 'q/parser/matrix_parser'
 require 'q/parser/vector_parser'
 require 'q/parser/list_parser'
 
-require 'q/lexer/cont_lexer'
-
 module Q
   module Parser
     def execute(lexed)
-
-      until lexed.tokens.count == 1
+      until lexed.token_str =~ /\A(:NLIN\d|:R\d)+\z/
         case lexed.token_str
         when /:LPRN\d(:CONT\d):RPRN\d/
           cont_token_with_num = $1
@@ -38,7 +39,7 @@ module Q
         end
       end
       lexed.fix_r_txt
-      lexed.values.first
+      lexed.values.join
     end
     module_function :execute
   end

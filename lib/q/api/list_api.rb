@@ -1,5 +1,5 @@
 module Q
-  module API
+  module Api
     module ListApi
       def execute(arys)
         combineds_by_equal = arys.map { |ary| "#{ary[0]}=#{ary[1]}" }.join(', ')

@@ -1,5 +1,5 @@
 module Q
-  module API
+  module Api
     module VectorApi
       def execute(nums)
         "c(#{nums.join(', ')})"

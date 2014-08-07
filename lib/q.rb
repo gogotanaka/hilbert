@@ -1,12 +1,13 @@
-require 'q/api'
 require 'q/lexer'
 require 'q/parser'
 
+require 'q/exec'
+
 module Q
-  include API
-  def _(str)
+  def compile(str)
     return super(str) unless str.is_a?(String)
     lexed = Lexer.execute(str)
     Parser.execute(lexed)
   end
+  module_function :compile
 end
