@@ -32,12 +32,16 @@ module Q
             cont = ListParser.execute(cont_lexed)
             lexed.squash_with_prn(cont_token_with_num, cont)
           end
+        when /:CONT\d/
+          lexed.ch_token($&, :R)
         end
+
 
         if lexed.token_str =~ /(:CONT\d|:R\d)(:CONT\d|:R\d)/
           lexed.squash_to_cont($1, 2)
         end
       end
+      binding.pry
       lexed.fix_r_txt
       lexed.values.join
     end

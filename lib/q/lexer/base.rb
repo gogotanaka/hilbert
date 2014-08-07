@@ -51,6 +51,12 @@ module Q
         @lexeds.insert(num, {CONT: value})
       end
 
+      def ch_token(token_with_num, token)
+        num = to_num(token_with_num)
+        before_hash = @lexeds.delete_at(num)
+        @lexeds.insert(num, {R: before_hash.values.first})
+      end
+
       def tokens
         @lexeds.map { |lexed| lexed.keys.first }
       end
@@ -77,10 +83,10 @@ module Q
 
       def fix_r_txt
         @lexeds.map do |hash|
-          if hash[:R] && hash[:R] =~ /\%R\%\|\|\|(.+)\|\|\|/
-            hash[:R] = $1
-          elsif hash[:CONT] && hash[:CONT] =~ /\%R\%\|\|\|(.+)\|\|\|/
-            hash[:CONT] = $1
+          if hash[:R] && hash[:R] =~ /\A(.*)\%R\%\|\|\|(.+)\|\|\|(.*)\z/m
+            hash[:R] = $1 + $2 + $3
+          elsif hash[:CONT] && hash[:CONT] =~ /\A(.*)\%R\%\|\|\|(.+)\|\|\|(.*)\z/m
+            hash[:CONT] = $1 + $2 + $3
           end
           hash
         end
