@@ -38,7 +38,7 @@ module Q
         3.times do
           @lexeds.delete_at(num - 1)
         end
-        @lexeds.insert(num - 1, {R: "%R%|||#{value}|||"})
+        @lexeds.insert(num - 1, {R: ":%|#{value}|%:"})
       end
 
       def squash_to_cont(token_with_num, count)
@@ -81,12 +81,12 @@ module Q
         values.chunk { |e| e == separator }.reject { |sep,ans| sep }.map { |sep,ans| ans }
       end
 
-      def fix_r_txt
-        @lexeds.map do |hash|
-          if hash[:R] && hash[:R] =~ /\A(.*)\%R\%\|\|\|(.+)\|\|\|(.*)\z/m
-            hash[:R] = $1 + $2 + $3
-          elsif hash[:CONT] && hash[:CONT] =~ /\A(.*)\%R\%\|\|\|(.+)\|\|\|(.*)\z/m
-            hash[:CONT] = $1 + $2 + $3
+      def fix_r_txt!
+        @lexeds.map! do |hash|
+          if value = hash[:R] || hash[:CONT]
+            ary = hash.first
+            ary[1] = value.gsub(/:%\|/,'').gsub(/\|%:/,'')
+            hash = Hash[*ary]
           end
           hash
         end

@@ -10,7 +10,9 @@ require 'q/parser/list_parser'
 module Q
   module Parser
     def execute(lexed)
+      time = Time.now
       until lexed.token_str =~ /\A(:NLIN\d|:R\d)+\z/
+        raise 'Something wrong' if Time.now > time + 10
         case lexed.token_str
         when /:LPRN\d(:CONT\d):RPRN\d/
           cont_token_with_num = $1
@@ -41,8 +43,7 @@ module Q
           lexed.squash_to_cont($1, 2)
         end
       end
-      binding.pry
-      lexed.fix_r_txt
+      lexed.fix_r_txt!
       lexed.values.join
     end
     module_function :execute
