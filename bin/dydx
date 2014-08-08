@@ -3,9 +3,6 @@
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
 require 'q'
-require 'pry'
 
-if ARGV.shift == '-q'
-  opts = Q::Exec::Compiler.new(ARGV)
-end
-
+opts = Q::Exec::Compiler.new(ARGV)
+opts.parse!
