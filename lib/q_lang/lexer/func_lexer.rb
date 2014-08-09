@@ -1,7 +1,7 @@
 module QLang
   module Lexer
     class FuncLexer < Base
-      rule(/\w\(\w, ?\w\)/) { :FDEF }
+      rule(/\w\(\w( ?, ?\w)*\)/) { :FDEF }
       rule(/\=/) { :EQL }
 
       rule(/[ \t\f]/)

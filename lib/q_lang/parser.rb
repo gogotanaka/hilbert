@@ -14,7 +14,7 @@ module QLang
     def execute(lexed)
       time = Time.now
       until lexed.token_str =~ /\A(:NLIN\d|:R\d)+\z/
-        raise 'Something wrong' if Time.now > time + 10
+        binding.pry if Time.now > time + 10
 
         case lexed.token_str
         when /:LPRN\d(:CONT\d):RPRN\d/
