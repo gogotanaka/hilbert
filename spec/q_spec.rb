@@ -2,6 +2,16 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'q'
 require 'pry'
 describe Q do
+  describe 'Function' do
+    it do
+      expect(
+        Q.compile('f(x, y) = x + y')
+      ).to eq(
+        "f <- function(x ,y) x + y"
+      )
+    end
+  end
+
   describe 'List' do
     it do
       expect(
