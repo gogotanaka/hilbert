@@ -1,13 +1,13 @@
-require 'q/api'
+require 'q_lang/api'
 
-require 'q/lexer/cont_lexer'
+require 'q_lang/lexer/cont_lexer'
 require 'q/lexer/func_lexer'
 
-require 'q/parser/base'
-require 'q/parser/matrix_parser'
-require 'q/parser/vector_parser'
-require 'q/parser/list_parser'
-require 'q/parser/func_parser'
+require 'q_lang/parser/base'
+require 'q_lang/parser/matrix_parser'
+require 'q_lang/parser/vector_parser'
+require 'q_lang/parser/list_parser'
+require 'q_lang/parser/func_parser'
 
 module Q
   module Parser
