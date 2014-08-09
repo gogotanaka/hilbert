@@ -5,7 +5,7 @@ require 'q_lang/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'q_lang'
-  spec.version       = QLang::VERSION
+  spec.version       = Qlang::VERSION
   spec.authors       = ['gogotanaka']
   spec.email         = ['mail@tanakakazuki.com']
   spec.summary       = %q{Enjoy MATH!}

@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe QLang do
+describe Qlang do
   it 'has a version number' do
-    expect(QLang::VERSION).not_to be nil
+    expect(Qlang::VERSION).not_to be nil
   end
 
   it 'has alias as Q' do
-    expect(QLang).to eq Q
+    expect(Qlang).to eq Q
   end
 
   describe Dydx do

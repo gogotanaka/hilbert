@@ -1,4 +1,4 @@
-module QLang
+module Qlang
   module QOnIrb
     def _(code)
       super(code) unless code.is_a?(String)

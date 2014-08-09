@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe QLang do
+describe Qlang do
   describe 'Matrix' do
     context 'into R' do
       it do

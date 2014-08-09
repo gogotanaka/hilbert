@@ -1,4 +1,4 @@
-module QLang
+module Qlang
   module Parser
     module ListParser
       include Base

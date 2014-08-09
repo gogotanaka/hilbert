@@ -1,4 +1,4 @@
-module QLang
+module Qlang
   module Lexer
     class WrapLexer < Base
       rule(/\w\(\w( ?, ?\w)*\) ?= ?[^\r\n]+/)  { :FUNC }

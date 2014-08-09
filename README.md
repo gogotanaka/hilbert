@@ -1,4 +1,4 @@
-# QLang
+# Qlang
 
 TODO: Write a gem description
 

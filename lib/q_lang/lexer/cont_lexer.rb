@@ -1,4 +1,4 @@
-module QLang
+module Qlang
   module Lexer
     class ContLexer < Base
       rule(/:%\|.+\|%:/) { :R }

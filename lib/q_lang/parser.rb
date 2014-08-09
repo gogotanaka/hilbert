@@ -9,7 +9,7 @@ require 'q_lang/parser/vector_parser'
 require 'q_lang/parser/list_parser'
 require 'q_lang/parser/func_parser'
 
-module QLang
+module Qlang
   module Parser
     def execute(lexed)
       time = Time.now

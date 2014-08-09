@@ -12,7 +12,7 @@ require 'q_lang/q_on_irb'
 
 require "kconv"
 
-module QLang
+module Qlang
   # compiles into R as default.
   $type = :R
 
@@ -24,30 +24,30 @@ module QLang
 
     def to_ruby
       $type = :Ruby
-      QLang
+      Qlang
     end
 
     def to_r
       $type = :R
-      QLang
+      Qlang
     end
 
     def to_haskell
       $type = :Hskl
-      QLang
+      Qlang
     end
 
     def to_scala
       $type = :Scla
-      QLang
+      Qlang
     end
 
     def to_java
       $type = :Scla
-      QLang
+      Qlang
     end
   end
 end
 
 # Make alias as Q
-Q = QLang
+Q = Qlang
