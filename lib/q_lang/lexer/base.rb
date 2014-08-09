@@ -4,14 +4,12 @@ module QLang
   module Lexer
     class Base
       class << self
+        attr_reader :token_hash
+
         def rule(pattern, &token)
-          token ||= Proc.new { :NULL }
+          token ||= proc { :NULL }
           @token_hash ||= {}
           @token_hash[token.call] = pattern
-        end
-
-        def token_hash
-          @token_hash
         end
       end
 
@@ -54,7 +52,7 @@ module QLang
       def ch_token(token_with_num, token)
         num = to_num(token_with_num)
         before_hash = @lexeds.delete_at(num)
-        @lexeds.insert(num, {R: before_hash.values.first})
+        @lexeds.insert(num, {token => before_hash.values.first})
       end
 
       def tokens
@@ -84,12 +82,12 @@ module QLang
       end
 
       def split(separator)
-        values.chunk { |e| e == separator }.reject { |sep,ans| sep }.map { |sep,ans| ans }
+        values.chunk { |e| e == separator }.reject { |sep, _| sep }.map { |_, ans| ans }
       end
 
       def fix_r_txt!
         @lexeds.map! do |hash|
-          if value = hash[:R] || hash[:CONT]
+          if value = (hash[:R] || hash[:CONT])
             ary = hash.first
             ary[1] = value.gsub(/:%\|/,'').gsub(/\|%:/,'')
             hash = Hash[*ary]
@@ -99,9 +97,9 @@ module QLang
       end
 
       private def to_num(token_with_num)
-          token_with_num =~ /\d+/
-          num = $&.to_i
-        end
+        token_with_num =~ /\d+/
+        $&.to_i
+      end
     end
   end
 end
