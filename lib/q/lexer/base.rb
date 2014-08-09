@@ -65,6 +65,12 @@ module Q
         @lexeds.map.with_index { |lexed, i| ":#{lexed.keys.first}#{i}" }
       end
 
+      def ch_value(token_with_num, value)
+        num = to_num(token_with_num)
+        before_hash = @lexeds.delete_at(num)
+        @lexeds.insert(num, {before_hash.keys.first => value })
+      end
+
       def values
         @lexeds.map { |lexed| lexed.values.first }
       end
