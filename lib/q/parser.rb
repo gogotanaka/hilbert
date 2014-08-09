@@ -1,11 +1,13 @@
 require 'q/api'
 
 require 'q/lexer/cont_lexer'
+require 'q/lexer/func_lexer'
 
 require 'q/parser/base'
 require 'q/parser/matrix_parser'
 require 'q/parser/vector_parser'
 require 'q/parser/list_parser'
+require 'q/parser/func_parser'
 
 module Q
   module Parser
@@ -33,6 +35,15 @@ module Q
           when /(:OTHER\d:CLN\d(:STR\d|:NUM\d|:R\d):CMA)*(:OTHER\d:CLN\d(:STR\d|:NUM\d|:R\d))/
             cont = ListParser.execute(cont_lexed)
             lexed.squash_with_prn(cont_token_with_num, cont)
+          end
+        when /:FUNC\d/
+          cont_token_with_num = $&
+          cont_lexed = Lexer::FuncLexer.new(lexed.get_value(cont_token_with_num))
+          case cont_lexed.token_str
+          when /:FDEF\d:EQL\d:OTHER\d/
+            cont = FuncParser.execute(cont_lexed)
+            lexed.ch_value(cont_token_with_num, cont)
+            lexed.ch_token(cont_token_with_num, :R)
           end
         when /:CONT\d/
           lexed.ch_token($&, :R)
