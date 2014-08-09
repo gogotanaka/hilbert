@@ -7,22 +7,20 @@ require "kconv"
 
 module Q
   $type = :R
-  def compile(str)
-    return super(str) unless str.is_a?(String)
-    lexed = Lexer.execute(str)
-    Kconv.tosjis(Parser.execute(lexed))
-  end
-  module_function :compile
+  class << self
+    def compile(str)
+      lexed = Lexer.execute(str)
+      Kconv.tosjis(Parser.execute(lexed))
+    end
 
-  def to_ruby
-    $type = :Ruby
-    Q
-  end
-  module_function :to_ruby
+    def to_ruby
+      $type = :Ruby
+      Q
+    end
 
-  def to_r
-    $type = :R
-    Q
+    def to_r
+      $type = :R
+      Q
+    end
   end
-  module_function :to_r
 end
