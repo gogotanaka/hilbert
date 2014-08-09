@@ -1,13 +1,13 @@
-require 'q_lang/api'
+require 'qlang/api'
 
-require 'q_lang/lexer/cont_lexer'
-require 'q_lang/lexer/func_lexer'
+require 'qlang/lexer/cont_lexer'
+require 'qlang/lexer/func_lexer'
 
-require 'q_lang/parser/base'
-require 'q_lang/parser/matrix_parser'
-require 'q_lang/parser/vector_parser'
-require 'q_lang/parser/list_parser'
-require 'q_lang/parser/func_parser'
+require 'qlang/parser/base'
+require 'qlang/parser/matrix_parser'
+require 'qlang/parser/vector_parser'
+require 'qlang/parser/list_parser'
+require 'qlang/parser/func_parser'
 
 module Qlang
   module Parser

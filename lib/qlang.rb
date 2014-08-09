@@ -2,13 +2,13 @@
 require 'dydx'
 include Dydx
 
-require "q_lang/version"
-require 'q_lang/lexer'
-require 'q_lang/parser'
+require "qlang/version"
+require 'qlang/lexer'
+require 'qlang/parser'
 
-require 'q_lang/exec'
+require 'qlang/exec'
 
-require 'q_lang/q_on_irb'
+require 'qlang/q_on_irb'
 
 require "kconv"
 

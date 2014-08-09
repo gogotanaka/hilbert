@@ -1,5 +1,5 @@
-require 'q_lang/lexer/base'
-require 'q_lang/lexer/wrap_lexer'
+require 'qlang/lexer/base'
+require 'qlang/lexer/wrap_lexer'
 
 module Qlang
   module Lexer

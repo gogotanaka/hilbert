@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'q_lang/version'
+require 'qlang/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'q_lang'
+  spec.name          = 'qlang'
   spec.version       = Qlang::VERSION
   spec.authors       = ['gogotanaka']
   spec.email         = ['mail@tanakakazuki.com']
