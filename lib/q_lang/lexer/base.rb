@@ -1,6 +1,6 @@
 require 'strscan'
 
-module Q
+module QLang
   module Lexer
     class Base
       class << self

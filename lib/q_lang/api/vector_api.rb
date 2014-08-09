@@ -1,4 +1,4 @@
-module Q
+module QLang
   module Api
     module VectorApi
       def execute(nums)

@@ -1,4 +1,4 @@
-module Q
+module QLang
   module Api
     module FuncApi
       def execute(func_name, args, contents)

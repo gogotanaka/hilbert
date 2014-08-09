@@ -1,4 +1,4 @@
-module Q
+module QLang
   module Parser
     module VectorParser
       include Base

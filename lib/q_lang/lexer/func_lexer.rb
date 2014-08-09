@@ -1,4 +1,4 @@
-module Q
+module QLang
   module Lexer
     class FuncLexer < Base
       rule(/\w\(\w, ?\w\)/) { :FDEF }

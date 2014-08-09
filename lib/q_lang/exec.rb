@@ -1,4 +1,4 @@
-module Q
+module QLang
   module Exec
     class Compiler
       def initialize(args)
@@ -23,7 +23,7 @@ module Q
         filename = @args[1]
         file = open_file(filename)
         string = read_file(file)
-        print(Kconv.tosjis(Q.compile(string)), '\n')
+        print(Kconv.tosjis(QLang.compile(string)), '\n')
         file.close
       end
 

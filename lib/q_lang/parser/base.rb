@@ -1,7 +1,7 @@
-module Q
+module QLang
   module Parser
     module Base
-      include ::Q::Api
+      include ::QLang::Api
       # TODO:
       class ::String
         def rm(str_or_rgx)

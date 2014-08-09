@@ -1,4 +1,4 @@
-module Q
+module QLang
   module Api
     module ListApi
       def execute(arys)
