@@ -1,5 +1,9 @@
 require "q_lang/version"
+require 'dydx'
+include Dydx
 
 module QLang
-  # Your code goes here...
+
 end
+
+Q = QLang
