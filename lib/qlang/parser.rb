@@ -14,7 +14,7 @@ module Qlang
     def execute(lexed)
       time = Time.now
       until lexed.token_str =~ /\A(:NLIN\d|:R\d)+\z/
-        binding.pry if Time.now > time + 10
+        fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
         when /:LPRN\d(:CONT\d):RPRN\d/
@@ -24,11 +24,12 @@ module Qlang
           case cont_lexed.token_str
           when /(:NUM\d)+(:SCLN\d|:NLIN\d)(:NUM\d)/
             cont = MatrixParser.execute(cont_lexed)
-            lexed.squash_with_prn(cont_token_with_num, cont)
           when /(:NUM\d)+/
             cont = VectorParser.execute(cont_lexed)
-            lexed.squash_with_prn(cont_token_with_num, cont)
+          else
+            cont = "(#{cont_lexed.values.join(' ')})"
           end
+          lexed.squash_with_prn(cont_token_with_num, cont)
 
         when /:LBRC\d(:CONT\d):RBRC\d/
           cont_token_with_num = $1
