@@ -10,7 +10,8 @@ require 'qlang/exec'
 
 require 'qlang/iq'
 
-require "kconv"
+require 'kconv'
+require 'matrix'
 
 module Qlang
   # compiles into R as default.

@@ -30,6 +30,18 @@ describe Qlang do
       ).to eq(
         "f(x ,y) <= x + y"
       )
+
+      expect(
+        Matrix[[1, 2, 3], [4, 5, 6]].to_q
+      ).to eq(
+        "(1 2 3; 4 5 6)"
+      )
+
+      expect(
+        Vector[1, 2, 3].to_q
+      ).to eq(
+        "(1 2 3)"
+      )
     end
   end
 end
