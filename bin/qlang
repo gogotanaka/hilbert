@@ -5,5 +5,9 @@ include Qlang
 
 loop do
   print 'Q:-> '
-  puts Iq.execute(gets)
+  begin
+    puts Iq.execute(gets)
+  rescue => e
+    puts e
+  end
 end
