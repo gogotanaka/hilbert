@@ -5,6 +5,10 @@ describe Qlang do
     it do
       expect(Iq.execute('(1 2 3; 4 5 6)')).to eq('(1 2 3; 4 5 6)')
       expect(Iq.execute('(1 2 3; 4 5 6) + (1 2 3; 4 5 6)')).to eq('(2 4 6; 8 10 12)')
+      expect(Iq.execute('(1 2 3; 4 5 6) - (2 4 1; 8 3 9)')).to eq('(-1 -2 2; -4 2 -3)')
+      expect(Iq.execute('(1 2; 3 4) * (1 2; 3 4)')).to eq('(7 10; 15 22)')
+      expect(Iq.execute('(1 2; 3 4) ** 2')).to eq('(7 10; 15 22)')
+      expect(Iq.execute('(1 2; 3 4) * (1 2)')).to eq('(5 11)')
       expect(Iq.execute('(1 2 3)')).to eq('(1 2 3)')
       expect(Iq.execute('d/dx(sin(x))')).to eq(cos(x))
       expect(Iq.execute('d/dx(log(x))')).to eq(1/x)
