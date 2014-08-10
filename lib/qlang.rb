@@ -8,7 +8,7 @@ require 'qlang/parser'
 
 require 'qlang/exec'
 
-require 'qlang/q_on_irb'
+require 'qlang/iq'
 
 require "kconv"
 
