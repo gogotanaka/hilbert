@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'qlang'
+include Qlang
+loop do
+  print 'Q:-> '
+  puts Iq.execute(gets)
+end
