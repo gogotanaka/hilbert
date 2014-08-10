@@ -6,6 +6,7 @@ module Qlang
       end
 
       def parse!
+        ch_compile_type(ARGV.shift)
         parse
       rescue Exception => e
         raise e if @options[:trace] || e.is_a?(SystemExit)
@@ -16,6 +17,17 @@ module Qlang
         exit 1
       ensure
         exit 0
+      end
+
+      private def ch_compile_type(lang)
+        case lang
+        when '-Ruby'
+          Qlang.to_ruby
+        when '-R'
+          Qlang.to_r
+        else
+          print 'Q support Ruby and R now.'
+        end
       end
 
       private def parse

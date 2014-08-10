@@ -13,6 +13,6 @@ when '-i'
     end
   end
 when '-c'
-  opts = Qlang::Exec::Compiler.new(ARGV)
-  opts.parse!
+  compiler = Qlang::Exec::Compiler.new(ARGV)
+  compiler.parse!
 end
