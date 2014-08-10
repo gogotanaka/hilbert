@@ -1,13 +1,18 @@
 #!/usr/bin/env ruby
-
 require 'qlang'
 include Qlang
 
-loop do
-  print 'Q:-> '
-  begin
-    puts Iq.execute(gets)
-  rescue => e
-    puts e
+case ARGV.shift
+when '-i'
+  loop do
+    print 'Q:-> '
+    begin
+      puts Iq.execute(gets)
+    rescue => e
+      puts e
+    end
   end
+when '-c'
+  opts = Qlang::Exec::Compiler.new(ARGV)
+  opts.parse!
 end
