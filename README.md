@@ -2,9 +2,9 @@
 
 Enjoy MATH with Keyboard.
 
+### Differentiate
 
 ```
-# Differentiate
 
 Q:-> d/dx(cos(x))
 ( - sin( x ) )
@@ -15,8 +15,11 @@ Q:-> d/dx(log(x))
 Q:-> d/dy(y ** 2)                        
 ( 2 * y )
 
+```
 
-# Integrate
+
+### Integrate
+```
 
 Q:-> S(log(x)dx)[0..1]
 ( - sin( x ) )
@@ -26,8 +29,12 @@ Q:-> d/dx(log(x))
 
 Q:-> d/dy(y ** 2)                        
 ( 2 * y )
+```
+
 
 ### Matrix
+
+```
 Q:->(1 2 3; 4 5 6)
 (1 2 3; 4 5 6)
 
