@@ -61,6 +61,10 @@ module Qlang
           lexed.ch_value(cont_token_with_num, cont)
           lexed.ch_token(cont_token_with_num, :R)
 
+        when /:EFUNC\d/
+          cont_token_with_num = $&
+          cont = lexed.get_value(cont_token_with_num)
+          lexed.squash_with_prn(cont_token_with_num, cont)
         when /:CONT\d/
           lexed.ch_token($&, :R)
         end
