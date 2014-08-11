@@ -11,6 +11,8 @@ describe Qlang do
       expect(Iq.execute('(1 2; 3 4) * (1 2)')).to eq('(5 11)')
       expect(Iq.execute('(1 2 3)')).to eq('(1 2 3)')
       expect(Iq.execute('d/dx(e ** x)')).to eq(e ** x)
+      expect(Iq.execute('d/dx(x ** 2)')).to eq(2 * x)
+      expect(Iq.execute('d/dx(x * 2)')).to eq(2)
       expect(Iq.execute('d/dx(sin(x))')).to eq(cos(x))
       expect(Iq.execute('d/dx(log(x))')).to eq(1/x)
       expect(Iq.execute('S( log(x)dx )[0..1]')).to eq(-oo)
