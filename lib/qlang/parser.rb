@@ -37,10 +37,12 @@ module Qlang
           cont_lexed = Lexer::ContLexer.new(lexed.get_value(cont_token_with_num))
 
           case cont_lexed.token_str
-          when /(:OTHER\d:CLN\d(:STR\d|:NUM\d|:R\d):CMA)*(:OTHER\d:CLN\d(:STR\d|:NUM\d|:R\d))/
+          when /(:SYM\d:CLN\d(:STR\d|:NUM\d|:R\d):CMA)*(:SYM\d:CLN\d(:STR\d|:NUM\d|:R\d))/
             cont = ListParser.execute(cont_lexed)
-            lexed.squash_with_prn(cont_token_with_num, cont)
+          else
+            cont = "{#{cont_lexed.values.join(' ')}}"
           end
+          lexed.squash_with_prn(cont_token_with_num, cont)
 
         when /:FUNC\d/
           cont_token_with_num = $&
