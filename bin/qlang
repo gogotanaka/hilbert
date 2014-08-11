@@ -7,7 +7,9 @@ when '-i'
   loop do
     print 'Q:-> '
     begin
-      puts Iq.execute(gets)
+      input = $stdin.gets
+      output = Iq.execute(input)
+      $stdout.puts output
     rescue => e
       puts e
     end

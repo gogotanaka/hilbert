@@ -39,7 +39,7 @@ describe Qlang do
 
     describe 'Integral' do
       it do
-        expect(Iq.execute('S( log(x)dx )[0..1]')).to eq(-oo)
+        expect(Iq.execute('S( log(x)dx )[0..1]')).to eq('-oo')
         expect(Iq.execute('S( sin(x)dx )[0..pi]')).to eq(2.0)
         expect(Iq.execute('S( cos(x)dx )[0..pi]')).to eq(0.0)
       end
