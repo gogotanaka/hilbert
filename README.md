@@ -1,5 +1,7 @@
 # Qlang
 
+[![Build Status](https://travis-ci.org/gogotanaka/Q.svg?branch=master)](https://travis-ci.org/gogotanaka/Q)   [![Gem Version](https://badge.fury.io/rb/qlang.svg)](http://badge.fury.io/rb/qlang)
+
 Enjoy MATH with Keyboard.
 
 ### Differentiate
