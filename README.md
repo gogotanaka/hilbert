@@ -1,24 +1,63 @@
 # Qlang
 
-TODO: Write a gem description
+Enjoy MATH with Keyboard.
 
-## Installation
 
-Add this line to your application's Gemfile:
+```
+# Differentiate
 
-    gem 'qlang'
+Q:-> d/dx(cos(x))
+( - sin( x ) )
 
-And then execute:
+Q:-> d/dx(log(x))
+( 1 / x )
 
-    $ bundle
+Q:-> d/dy(y ** 2)                        
+( 2 * y )
 
-Or install it yourself as:
+
+# Integrate
+
+Q:-> S(log(x)dx)[0..1]
+( - sin( x ) )
+
+Q:-> d/dx(log(x))
+( 1 / x )
+
+Q:-> d/dy(y ** 2)                        
+( 2 * y )
+
+### Matrix
+Q:->(1 2 3; 4 5 6)
+(1 2 3; 4 5 6)
+
+Q:-> (1 2 3; 4 5 6) + (1 2 3; 4 5 6)
+(2 4 6; 8 10 12)
+
+Q:-> (1 2 3; 4 5 6) * (1 2 3)
+(14 32)
+
+```
+
+
+## How to use
+
+Install it yourself as:
 
     $ gem install qlang
 
-## Usage
+### Compiler into R
 
-TODO: Write usage instructions here
+    $ qlang -c -R foo.q
+    
+### Compiler into Ruby
+
+    $ qlang -c -Ruby foo.q
+
+### Interpreter
+
+    $ qlang -i
+
 
 ## Contributing
 
