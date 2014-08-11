@@ -12,6 +12,7 @@ describe Qlang do
       expect(Iq.execute('(1 2 3)')).to eq('(1 2 3)')
       expect(Iq.execute('d/dx(sin(x))')).to eq(cos(x))
       expect(Iq.execute('d/dx(log(x))')).to eq(1/x)
+      expect(Iq.execute('S( log(x)dx )[0..1]')).to eq(-oo)
       expect(Iq.execute('f(x, y) = x + y')).to eq(f(x, y) <= x + y)
       expect(Iq.execute('g(x) = x ** 2')).to eq(g(x) <= x ** 2)
     end

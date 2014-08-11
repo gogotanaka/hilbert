@@ -8,6 +8,7 @@ require 'qlang/parser/matrix_parser'
 require 'qlang/parser/vector_parser'
 require 'qlang/parser/list_parser'
 require 'qlang/parser/func_parser'
+require 'qlang/parser/integral_parser'
 
 module Qlang
   module Parser
@@ -51,6 +52,12 @@ module Qlang
             lexed.ch_value(cont_token_with_num, cont)
             lexed.ch_token(cont_token_with_num, :R)
           end
+
+        when /:ITGL\d/
+          cont_token_with_num = $&
+          cont = IntegralParser.execute(lexed.get_value(cont_token_with_num))
+          lexed.ch_value(cont_token_with_num, cont)
+          lexed.ch_token(cont_token_with_num, :R)
 
         when /:CONT\d/
           lexed.ch_token($&, :R)

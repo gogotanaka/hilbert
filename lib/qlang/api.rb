@@ -2,6 +2,7 @@ require 'qlang/api/matrix_api'
 require 'qlang/api/vector_api'
 require 'qlang/api/list_api'
 require 'qlang/api/func_api'
+require 'qlang/api/integral_api'
 
 module Qlang
   module Api

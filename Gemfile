@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.1.2'
 
-gem 'dydx'
+gem 'dydx', '0.1.412'
 
 gem 'rubocop'
 gem 'pry'
