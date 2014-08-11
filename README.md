@@ -43,6 +43,11 @@ S( cos(x)dx )[0..pi]
 => (14 32)
 ```
 
+### Function
+```
+f(x, y) = x + y
+```
+
 
 ## How to use
 
