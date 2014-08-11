@@ -22,10 +22,10 @@ d/dy(y ** 2)
 S(log(x)dx)[0..1]
 => - oo
 
-S( sin(x)dx )[0..pi]
+S(sin(x)dx)[0..pi]
 => 2.0
 
-S( cos(x)dx )[0..pi]                       
+S(cos(x)dx)[0..pi]                       
 => 0.0
 ```
 
