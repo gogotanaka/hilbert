@@ -96,10 +96,12 @@ module Qlang
         end
       end
 
-      private def to_num(token_with_num)
-        token_with_num =~ /\d+/
-        $&.to_i
-      end
+      private
+
+        def to_num(token_with_num)
+          token_with_num =~ /\d+/
+          $&.to_i
+        end
     end
   end
 end
