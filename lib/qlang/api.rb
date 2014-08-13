@@ -9,14 +9,30 @@ module Qlang
     # TODO:
     class ::String
       def rm(str_or_rgx)
-        gsub!(str_or_rgx, '')
+        gsub(str_or_rgx, '')
       end
 
-      def rms(*str_or_rgxs)
+      def rm!(str_or_rgx)
+        gsub!(str_or_rgx, '')
+        self
+      end
+
+      def rms!(*str_or_rgxs)
         str_or_rgxs.each do |str_or_rgx|
-          rm(str_or_rgx)
+          rm!(str_or_rgx)
         end
         self
+      end
+
+      # FIX:
+      def equalize!
+        rms!(/\A +/, / +\z/)
+        if self =~ /\A\(/ && self =~ /\)\z/
+          rms!(/\A\(/, /\)\z/)
+          rms!(/\A +/, / +\z/)
+        else
+          self
+        end
       end
     end
 

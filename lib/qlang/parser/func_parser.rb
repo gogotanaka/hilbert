@@ -6,7 +6,7 @@ module Qlang
         lexed.fix_r_txt!
         fdef_ary = lexed[0][:FDEF].split('')
         func_name = fdef_ary.shift
-        args = fdef_ary.join.rms('(', ')', ',', ' ').split('')
+        args = fdef_ary.join.rms!('(', ')', ',', ' ').split('')
 
         FuncApi.execute(func_name, args, FomlParser.execute(lexed[-1][:FOML]))
       end

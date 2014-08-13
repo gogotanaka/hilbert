@@ -29,11 +29,11 @@ describe Qlang do
 
     describe 'Diff' do
       it do
-        expect(Iq.execute('d/dx(e ** x)')).to eq(e ** x)
-        expect(Iq.execute('d/dx(x ** 2)')).to eq(2 * x)
-        expect(Iq.execute('d/dx(x * 2)')).to eq(2)
-        expect(Iq.execute('d/dx( sin(x) )')).to eq(cos(x))
-        expect(Iq.execute('d/dx(log( x ))')).to eq(1/x)
+        expect(Iq.execute('d/dx(e ** x)')).to eq('e ^ x')
+        expect(Iq.execute('d/dx(x ** 2)')).to eq('2x')
+        expect(Iq.execute('d/dx(x * 2)')).to eq('2')
+        expect(Iq.execute('d/dx( sin(x) )')).to eq('cos( x )')
+        expect(Iq.execute('d/dx(log( x ))')).to eq('1 / x')
       end
     end
 
@@ -47,28 +47,28 @@ describe Qlang do
 
     describe 'Function' do
       it 'ex1' do
-        expect(Iq.execute('f(x, y) = x + y')).to eq(f(x, y) <= x + y)
-        expect(Iq.execute('f( 4, 5 )')).to eq(9)
+        Iq.execute('f(x, y) = x + y')
+        expect(Iq.execute('f( 4, 5 )')).to eq('9.0')
       end
 
       it 'ex2' do
-        expect(Iq.execute('f(x, y) = xy')).to eq(f(x, y) <= x * y)
-        expect(Iq.execute('f( 3, 9 )')).to eq(27)
+        Iq.execute('f(x, y) = xy')
+        expect(Iq.execute('f( 3, 9 )')).to eq('27.0')
       end
 
       it 'ex3' do
-        expect(Iq.execute('f(x, y) = xy^2')).to eq(f(x, y) <= x * y ** 2)
-        expect(Iq.execute('f( 3, 2 )')).to eq(12)
-      end
-
-      it 'ex3' do
-        expect(Iq.execute('f(x, y) = xy^2')).to eq(f(x, y) <= x * y ** 2)
-        expect(Iq.execute('df/dx')).to eq(y ** 2)
+        Iq.execute('f(x, y) = xy^2')
+        expect(Iq.execute('f( 3, 2 )')).to eq('12.0')
       end
 
       it 'ex4' do
-        expect(Iq.execute('g(x) = x ^ 2')).to eq(g(x) <= x ** 2)
-        expect(Iq.execute('g(2)')).to eq(4)
+        Iq.execute('f(x, y) = xy^2')
+        expect(Iq.execute('df/dx')).to eq('y ^ 2')
+      end
+
+      it 'ex5' do
+        Iq.execute('g(x) = x ^ 2')
+        expect(Iq.execute('g(2)')).to eq('4.0')
       end
     end
   end
