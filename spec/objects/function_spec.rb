@@ -11,21 +11,21 @@ describe Qlang do
         )
 
         expect(
-          Q.to_r.compile('g(x) = x ** 2')
+          Q.to_r.compile('g(x) = x ^ 2')
         ).to eq(
-          "g <- function(x) x ** 2"
+          "g <- function(x) x ^ 2"
         )
 
         expect(
-          Q.to_r.compile('g(x) = x ** (2 + 2)')
+          Q.to_r.compile('g(x) = x ^ (2 + 2)')
         ).to eq(
-          "g <- function(x) x ** (2 + 2)"
+          "g <- function(x) x ^ (2 + 2)"
         )
 
         expect(
-          Q.to_r.compile('h(a, b, c) = a ** 2 + b ** 2 + c ** 2')
+          Q.to_r.compile('h(a, b, c) = a ^ 2 + b ^ 2 + c ^ 2')
         ).to eq(
-          "h <- function(a ,b ,c) a ** 2 + b ** 2 + c ** 2"
+          "h <- function(a ,b ,c) a ^ 2 + b ^ 2 + c ^ 2"
         )
       end
     end

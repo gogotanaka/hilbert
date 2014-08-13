@@ -49,7 +49,7 @@ describe Qlang do
       it do
         expect(Iq.execute('f(x, y) = x + y')).to eq(f(x, y) <= x + y)
         expect(Iq.execute('f( 4, 5 )')).to eq(9)
-        expect(Iq.execute('g(x) = x ** 2')).to eq(g(x) <= x ** 2)
+        expect(Iq.execute('g(x) = x ^ 2')).to eq(g(x) <= x ** 2)
         expect(Iq.execute('g(2)')).to eq(4)
       end
     end
