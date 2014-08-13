@@ -46,9 +46,27 @@ describe Qlang do
     end
 
     describe 'Function' do
-      it do
+      it 'ex1' do
         expect(Iq.execute('f(x, y) = x + y')).to eq(f(x, y) <= x + y)
         expect(Iq.execute('f( 4, 5 )')).to eq(9)
+      end
+
+      it 'ex2' do
+        expect(Iq.execute('f(x, y) = xy')).to eq(f(x, y) <= x * y)
+        expect(Iq.execute('f( 3, 9 )')).to eq(27)
+      end
+
+      it 'ex3' do
+        expect(Iq.execute('f(x, y) = xy^2')).to eq(f(x, y) <= x * y ** 2)
+        expect(Iq.execute('f( 3, 2 )')).to eq(12)
+      end
+
+      it 'ex3' do
+        expect(Iq.execute('f(x, y) = xy^2')).to eq(f(x, y) <= x * y ** 2)
+        expect(Iq.execute('df/dx')).to eq(y ** 2)
+      end
+
+      it 'ex4' do
         expect(Iq.execute('g(x) = x ^ 2')).to eq(g(x) <= x ** 2)
         expect(Iq.execute('g(2)')).to eq(4)
       end
