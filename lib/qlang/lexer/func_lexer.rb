@@ -7,7 +7,7 @@ module Qlang
       rule(/[ \t\f]/)
 
       rule(/\r\n/) { :NLIN }
-      rule(/\w.*/) { :FOML }
+      rule(/[\w\(].*/) { :FOML }
     end
   end
 end
