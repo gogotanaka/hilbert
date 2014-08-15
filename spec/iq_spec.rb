@@ -46,40 +46,56 @@ describe Qlang do
       end
     end
 
-    def self.iqtest(name, input, output)
-      it name do
+    def self.def_test(name, input, output)
+      it name + '_def' do
         expect(Iq.execute(input)).to eq(output)
+      end
+    end
+
+    def self.cal_test(name, input, output)
+      it name + '_cal' do
+        expect(Iq.execute(input)).to eq(output)
+        reset
       end
     end
 
 
     describe 'Function' do
-      iqtest('ex1-def', 'f(x, y) = x + y', 'x + y')
-      iqtest('ex1-cal', 'f( 4, 5 )', '9.0')
+      def_test('ex1', 'f(x, y) = x + y', 'x + y')
+      cal_test('ex1', 'f( 4, 5 )', '9.0')
 
-      iqtest('ex2-def', 'f(x, y) = xy', 'x * y')
-      iqtest('ex2-cal', 'f( 3, 9 )', '27.0')
+      def_test('ex2', 'f(x, y) = xy', 'x * y')
+      cal_test('ex2', 'f( 3, 9 )', '27.0')
 
-      iqtest('ex3-def', 'f(x, y) = xy^2', 'x * ( y ** 2 )')
-      iqtest('ex3-cal', 'f( 3, 2 )', '12.0')
+      def_test('ex3', 'f(x, y) = xy^2', 'x * ( y ** 2 )')
+      cal_test('ex3', 'f( 3, 2 )', '12.0')
 
-      iqtest('ex4-def', 'f(x, y) = xy^2', 'x * ( y ** 2 )')
-      iqtest('ex4-cal', 'df/dx', 'y ^ 2')
+      def_test('ex4', 'f(x, y) = xy^2', 'x * ( y ** 2 )')
+      cal_test('ex4', 'df/dx', 'y ^ 2')
 
-      iqtest('ex5-def', 'g(x) = x ^ 2', 'x ** 2')
-      iqtest('ex5-cal', 'g(2)', '4.0')
+      def_test('ex5', 'g(x) = x ^ 2', 'x ** 2')
+      cal_test('ex5', 'g(2)', '4.0')
 
-      iqtest('ex6-def', 'h(x) = e ^ 2', 'e ** 2')
-      iqtest('ex6-cal', 'h(2)', '7.3890560989306495')
+      def_test('ex6', 'h(x) = e ^ 2', 'e ** 2')
+      cal_test('ex6', 'h(2)', '7.3890560989306495')
 
-      iqtest('ex7-def', 'h(x) = pix', 'pi * x')
-      iqtest('ex7-cal', 'h(3)', '9.42477796076938')
+      def_test('ex7', 'h(x) = pix', 'pi * x')
+      cal_test('ex7', 'h(3)', '9.42477796076938')
 
-      iqtest('ex8-def', 'h(x) = pie', 'pi * e')
-      iqtest('ex8-cal', 'h(2)', '8.539734222673566')
+      def_test('ex8', 'h(x) = pie', 'pi * e')
+      cal_test('ex8', 'h(2)', '8.539734222673566')
 
-      iqtest('ex9-def', 'h(x) = ( 1 / ( 2pi ) ^( 1 / 2.0 ) ) * e ^ ( - x ^ 2 / 2 )', '( ( 4503599627370496 / 6369051672525773 ) / ( pi ** 0.5 ) ) * ( e ** ( ( - ( x ** 2 ) ) / 2 ) )')
-      iqtest('ex9-cal', 'S( h(x)dx )[-oo..oo]', '1.0')
+      def_test('ex9', 'h(x) = ( 1 / ( 2pi ) ^ ( 1 / 2.0 ) ) * e ^ ( - x ^ 2 / 2 )', '( ( 4503599627370496 / 6369051672525773 ) / ( pi ** 0.5 ) ) * ( e ** ( ( - ( x ** 2 ) ) / 2 ) )')
+      cal_test('ex9', 'S( h(x)dx )[-oo..oo]', '1.0')
+
+      def_test('ex10', 'f(x) = sin(x)', 'sin( x )')
+      cal_test('ex10', 'f(pi)', '0.0')
+
+      def_test('ex11', 'f(x) = cos(x)', 'cos( x )')
+      cal_test('ex11', 'f(pi)', '-1.0')
+
+      def_test('ex11', 'f(x) = log(x)', 'log( x )')
+      cal_test('ex11', 'f(e)', '1.0')
     end
   end
 end

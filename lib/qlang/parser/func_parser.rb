@@ -18,7 +18,7 @@ module Qlang
           ss = StringScanner.new(lexed)
           result = ''
           until ss.eos?
-            { EXP: /\^/, MUL: /(pi|[1-9a-z]){2,}/, SNGL: /(pi|[1-9a-z])/, OTHER: /([^\^1-9a-z]|^pi)+/ }.each do |token , rgx|
+            { EXP: /\^/, BFUNC: /sin|cos|tan|log/, MUL: /(pi|[1-9a-z]){2,}/, SNGL: /(pi|[1-9a-z])/, OTHER: /([^\^1-9a-z]|^pi)+/ }.each do |token , rgx|
               if ss.scan(rgx)
                 item = case token
                 when :EXP
