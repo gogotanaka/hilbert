@@ -40,8 +40,9 @@ describe Qlang do
     describe 'Integral' do
       it do
         expect(Iq.execute('S( log(x)dx )[0..1]')).to eq('-oo')
-        expect(Iq.execute('S( sin(x)dx )[0..pi]')).to eq(2.0)
-        expect(Iq.execute('S( cos(x)dx )[0..pi]')).to eq(0.0)
+        expect(Iq.execute('S( sin(x)dx )[0..pi]')).to eq('2.0')
+        expect(Iq.execute('S( cos(x)dx )[0..pi]')).to eq('0.0')
+        expect(Iq.execute('S( cos(x)dx )[0..pi]')).to eq('0.0')
       end
     end
 
@@ -69,6 +70,16 @@ describe Qlang do
       it 'ex5' do
         Iq.execute('g(x) = x ^ 2')
         expect(Iq.execute('g(2)')).to eq('4.0')
+      end
+
+      it 'ex6' do
+        Iq.execute('h(x) = e ^ 2')
+        expect(Iq.execute('h(2)')).to eq('7.3890560989306495')
+      end
+
+      it 'ex7' do
+        Iq.execute('h(x) = pix')
+        expect(Iq.execute('h(3)')).to eq('9.42477796076938')
       end
     end
   end

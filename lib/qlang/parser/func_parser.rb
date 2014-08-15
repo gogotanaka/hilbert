@@ -18,13 +18,20 @@ module Qlang
           ss = StringScanner.new(lexed)
           result = ''
           until ss.eos?
-            { EXP: /\^/, MUL: /[1-9a-z]{2,}/, SNGL: /[1-9a-z]/, OTHER: /[^\^1-9a-z]+/ }.each do |token , rgx|
+            { EXP: /\^/, MUL: /(pi|[1-9a-z]){2,}/, SNGL: /(pi|[1-9a-z])/, OTHER: /([^\^1-9a-z]|^pi)+/ }.each do |token , rgx|
               if ss.scan(rgx)
                 item = case token
                 when :EXP
                   $type == :Ruby ? '**' : '^'
                 when :MUL
-                  ss[0].split('').join(' * ')
+                  sss = StringScanner.new(ss[0])
+                  ary = []
+                  until sss.eos?
+                    [/pi/, /[1-9a-z]/].each do |rgx2|
+                      ary << sss[0] if sss.scan(rgx2)
+                    end
+                  end
+                  ary.join(' * ')
                 else
                   ss[0]
                 end
