@@ -46,41 +46,40 @@ describe Qlang do
       end
     end
 
+    def self.iqtest(name, input, output)
+      it name do
+        expect(Iq.execute(input)).to eq(output)
+      end
+    end
+
+
     describe 'Function' do
-      it 'ex1' do
-        Iq.execute('f(x, y) = x + y')
-        expect(Iq.execute('f( 4, 5 )')).to eq('9.0')
-      end
+      iqtest('ex1-def', 'f(x, y) = x + y', 'x + y')
+      iqtest('ex1-cal', 'f( 4, 5 )', '9.0')
 
-      it 'ex2' do
-        Iq.execute('f(x, y) = xy')
-        expect(Iq.execute('f( 3, 9 )')).to eq('27.0')
-      end
+      iqtest('ex2-def', 'f(x, y) = xy', 'x * y')
+      iqtest('ex2-cal', 'f( 3, 9 )', '27.0')
 
-      it 'ex3' do
-        Iq.execute('f(x, y) = xy^2')
-        expect(Iq.execute('f( 3, 2 )')).to eq('12.0')
-      end
+      iqtest('ex3-def', 'f(x, y) = xy^2', 'x * ( y ** 2 )')
+      iqtest('ex3-cal', 'f( 3, 2 )', '12.0')
 
-      it 'ex4' do
-        Iq.execute('f(x, y) = xy^2')
-        expect(Iq.execute('df/dx')).to eq('y ^ 2')
-      end
+      iqtest('ex4-def', 'f(x, y) = xy^2', 'x * ( y ** 2 )')
+      iqtest('ex4-cal', 'df/dx', 'y ^ 2')
 
-      it 'ex5' do
-        Iq.execute('g(x) = x ^ 2')
-        expect(Iq.execute('g(2)')).to eq('4.0')
-      end
+      iqtest('ex5-def', 'g(x) = x ^ 2', 'x ** 2')
+      iqtest('ex5-cal', 'g(2)', '4.0')
 
-      it 'ex6' do
-        Iq.execute('h(x) = e ^ 2')
-        expect(Iq.execute('h(2)')).to eq('7.3890560989306495')
-      end
+      iqtest('ex6-def', 'h(x) = e ^ 2', 'e ** 2')
+      iqtest('ex6-cal', 'h(2)', '7.3890560989306495')
 
-      it 'ex7' do
-        Iq.execute('h(x) = pix')
-        expect(Iq.execute('h(3)')).to eq('9.42477796076938')
-      end
+      iqtest('ex7-def', 'h(x) = pix', 'pi * x')
+      iqtest('ex7-cal', 'h(3)', '9.42477796076938')
+
+      iqtest('ex8-def', 'h(x) = pie', 'pi * e')
+      iqtest('ex8-cal', 'h(2)', '8.539734222673566')
+
+      iqtest('ex9-def', 'h(x) = ( 1 / ( 2pi ) ^( 1 / 2.0 ) ) * e ^ ( - x ^ 2 / 2 )', '( ( 4503599627370496 / 6369051672525773 ) / ( pi ** 0.5 ) ) * ( e ** ( ( - ( x ** 2 ) ) / 2 ) )')
+      iqtest('ex9-cal', 'S( h(x)dx )[-oo..oo]', '1.0')
     end
   end
 end
