@@ -5,7 +5,7 @@ module Qlang
       def execute(string)
         integrated, range = string.scan(/S *\((.+)\)\[(.+)\]/).first
 
-        integrated.rm(' ')
+        integrated.rm!(' ')
 
         IntegralApi.execute(integrated[0..-3], integrated[-2..-1], range)
       end

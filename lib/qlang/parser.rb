@@ -49,7 +49,7 @@ module Qlang
           cont_lexed = Lexer::FuncLexer.new(lexed.get_value(cont_token_with_num))
 
           case cont_lexed.token_str
-          when /:FDEF\d:EQL\d:OTHER\d/
+          when /:FDEF\d:EQL\d:FOML\d/
             cont = FuncParser.execute(cont_lexed)
             lexed.ch_value(cont_token_with_num, cont)
             lexed.ch_token(cont_token_with_num, :R)
