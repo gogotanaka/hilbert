@@ -65,6 +65,12 @@ module Qlang
           cont_token_with_num = $&
           cont = lexed.get_value(cont_token_with_num)
           lexed.squash_with_prn(cont_token_with_num, cont)
+
+        when /:DIFF\d/
+          cont_token_with_num = $&
+          cont = lexed.get_value(cont_token_with_num)
+          cont.gsub!(/(d\/d[a-zA-Z]) (.*)/, '\1(\2)')
+          lexed.squash_with_prn(cont_token_with_num, cont)
         when /:CONT\d/
           lexed.ch_token($&, :R)
         end

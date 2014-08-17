@@ -34,6 +34,7 @@ describe Qlang do
         expect(Iq.execute('d/dx(x * 2)')).to eq('2')
         expect(Iq.execute('d/dx( sin(x) )')).to eq('cos( x )')
         expect(Iq.execute('d/dx(log( x ))')).to eq('1 / x')
+        expect(Iq.execute('d/dx cos(x)')).to eq('- sin( x )')
       end
     end
 
