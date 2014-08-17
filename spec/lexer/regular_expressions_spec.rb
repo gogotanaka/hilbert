@@ -11,7 +11,8 @@ describe 'Regular expressions' do
   end
 
   describe 'differentiate' do
-    should_match(1, /d\/d[a-zA-Z] .*/, 'd/dx sin(x)')
-    should_match(1, /d\/d[a-zA-Z] .*/, 'd/dz z^2')
+    rgx = /d\/d[a-zA-Z] .*/
+    should_match(1, rgx, 'd/dx sin(x)')
+    should_match(2, rgx, 'd/dz z^2')
   end
 end
