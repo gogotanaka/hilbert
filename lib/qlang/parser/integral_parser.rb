@@ -7,7 +7,7 @@ module Qlang
 
         integrated.rm!(' ')
 
-        IntegralApi.execute(integrated[0..-3], integrated[-2..-1], range)
+        IntegralApi.execute(FormulaParser.execute(integrated[0..-3]), integrated[-2..-1], range)
       end
       module_function :execute
     end

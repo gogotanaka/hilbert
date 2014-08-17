@@ -9,6 +9,7 @@ require 'qlang/parser/vector_parser'
 require 'qlang/parser/list_parser'
 require 'qlang/parser/func_parser'
 require 'qlang/parser/integral_parser'
+require 'qlang/parser/formula_parser'
 
 module Qlang
   module Parser
@@ -69,7 +70,10 @@ module Qlang
         when /:DIFF\d/
           cont_token_with_num = $&
           cont = lexed.get_value(cont_token_with_num)
-          cont.gsub!(/(d\/d[a-zA-Z]) (.*)/, '\1(\2)')
+          cont =~ /(d\/d[a-zA-Z]) (.*)/
+          cont = "#{$1}(#{FormulaParser.execute($2)})"
+          # FIX: Refactor
+          #cont.gsub!(/(d\/d[a-zA-Z]) (.*)/, "\1(\2)")
           lexed.squash_with_prn(cont_token_with_num, cont)
         when /:CONT\d/
           lexed.ch_token($&, :R)
