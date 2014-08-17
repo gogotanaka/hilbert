@@ -1,4 +1,4 @@
-require '../spec_helper'
+require 'spec_helper'
 
 describe 'Regular expressions' do
   def self.should_match(num, rgx, str)
