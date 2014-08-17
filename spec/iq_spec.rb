@@ -2,6 +2,19 @@ require 'spec_helper'
 
 describe Qlang do
   describe Iq do
+    def self.def_test(name, input, output)
+      it name + '_def' do
+        expect(Iq.execute(input)).to eq(output)
+      end
+    end
+
+    def self.cal_test(name, input, output)
+      it name + '_cal' do
+        expect(Iq.execute(input)).to eq(output)
+        reset
+      end
+    end
+
     describe 'Matrix' do
       it do
         expect(Iq.execute('(1 2 3; 4 5 6)')).to eq('(1 2 3; 4 5 6)')
@@ -34,8 +47,9 @@ describe Qlang do
         expect(Iq.execute('d/dx(x * 2)')).to eq('2')
         expect(Iq.execute('d/dx( sin(x) )')).to eq('cos( x )')
         expect(Iq.execute('d/dx(log( x ))')).to eq('1 / x')
-        expect(Iq.execute('d/dx cos(x)')).to eq('- sin( x )')
       end
+      cal_test('ex1', 'd/dx cos(x)', '- sin( x )')
+      cal_test('ex2', 'd/dx xx', '2x')
     end
 
     describe 'Integral' do
@@ -46,20 +60,6 @@ describe Qlang do
         expect(Iq.execute('S( cos(x)dx )[0..pi]')).to eq('0.0')
       end
     end
-
-    def self.def_test(name, input, output)
-      it name + '_def' do
-        expect(Iq.execute(input)).to eq(output)
-      end
-    end
-
-    def self.cal_test(name, input, output)
-      it name + '_cal' do
-        expect(Iq.execute(input)).to eq(output)
-        reset
-      end
-    end
-
 
     describe 'Function' do
       def_test('ex1', 'f(x, y) = x + y', 'x + y')
