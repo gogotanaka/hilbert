@@ -59,6 +59,8 @@ describe Qlang do
         expect(Iq.execute('S( cos(x)dx )[0..pi]')).to eq('0.0')
         expect(Iq.execute('S( cos(x)dx )[0..pi]')).to eq('0.0')
       end
+      cal_test('ex1', 'S(xx dx)[0..1]', '0.33333333')
+      cal_test('ex2', 'S(2pi dx)[0..1]', '6.28318531')
     end
 
     describe 'Function' do
