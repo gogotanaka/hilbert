@@ -13,8 +13,13 @@ d/dx(cos(x))
 d/dx(log(x))
 => ( 1 / x )
 
-d/dy(y ** 2)                        
+# You can omit parentheses
+
+d/dy y^2                        
 => ( 2 * y )
+
+d/dy xy                       
+=> ( x )
 ```
 
 
@@ -47,7 +52,9 @@ S(cos(x)dx)[0..pi]
 
 ### Function
 ```
-f(x, y) = x + y
+f(x, y) = xy
+f(1, 2)
+=> 2
 ```
 
 
