@@ -45,7 +45,7 @@ module Qlang
           end
           lexed.squash_with_prn(cont_token_with_num, cont)
 
-        when /:FUNC\d/
+        when /:def_func\d/
           cont_token_with_num = $&
           cont_lexed = Lexer::FuncLexer.new(lexed.get_value(cont_token_with_num))
 
@@ -62,7 +62,7 @@ module Qlang
           lexed.ch_value(cont_token_with_num, cont)
           lexed.ch_token(cont_token_with_num, :R)
 
-        when /:EFUNC\d/
+        when /:eval_func\d/
           cont_token_with_num = $&
           cont = lexed.get_value(cont_token_with_num)
           lexed.squash_with_prn(cont_token_with_num, cont)

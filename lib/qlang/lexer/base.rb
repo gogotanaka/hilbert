@@ -3,6 +3,11 @@ require 'strscan'
 module Qlang
   module Lexer
     class Base
+      NUM = '[0-9]'
+      VAR = '[a-z]'
+      FUNCN = '[a-zA-Z]'
+      VARNUM = '[0-9a-z]'
+
       class << self
         attr_reader :token_hash
 
