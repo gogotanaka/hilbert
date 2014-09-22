@@ -56,7 +56,7 @@ module Qlang
             lexed.ch_token(cont_token_with_num, :R)
           end
 
-        when /:ITGL\d/
+        when /:integral\d/
           cont_token_with_num = $&
           cont = IntegralParser.execute(lexed.get_value(cont_token_with_num))
           lexed.ch_value(cont_token_with_num, cont)
@@ -67,7 +67,7 @@ module Qlang
           cont = lexed.get_value(cont_token_with_num)
           lexed.squash_with_prn(cont_token_with_num, cont)
 
-        when /:DIFF\d/
+        when /:differential\d/
           cont_token_with_num = $&
           cont = lexed.get_value(cont_token_with_num)
           cont =~ /(d\/d[a-zA-Z]) (.*)/

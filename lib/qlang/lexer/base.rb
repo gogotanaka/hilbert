@@ -5,8 +5,11 @@ module Qlang
     class Base
       NUM = '[0-9]'
       VAR = '[a-z]'
-      FUNCN = '[a-zA-Z]'
+      FUNCV = '[a-zA-Z]'
       VARNUM = '[0-9a-z]'
+      ANYSP = ' *'
+      NONL = '[^\r\n]'
+      FUNCTION = "#{FUNCV}\\(#{ANYSP}#{VARNUM}(#{ANYSP},#{ANYSP}#{VARNUM})*\\)"
 
       class << self
         attr_reader :token_hash
