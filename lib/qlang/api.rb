@@ -24,6 +24,10 @@ module Qlang
         self
       end
 
+      def split_by_sp
+        split(/ */)
+      end
+
       # FIX:
       def equalize!
         rms!(/\A +/, / +\z/)

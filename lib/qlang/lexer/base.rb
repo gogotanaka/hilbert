@@ -3,7 +3,8 @@ require 'strscan'
 module Qlang
   module Lexer
     class Base
-      NUM = '[0-9]'
+      # FIRST TOKEN
+      NUM = '[0-9]+'
       VAR = '[a-z]'
       FUNCV = '[a-zA-Z]'
       VARNUM = '[0-9a-z]'
@@ -14,9 +15,37 @@ module Qlang
       RPRN = '\)'
       LBRC = '\{'
       RBRC = '\}'
-      FUNCCV =  "#{FUNCV}#{LPRN}#{ANYSP}#{VAR}(#{ANYSP},#{ANYSP}#{VAR})*#{ANYSP}#{RPRN}"
-      FUNCCN =  "#{FUNCV}#{LPRN}#{ANYSP}#{NUM}(#{ANYSP},#{ANYSP}#{NUM})*#{ANYSP}#{RPRN}"
-      FUNCCVN = "#{FUNCV}#{LPRN}#{ANYSP}#{VARNUM}(#{ANYSP},#{ANYSP}#{VARNUM})*#{ANYSP}#{RPRN}"
+      CLN = '\:'
+      SCLN = ';'
+      CMA = '\,'
+      SP = ' '
+
+      # SECOND TOKEN
+      class ::String
+        def line_by(char)
+          "#{self}(#{ANYSP}#{char}#{ANYSP}#{self})*"
+        end
+      end
+      NUMS_BY_CMA = NUM.line_by(CMA)
+      VARS_BY_CMA = VAR.line_by(CMA)
+      VARNUMS_BY_CMA = VARNUM.line_by(CMA)
+      NUMS_BY_SP = NUM.line_by(SP)
+
+      # THIRD TOKEN
+      class ::String
+        def func_call
+          "#{FUNCV}#{LPRN}#{ANYSP}#{self}*#{ANYSP}#{RPRN}"
+        end
+      end
+      FUNCCN =  NUMS_BY_CMA.func_call
+      FUNCCV = VARS_BY_CMA.func_call
+      FUNCCVN =  VARNUMS_BY_CMA.func_call
+
+      NUMS_BY_SP_BY_SCLN = NUMS_BY_SP.line_by(SCLN)
+
+
+
+
 
       class << self
         attr_reader :token_hash

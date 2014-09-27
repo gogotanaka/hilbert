@@ -2,8 +2,9 @@ module Qlang
   module Parser
     module MatrixParser
       include Base
-      def execute(lexed)
-        rows = lexed.split(';')
+      def execute(lexed_string)
+        lexed_string.rms!(')','(')
+        rows = lexed_string.split(/ *; */).map(&:split_by_sp)
         rows.all? { |row| row.count == rows.first.count }
         MatrixApi.execute(rows)
       end

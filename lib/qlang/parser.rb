@@ -19,13 +19,17 @@ module Qlang
         fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
+        when /:matrix\d/
+          cont_token_with_num = $&
+          cont = MatrixParser.execute(lexed.get_value(cont_token_with_num))
+          lexed.ch_value(cont_token_with_num, cont)
+          lexed.ch_token(cont_token_with_num, :R)
+
         when /:LPRN\d(:CONT\d):RPRN\d/
           cont_token_with_num = $1
           cont_lexed = Lexer::ContLexer.new(lexed.get_value(cont_token_with_num))
 
           case cont_lexed.token_str
-          when /(:NUM\d)+(:SCLN\d|:NLIN\d)(:NUM\d)/
-            cont = MatrixParser.execute(cont_lexed)
           when /(:NUM\d)+/
             cont = VectorParser.execute(cont_lexed)
           else
