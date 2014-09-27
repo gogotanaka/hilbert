@@ -8,8 +8,15 @@ module Qlang
       FUNCV = '[a-zA-Z]'
       VARNUM = '[0-9a-z]'
       ANYSP = ' *'
+      ANYSTR = '.+'
       NONL = '[^\r\n]'
-      FUNCTION = "#{FUNCV}\\(#{ANYSP}#{VARNUM}(#{ANYSP},#{ANYSP}#{VARNUM})*\\)"
+      LPRN = '\('
+      RPRN = '\)'
+      LBRC = '\{'
+      RBRC = '\}'
+      FUNCCV =  "#{FUNCV}#{LPRN}#{ANYSP}#{VAR}(#{ANYSP},#{ANYSP}#{VAR})*#{ANYSP}#{RPRN}"
+      FUNCCN =  "#{FUNCV}#{LPRN}#{ANYSP}#{NUM}(#{ANYSP},#{ANYSP}#{NUM})*#{ANYSP}#{RPRN}"
+      FUNCCVN = "#{FUNCV}#{LPRN}#{ANYSP}#{VARNUM}(#{ANYSP},#{ANYSP}#{VARNUM})*#{ANYSP}#{RPRN}"
 
       class << self
         attr_reader :token_hash

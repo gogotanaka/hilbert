@@ -1,9 +1,9 @@
 module Qlang
   module Lexer
     class WrapLexer < Base
-      rule(%r@#{FUNCTION}#{ANYSP}=#{ANYSP}#{NONL}+@) { :def_func }
-      rule(%r@#{FUNCV}\( ?#{NUM}( *, *#{NUM})* *\)@) { :eval_func }
-      rule(/S#{ANYSP}\(.+\)\[.+\]/) { :integral }
+      rule(%r@#{FUNCCV}#{ANYSP}=#{ANYSP}#{NONL}+@) { :def_func }
+      rule(%r@#{FUNCCN}@) { :eval_func }
+      rule(/S#{ANYSP}#{LPRN}#{ANYSTR}#{RPRN}\[#{ANYSTR}\]/) { :integral }
       rule(/d\/d#{VAR} .*/) { :differential }
       rule(/\(/) { :LPRN }
       rule(/\)/) { :RPRN }
