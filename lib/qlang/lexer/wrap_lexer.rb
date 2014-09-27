@@ -7,6 +7,7 @@ module Qlang
       rule(/S#{ANYSP}#{LPRN}#{ANYSTR}#{RPRN}\[#{ANYSTR}\]/) { :integral }
       rule(/d\/d#{VAR} .*/) { :differential }
       rule(%r@#{LPRN}#{NUMS_BY_SP}#{RPRN}@) { :vector }
+      rule(%r@#{LPRN}#{NUMS_BY_SP_BY_SCLN}#{RPRN}t@) { :tmatrix }
       rule(%r@#{LPRN}#{NUMS_BY_SP_BY_SCLN}#{RPRN}@) { :matrix }
 
 

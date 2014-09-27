@@ -18,6 +18,7 @@ describe Qlang do
     describe 'Matrix' do
       it do
         expect(Iq.execute('(1 2 3; 4 5 6)')).to eq('(1 2 3; 4 5 6)')
+        expect(Iq.execute('(1 2 3; 4 5 6)t')).to eq('(1 4; 2 5; 3 6)')
         expect(Iq.execute('(1 2 3; 4 5 6) + (1 2 3; 4 5 6)')).to eq('(2 4 6; 8 10 12)')
         expect(Iq.execute('(1 2 3; 4 5 6) - (2 4 1; 8 3 9)')).to eq('(-1 -2 2; -4 2 -3)')
         expect(Iq.execute('(1 2; 3 4) * (1 2; 3 4)')).to eq('(7 10; 15 22)')

@@ -31,12 +31,18 @@ module Qlang
           lexed.ch_value(cont_token_with_num, cont)
           lexed.ch_token(cont_token_with_num, :R)
 
-        # when /:LPRN\d(:CONT\d):RPRN\d/
-        #   cont_token_with_num = $1
-        #   cont_lexed = Lexer::ContLexer.new(lexed.get_value(cont_token_with_num))
+        when /:tmatrix\d/
+          cont_token_with_num = $&
+          cont = MatrixParser.execute(lexed.get_value(cont_token_with_num), trans: true)
+          lexed.ch_value(cont_token_with_num, cont)
+          lexed.ch_token(cont_token_with_num, :R)
 
-        #   cont = "(#{cont_lexed.values.join(' ')})"
-        #   lexed.squash_with_prn(cont_token_with_num, cont)
+        when /:LPRN\d(:CONT\d):RPRN\d/
+          cont_token_with_num = $1
+          cont_lexed = Lexer::ContLexer.new(lexed.get_value(cont_token_with_num))
+
+          cont = "(#{cont_lexed.values.join(' ')})"
+          lexed.squash_with_prn(cont_token_with_num, cont)
 
         when /:LBRC\d(:CONT\d):RBRC\d/
           cont_token_with_num = $1
