@@ -25,7 +25,7 @@ module Qlang
       end
 
       def split_by_sp
-        split(/ */)
+        split(/ +/)
       end
 
       # FIX:

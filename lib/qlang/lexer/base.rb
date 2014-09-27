@@ -23,7 +23,7 @@ module Qlang
       # SECOND TOKEN
       class ::String
         def line_by(char)
-          "#{self}(#{ANYSP}#{char}#{ANYSP}#{self})*"
+          "#{ANYSP}#{self}(#{ANYSP}#{char}#{ANYSP}#{self})*#{ANYSP}"
         end
       end
       NUMS_BY_CMA = NUM.line_by(CMA)
