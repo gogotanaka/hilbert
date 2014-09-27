@@ -15,16 +15,52 @@ describe Qlang do
       end
     end
 
+    describe 'General' do
+      cal_test('ex1', '2x', '2x')
+      cal_test('ex2', 'x + x', '2x')
+      cal_test('ex3', 'x * y', 'xy')
+    end
+
     describe 'Matrix' do
-      it do
-        expect(Iq.execute('(1 2 3; 4 5 6)')).to eq('(1 2 3; 4 5 6)')
-        expect(Iq.execute('(1 2 3; 4 5 6)t')).to eq('(1 4; 2 5; 3 6)')
-        expect(Iq.execute('(1 2 3; 4 5 6) + (1 2 3; 4 5 6)')).to eq('(2 4 6; 8 10 12)')
-        expect(Iq.execute('(1 2 3; 4 5 6) - (2 4 1; 8 3 9)')).to eq('(-1 -2 2; -4 2 -3)')
-        expect(Iq.execute('(1 2; 3 4) * (1 2; 3 4)')).to eq('(7 10; 15 22)')
-        expect(Iq.execute('(1 2; 3 4) ** 2')).to eq('(7 10; 15 22)')
-        expect(Iq.execute('(1 2; 3 4) * (1 2)')).to eq('(5 11)')
-      end
+      cal_test('ex1',
+        '(1 2 3; 4 5 6)',
+        '(1 2 3; 4 5 6)'
+      )
+
+      cal_test('ex2',
+        '(1 2 3; 4 5 6) + (1 2 3; 4 5 6)',
+        '(2 4 6; 8 10 12)'
+      )
+
+      cal_test('ex3',
+        '(1 2 3; 4 5 6) - (2 4 1; 8 3 9)',
+        '(-1 -2 2; -4 2 -3)'
+      )
+
+      cal_test('ex4',
+        '(1 2; 3 4) * (1 2; 3 4)',
+        '(7 10; 15 22)'
+      )
+
+      cal_test('ex5',
+        '(1 2; 3 4) ** 2',
+        '(7 10; 15 22)'
+      )
+
+      cal_test('ex6',
+        '(1 2; 3 4) ** 2',
+        '(7 10; 15 22)'
+      )
+
+      cal_test('ex7',
+        '(1 2; 3 4) * (1 2)',
+        '(5 11)'
+      )
+
+      cal_test('ex8',
+        '(1 2 3; 4 5 6)t',
+        '(1 4; 2 5; 3 6)'
+      )
     end
 
     describe 'Vector' do

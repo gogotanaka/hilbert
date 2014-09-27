@@ -7,9 +7,22 @@ module Qlang
         str.equalize!
       end
     end
-    def execute(code)
-      ruby_obj = eval Q.to_ruby.compile(code)
-      output = case ruby_obj
+
+    def self.execute(code)
+      ruby_code = Q.to_ruby.compile(code)
+      ruby_obj = eval(ruby_code)
+
+      optimize_output(ruby_obj)
+    rescue SyntaxError
+      # TODO: emergency
+      case ruby_code
+      when /(\d)+(\w)/
+        execute("#{$1} * #{$2}")
+      end
+    end
+
+    def self.optimize_output(ruby_obj)
+      case ruby_obj
       when Matrix, Vector, Dydx::Algebra::Formula
         ruby_obj.to_q
       when Float::INFINITY
@@ -21,6 +34,6 @@ module Qlang
         str.equalize!
       end
     end
-    module_function :execute
+
   end
 end
