@@ -5,6 +5,7 @@ require 'qlang/lexer/tokens'
 module Qlang
   module Lexer
     class Base
+      attr_accessor :lexeds
       include Tokens
       class << self
         attr_reader :token_hash
@@ -97,6 +98,12 @@ module Qlang
           end
           hash
         end
+      end
+
+      # NEW APIs
+      def parsed!(token_position, parsed)
+        @lexeds.delete_at(token_position)
+        @lexeds.insert(token_position, { R: parsed })
       end
 
       private
