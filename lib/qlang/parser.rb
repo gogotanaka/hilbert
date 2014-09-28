@@ -19,26 +19,23 @@ module Qlang
         fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
-        when /:vector(\d)/
-          token_position = $1.to_i
-          parsed = VectorParser.execute(
-            lexed.lexeds[token_position][:vector]
-          )
-          lexed.parsed!(token_position, parsed)
+        when /(:vector)(\d)/, /(:matrix)(\d)/, /(:tmatrix)(\d)/, /(:integral)(\d)/, /(:def_func)(\d)/
+          token_sym = $1.delete(':').to_sym
+          token_position = $2.to_i
+          token_val = lexed.lexeds[token_position][token_sym]
 
-        when /:matrix(\d)/
-          token_position = $1.to_i
-          parsed = MatrixParser.execute(
-            lexed.lexeds[token_position][:matrix]
-          )
-          lexed.parsed!(token_position, parsed)
-
-        when /:tmatrix\d/
-          token_position = $1.to_i
-          parsed = MatrixParser.execute(
-            lexed.lexeds[token_position][:tmatrix],
-            trans: true
-          )
+          parsed = case token_sym
+          when :vector
+            VectorParser.execute(token_val)
+          when :matrix
+            MatrixParser.execute(token_val)
+          when :tmatrix
+            MatrixParser.execute(token_val, trans: true)
+          when :integral
+            IntegralParser.execute(token_val)
+          when :def_func
+            FuncParser.execute(token_val)
+          end
           lexed.parsed!(token_position, parsed)
 
         when /:LPRN\d(:CONT\d):RPRN\d/
@@ -59,24 +56,6 @@ module Qlang
             cont = "{#{cont_lexed.values.join(' ')}}"
           end
           lexed.squash_with_prn(cont_token_with_num, cont)
-
-        when /:def_func\d/
-          cont_token_with_num = $&
-          cont_lexed = Lexer::FuncLexer.new(lexed.get_value(cont_token_with_num))
-
-          case cont_lexed.token_str
-          when /:FDEF\d:EQL\d:FOML\d/
-            cont = FuncParser.execute(cont_lexed)
-            lexed.ch_value(cont_token_with_num, cont)
-            lexed.ch_token(cont_token_with_num, :R)
-          end
-
-        when /:integral(\d)/
-          token_position = $1.to_i
-          parsed = IntegralParser.execute(
-            lexed.lexeds[token_position][:integral]
-          )
-          lexed.parsed!(token_position, parsed)
 
         when /:eval_func\d/
           cont_token_with_num = $&
