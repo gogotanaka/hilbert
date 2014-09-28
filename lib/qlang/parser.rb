@@ -34,10 +34,12 @@ module Qlang
           lexed.parsed!(token_position, parsed)
 
         when /:tmatrix\d/
-          cont_token_with_num = $&
-          cont = MatrixParser.execute(lexed.get_value(cont_token_with_num), trans: true)
-          lexed.ch_value(cont_token_with_num, cont)
-          lexed.ch_token(cont_token_with_num, :R)
+          token_position = $1.to_i
+          parsed = MatrixParser.execute(
+            lexed.lexeds[token_position][:tmatrix],
+            trans: true
+          )
+          lexed.parsed!(token_position, parsed)
 
         when /:LPRN\d(:CONT\d):RPRN\d/
           cont_token_with_num = $1
