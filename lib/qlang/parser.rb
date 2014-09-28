@@ -71,11 +71,12 @@ module Qlang
             lexed.ch_token(cont_token_with_num, :R)
           end
 
-        when /:integral\d/
-          cont_token_with_num = $&
-          cont = IntegralParser.execute(lexed.get_value(cont_token_with_num))
-          lexed.ch_value(cont_token_with_num, cont)
-          lexed.ch_token(cont_token_with_num, :R)
+        when /:integral(\d)/
+          token_position = $1.to_i
+          parsed = IntegralParser.execute(
+            lexed.lexeds[token_position][:integral]
+          )
+          lexed.parsed!(token_position, parsed)
 
         when /:eval_func\d/
           cont_token_with_num = $&
