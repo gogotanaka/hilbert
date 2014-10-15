@@ -7,7 +7,7 @@ describe Qlang do
         expect(
           Q.to_r.compile('f(x, y) = x + y')
         ).to eq(
-          "f <- function(x ,y) x + y"
+          "f <- function(x, y) x + y"
         )
 
         expect(
@@ -25,7 +25,7 @@ describe Qlang do
         expect(
           Q.to_r.compile('h(a, b, c) = a ^ 2 + b ^ 2 + c ^ 2')
         ).to eq(
-          "h <- function(a ,b ,c) a ^ 2 + b ^ 2 + c ^ 2"
+          "h <- function(a, b, c) a ^ 2 + b ^ 2 + c ^ 2"
         )
       end
     end

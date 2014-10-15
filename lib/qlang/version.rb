@@ -1,3 +1,3 @@
 module Qlang
-  VERSION = "0.0.14142135"
+  VERSION = "0.0.27"
 end

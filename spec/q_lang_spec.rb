@@ -28,7 +28,7 @@ describe Qlang do
       expect(
         Q.to_ruby.compile('f(x, y) = x + y')
       ).to eq(
-        "f(x ,y) <= x + y"
+        "f(x, y) <= x + y"
       )
 
       expect(
