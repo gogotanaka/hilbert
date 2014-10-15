@@ -61,6 +61,11 @@ describe Qlang do
         '(1 2 3; 4 5 6)t',
         '(1 4; 2 5; 3 6)'
       )
+
+      describe 'Var' do
+        def_test('ex1', 'A = (1 2 3 ; 4 5 6); ', '(1 2 3; 4 5 6)')
+        cal_test('ex1', 'A = (1 2 3 ; 4 5 6); A * (1 2)', '(1 2 3; 4 5 6)')
+      end
     end
 
     describe 'Vector' do
