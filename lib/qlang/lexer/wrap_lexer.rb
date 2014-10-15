@@ -1,10 +1,16 @@
+require 'pry'
 module Qlang
   module Lexer
     class WrapLexer < Base
-      rule(/#{FUNCN}\(#{VARNUM}( *, *#{VARNUM})*\) ?= ?[^\r\n]+/) { :def_func }
-      rule(/#{FUNCN}\( ?#{NUM}( *, *#{NUM})* *\)/) { :eval_func }
-      rule(/S *\(.+\)\[.+\]/) { :ITGL }
-      rule(/d\/d#{VAR} .*/) { :DIFF }
+      rule(%r@#{FUNCCV}#{ANYSP}=#{ANYSP}#{NONL}+@) { :def_func }
+      rule(%r@#{FUNCCN}@) { :eval_func }
+      rule(/S#{ANYSP}#{LPRN}#{ANYSTR}#{RPRN}\[#{ANYSTR}\]/) { :integral }
+      rule(/d\/d#{VAR} .*/) { :differential }
+      rule(%r@#{LPRN}#{NUMS_BY_SP}#{RPRN}@) { :vector }
+      rule(%r@#{LPRN}#{NUMS_BY_SP_BY_SCLN}#{RPRN}t@) { :tmatrix }
+      rule(%r@#{LPRN}#{NUMS_BY_SP_BY_SCLN}#{RPRN}@) { :matrix }
+
+
       rule(/\(/) { :LPRN }
       rule(/\)/) { :RPRN }
       rule(/\{/) { :LBRC }

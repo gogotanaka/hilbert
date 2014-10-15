@@ -56,6 +56,11 @@ describe Qlang do
         '(1 2; 3 4) * (1 2)',
         '(5 11)'
       )
+
+      cal_test('ex8',
+        '(1 2 3; 4 5 6)t',
+        '(1 4; 2 5; 3 6)'
+      )
     end
 
     describe 'Vector' do
@@ -99,7 +104,7 @@ describe Qlang do
       def_test('ex1', 'f(x, y) = x + y', 'x + y')
       cal_test('ex1', 'f( 4, 5 )', '9.0')
 
-      def_test('ex2', 'f(x, y) = xy', 'x * y')
+      def_test('ex2', 'f( x     ,    y) = xy', 'x * y')
       cal_test('ex2', 'f( 3, 9 )', '27.0')
 
       def_test('ex3', 'f(x, y) = xy^2', 'x * ( y ** 2 )')

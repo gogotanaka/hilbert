@@ -19,18 +19,29 @@ module Qlang
         fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
+        when /:vector\d/
+          cont_token_with_num = $&
+          cont = VectorParser.execute(lexed.get_value(cont_token_with_num))
+          lexed.ch_value(cont_token_with_num, cont)
+          lexed.ch_token(cont_token_with_num, :R)
+
+        when /:matrix\d/
+          cont_token_with_num = $&
+          cont = MatrixParser.execute(lexed.get_value(cont_token_with_num))
+          lexed.ch_value(cont_token_with_num, cont)
+          lexed.ch_token(cont_token_with_num, :R)
+
+        when /:tmatrix\d/
+          cont_token_with_num = $&
+          cont = MatrixParser.execute(lexed.get_value(cont_token_with_num), trans: true)
+          lexed.ch_value(cont_token_with_num, cont)
+          lexed.ch_token(cont_token_with_num, :R)
+
         when /:LPRN\d(:CONT\d):RPRN\d/
           cont_token_with_num = $1
           cont_lexed = Lexer::ContLexer.new(lexed.get_value(cont_token_with_num))
 
-          case cont_lexed.token_str
-          when /(:NUM\d)+(:SCLN\d|:NLIN\d)(:NUM\d)/
-            cont = MatrixParser.execute(cont_lexed)
-          when /(:NUM\d)+/
-            cont = VectorParser.execute(cont_lexed)
-          else
-            cont = "(#{cont_lexed.values.join(' ')})"
-          end
+          cont = "(#{cont_lexed.values.join(' ')})"
           lexed.squash_with_prn(cont_token_with_num, cont)
 
         when /:LBRC\d(:CONT\d):RBRC\d/
@@ -56,7 +67,7 @@ module Qlang
             lexed.ch_token(cont_token_with_num, :R)
           end
 
-        when /:ITGL\d/
+        when /:integral\d/
           cont_token_with_num = $&
           cont = IntegralParser.execute(lexed.get_value(cont_token_with_num))
           lexed.ch_value(cont_token_with_num, cont)
@@ -67,7 +78,7 @@ module Qlang
           cont = lexed.get_value(cont_token_with_num)
           lexed.squash_with_prn(cont_token_with_num, cont)
 
-        when /:DIFF\d/
+        when /:differential\d/
           cont_token_with_num = $&
           cont = lexed.get_value(cont_token_with_num)
           cont =~ /(d\/d[a-zA-Z]) (.*)/
@@ -81,6 +92,7 @@ module Qlang
 
         lexed.squash_to_cont($1, 2) if lexed.token_str =~ /(:CONT\d|:R\d)(:CONT\d|:R\d)/
       end
+
       lexed.fix_r_txt!
       lexed.values.join
     end
