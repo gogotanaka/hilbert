@@ -5,9 +5,11 @@ module Qlang
         @args = args
       end
 
-      def parse!
-        ch_compile_type(ARGV.shift)
-        parse
+      def output!
+        ch_compile_type(@args.first)
+        parse_string = parse(@args[1])
+        write!(@args[2], parse_string)
+
       rescue Exception => e
         raise e if @options[:trace] || e.is_a?(SystemExit)
 
@@ -28,17 +30,21 @@ module Qlang
           when '-R'
             Qlang.to_r
           else
-            print 'Q support Ruby and R now.'
+            print 'Q support only Ruby and R now.'
           end
         end
 
-        def parse
-          raise '#{@args[0]} is unsupported option' unless @args[0] == '-q'
-          filename = @args[1]
-          file = open_file(filename)
-          string = read_file(file)
-          print(Kconv.tosjis(Qlang.compile(string)), '\n')
+        def parse(file_path)
+          file = open_file(file_path)
+          input_string = read_file(file)
           file.close
+          Kconv.tosjis(Qlang.compile(input_string))
+        end
+
+        def write!(output_path, string)
+          open(output_path, 'w') do |f|
+            f.puts string
+          end
         end
 
         def open_file(filename, flag = 'r')

@@ -2,7 +2,8 @@
 require 'qlang'
 include Qlang
 
-case ARGV.shift
+# TODO: There are vanch of todo ..
+case ARGV.first
 when '-i'
   loop do
     print 'Q:-> '
@@ -14,7 +15,7 @@ when '-i'
       puts e
     end
   end
-when '-c'
-  compiler = Qlang::Exec::Compiler.new(ARGV)
-  compiler.parse!
+when '-R', '-Ruby'
+  exec = Qlang::Exec::Compiler.new(ARGV)
+  exec.output!
 end
