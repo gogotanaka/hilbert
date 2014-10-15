@@ -32,7 +32,7 @@ module Qlang
       # THIRD TOKEN
       class ::String
         def func_call
-          "#{FUNCV}#{LPRN}#{ANYSP}#{self}*#{ANYSP}#{RPRN}"
+          "#{FUNCV}#{LPRN}#{ANYSP}#{self}#{ANYSP}#{RPRN}"
         end
       end
       FUNCCN =  NUMS_BY_CMA.func_call
