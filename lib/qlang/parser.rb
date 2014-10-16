@@ -14,6 +14,8 @@ require 'qlang/parser/formula_parser'
 module Qlang
   module Parser
     include Lexer::Tokens
+    SYM = '\w+'
+    ONEHASH = "#{ANYSP}#{SYM}#{CLN}#{ANYSP}#{VARNUM}#{ANYSP}" # sdf: 234
     def execute(lexed)
       time = Time.now
       until lexed.token_str =~ /\A(:NLIN\d|:R\d)+\z/
@@ -47,11 +49,12 @@ module Qlang
           lexed.squash_with_prn(cont_token_with_num, cont)
 
         when /:LBRC\d:CONT(\d):RBRC\d/
+          # TODO: Refactoring
           token_position = $1.to_i
 
           case lexed.lexeds[token_position][:CONT]
-          when /(:SYM\d:CLN\d(:STR\d|:NUM\d|:R\d):CMA)*(:SYM\d:CLN\d(:STR\d|:NUM\d|:R\d))/
-            cont = ListParser.execute(cont_lexed)
+          when %r@#{ONEHASH}(#{CMA}#{ONEHASH})*@
+            cont = ListParser.execute(lexed.lexeds[token_position][:CONT])
           else
             cont = "{#{cont_lexed.values.join(' ')}}"
           end

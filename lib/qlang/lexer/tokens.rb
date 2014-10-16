@@ -5,7 +5,7 @@ module Qlang
       NUM = '[0-9]+'
       VAR = '[a-z]'
       FUNCV = '[a-zA-Z]'
-      VARNUM = '[0-9a-z]'
+      VARNUM = '([0-9]+|[a-z])'
       ANYSP = ' *'
       ANYSTR = '.+'
       NONL = '[^\r\n]'

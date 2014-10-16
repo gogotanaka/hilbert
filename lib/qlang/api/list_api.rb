@@ -3,10 +3,10 @@ module Qlang
     module ListApi
       def execute(arys)
         case $type
-        when :R
+        when :r
           combineds_by_equal = arys.map { |ary| "#{ary[0]}=#{ary[1]}" }.join(', ')
           "list(#{combineds_by_equal})"
-        when :Ruby
+        when :ruby
           fail 'List is not implemented for Ruby'
         end
 
