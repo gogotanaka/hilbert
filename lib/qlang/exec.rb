@@ -37,9 +37,11 @@ module Qlang
         def parse(file_path)
           file = open_file(file_path)
           input_string = read_file(file)
-          input_string =~ /I love mathematics\.(.*)Q\.E\.D/m
           file.close
-          Kconv.tosjis(Qlang.compile($1))
+          input_string.gsub(
+            /(.*)I love mathematics\.(.*)Q\.E\.D(.*)/m,
+            "#{$1}#{Kconv.tosjis(Qlang.compile($2))}#{$3}"
+          )
         end
 
         def write!(output_path, string)
