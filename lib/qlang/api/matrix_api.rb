@@ -10,6 +10,8 @@ module Qlang
         when :ruby
           arys_str = rows.map { |row| "[#{row.join(', ')}]" }.join(', ')
           "Matrix[#{arys_str}]"
+        else
+          fail "Matrix is not implemented for #{LANGS_HASH[$type.to_s]}"
         end
       end
       module_function :execute

@@ -6,8 +6,8 @@ module Qlang
         when :r
           combineds_by_equal = arys.map { |ary| "#{ary[0]}=#{ary[1]}" }.join(', ')
           "list(#{combineds_by_equal})"
-        when :ruby
-          fail 'List is not implemented for Ruby'
+        else
+          fail "List is not implemented for #{LANGS_HASH[$type.to_s]}"
         end
 
       end

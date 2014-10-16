@@ -21,6 +21,12 @@ describe Qlang do
         "list(key1=234234, key2=387342, key3=38733242)"
       )
 
+      expect(
+        Q.to_ruby.compile('{key1:234234,key2:387342,key3:38733242}')
+      ).to eq(
+        "list(key1=234234, key2=387342, key3=38733242)"
+      )
+
       # expect(
       #   Q.to_r.compile('{key1:(1 3 2; 8 2 3),key2:387342,key3:38733242}')
       # ).to eq(

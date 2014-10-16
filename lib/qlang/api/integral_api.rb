@@ -4,10 +4,10 @@ module Qlang
       def execute(func, delta, range)
         a, b = range.split('..')
         case $type
-        when :r
-          fail 'Integral is not implemented for R'
         when :ruby
           "S(#{func}, #{delta})[#{a}, #{b}]"
+        else
+          fail "Integral is not implemented for #{LANGS_HASH[$type.to_s]}"
         end
 
       end
