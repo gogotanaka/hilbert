@@ -17,7 +17,7 @@ print_zip_choropleth = function(choropleth.df, states, scaleName, theme, min, ma
 {
   stopifnot(states %in% state.abb)
 
-  a = (1 3 4)
+a = c(1, 3, 4)
 
   state.df = subset_map("state", states)
   colnames(state.df)[names(state.df) == "long"] = "longitude"

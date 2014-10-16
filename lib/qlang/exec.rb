@@ -38,10 +38,9 @@ module Qlang
           file = open_file(file_path)
           input_string = read_file(file)
           file.close
-          input_string.gsub(
-            /(.*)I love mathematics\.(.*)Q\.E\.D(.*)/m,
+          input_string.gsub(/(.*)I love mathematics\.(.*)Q\.E\.D(.*)/m) {
             "#{$1}#{Kconv.tosjis(Qlang.compile($2))}#{$3}"
-          )
+          }
         end
 
         def write!(output_path, string)
