@@ -16,9 +16,9 @@ bind_df_to_zip_map = function(df)
 print_zip_choropleth = function(choropleth.df, states, scaleName, theme, min, max)
 {
   stopifnot(states %in% state.abb)
-
+I love mathematics.
   a = (1 3 4)
-
+Q.E.D
   state.df = subset_map("state", states)
   colnames(state.df)[names(state.df) == "long"] = "longitude"
   colnames(state.df)[names(state.df) == "lat"]  = "latitude"
