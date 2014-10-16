@@ -3,9 +3,9 @@ module Qlang
     module FuncApi
       def execute(func_name, args, contents)
         case $type
-        when :R
+        when :r
           "#{func_name} <- function(#{ args.join(' ,') }) #{contents}"
-        when :Ruby
+        when :ruby
           "#{func_name}(#{ args.join(' ,') }) <= #{contents}"
         end
 

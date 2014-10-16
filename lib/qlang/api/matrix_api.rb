@@ -5,9 +5,9 @@ module Qlang
         row_count = rows.count
         column_count = rows.first.count
         case $type
-        when :R
+        when :r
           "matrix(#{VectorApi.execute(rows.flatten)}, #{row_count}, #{column_count}, byrow = TRUE)"
-        when :Ruby
+        when :ruby
           arys_str = rows.map { |row| "[#{row.join(', ')}]" }.join(', ')
           "Matrix[#{arys_str}]"
         end

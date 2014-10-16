@@ -10,7 +10,7 @@ module Qlang
             if ss.scan(rgx)
               item = case token
               when :EXP
-                $type == :Ruby ? '**' : '^'
+                $type == :ruby ? '**' : '^'
               when :MUL
                 sss = StringScanner.new(ss[0])
                 ary = []

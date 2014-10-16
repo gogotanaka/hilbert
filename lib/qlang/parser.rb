@@ -13,6 +13,7 @@ require 'qlang/parser/formula_parser'
 
 module Qlang
   module Parser
+    include Lexer::Tokens
     def execute(lexed)
       time = Time.now
       until lexed.token_str =~ /\A(:NLIN\d|:R\d)+\z/
@@ -45,11 +46,10 @@ module Qlang
           cont = "(#{cont_lexed.values.join(' ')})"
           lexed.squash_with_prn(cont_token_with_num, cont)
 
-        when /:LBRC\d(:CONT\d):RBRC\d/
-          cont_token_with_num = $1
-          cont_lexed = Lexer::ContLexer.new(lexed.get_value(cont_token_with_num))
+        when /:LBRC\d:CONT(\d):RBRC\d/
+          token_position = $1.to_i
 
-          case cont_lexed.token_str
+          case lexed.lexeds[token_position][:CONT]
           when /(:SYM\d:CLN\d(:STR\d|:NUM\d|:R\d):CMA)*(:SYM\d:CLN\d(:STR\d|:NUM\d|:R\d))/
             cont = ListParser.execute(cont_lexed)
           else

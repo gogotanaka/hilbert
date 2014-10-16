@@ -15,7 +15,7 @@ require 'matrix'
 
 module Qlang
   # compiles into R as default.
-  $type = :R
+  $type = :r
 
   class << self
     def compile(str)
@@ -23,30 +23,13 @@ module Qlang
       Kconv.tosjis(Parser.execute(lexed))
     end
 
-    def to_ruby
-      $type = :Ruby
-      Qlang
+    %w(ruby r haskell scala java).each do |lang_name|
+      define_method("to_#{lang_name}") do
+        $type = lang_name.to_sym
+        Qlang
+      end
     end
 
-    def to_r
-      $type = :R
-      Qlang
-    end
-
-    def to_haskell
-      $type = :Hskl
-      Qlang
-    end
-
-    def to_scala
-      $type = :Scla
-      Qlang
-    end
-
-    def to_java
-      $type = :Scla
-      Qlang
-    end
   end
 end
 

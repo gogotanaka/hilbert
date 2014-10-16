@@ -3,9 +3,9 @@ module Qlang
     module VectorApi
       def execute(nums)
         case $type
-        when :R
+        when :r
           "c(#{nums.join(', ')})"
-        when :Ruby
+        when :ruby
           "Vector[#{nums.join(', ')}]"
         end
       end
