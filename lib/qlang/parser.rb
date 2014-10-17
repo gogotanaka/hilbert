@@ -41,12 +41,13 @@ module Qlang
           end
           lexed.parsed!(token_position, parsed)
 
-        when /:LPRN\d(:CONT\d):RPRN\d/
-          cont_token_with_num = $1
-          cont_lexed = Lexer::ContLexer.new(lexed.get_value(cont_token_with_num))
+        when /:LPRN(\d):CONT\d:RPRN(\d)/
+          tokens_range = $1.to_i..$2.to_i
+          token_val = lexed.lexeds[tokens_range.to_a[1]][:CONT]
 
-          cont = "(#{cont_lexed.values.join(' ')})"
-          lexed.squash_with_prn(cont_token_with_num, cont)
+          cont_lexed = Lexer::ContLexer.new(token_val)
+          cont = cont_lexed.values.join(' ')
+          lexed.parsed!(tokens_range, cont.parentheses)
 
         when /:LBRC(\d):CONT\d:RBRC(\d)/
           tokens_range = $1.to_i..$2.to_i
@@ -59,10 +60,9 @@ module Qlang
               token_val
             end
 
-          lexed.parsed!(tokens_range, cont.braces)
+          lexed.parsed!(tokens_range, cont)
 
         when /:eval_func\d/
-
           cont_token_with_num = $&
           cont = lexed.get_value(cont_token_with_num)
           lexed.squash_with_prn(cont_token_with_num, cont)
