@@ -23,12 +23,24 @@ describe Qlang do
         )
       end
     end
+
     context 'into Ruby' do
       it do
         expect(
           Q.to_ruby.compile('(1 2 3)')
         ).to eq(
           "Vector[1, 2, 3]"
+        )
+      end
+    end
+
+    context 'into Python' do
+      it do
+        binding.pry
+        expect(
+          Q.to_python.compile('(1 2 3)')
+        ).to eq(
+          "array([1, 2, 3])"
         )
       end
     end

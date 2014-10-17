@@ -7,6 +7,8 @@ module Qlang
           "c(#{nums.join(', ')})"
         when :ruby
           "Vector[#{nums.join(', ')}]"
+        when :python
+          "array([#{nums.join(', ')}])"
         else
           fail "Vector is not implemented for #{LANGS_HASH[$meta_info.lang.to_s]}"
         end
