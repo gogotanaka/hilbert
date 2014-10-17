@@ -62,21 +62,21 @@ module Qlang
 
           lexed.parsed!(tokens_range, cont)
 
-        when /:eval_func\d/
-          cont_token_with_num = $&
-          cont = lexed.get_value(cont_token_with_num)
-          lexed.squash_with_prn(cont_token_with_num, cont)
+        when /:eval_func(\d)/
+          token_position = $1.to_i
+          cont = lexed.get_value(token_position)
+          lexed.parsed!(token_position, cont.parentheses)
 
-        when /:differential\d/
-          cont_token_with_num = $&
-          cont = lexed.get_value(cont_token_with_num)
+        when /:differential(\d)/
+          token_position = $1.to_i
+          cont = lexed.get_value(token_position)
           cont =~ /(d\/d[a-zA-Z]) (.*)/
           cont = "#{$1}(#{FormulaParser.execute($2)})"
           # FIX: Refactor
           #cont.gsub!(/(d\/d[a-zA-Z]) (.*)/, "\1(\2)")
-          lexed.squash_with_prn(cont_token_with_num, cont)
-        when /:CONT\d/
-          lexed.ch_token($&, :R)
+          lexed.parsed!(token_position, cont.parentheses)
+        when /:CONT(\d)/
+          lexed.parsed!($1.to_i, lexed.get_value($1.to_i))
         end
 
         lexed.squash_to_cont($1, 2) if lexed.token_str =~ /(:CONT\d|:R\d)(:CONT\d|:R\d)/

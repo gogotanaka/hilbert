@@ -30,17 +30,18 @@ module Qlang
         end
       end
 
-      def get_value(token_with_num)
-        num = to_num(token_with_num)
-        values[num]
+      # Accessor
+      def get_value(num)
+        @lexeds.map { |lexed| lexed.values.first }[num]
       end
 
-      def squash_with_prn(token_with_num, value)
-        num = to_num(token_with_num)
-        3.times do
-          @lexeds.delete_at(num - 1)
-        end
-        @lexeds.insert(num - 1, {R: ":%|#{value}|%:"})
+      def token_str
+        @lexeds.map.with_index { |lexed, i| ":#{lexed.keys.first}#{i}" }.join
+      end
+
+      # Legacy Accessor
+      def values
+        @lexeds.map { |lexed| lexed.values.first }
       end
 
       def squash_to_cont(token_with_num, count)
@@ -53,40 +54,12 @@ module Qlang
         @lexeds.insert(num, {CONT: value})
       end
 
-      def ch_token(token_with_num, token)
-        num = to_num(token_with_num)
-        before_hash = @lexeds.delete_at(num)
-        @lexeds.insert(num, {token => before_hash.values.first})
-      end
-
       def tokens
         @lexeds.map { |lexed| lexed.keys.first }
       end
 
-      def token_with_nums
-        @lexeds.map.with_index { |lexed, i| ":#{lexed.keys.first}#{i}" }
-      end
-
-      def ch_value(token_with_num, value)
-        num = to_num(token_with_num)
-        before_hash = @lexeds.delete_at(num)
-        @lexeds.insert(num, {before_hash.keys.first => value })
-      end
-
-      def values
-        @lexeds.map { |lexed| lexed.values.first }
-      end
-
-      def token_str
-        token_with_nums.join
-      end
-
       def [](index)
         @lexeds[index]
-      end
-
-      def split(separator)
-        values.chunk { |e| e == separator }.reject { |sep, _| sep }.map { |_, ans| ans }
       end
 
       def fix_r_txt!
@@ -107,8 +80,6 @@ module Qlang
           when Range   then parsed_between!(target, parsed)
         end
       end
-
-
 
       private
 
