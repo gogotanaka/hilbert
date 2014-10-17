@@ -54,10 +54,6 @@ module Qlang
         @lexeds.insert(num, {CONT: value})
       end
 
-      def tokens
-        @lexeds.map { |lexed| lexed.keys.first }
-      end
-
       def [](index)
         @lexeds[index]
       end
