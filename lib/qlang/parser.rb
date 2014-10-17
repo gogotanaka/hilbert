@@ -48,19 +48,21 @@ module Qlang
           cont = "(#{cont_lexed.values.join(' ')})"
           lexed.squash_with_prn(cont_token_with_num, cont)
 
-        when /:LBRC\d:CONT(\d):RBRC\d/
-          # TODO: Refactoring
-          token_position = $1.to_i
+        when /:LBRC(\d):CONT\d:RBRC(\d)/
+          tokens_range = $1.to_i..$2.to_i
+          token_val = lexed.lexeds[tokens_range.to_a[1]][:CONT]
 
-          case lexed.lexeds[token_position][:CONT]
-          when %r@#{ONEHASH}(#{CMA}#{ONEHASH})*@
-            cont = ListParser.execute(lexed.lexeds[token_position][:CONT])
-          else
-            cont = "{#{cont_lexed.values.join(' ')}}"
-          end
-          lexed.squash_with_prn(cont_token_with_num, cont)
+          cont = case token_val
+            when %r@#{ONEHASH}(#{CMA}#{ONEHASH})*@
+              ListParser.execute(token_val)
+            else
+              token_val
+            end
+
+          lexed.parsed!(tokens_range, cont.braces)
 
         when /:eval_func\d/
+
           cont_token_with_num = $&
           cont = lexed.get_value(cont_token_with_num)
           lexed.squash_with_prn(cont_token_with_num, cont)
