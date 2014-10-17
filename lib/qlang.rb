@@ -36,8 +36,9 @@ module Qlang
     end
 
     LANGS_HASH.keys.each do |lang_name|
-      define_method("to_#{lang_name}") do |*args|
+      define_method("to_#{lang_name}") do |*opts|
         $meta_info.lang = lang_name.to_sym
+        $meta_info.opts = opts
         Qlang
       end
     end
