@@ -36,7 +36,6 @@ describe Qlang do
 
     context 'into Python' do
       it do
-        binding.pry
         expect(
           Q.to_python.compile('(1 2 3)')
         ).to eq(

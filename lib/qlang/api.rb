@@ -28,6 +28,14 @@ module Qlang
         split(/ +/)
       end
 
+      def parentheses
+        "(#{self})"
+      end
+
+      def braces
+        "{#{self}}"
+      end
+
       # FIX:
       def equalize!
         rms!(/\A +/, / +\z/)
@@ -40,16 +48,21 @@ module Qlang
       end
     end
 
+    class ::Array
+      def join_by_sp
+        join(' ')
+      end
+    end
+
     class ::Matrix
       def to_q
-        q_rows = rows.map { |row| row.join(' ') }.join('; ')
-        "(#{q_rows})"
+        rows.map(&:join_by_sp).join('; ').parentheses
       end
     end
 
     class ::Vector
       def to_q
-        "(#{elements.join(' ')})"
+        elements.join_by_sp.parentheses
       end
     end
   end
