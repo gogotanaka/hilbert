@@ -3,6 +3,7 @@ require 'dydx'
 include Dydx
 
 require "qlang/version"
+require 'qlang/utils/ruby_ext'
 require 'qlang/lexer'
 require 'qlang/parser'
 
