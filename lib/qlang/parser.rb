@@ -78,8 +78,7 @@ module Qlang
         when /:CONT(\d)/
           lexed.parsed!($1.to_i, lexed.get_value($1.to_i))
         end
-
-        lexed.squash_to_cont($1, 2) if lexed.token_str =~ /(:CONT\d|:R\d)(:CONT\d|:R\d)/
+        lexed.squash!(($1.to_i)..($1.to_i+1)) if lexed.token_str =~ /(?::CONT|:R)(\d)(?::CONT|:R)(\d)/
       end
 
       lexed.fix_r_txt!

@@ -1,7 +1,6 @@
 require 'strscan'
 require 'qlang/lexer/tokens'
 
-
 module Qlang
   module Lexer
     class Base
@@ -31,6 +30,7 @@ module Qlang
       end
 
       # Accessor
+      ## GET(without side effect)
       def get_value(num)
         @lexeds.map { |lexed| lexed.values.first }[num]
       end
@@ -39,19 +39,23 @@ module Qlang
         @lexeds.map.with_index { |lexed, i| ":#{lexed.keys.first}#{i}" }.join
       end
 
+      ## POST(with side effect, without idempotence.)
+      def parsed!(target, parsed)
+        case target
+          when Integer then parsed_at!(target, parsed)
+          when Range   then parsed_between!(target, parsed)
+        end
+      end
+
+      def squash!(range, token: :CONT)
+        value = values[range].join
+        range.count.times { @lexeds.delete_at(range.first) }
+        @lexeds.insert(range.first, { token => value })
+      end
+
       # Legacy Accessor
       def values
         @lexeds.map { |lexed| lexed.values.first }
-      end
-
-      def squash_to_cont(token_with_num, count)
-        num = to_num(token_with_num)
-        value = ''
-        count.times do
-          value += values[num]
-          @lexeds.delete_at(num)
-        end
-        @lexeds.insert(num, {CONT: value})
       end
 
       def [](index)
@@ -69,23 +73,7 @@ module Qlang
         end
       end
 
-      # NEW APIs
-      def parsed!(target, parsed)
-        case target
-          when Integer then parsed_at!(target, parsed)
-          when Range   then parsed_between!(target, parsed)
-        end
-      end
-
       private
-
-        def to_num(token_with_num)
-          token_with_num =~ /\d+/
-          $&.to_i
-        end
-
-        # NEW APIs
-
         def parsed_at!(token_position, parsed)
           @lexeds.delete_at(token_position)
           @lexeds.insert(token_position, { R: parsed })
