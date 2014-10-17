@@ -13,10 +13,20 @@ require 'qlang/iq'
 require 'kconv'
 require 'matrix'
 require 'yaml'
+require 'singleton'
 
 module Qlang
-  # compiles into R as default.
-  $type = :r
+  class MetaInfo
+    include Singleton
+    attr_accessor :lang, :opts
+
+    def _load
+      # compiles into R as default.
+      lang = :r
+    end
+  end
+  $meta_info = MetaInfo.instance
+
   LANGS_HASH = YAML.load_file("./lib/qlang/utils/langs.yml")['langs']
 
   class << self
@@ -26,8 +36,8 @@ module Qlang
     end
 
     LANGS_HASH.keys.each do |lang_name|
-      define_method("to_#{lang_name}") do
-        $type = lang_name.to_sym
+      define_method("to_#{lang_name}") do |*args|
+        $meta_info.lang = lang_name.to_sym
         Qlang
       end
     end
