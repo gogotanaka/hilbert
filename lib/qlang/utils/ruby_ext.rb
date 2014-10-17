@@ -1,4 +1,12 @@
 class ::String
+  def parentheses
+    "(#{self})"
+  end
+
+  def braces
+    "{#{self}}"
+  end
+
   def rm(str_or_rgx)
     gsub(str_or_rgx, '')
   end
@@ -17,14 +25,6 @@ class ::String
 
   def split_by_sp
     split(/ +/)
-  end
-
-  def parentheses
-    "(#{self})"
-  end
-
-  def braces
-    "{#{self}}"
   end
 
   # FIX:

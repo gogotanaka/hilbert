@@ -101,10 +101,14 @@ module Qlang
       end
 
       # NEW APIs
-      def parsed!(token_position, parsed)
-        @lexeds.delete_at(token_position)
-        @lexeds.insert(token_position, { R: parsed })
+      def parsed!(target, parsed)
+        case target
+          when Integer then parsed_at!(target, parsed)
+          when Range   then parsed_between!(target, parsed)
+        end
       end
+
+
 
       private
 
@@ -112,6 +116,22 @@ module Qlang
           token_with_num =~ /\d+/
           $&.to_i
         end
+
+        # NEW APIs
+
+        def parsed_at!(token_position, parsed)
+          @lexeds.delete_at(token_position)
+          @lexeds.insert(token_position, { R: parsed })
+        end
+
+        def parsed_between!(token_range, parsed)
+          start_pos = token_range.first
+          token_range.count.times do
+            @lexeds.delete_at(start_pos)
+          end
+          @lexeds.insert(start_pos, { R: parsed })
+        end
+
     end
   end
 end
