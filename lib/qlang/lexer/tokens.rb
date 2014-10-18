@@ -8,8 +8,10 @@ module Qlang
       PI = /pi/
       NUM = /(#{INT}|#{FLO}|#{E}|#{PI})/
 
-
       EMBEDDED_FUNC = /(sin|cos|tan|log)/
+      USER_FUNC = /[a-zA-Z]/
+
+      FUNCV = /(#{EMBEDDED_FUNC}|#{USER_FUNC})/
 
       VAR = /([a-d]|[f-z])/
       VAR_MUL2 = /(?!pi)#{VAR}{2}/
@@ -17,7 +19,6 @@ module Qlang
       # FIX:
       VAR_MUL  = /(?!#{EMBEDDED_FUNC})#{VAR_MUL2}/
 
-      FUNCV = /[a-zA-Z]/
       VARNUM = /(#{NUM}|#{VAR})/
       ANYSP = ' *'
       ANYSTR = /.+/

@@ -6,7 +6,7 @@ module Qlang
       include Lexer::Tokens
       def execute(string)
         def_func, formula = string.split(/ *= */)
-        def_func =~ %r@(#{FUNCV})#{LPRN}#{ANYSP}(#{VARS_BY_CMA})#{ANYSP}#{RPRN}@
+        def_func =~ /(#{USER_FUNC})#{LPRN}#{ANYSP}(#{VARS_BY_CMA})#{ANYSP}#{RPRN}/
         FuncApi.execute($1, $2.split(' *,'), FormulaParser.execute(formula))
       end
       module_function :execute
