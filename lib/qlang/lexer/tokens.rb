@@ -23,11 +23,11 @@ module Qlang
       # SECOND TOKEN
       class Tmp
         def self.string_out(str, partition)
-        "#{ANYSP}#{str}(#{ANYSP}#{partition}#{ANYSP}#{str})*#{ANYSP}"
+        /#{ANYSP}#{str}(#{ANYSP}#{partition}#{ANYSP}#{str})*#{ANYSP}/
         end
 
         def self.func_call(args)
-          "#{FUNCV}#{LPRN}#{ANYSP}#{args}#{ANYSP}#{RPRN}"
+          /#{FUNCV}#{LPRN}#{ANYSP}#{args}#{ANYSP}#{RPRN}/
         end
       end
 
