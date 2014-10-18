@@ -2,10 +2,10 @@ require 'pry'
 module Qlang
   module Lexer
     class WrapLexer < Base
-      rule(/#{FUNCCV}#{ANYSP}=#{ANYSP}#{NONL}+/) { :def_func }
+      rule(/#{FUNCCV}#{ANYSP}=#{ANYSP}#{FORMULA}+/) { :def_func }
       rule(/#{FUNCCN}/) { :eval_func }
       rule(/S#{ANYSP}#{LPRN}#{ANYSTR}#{RPRN}\[#{ANYSTR}\]/) { :integral }
-      rule(/d\/d#{VAR} .*/) { :differential }
+      rule(/d\/d#{VAR} #{FORMULA}/) { :differential }
       rule(/#{LPRN}#{NUMS_BY_SP}#{RPRN}/) { :vector }
       rule(/#{LPRN}#{NUMS_BY_SP_BY_SCLN}#{RPRN}t/) { :tmatrix }
       rule(/#{LPRN}#{NUMS_BY_SP_BY_SCLN}#{RPRN}/) { :matrix }
