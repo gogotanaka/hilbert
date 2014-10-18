@@ -4,13 +4,13 @@ module Qlang
       # FIRST TOKEN
       INT = /[0-9]+/
       FLO = /[0-9]+\.[0-9]+/
-      NUM = "(#{INT}|#{FLO})"
-      VAR = '[a-z]'
-      FUNCV = '[a-zA-Z]'
-      VARNUM = "(#{NUM}|#{VAR})"
+      NUM = /(#{INT}|#{FLO})/
+      VAR = /[a-z]/
+      FUNCV = /[a-zA-Z]/
+      VARNUM = /(#{NUM}|#{VAR})/
       ANYSP = ' *'
-      ANYSTR = '.+'
-      NONL = '[^\r\n]'
+      ANYSTR = /.+/
+      NONL = /[^\r\n]/
       LPRN = /\(/
       RPRN = /\)/
       LBRC = /\{/
