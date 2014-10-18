@@ -1,11 +1,22 @@
 module Qlang
   module Lexer
     module Tokens
-      # FIRST TOKEN
+      # NUM
       INT = /[0-9]+/
       FLO = /[0-9]+\.[0-9]+/
-      NUM = /(#{INT}|#{FLO})/
-      VAR = /[a-z]/
+      E = /e/
+      PI = /pi/
+      NUM = /(#{INT}|#{FLO}|#{E}|#{PI})/
+
+
+      EMBEDDED_FUNC = /(sin|cos|tan|log)/
+
+      VAR = /([a-d]|[f-z])/
+      VAR_MUL2 = /(?!pi)#{VAR}{2}/
+      VAR_MUL3 = /(?!#{EMBEDDED_FUNC})#{VAR}{3}/
+      # FIX:
+      VAR_MUL  = /(?!#{EMBEDDED_FUNC})#{VAR_MUL2}/
+
       FUNCV = /[a-zA-Z]/
       VARNUM = /(#{NUM}|#{VAR})/
       ANYSP = ' *'
