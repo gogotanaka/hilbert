@@ -60,27 +60,60 @@ f(1, 2)
 
 ## How to use
 
-Install it yourself as:
+Install qlang gme.
 
     $ gem install qlang
-
-### Compiler into R
-
-    $ qlang -c -R foo.q
     
-### Compiler into Ruby
+    
+## Use as native language
 
-    $ qlang -c -Ruby foo.q
+### Compile into R
 
-### Interpreter
+    $ qlang -R foo.q
+    
+### Compile into Ruby
 
-    $ qlang -i
+    $ qlang -Ruby foo.q
+    
+### Compile into Python
 
+    $ qlang -Python foo.q
+
+
+## Use as math template within other langs
+
+
+```rb
+class ExampleClass
+  def example_method
+    #your Ruby codes
+    ......
+
+I love mathematics.
+  a = (1 3 4)
+  # your Q codes
+Q.E.D
+
+  end
+end
+```
+
+    $ qlang -Ruby example.rb
+    
+
+```rb
+class ExampleClass
+  def example_method
+    #your Ruby codes
+    ......
+
+    a = Vector[1, 3, 4]
+
+  end
+end
+```
 
 ## Contributing
 
-1. Fork it ( https://github.com/gogotanaka/Q/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+Welcome any your PR or issue.
+You can become commiter, if you commit even once.
