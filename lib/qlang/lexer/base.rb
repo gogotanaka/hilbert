@@ -32,6 +32,7 @@ module Qlang
       # Accessor
       ## GET(without side effect)
       def get_value(num)
+        num = num.to_i
         @lexeds.map { |lexed| lexed.values.first }[num]
       end
 
@@ -40,7 +41,7 @@ module Qlang
       end
 
       ## POST(with side effect, without idempotence.)
-      def parsed!(target, parsed)
+      def parsed!(parsed, target)
         case target
           when Integer then parsed_at!(target, parsed)
           when Range   then parsed_between!(target, parsed)

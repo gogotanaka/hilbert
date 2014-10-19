@@ -39,7 +39,7 @@ module Qlang
           when :def_func
             FuncParser.execute(token_val)
           end
-          lexed.parsed!(token_position, parsed)
+          lexed.parsed!(parsed, token_position)
 
         when /:LPRN(\d):CONT\d:RPRN(\d)/
           tokens_range = $1.to_i..$2.to_i
@@ -47,7 +47,7 @@ module Qlang
 
           cont_lexed = Lexer::ContLexer.new(token_val)
           cont = cont_lexed.values.join(' ')
-          lexed.parsed!(tokens_range, cont.parentheses)
+          lexed.parsed!(cont.parentheses, tokens_range)
 
         when /:LBRC(\d):CONT\d:RBRC(\d)/
           tokens_range = $1.to_i..$2.to_i
@@ -60,12 +60,12 @@ module Qlang
               token_val
             end
 
-          lexed.parsed!(tokens_range, cont)
+          lexed.parsed!(cont, tokens_range)
 
         when /:eval_func(\d)/
           token_position = $1.to_i
           cont = lexed.get_value(token_position)
-          lexed.parsed!(token_position, cont.parentheses)
+          lexed.parsed!(cont.parentheses, token_position)
 
         when /:differential(\d)/
           token_position = $1.to_i
@@ -74,9 +74,9 @@ module Qlang
           cont = "#{$1}(#{FormulaParser.execute($2)})"
           # FIX: Refactor
           #cont.gsub!(/(d\/d[a-zA-Z]) (.*)/, "\1(\2)")
-          lexed.parsed!(token_position, cont.parentheses)
+          lexed.parsed!(cont.parentheses, token_position)
         when /:CONT(\d)/
-          lexed.parsed!($1.to_i, lexed.get_value($1.to_i))
+          lexed.parsed!(lexed.get_value($1.to_i), $1.to_i)
         end
         lexed.squash!(($1.to_i)..($1.to_i+1)) if lexed.token_str =~ /(?::CONT|:R)(\d)(?::CONT|:R)(\d)/
       end
