@@ -45,12 +45,13 @@ module Qlang
         case target
           when Range
             parsed_between!((target.first.to_i)..(target.last.to_i), parsed)
-          when Integer
+          else
             parsed_at!(target.to_i, parsed)
         end
       end
 
       def squash!(range, token: :CONT)
+        range = (range.first.to_i)..(range.last.to_i)
         value = values[range].join
         range.count.times { @lexeds.delete_at(range.first) }
         @lexeds.insert(range.first, { token => value })
