@@ -43,8 +43,10 @@ module Qlang
       ## POST(with side effect, without idempotence.)
       def parsed!(parsed, target)
         case target
-          when Integer then parsed_at!(target, parsed)
-          when Range   then parsed_between!(target, parsed)
+          when Range
+            parsed_between!((target.first.to_i)..(target.last.to_i), parsed)
+          when Integer
+            parsed_at!(target.to_i, parsed)
         end
       end
 
