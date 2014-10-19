@@ -66,17 +66,6 @@ module Qlang
         @lexeds[index]
       end
 
-      def fix_r_txt!
-        @lexeds.map! do |hash|
-          if value = (hash[:R] || hash[:CONT])
-            ary = hash.first
-            ary[1] = value.gsub(/:%\|/,'').gsub(/\|%:/,'')
-            hash = Hash[*ary]
-          end
-          hash
-        end
-      end
-
       private
         def parsed_at!(token_position, parsed)
           @lexeds.delete_at(token_position)

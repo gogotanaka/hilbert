@@ -80,7 +80,6 @@ module Qlang
         lexed.squash!(($1.to_i)..($1.to_i+1)) if lexed.token_str =~ /(?::CONT|:R)(\d)(?::CONT|:R)(\d)/
       end
 
-      lexed.fix_r_txt!
       lexed.values.join
     end
     module_function :execute
