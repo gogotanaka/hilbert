@@ -1,4 +1,3 @@
-require 'pry'
 module Qlang
   module Lexer
     class WrapLexer < Base
