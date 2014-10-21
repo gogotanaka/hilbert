@@ -55,6 +55,8 @@ module Qlang
       EQL = /\=/
       SP = / /
 
+      ITGRLSYM = 'S'
+
       # TODO: what is better
       class Util
         def self.string_out(str, partition)
