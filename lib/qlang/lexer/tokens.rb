@@ -45,7 +45,9 @@ module Qlang
       RBRCS = /\}/
       BRCS = /(#{LBRCS}|#{RBRCS})/
 
-
+      LBRCT = /\[/
+      RBRCT = /\]/
+      BRCT = /(#{LBRCT}|#{RBRCT})/
 
       CLN = /\:/
       SCLN = /;/
