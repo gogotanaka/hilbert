@@ -48,6 +48,7 @@ module Qlang
       CLN = /\:/
       SCLN = /;/
       CMA = /\,/
+      EQL = /\=/
       SP = / /
 
       # TODO: what is better
