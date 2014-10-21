@@ -41,9 +41,11 @@ module Qlang
       RPRN = /\)/
       PRN = /(#{LPRN}|#{RPRN})/
 
-      LBRC = /\{/
-      RBRC = /\}/
-      BRC = /(#{LBRC}|#{RBRC})/
+      LBRCS = /\{/
+      RBRCS = /\}/
+      BRCS = /(#{LBRCS}|#{RBRCS})/
+
+
 
       CLN = /\:/
       SCLN = /;/

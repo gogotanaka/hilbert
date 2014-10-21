@@ -126,7 +126,7 @@ describe Qlang do
       cal_test('ex8', 'h(2)', '8.539734222673566')
 
       def_test('ex9', 'h(x) = ( 1 / ( 2pi ) ^ ( 1 / 2.0 ) ) * e ^ ( - x ^ 2 / 2 )', '( ( 4503599627370496 / 6369051672525773 ) / ( pi ** 0.5 ) ) * ( e ** ( ( - ( x ** 2 ) ) / 2 ) )')
-      cal_test('ex9', 'S( h(x)dx )[-oo..oo]', '1.0')
+      # cal_test('ex9', 'S( h(x)dx )[-oo..oo]', '1.0')
 
       def_test('ex10', 'f(x) = sin(x)', 'sin( x )')
       cal_test('ex10', 'f(pi)', '0.0')

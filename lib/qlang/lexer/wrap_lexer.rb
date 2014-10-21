@@ -10,10 +10,10 @@ module Qlang
       rule(/#{LPRN}#{NUMS_BY_SP_BY_SCLN}#{RPRN}/) { :matrix }
 
 
-      rule(/\(/) { :LPRN }
-      rule(/\)/) { :RPRN }
-      rule(/\{/) { :LBRC }
-      rule(/\}/) { :RBRC }
+      rule(/#{LPRN}/) { :LPRN }
+      rule(/#{RPRN}/) { :RPRN }
+      rule(/#{LBRCS}/) { :LBRCS }
+      rule(/#{RBRCS}/) { :RBRCS }
 
       rule(/[ \t\f]/)
 

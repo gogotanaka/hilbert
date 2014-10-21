@@ -49,7 +49,7 @@ module Qlang
           cont = cont_lexed.values.join(' ')
           lexed.parsed!(cont.parentheses, tokens_range)
 
-        when /:LBRC(\d):CONT\d:RBRC(\d)/
+        when /:LBRCS(\d):CONT\d:RBRCS(\d)/
           tokens_range = $1.to_i..$2.to_i
           token_val = lexed.lexeds[tokens_range.to_a[1]][:CONT]
 
