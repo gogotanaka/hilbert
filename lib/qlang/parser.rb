@@ -80,8 +80,23 @@ module Qlang
         lexed.squash!(($1.to_i)..($1.to_i+1)) if lexed.token_str =~ /(?::CONT|:R)(\d)(?::CONT|:R)(\d)/
       end
 
-      lexed.values.join
+      LangEqualizer.execute(
+        lexed.values.join
+      )
     end
     module_function :execute
+
+    # FIXIT
+    class LangEqualizer
+      def self.execute(str)
+        case $meta_info.lang
+        when :ruby
+          str.gsub(/\^/, '**')
+        else
+          str
+        end
+      end
+    end
+
   end
 end
