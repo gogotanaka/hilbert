@@ -22,7 +22,7 @@ module Qlang
         fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
-        when /(:vector)(\d)/, /(:matrix)(\d)/, /(:tmatrix)(\d)/, /(:integral)(\d)/, /(:def_func)(\d)/
+        when /(:vector)(\d)/, /(:matrix)(\d)/, /(:tmatrix)(\d)/, /(:integral)(\d)/, /(:def_func)(\d)/, /(:differential)(\d)/
           token_sym = $1.delete(':').to_sym
           token_position = $2.to_i
           token_els = lexed.lexeds[token_position][:els]
@@ -38,6 +38,9 @@ module Qlang
             IntegralParser.execute(token_els)
           when :def_func
             FuncParser.execute(token_els)
+          when :differential
+            del_var, formula = token_els
+            "d/d#{del_var}(#{FormulaParser.execute(formula)})"
           end
           lexed.parsed!(parsed, token_position)
 
@@ -66,13 +69,6 @@ module Qlang
           token_val = lexed.get_value($1)
           lexed.parsed!(token_val.parentheses, $1)
 
-        when /:differential(\d)/
-          cont = lexed.get_value($1)
-          cont =~ /(d\/d[a-zA-Z]) (.*)/
-          cont = "#{$1}(#{FormulaParser.execute($2)})"
-          # FIX: Refactor
-          #cont.gsub!(/(d\/d[a-zA-Z]) (.*)/, "\1(\2)")
-          lexed.parsed!(cont.parentheses, $1)
         when /:CONT(\d)/
           lexed.parsed!(lexed.get_value($1), $1)
         end
