@@ -4,7 +4,7 @@ module Qlang
       include Base
       def execute(els)
         VectorApi.execute(
-          els.first.split_by_sp
+          els.first.rm(/\A +/).rm(/ +\z/).split_by_sp
         )
       end
       module_function :execute
