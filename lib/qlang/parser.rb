@@ -25,7 +25,7 @@ module Qlang
         when /(:vector)(\d)/, /(:matrix)(\d)/, /(:tmatrix)(\d)/, /(:integral)(\d)/, /(:def_func)(\d)/, /(:differential)(\d)/
           token_sym = $1.delete(':').to_sym
           token_position = $2.to_i
-          token_els = lexed.lexeds[token_position][:els]
+          token_els = lexed[token_position][:els]
 
           parsed = case token_sym
           when :vector
@@ -46,7 +46,7 @@ module Qlang
 
         when /:LPRN(\d):CONT\d:RPRN(\d)/
           tokens_range = $1.to_i..$2.to_i
-          token_val = lexed.lexeds[tokens_range.to_a[1]][:CONT]
+          token_val = lexed[tokens_range.to_a[1]][:CONT]
 
           cont_lexed = Lexer::ContLexer.new(token_val)
           cont = cont_lexed.values.join(' ')
@@ -54,7 +54,7 @@ module Qlang
 
         when /:LBRCS(\d):CONT\d:RBRCS(\d)/
           tokens_range = $1.to_i..$2.to_i
-          token_val = lexed.lexeds[tokens_range.to_a[1]][:CONT]
+          token_val = lexed[tokens_range.to_a[1]][:CONT]
 
           cont = case token_val
             when %r@#{ONEHASH}(#{CMA}#{ONEHASH})*@
