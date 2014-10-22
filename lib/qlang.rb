@@ -2,6 +2,13 @@
 require 'dydx'
 include Dydx
 
+# Ruby stlib
+require 'kconv'
+require 'matrix'
+require 'yaml'
+require 'singleton'
+
+
 require "qlang/version"
 require 'qlang/utils/ruby_ext'
 require 'qlang/lexer'
@@ -10,11 +17,6 @@ require 'qlang/parser'
 require 'qlang/exec'
 
 require 'qlang/iq'
-
-require 'kconv'
-require 'matrix'
-require 'yaml'
-require 'singleton'
 
 module Qlang
   class MetaInfo
