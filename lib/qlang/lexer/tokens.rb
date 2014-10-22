@@ -6,15 +6,15 @@ module Qlang
       FLO = /[0-9]+\.[0-9]+/
       E = /e/
       PI = /pi/
-      NUM = /(#{FLO}|#{INT}|#{E}|#{PI})/
+      NUM = /(?:#{FLO}|#{INT}|#{E}|#{PI})/
 
       # FUNCTION
       EMBEDDED_FUNC = /(sin|cos|tan|log)/
       USER_FUNC = /[a-zA-Z]/
-      FUNCV = /(#{EMBEDDED_FUNC}|#{USER_FUNC})/
+      FUNCV = /(?:#{EMBEDDED_FUNC}|#{USER_FUNC})/
 
       # VARIABLE
-      VAR = /([a-d]|[f-z])/
+      VAR = /(?:[a-d]|[f-z])/
       #VAR_MUL2 = /(?!pi)#{VAR}{2}/
       # #VAR_MUL3 = /(?!#{EMBEDDED_FUNC})#{VAR}{3}/
       # # FIX:
@@ -30,24 +30,24 @@ module Qlang
       MUL = /\*/
       DIV = /\//
       EXP = /(\*\*|\^)/
-      OPE = /(#{PLS}|#{SUB}|#{MUL}|#{DIV}|#{EXP})/
+      OPE = /(?:#{PLS}|#{SUB}|#{MUL}|#{DIV}|#{EXP})/
 
-      VARNUM = /(#{NUM}|#{VAR})/
+      VARNUM = /(?:#{NUM}|#{VAR})/
       ANYSP = ' *'
       ANYSTR = /.+/
       NONL = /[^\r\n]/
 
       LPRN = /\(/
       RPRN = /\)/
-      PRN = /(#{LPRN}|#{RPRN})/
+      PRN = /(?:#{LPRN}|#{RPRN})/
 
       LBRCS = /\{/
       RBRCS = /\}/
-      BRCS = /(#{LBRCS}|#{RBRCS})/
+      BRCS = /(?:#{LBRCS}|#{RBRCS})/
 
       LBRCT = /\[/
       RBRCT = /\]/
-      BRCT = /(#{LBRCT}|#{RBRCT})/
+      BRCT = /(?:#{LBRCT}|#{RBRCT})/
 
       CLN = /\:/
       SCLN = /;/
@@ -60,7 +60,7 @@ module Qlang
       # TODO: what is better
       class Util
         def self.string_out(str, partition)
-        /#{ANYSP}#{str}(#{ANYSP}#{partition}#{ANYSP}#{str})*#{ANYSP}/
+        /#{ANYSP}#{str}(?:#{ANYSP}#{partition}#{ANYSP}#{str})*#{ANYSP}/
         end
 
         def self.func_call(args)
@@ -79,7 +79,7 @@ module Qlang
 
       NUMS_BY_SP_BY_SCLN = Util.string_out(NUMS_BY_SP, SCLN)
 
-      FORMULA = /(#{OPE}|#{FUNCV}|#{VAR}|#{NUM}|#{PRN}|#{ANYSP})+/
+      FORMULA = /(?:#{OPE}|#{FUNCV}|#{VAR}|#{NUM}|#{PRN}|#{ANYSP})+/
     end
   end
 end
