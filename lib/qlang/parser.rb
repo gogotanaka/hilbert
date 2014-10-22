@@ -67,13 +67,12 @@ module Qlang
           lexed.parsed!(token_val.parentheses, $1)
 
         when /:differential(\d)/
-          token_position = $1.to_i
-          cont = lexed.get_value(token_position)
+          cont = lexed.get_value($1)
           cont =~ /(d\/d[a-zA-Z]) (.*)/
           cont = "#{$1}(#{FormulaParser.execute($2)})"
           # FIX: Refactor
           #cont.gsub!(/(d\/d[a-zA-Z]) (.*)/, "\1(\2)")
-          lexed.parsed!(cont.parentheses, token_position)
+          lexed.parsed!(cont.parentheses, $1)
         when /:CONT(\d)/
           lexed.parsed!(lexed.get_value($1), $1)
         end
