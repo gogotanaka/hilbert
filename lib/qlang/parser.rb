@@ -62,7 +62,7 @@ module Qlang
 
           lexed.parsed!(cont, tokens_range)
 
-        when /:eval_func(\d)/
+        when /:FUNCCN(\d)/
           token_val = lexed.get_value($1)
           lexed.parsed!(token_val.parentheses, $1)
 
