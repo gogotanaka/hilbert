@@ -22,10 +22,9 @@ module Qlang
         fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
-        when /(:vector)(\d)/, /(:matrix)(\d)/, /(:tmatrix)(\d)/, /(:integral)(\d)/, /(:def_func)(\d)/, /(:differential)(\d)/
-          token_sym = $1.delete(':').to_sym
-          token_position = $2.to_i
-          token_els = lexed[token_position][:els]
+        when /:(vector)(\d)/, /:(matrix)(\d)/, /:(tmatrix)(\d)/, /:(integral)(\d)/, /:(def_func)(\d)/, /:(differential)(\d)/
+          token_sym = $1.to_sym
+          token_els = lexed[$2][:els]
 
           parsed = case token_sym
           when :vector
@@ -42,7 +41,7 @@ module Qlang
             del_var, formula = token_els
             "d/d#{del_var}(#{FormulaParser.execute(formula)})"
           end
-          lexed.parsed!(parsed, token_position)
+          lexed.parsed!(parsed, $2)
 
         when /:LPRN(\d):CONT\d:RPRN(\d)/
           tokens_range = $1.to_i..$2.to_i
