@@ -18,45 +18,42 @@ module Qlang
     ONEHASH = "#{ANYSP}#{SYM}#{CLN}#{ANYSP}#{VARNUM}#{ANYSP}" # sdf: 234
     def execute(lexed)
       time = Time.now
-      until lexed.token_str =~ /\A(:NLIN\d|:R\d)+\z/
+      until lexed.token_str =~ /\A:(NLIN|R)\d+\z/
         fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
         when /:(vector)(\d)/, /:(matrix)(\d)/, /:(tmatrix)(\d)/, /:(integral)(\d)/, /:(def_func)(\d)/, /:(differential)(\d)/
-          token_sym = $1.to_sym
           token_els = lexed[$2][:els]
 
-          parsed = case token_sym
-          when :vector
+          parsed = case $1
+          when 'vector'
             VectorParser.execute(token_els)
-          when :matrix
+          when 'matrix'
             MatrixParser.execute(token_els)
-          when :tmatrix
+          when 'tmatrix'
             MatrixParser.execute(token_els, trans: true)
-          when :integral
+          when 'integral'
             IntegralParser.execute(token_els)
-          when :def_func
+          when 'def_func'
             FuncParser.execute(token_els)
-          when :differential
+          when 'differential'
             del_var, formula = token_els
             "d/d#{del_var}(#{FormulaParser.execute(formula)})"
           end
           lexed.parsed!(parsed, $2)
 
-        when /:LPRN(\d):CONT\d:RPRN(\d)/
-          tokens_range = $1.to_i..$2.to_i
-          token_val = lexed[tokens_range.to_a[1]][:CONT]
+        when /:LPRN(\d):CONT(\d):RPRN(\d)/
+          tokens_range = $1.to_i..$3.to_i
+          token_val = lexed[$2][:CONT]
 
-          cont_lexed = Lexer::ContLexer.new(token_val)
-          cont = cont_lexed.values.join(' ')
-          lexed.parsed!(cont.parentheses, tokens_range)
+          lexed.parsed!(token_val.parentheses, tokens_range)
 
-        when /:LBRCS(\d):CONT\d:RBRCS(\d)/
-          tokens_range = $1.to_i..$2.to_i
-          token_val = lexed[tokens_range.to_a[1]][:CONT]
+        when /:LBRCS(\d):CONT(\d):RBRCS(\d)/
+          tokens_range = $1.to_i..$3.to_i
+          token_val = lexed[$2][:CONT]
 
           cont = case token_val
-            when %r@#{ONEHASH}(#{CMA}#{ONEHASH})*@
+            when /#{ONEHASH}(#{CMA}#{ONEHASH})*/
               ListParser.execute(token_val)
             else
               token_val
@@ -71,7 +68,7 @@ module Qlang
         when /:CONT(\d)/
           lexed.parsed!(lexed.get_value($1), $1)
         end
-        lexed.squash!(($1.to_i)..($1.to_i+1)) if lexed.token_str =~ /(?::CONT|:R)(\d)(?::CONT|:R)(\d)/
+        lexed.squash!(($1.to_i)..($1.to_i+1)) if lexed.token_str =~ /:(?:CONT|R)(\d):(?:CONT|R)(\d)/
       end
 
       LangEqualizer.execute(

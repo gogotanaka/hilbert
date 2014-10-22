@@ -16,13 +16,13 @@ describe Qlang do
       expect(
         Q.to_ruby.compile('d/dx(sin(x))')
       ).to eq(
-        "d/dx(sin (x))"
+        "d/dx(sin(x))"
       )
 
       expect(
         Q.to_ruby.compile('d/dx(log(x))')
       ).to eq(
-        "d/dx(log (x))"
+        "d/dx(log(x))"
       )
 
       expect(
