@@ -30,7 +30,7 @@ module Qlang
 
           parsed = case token_sym
           when :vector
-            VectorParser.execute(token_val)
+            VectorParser.execute(token_els)
           when :matrix
             MatrixParser.execute(token_els)
           when :tmatrix
