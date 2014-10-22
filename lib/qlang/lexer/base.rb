@@ -42,9 +42,13 @@ module Qlang
 
       # Accessor
       ## GET(without side effect)
+      def [](index)
+        @lexeds[index]
+      end
+
       def get_value(num)
         num = num.to_i
-        @lexeds.map { |lexed| lexed.values.first }[num]
+        @lexeds[num].values.first
       end
 
       def token_str
