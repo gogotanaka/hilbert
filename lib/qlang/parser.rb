@@ -36,7 +36,7 @@ module Qlang
           when :tmatrix
             MatrixParser.execute(token_els, trans: true)
           when :integral
-            IntegralParser.execute(token_val)
+            IntegralParser.execute(token_els)
           when :def_func
             FuncParser.execute(token_val)
           end

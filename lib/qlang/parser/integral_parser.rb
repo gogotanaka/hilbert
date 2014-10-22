@@ -2,8 +2,8 @@ module Qlang
   module Parser
     module IntegralParser
       include Base
-      def execute(string)
-        integrated, range = string.scan(/S *\((.+)\)\[(.+)\]/).first
+      def execute(els)
+        integrated, range = els[0], els[1]
 
         integrated.rm!(' ')
 
