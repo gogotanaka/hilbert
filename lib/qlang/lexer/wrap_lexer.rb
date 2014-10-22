@@ -17,7 +17,7 @@ module Qlang
 
       rule(/[ \t\f]/)
 
-      rule(/(\r|\n)+/) { :NLIN }
+      rule(/(\r|\n)+/) { :NULL }
 
       rule(/[^\(\)\{\}(\n\n)]+/) { :CONT }
     end

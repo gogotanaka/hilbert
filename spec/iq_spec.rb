@@ -62,6 +62,13 @@ describe Qlang do
         '(1 4; 2 5; 3 6)'
       )
 
+      cal_test('ex9',
+        '(1 2 3
+          4 5 6) +
+         (1 2 3
+          4 5 6)',
+        '(2 4 6; 8 10 12)'
+      )
 
       describe 'Float' do
         cal_test('ex1',
