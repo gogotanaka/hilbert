@@ -26,14 +26,15 @@ module Qlang
           token_sym = $1.delete(':').to_sym
           token_position = $2.to_i
           token_val = lexed.lexeds[token_position][token_sym]
+          token_els = lexed.lexeds[token_position][:els]
 
           parsed = case token_sym
           when :vector
             VectorParser.execute(token_val)
           when :matrix
-            MatrixParser.execute(token_val)
+            MatrixParser.execute(token_els)
           when :tmatrix
-            MatrixParser.execute(token_val, trans: true)
+            MatrixParser.execute(token_els, trans: true)
           when :integral
             IntegralParser.execute(token_val)
           when :def_func

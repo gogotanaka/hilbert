@@ -22,7 +22,7 @@ module Qlang
         until ss.eos?
           self.class.token_hash.each do |token, patter|
             if ss.scan(patter)
-              (@lexeds << {token => ss[0]}) unless token == :NULL
+              (@lexeds << {token => ss[0], els: [ss[1],s[2], s[3]].compact }) unless token == :NULL
               break
             end
           end
