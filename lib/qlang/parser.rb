@@ -25,7 +25,6 @@ module Qlang
         when /(:vector)(\d)/, /(:matrix)(\d)/, /(:tmatrix)(\d)/, /(:integral)(\d)/, /(:def_func)(\d)/
           token_sym = $1.delete(':').to_sym
           token_position = $2.to_i
-          token_val = lexed.lexeds[token_position][token_sym]
           token_els = lexed.lexeds[token_position][:els]
 
           parsed = case token_sym
