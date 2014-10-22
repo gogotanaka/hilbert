@@ -38,7 +38,7 @@ module Qlang
           when :integral
             IntegralParser.execute(token_els)
           when :def_func
-            FuncParser.execute(token_val)
+            FuncParser.execute(token_els)
           end
           lexed.parsed!(parsed, token_position)
 
