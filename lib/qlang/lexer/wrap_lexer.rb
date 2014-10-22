@@ -5,8 +5,8 @@ module Qlang
       rule(/#{ITGRLSYM}#{ANYSP}#{LPRN}(#{ANYSTR})#{RPRN}#{LBRCT}(#{ANYSTR})#{RBRCT}/) { :integral }
       rule(/d\/d(#{VAR}) (#{FORMULA})/) { :differential }
       rule(/#{LPRN}(#{NUMS_BY_SP})#{RPRN}/) { :vector }
-      rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN})#{RPRN}t/) { :tmatrix }
-      rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN})#{RPRN}/) { :matrix }
+      rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN_OR_NELN})#{RPRN}t/m) { :tmatrix }
+      rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN_OR_NELN})#{RPRN}/m) { :matrix }
 
       rule(/#{FUNCCN}/) { :FUNCCN }
 

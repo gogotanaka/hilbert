@@ -3,7 +3,7 @@ module Qlang
     module MatrixParser
       include Base
       def execute(els, trans: false)
-        rows = els.first.split(/ *; */).map(&:split_by_sp)
+        rows = els.first.split(/ *(?:;|\n) */).map(&:split_by_sp)
         rows.all? { |row| row.count == rows.first.count }
         if trans
           rows = rows.transpose

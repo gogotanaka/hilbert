@@ -61,6 +61,21 @@ describe Qlang do
         '(1 2 3; 4 5 6)t',
         '(1 4; 2 5; 3 6)'
       )
+
+
+      describe 'Float' do
+        cal_test('ex1',
+          '(1.0  2.0  3
+            4.2  5.3  6)t',
+          '(1.0 4.2; 2.0 5.3; 3 6)'
+        )
+
+        cal_test('ex2',
+          '(1.0  2.0  3
+            4.2  5.3  6)t',
+          '(1.0 4.2; 2.0 5.3; 3 6)'
+        )
+      end
     end
 
     describe 'Vector' do

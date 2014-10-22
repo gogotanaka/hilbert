@@ -54,8 +54,11 @@ module Qlang
       CMA = /\,/
       EQL = /\=/
       SP = / /
+      NLIN = /(\r|\n)/
 
       ITGRLSYM = 'S'
+      # FIXIT
+      SCLN_OR_NELN = /(?:#{SCLN}|#{NLIN})/
 
       # TODO: what is better
       class Util
@@ -77,7 +80,7 @@ module Qlang
       FUNCCV = Util.func_call(VARS_BY_CMA)
       FUNCCVN =  Util.func_call(VARNUMS_BY_CMA)
 
-      NUMS_BY_SP_BY_SCLN = Util.string_out(NUMS_BY_SP, SCLN)
+      NUMS_BY_SP_BY_SCLN_OR_NELN = Util.string_out(NUMS_BY_SP, SCLN_OR_NELN)
 
       FORMULA = /(?:#{OPE}|#{FUNCV}|#{VAR}|#{NUM}|#{PRN}|#{ANYSP})+/
     end
