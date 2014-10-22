@@ -1,12 +1,12 @@
 module Qlang
   module Lexer
     class WrapLexer < Base
-      rule(/#{FUNCCV}#{ANYSP}#{EQL}#{ANYSP}#{FORMULA}/) { :def_func }
-      rule(/#{ITGRLSYM}#{ANYSP}#{LPRN}#{ANYSTR}#{RPRN}#{LBRCT}#{ANYSTR}#{RBRCT}/) { :integral }
-      rule(/d\/d#{VAR} #{FORMULA}/) { :differential }
-      rule(/#{LPRN}#{NUMS_BY_SP}#{RPRN}/) { :vector }
-      rule(/#{LPRN}#{NUMS_BY_SP_BY_SCLN}#{RPRN}t/) { :tmatrix }
-      rule(/#{LPRN}#{NUMS_BY_SP_BY_SCLN}#{RPRN}/) { :matrix }
+      rule(/(#{FUNCCV})#{ANYSP}#{EQL}#{ANYSP}(#{FORMULA})/) { :def_func }
+      rule(/#{ITGRLSYM}#{ANYSP}#{LPRN}(#{ANYSTR})#{RPRN}#{LBRCT}(#{ANYSTR})#{RBRCT}/) { :integral }
+      rule(/d\/d(#{VAR}) (#{FORMULA})/) { :differential }
+      rule(/#{LPRN}(#{NUMS_BY_SP})#{RPRN}/) { :vector }
+      rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN})#{RPRN}t/) { :tmatrix }
+      rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN})#{RPRN}/) { :matrix }
 
       rule(/#{FUNCCN}/) { :FUNCCN }
 
