@@ -11,7 +11,7 @@ module Qlang
           arys_str = rows.map { |row| "[#{row.join(', ')}]" }.join(', ')
           "Matrix[#{arys_str}]"
         else
-          fail "Matrix is not implemented for #{LANGS_HASH[$meta_info.lang.to_s]}"
+          fail "Matrix is not implemented for #{$meta_info.lang_str}"
         end
       end
       module_function :execute

@@ -7,7 +7,7 @@ module Qlang
         when :ruby
           "S(#{func}, #{delta})[#{a}, #{b}]"
         else
-          fail "Integral is not implemented for #{LANGS_HASH[$meta_info.lang.to_s]}"
+          fail "Integral is not implemented for #{$meta_info.lang_str}"
         end
 
       end

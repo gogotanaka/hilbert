@@ -10,7 +10,7 @@ module Qlang
         when :python
           "array([#{nums.join(', ')}])"
         else
-          fail "Vector is not implemented for #{LANGS_HASH[$meta_info.lang.to_s]}"
+          fail "Vector is not implemented for #{$meta_info.lang_str}"
         end
       end
       module_function :execute

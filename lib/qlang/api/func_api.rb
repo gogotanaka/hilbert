@@ -8,7 +8,7 @@ module Qlang
         when :ruby
           "#{func_name}(#{ args.join(' ,') }) <= #{contents}"
         else
-          fail "Function is not implemented for #{LANGS_HASH[$meta_info.lang.to_s]}"
+          fail "Function is not implemented for #{$meta_info.lang_str}"
         end
 
       end
