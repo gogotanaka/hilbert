@@ -1,14 +1,14 @@
 # Ruby stlib
 require 'kconv'
 require 'matrix'
-require 'yaml'
 require 'singleton'
+require 'yaml'
 
 # Q core
-require "qlang/version"
-require 'qlang/utils/ruby_ext'
 require 'qlang/lexer'
 require 'qlang/parser'
+require 'qlang/utils/ruby_ext'
+require "qlang/version"
 
 module Qlang
   LANGS_HASH = YAML.load_file("./lib/qlang/utils/langs.yml")['langs']
