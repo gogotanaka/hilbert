@@ -1,7 +1,7 @@
 require 'test/unit'
 require './lib/qlang'
 
-class TestVector < Test::Unit::TestCase
+class TestQlang < Test::Unit::TestCase
   def setup
 
   end

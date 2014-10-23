@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Qlang do
+  # Has moved to minitest now.
   it 'has a version number' do
     expect(Qlang::VERSION).not_to be nil
   end
