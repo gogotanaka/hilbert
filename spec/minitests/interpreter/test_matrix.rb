@@ -1,13 +1,10 @@
 require 'test/unit'
+require './spec/minitests/interpreter/base'
 require './lib/qlang'
 
-class TestMatrix < Test::Unit::TestCase
+class TestMatrix < TestInterpreterBase
   def setup
 
-  end
-
-  def assert_iq_equal(input, output)
-    assert_equal(Qlang::Iq.execute(input), output)
   end
 
   def test_integer

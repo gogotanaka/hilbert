@@ -1,18 +1,10 @@
 require 'test/unit'
+require './spec/minitests/interpreter/base'
 require './lib/qlang'
-require 'pry'
-class TestFunction < Test::Unit::TestCase
+
+class TestFunction < TestInterpreterBase
   def setup
 
-  end
-
-  def assert_def_func(input, output)
-    assert_equal(Qlang::Iq.execute(input), output)
-  end
-
-  def assert_cal_func(input, output)
-    assert_equal(Qlang::Iq.execute(input), output)
-    reset
   end
 
   def test_general
