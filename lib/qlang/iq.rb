@@ -9,10 +9,10 @@ module Qlang
     end
 
     def self.execute(code)
-      ruby_code = Q.to_ruby.compile(code)
+      ruby_code = Q.to_ruby.compile(code.encode('utf-8'))
       ruby_obj = eval(ruby_code)
 
-      optimize_output(ruby_obj)
+      optimize_output(ruby_obj).encode('utf-8')
     rescue SyntaxError
       # TODO: emergency
       case ruby_code
