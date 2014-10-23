@@ -1,3 +1,6 @@
+require 'dydx'
+include Dydx
+
 module Qlang
   module Iq
     class Dydx::Algebra::Formula

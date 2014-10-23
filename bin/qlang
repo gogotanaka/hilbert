@@ -1,6 +1,12 @@
 #!/usr/bin/env ruby
+
 require 'qlang'
-include Qlang
+
+# Q command line
+require 'qlang/exec'
+
+# Q interpreter
+require 'qlang/iq'
 
 # TODO: There are vanch of todo ..
 case ARGV.first

@@ -1,24 +1,18 @@
-# Use Dydx -> https://github.com/gogotanaka/dydx
-require 'dydx'
-include Dydx
-
 # Ruby stlib
 require 'kconv'
 require 'matrix'
 require 'yaml'
 require 'singleton'
 
-
+# Q core
 require "qlang/version"
 require 'qlang/utils/ruby_ext'
 require 'qlang/lexer'
 require 'qlang/parser'
 
-require 'qlang/exec'
-
-require 'qlang/iq'
-
 module Qlang
+  LANGS_HASH = YAML.load_file("./lib/qlang/utils/langs.yml")['langs']
+
   class MetaInfo
     include Singleton
     attr_accessor :lang, :opts
@@ -29,8 +23,6 @@ module Qlang
     end
   end
   $meta_info = MetaInfo.instance
-
-  LANGS_HASH = YAML.load_file("./lib/qlang/utils/langs.yml")['langs']
 
   class << self
     def compile(str)
