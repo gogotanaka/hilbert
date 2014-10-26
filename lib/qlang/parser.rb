@@ -1,7 +1,5 @@
 require 'qlang/api'
 
-require 'qlang/lexer/formula_lexer'
-
 require 'qlang/parser/base'
 require 'qlang/parser/matrix_parser'
 require 'qlang/parser/vector_parser'
@@ -21,7 +19,7 @@ module Qlang
         fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
-        when /:(vector)(\d)/, /:(matrix)(\d)/, /:(tmatrix)(\d)/, /:(integral)(\d)/, /:(def_func)(\d)/, /:(differential)(\d)/
+        when /:(vector)(\d+)/, /:(matrix)(\d+)/, /:(tmatrix)(\d+)/, /:(integral)(\d+)/, /:(def_func)(\d+)/, /:(differential)(\d+)/
           token_els = lexed[$2][:els]
 
           parsed = case $1
@@ -41,13 +39,13 @@ module Qlang
           end
           lexed.parsed!(parsed, $2)
 
-        when /:LPRN(\d):CONT(\d):RPRN(\d)/
+        when /:LPRN(\d+):CONT(\d+):RPRN(\d+)/
           tokens_range = $1.to_i..$3.to_i
           token_val = lexed[$2][:CONT]
 
           lexed.parsed!(token_val.parentheses, tokens_range)
 
-        when /:LBRCS(\d):CONT(\d):RBRCS(\d)/
+        when /:LBRCS(\d+):CONT(\d+):RBRCS(\d+)/
           tokens_range = $1.to_i..$3.to_i
           token_val = lexed[$2][:CONT]
 
@@ -60,14 +58,14 @@ module Qlang
 
           lexed.parsed!(cont, tokens_range)
 
-        when /:FUNCCN(\d)/
+        when /:FUNCCN(\d+)/
           token_val = lexed.get_value($1)
           lexed.parsed!(token_val.parentheses, $1)
 
-        when /:CONT(\d)/
+        when /:CONT(\d+)/
           lexed.parsed!(lexed.get_value($1), $1)
         end
-        lexed.squash!(($1.to_i)..($1.to_i+1)) if lexed.token_str =~ /:(?:CONT|R)(\d):(?:CONT|R)(\d)/
+        lexed.squash!(($1.to_i)..($1.to_i+1)) if lexed.token_str =~ /:(?:CONT|R)(\d+):(?:CONT|R)(\d+)/
       end
 
       LangEqualizer.execute(
