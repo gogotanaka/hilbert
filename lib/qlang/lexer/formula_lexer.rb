@@ -7,9 +7,6 @@ module Qlang
       rule(/(pi|[1-9a-z])/) { :SNGL }
       rule(/([^\^1-9a-z]|^pi)+/) { :OTHER }
 
-
-
-
       # rule(/#{OPE}/) { :OPE }
       # rule(/#{FUNCV}/) { :FUNCV }
       # rule(/#{VAR}/) { :VAR }

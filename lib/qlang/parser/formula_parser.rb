@@ -2,10 +2,10 @@ require 'qlang/lexer/formula_lexer'
 
 module Qlang
   module Parser
-    # FIX:
     module FormulaParser
       include Lexer::Tokens
-      def execute(str)
+
+      def self.execute(str)
         lexed = Lexer::FormulaLexer.new(str)
         time = Time.now
         loop do
@@ -31,7 +31,6 @@ module Qlang
         end
         lexed.values.join
       end
-      module_function :execute
     end
   end
 end
