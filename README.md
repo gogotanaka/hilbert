@@ -6,7 +6,7 @@
 
 #### I belive mathematics is that one absolutely.
 
-## How can we deal such a nice mathematics in discret world?
+## How can we deal such a great mathematics in discret world?
 
 #### Q-language can be.
 
