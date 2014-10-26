@@ -1,6 +1,6 @@
 module Qlang
   module Lexer
-    class FuncLexer < Base
+    class FormulaLexer < Base
       rule(%r@#{FUNCCV}@) { :FDEF }
       rule(/\=/) { :EQL }
 

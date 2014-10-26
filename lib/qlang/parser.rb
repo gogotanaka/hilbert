@@ -1,7 +1,6 @@
 require 'qlang/api'
 
-require 'qlang/lexer/cont_lexer'
-require 'qlang/lexer/func_lexer'
+require 'qlang/lexer/formula_lexer'
 
 require 'qlang/parser/base'
 require 'qlang/parser/matrix_parser'
