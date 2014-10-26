@@ -1,6 +1,6 @@
 module Qlang
   module Lexer
-    class WrapLexer < Base
+    class MainLexer < Base
       rule(/(#{FUNCCV})#{ANYSP}#{EQL}#{ANYSP}(#{FORMULA})/) { :def_func }
       rule(/#{ITGRLSYM}#{ANYSP}#{LPRN}(#{ANYSTR})#{RPRN}#{LBRCT}(#{ANYSTR})#{RBRCT}/) { :integral }
       rule(/d\/d(#{VAR}) (#{FORMULA})/) { :differential }
