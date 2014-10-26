@@ -1,6 +1,7 @@
 require 'qlang/iq'
 
 class TestInterpreterBase < MiniTest::Unit::TestCase
+  # TODO: opposite
   def assert_iq_equal(input, output)
     assert_equal(Qlang::Iq.execute(input), output)
   end
