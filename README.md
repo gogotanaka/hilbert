@@ -2,7 +2,23 @@
 
 [![Gem Version](https://badge.fury.io/rb/qlang.svg)](http://badge.fury.io/rb/qlang) [![Build Status](https://travis-ci.org/gogotanaka/Q.svg?branch=master)](https://travis-ci.org/gogotanaka/Q) [![Coverage Status](https://coveralls.io/repos/gogotanaka/Q/badge.png?branch=master)](https://coveralls.io/r/gogotanaka/Q?branch=master) [![Code Climate](https://codeclimate.com/github/gogotanaka/Q/badges/gpa.svg)](https://codeclimate.com/github/gogotanaka/Q) [![Dependency Status](https://gemnasium.com/gogotanaka/Q.svg)](https://gemnasium.com/gogotanaka/Q)
 
-Enjoy MATH with Keyboard.
+## Do you know one of the best language in this world?
+
+#### I belive mathematics is that one absolutely.
+
+## How can we deal such a nice mathematics in discret world?
+
+#### Q-language can be.
+
+
+```
++---Discret world---+                    +------mathematics-----+
+|        Ruby       |                    |        axiom         |
+|        TeX        |<------   Q  ------>|    Uncountable noun  |
+|       Pyhthon     |                    |  real number topology|
++-------------------+                    +----------------------+
+```
+
 
 ### Differentiate
 
