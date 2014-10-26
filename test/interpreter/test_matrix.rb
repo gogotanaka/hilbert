@@ -1,4 +1,4 @@
-require './spec/minitests/interpreter/base'
+require 'minitest_helper'
 
 class TestMatrix < TestInterpreterBase
   def setup

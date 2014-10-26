@@ -1,7 +1,6 @@
-require 'test/unit'
-require './lib/qlang'
+require 'minitest_helper'
 
-class TestQlang < Test::Unit::TestCase
+class TestQlang < MiniTest::Unit::TestCase
   def setup
 
   end
@@ -11,7 +10,7 @@ class TestQlang < Test::Unit::TestCase
   end
 
   def test_basis
-    assert_not_equal(Qlang::VERSION, nil)
+    refute_nil ::Qlang::VERSION
     assert_equal(Qlang, Q)
   end
 
@@ -22,5 +21,5 @@ class TestQlang < Test::Unit::TestCase
     assert_equal(Matrix[[1, 2, 3], [4, 5, 6]].to_q, '(1 2 3; 4 5 6)')
     assert_equal(Vector[1, 2, 3].to_q, '(1 2 3)')
   end
-
 end
+

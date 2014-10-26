@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Qlang::VERSION
   spec.authors       = ['gogotanaka']
   spec.email         = ['mail@tanakakazuki.com']
+  spec.extensions    = ["ext/qlang/extconf.rb"]
   spec.summary       = %q{Enjoy MATH!}
   spec.description   = %q{Enjoy MATH!}
   spec.homepage      = 'http://q-language.org/'
@@ -20,7 +21,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "dydx", '~> 0.1.41421'
 
-  spec.add_development_dependency "bundler", "~> 1.6"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake-compiler"
+  spec.add_development_dependency "minitest"
 end

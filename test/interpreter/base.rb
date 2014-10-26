@@ -1,7 +1,6 @@
-require './lib/qlang'
-require 'test/unit'
+require 'qlang/iq'
 
-class TestInterpreterBase < Test::Unit::TestCase
+class TestInterpreterBase < MiniTest::Unit::TestCase
   def assert_iq_equal(input, output)
     assert_equal(Qlang::Iq.execute(input), output)
   end
