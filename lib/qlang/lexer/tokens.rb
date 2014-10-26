@@ -9,7 +9,7 @@ module Qlang
       NUM = /(?:#{FLO}|#{INT}|#{E}|#{PI})/
 
       # FUNCTION
-      EMBEDDED_FUNC = /(sin|cos|tan|log)/
+      EMBEDDED_FUNC = /(?:sin|cos|tan|log)/
       USER_FUNC = /[a-zA-Z]/
       FUNCV = /(?:#{EMBEDDED_FUNC}|#{USER_FUNC})/
 
