@@ -9,9 +9,12 @@ module Qlang
       NUM = /(?:#{FLO}|#{INT}|#{E}|#{PI})/
 
       # FUNCTION
+      LPRN = /\(/
+      RPRN = /\)/
       EMBEDDED_FUNC = /(?:sin|cos|tan|log)/
       USER_FUNC = /[a-zA-Z]/
-      FUNCV = /(?:#{EMBEDDED_FUNC}|#{USER_FUNC})/
+      # h(x + y) != h * (x + y)
+      FUNCV = /(?:#{EMBEDDED_FUNC}|#{USER_FUNC})(?=#{LPRN})/
 
       # VARIABLE
       VAR = /(?:[a-d]|[f-z])/
@@ -37,8 +40,7 @@ module Qlang
       ANYSTR = /.+/
       NONL = /[^\r\n]/
 
-      LPRN = /\(/
-      RPRN = /\)/
+
       PRN = /(?:#{LPRN}|#{RPRN})/
 
       LBRCS = /\{/
