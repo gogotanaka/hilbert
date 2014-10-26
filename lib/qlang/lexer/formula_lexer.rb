@@ -1,13 +1,23 @@
 module Qlang
   module Lexer
     class FormulaLexer < Base
-      rule(%r@#{FUNCCV}@) { :FDEF }
-      rule(/\=/) { :EQL }
+      rule(/\^/) { :EXP }
+      rule(/#{EMBEDDED_FUNC}/) { :BFUNC }
+      rule(/(pi|[1-9a-z]){2,}/) { :MUL }
+      rule(/(pi|[1-9a-z])/) { :SNGL }
+      rule(/([^\^1-9a-z]|^pi)+/) { :OTHER }
 
-      rule(/[ \t\f]/)
 
-      rule(/\r\n/) { :NLIN }
-      rule(/[\w\(].*/) { :FOML }
+
+
+      # rule(/#{OPE}/) { :OPE }
+      # rule(/#{FUNCV}/) { :FUNCV }
+      # rule(/#{VAR}/) { :VAR }
+      # rule(/#{NUM}/) { :NUM }
+      # rule(/#{LPRN}/) { :LPRN }
+      # rule(/#{RPRN}/) { :RPRN }
+
+      # rule(/#{ANYSP}/) {  }
     end
   end
 end
