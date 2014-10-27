@@ -6,6 +6,8 @@ require 'qlang/parser/vector_parser'
 require 'qlang/parser/list_parser'
 require 'qlang/parser/func_parser'
 require 'qlang/parser/integral_parser'
+require 'qlang/parser/limit_parser'
+
 require 'qlang/parser/formula_parser'
 
 module Qlang
@@ -19,7 +21,7 @@ module Qlang
         fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
-        when /:(vector)(\d+)/, /:(matrix)(\d+)/, /:(tmatrix)(\d+)/, /:(integral)(\d+)/, /:(def_func)(\d+)/, /:(differential)(\d+)/
+        when /:(vector)(\d+)/, /:(matrix)(\d+)/, /:(tmatrix)(\d+)/, /:(integral)(\d+)/, /:(def_func)(\d+)/, /:(differential)(\d+)/, /:(limit)(\d+)/
           token_els = lexed[$2][:els]
 
           parsed = case $1
@@ -29,6 +31,8 @@ module Qlang
             MatrixParser.execute(token_els)
           when 'tmatrix'
             MatrixParser.execute(token_els, trans: true)
+          when 'limit'
+            LimitParser.execute(token_els)
           when 'integral'
             IntegralParser.execute(token_els)
           when 'def_func'
