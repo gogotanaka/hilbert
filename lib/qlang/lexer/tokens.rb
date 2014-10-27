@@ -55,6 +55,11 @@ module Qlang
       SCLN = /;/
       CMA = /\,/
       EQL = /\=/
+
+      RSARW = '->'
+      LSARW = '<-'
+      RDARW = '=>'
+      LDARW = '<='
       SP = / /
       NLIN = /(\r|\n)/
 
