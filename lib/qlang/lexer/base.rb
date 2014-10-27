@@ -69,7 +69,9 @@ module Qlang
         end
       end
 
-      def squash!(range, token: :CONT)
+      #squash!(range, token: :CONT)
+      def squash!(range, opts={token: :CONT})
+        token = opts[:token]
         range = (range.first.to_i)..(range.last.to_i)
         value = values[range].join
         range.count.times { @lexeds.delete_at(range.first) }
