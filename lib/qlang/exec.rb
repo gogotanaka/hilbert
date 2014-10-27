@@ -25,10 +25,12 @@ module Qlang
 
         def ch_compile_type(lang)
           case lang
-          when '-Ruby'
+          when '-rb'
             Qlang.to_ruby
-          when '-R'
+          when '-r'
             Qlang.to_r
+          when '-py'
+            Qlang.to_python
           else
             print 'Q support only Ruby and R now.'
           end

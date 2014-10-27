@@ -23,7 +23,7 @@ when '-i'
   end
 when '-v'
   puts Qlang::VERSION
-when '-R', '-Ruby'
+when '-r', '-rb', '-py'
   exec = Qlang::Exec::Compiler.new(ARGV)
   exec.output!
 end
