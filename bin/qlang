@@ -15,7 +15,7 @@ when '-i'
     print 'Q:-> '
     begin
       input = $stdin.gets
-      output = Iq.execute(input)
+      output = Qlang::Iq.execute(input)
       $stdout.puts output
     rescue => e
       puts e
