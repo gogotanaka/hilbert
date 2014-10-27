@@ -19,6 +19,11 @@
 +-------------------+                    +----------------------+
 ```
 
+## Demo
+
+Below code is input and output for interpreter of q-lang
+
+(you can try it by `qlang -i`)
 
 ### Differentiate
 
@@ -85,15 +90,15 @@ Install qlang gme.
 
 ### Compile into R
 
-    $ qlang -R foo.q
+    $ qlang -r foo.q
     
 ### Compile into Ruby
 
-    $ qlang -Ruby foo.q
+    $ qlang -rb foo.q
     
 ### Compile into Python
 
-    $ qlang -Python foo.q
+    $ qlang -py foo.q
 
 
 ## Use as math template within other langs
@@ -114,7 +119,7 @@ Q.E.D
 end
 ```
 
-    $ qlang -Ruby example.rb
+    $ qlang -rb example.rb
     
 
 ```rb
@@ -128,6 +133,11 @@ class ExampleClass
   end
 end
 ```
+
+## Interpreter
+
+    $ qlang -i
+    Q:-> 
 
 ## Contributing
 
