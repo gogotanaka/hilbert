@@ -10,6 +10,7 @@
 
 #### Q-language can be.
 
+Q let you know the sense of mathematics with Keyboard same as with a pen.
 
 ```
 +---Discret world---+                    +------mathematics-----+
