@@ -1,10 +1,10 @@
-module ::Kernel
-  def recursive_require(str)
-    Dir["#{$:.first}/#{str}"].each do |file|
-      require file
-    end
-  end
-end
+# module ::Kernel
+#   def recursive_require(str)
+#     Dir["#{$:.first}/#{str}"].each do |file|
+#       require file
+#     end
+#   end
+# end
 
 class ::String
   def parentheses
