@@ -1,14 +1,6 @@
 require 'qlang/api'
 
-require 'qlang/parser/base'
-require 'qlang/parser/matrix_parser'
-require 'qlang/parser/vector_parser'
-require 'qlang/parser/list_parser'
-require 'qlang/parser/func_parser'
-require 'qlang/parser/integral_parser'
-require 'qlang/parser/limit_parser'
-
-require 'qlang/parser/formula_parser'
+recursive_require 'qlang/parser/*.rb'
 
 module Qlang
   module Parser

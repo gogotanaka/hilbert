@@ -6,9 +6,9 @@ require 'yaml'
 
 $:.unshift(File.dirname(__FILE__))
 # Q core
+require 'qlang/utils/ruby_ext'
 require 'qlang/lexer'
 require 'qlang/parser'
-require 'qlang/utils/ruby_ext'
 
 module Qlang
   # $meta_info indicate what and how to do.
