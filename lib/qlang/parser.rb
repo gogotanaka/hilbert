@@ -22,7 +22,7 @@ module Qlang
         fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
-        when /:(vector)(\d+)/, /:(matrix)(\d+)/, /:(tmatrix)(\d+)/, /:(integral)(\d+)/, /:(def_func)(\d+)/, /:(differential)(\d+)/, /:(limit)(\d+)/
+        when /:(vector)(\d+)/, /:(matrix)(\d+)/, /:(tmatrix)(\d+)/, /:(integral)(\d+)/, /:(def_func)(\d+)/, /:(differential)(\d+)/, /:(limit)(\d+)/, /:(sigma)(\d+)/
           token_els = lexed[$2][:els]
 
           parsed = case $1
@@ -38,6 +38,8 @@ module Qlang
             IntegralParser.execute(token_els)
           when 'def_func'
             FuncParser.execute(token_els)
+          when 'sigma'
+            SigmaParser.execute(token_els)
           when 'differential'
             del_var, formula = token_els
             "d/d#{del_var}(#{FormulaParser.execute(formula)})"

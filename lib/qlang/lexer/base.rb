@@ -33,7 +33,7 @@ module Qlang
         scan_rslt = nil
         token_rule_hash.each do |token, patter|
           if ss.scan(patter)
-            scan_rslt = (token == :NULL) ? :NULL : {token => ss[0], els: [ss[1],ss[2], ss[3]].compact }
+            scan_rslt = (token == :NULL) ? :NULL : {token => ss[0], els: [ss[1],ss[2], ss[3], ss[4]].compact }
             break
           end
         end
