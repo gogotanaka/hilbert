@@ -4,11 +4,11 @@ require 'matrix'
 require 'singleton'
 require 'yaml'
 
+$:.unshift(File.dirname(__FILE__))
 # Q core
 require 'qlang/lexer'
 require 'qlang/parser'
 require 'qlang/utils/ruby_ext'
-require "qlang/version"
 
 module Qlang
   # $meta_info indicate what and how to do.
