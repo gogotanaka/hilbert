@@ -48,13 +48,13 @@ module Qlang
 
         when /:LPRN(\d+):CONT(\d+):RPRN(\d+)/
           tokens_range = $1.to_i..$3.to_i
-          token_val = lexed[$2][:CONT]
+          token_val = lexed[$2][:value]
 
           lexed.parsed!(token_val.parentheses, tokens_range)
 
         when /:LBRCS(\d+):CONT(\d+):RBRCS(\d+)/
           tokens_range = $1.to_i..$3.to_i
-          token_val = lexed[$2][:CONT]
+          token_val = lexed[$2][:value]
 
           cont = case token_val
             when /#{ONEHASH}(#{CMA}#{ONEHASH})*/

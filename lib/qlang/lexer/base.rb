@@ -22,7 +22,7 @@ module Qlang
         until ss.eos?
           scan_rslt, ss = scan(ss)
           if scan_rslt
-            @lexeds << scan_rslt unless scan_rslt.keys.include?(:NULL)
+            @lexeds << scan_rslt unless scan_rslt[:token] == :NULL
           else
             fail "I'm so sorry, something wrong. Please feel free to report this."
           end
@@ -34,7 +34,8 @@ module Qlang
         token_rule_hash.each do |pattern, token|
           if ss.scan(pattern)
             scan_rslt = {
-              token => ss[0],
+              token: token,
+              value: ss[0],
               els: 4.times.inject([]) { |s,i|s << ss[i+1] }.compact
             }
             break
@@ -51,11 +52,11 @@ module Qlang
 
       def get_value(num)
         num = num.to_i
-        @lexeds[num].values.first
+        @lexeds[num][:value]
       end
 
       def token_str
-        @lexeds.map.with_index { |lexed, i| ":#{lexed.keys.first}#{i}" }.join
+        @lexeds.map.with_index { |lexed, i| ":#{lexed[:token]}#{i}" }.join
       end
 
       def token_rule_hash
@@ -78,18 +79,18 @@ module Qlang
         range = (range.first.to_i)..(range.last.to_i)
         value = values[range].join
         range.count.times { @lexeds.delete_at(range.first) }
-        @lexeds.insert(range.first, { token => value })
+        @lexeds.insert(range.first, { token: token, value: value })
       end
 
       # Legacy Accessor
       def values
-        @lexeds.map { |lexed| lexed.values.first }
+        @lexeds.map { |lexed| lexed[:value] }
       end
 
       private
         def parsed_at!(token_position, parsed)
           @lexeds.delete_at(token_position)
-          @lexeds.insert(token_position, { R: parsed })
+          @lexeds.insert(token_position, { token: :R, value: parsed })
         end
 
         def parsed_between!(token_range, parsed)
@@ -97,7 +98,7 @@ module Qlang
           token_range.count.times do
             @lexeds.delete_at(start_pos)
           end
-          @lexeds.insert(start_pos, { R: parsed })
+          @lexeds.insert(start_pos, { token: :R, value: parsed })
         end
 
     end
