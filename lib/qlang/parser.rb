@@ -23,7 +23,7 @@ module Qlang
 
         case lexed.token_str
         when /:(vector)(\d+)/, /:(matrix)(\d+)/, /:(tmatrix)(\d+)/, /:(integral)(\d+)/, /:(def_func)(\d+)/, /:(differential)(\d+)/, /:(limit)(\d+)/, /:(sigma)(\d+)/
-          token_els = lexed[$2][:els]
+          token_els = lexed.get_els($2)
 
           parsed = case $1
           when 'vector'
@@ -48,13 +48,16 @@ module Qlang
 
         when /:LPRN(\d+):CONT(\d+):RPRN(\d+)/
           tokens_range = $1.to_i..$3.to_i
-          token_val = lexed[$2][:value]
+          token_val =
 
-          lexed.parsed!(token_val.parentheses, tokens_range)
+          lexed.parsed!(
+            lexed.get_value($2).parentheses,
+            tokens_range
+          )
 
         when /:LBRCS(\d+):CONT(\d+):RBRCS(\d+)/
           tokens_range = $1.to_i..$3.to_i
-          token_val = lexed[$2][:value]
+          token_val = lexed.get_value($2)
 
           cont = case token_val
             when /#{ONEHASH}(#{CMA}#{ONEHASH})*/

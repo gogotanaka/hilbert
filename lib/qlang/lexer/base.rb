@@ -46,13 +46,14 @@ module Qlang
 
       # Accessor
       ## GET(without side effect)
-      def [](index)
-        @lexeds[index.to_i]
-      end
-
       def get_value(num)
         num = num.to_i
         @lexeds[num][:value]
+      end
+
+      def get_els(num)
+        num = num.to_i
+        @lexeds[num][:els]
       end
 
       def token_str
