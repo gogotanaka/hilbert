@@ -12,7 +12,7 @@ module Qlang
         def rule(pattern, &token)
           token ||= proc { :NULL }
           @token_rule_hash ||= {}
-          @token_rule_hash[token.call] = pattern
+          @token_rule_hash[pattern] = token.call
         end
       end
 
@@ -31,8 +31,8 @@ module Qlang
 
       def scan(ss)
         scan_rslt = nil
-        token_rule_hash.each do |token, patter|
-          if ss.scan(patter)
+        token_rule_hash.each do |pattern, token|
+          if ss.scan(pattern)
             scan_rslt = (token == :NULL) ? :NULL : {token => ss[0], els: [ss[1],ss[2], ss[3], ss[4]].compact }
             break
           end

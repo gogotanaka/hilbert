@@ -6,8 +6,7 @@ module Qlang
       rule(/d\/d(#{VAR}) (#{FORMULA})/) { :differential }
 
       rule(/lim#{LBRCT}(#{VAR})#{RSARW}(#{VARNUM})#{RBRCT}#{LPRN}(#{FORMULA})#{RPRN}/) { :limit }
-      #rule(/lim#{LBRCT}(#{VAR})#{RSARW}(#{VARNUM})#{RBRCT} (#{FORMULA})/) { :limit }
-
+      rule(/lim#{LBRCT}(#{VAR})#{RSARW}(#{VARNUM})#{RBRCT} (#{FORMULA})/) { :limit }
 
       rule(/#{LPRN}(#{NUMS_BY_SP})#{RPRN}/) { :vector }
       rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN_OR_NELN})#{RPRN}t/m) { :tmatrix }
