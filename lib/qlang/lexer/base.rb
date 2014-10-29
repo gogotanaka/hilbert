@@ -22,7 +22,7 @@ module Qlang
         until ss.eos?
           scan_rslt, ss = scan(ss)
           if scan_rslt
-            @lexeds << scan_rslt unless scan_rslt == :NULL
+            @lexeds << scan_rslt unless scan_rslt.keys.include?(:NULL)
           else
             fail "I'm so sorry, something wrong. Please feel free to report this."
           end
@@ -33,7 +33,10 @@ module Qlang
         scan_rslt = nil
         token_rule_hash.each do |pattern, token|
           if ss.scan(pattern)
-            scan_rslt = (token == :NULL) ? :NULL : {token => ss[0], els: [ss[1],ss[2], ss[3], ss[4]].compact }
+            scan_rslt = {
+              token => ss[0],
+              els: 4.times.inject([]) { |s,i|s << ss[i+1] }.compact
+            }
             break
           end
         end
