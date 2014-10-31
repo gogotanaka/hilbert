@@ -1,5 +1,5 @@
 # $meta_info indicate what and how to do.
-require 'pry'
+
 class MetaInfo
   include Singleton
   attr_accessor :lang, :opts, :mode
