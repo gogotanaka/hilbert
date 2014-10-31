@@ -25,26 +25,19 @@ module Qlang
         when /:(vector)(\d+)/, /:(matrix)(\d+)/, /:(tmatrix)(\d+)/, /:(integral)(\d+)/, /:(def_func)(\d+)/, /:(differential)(\d+)/, /:(limit)(\d+)/, /:(sigma)(\d+)/
           token_els = lexed.get_els($2)
 
-          parsed =
-            case $1
-            when 'vector'
-              VectorParser.execute(token_els)
-            when 'matrix'
-              MatrixParser.execute(token_els)
-            when 'tmatrix'
-              MatrixParser.execute(token_els, trans: true)
-            when 'limit'
-              LimitParser.execute(token_els)
-            when 'integral'
-              IntegralParser.execute(token_els)
-            when 'def_func'
-              FuncParser.execute(token_els)
-            when 'sigma'
-              SigmaParser.execute(token_els)
-            when 'differential'
-              del_var, formula = token_els
-              "d/d#{del_var}(#{FormulaParser.execute(formula)})"
-            end
+          parsed = case $1
+                   when 'vector'   then VectorParser.execute(token_els)
+                   when 'matrix'   then MatrixParser.execute(token_els)
+                   when 'tmatrix'  then MatrixParser.execute(token_els, trans: true)
+                   when 'limit'    then LimitParser.execute(token_els)
+                   when 'integral' then IntegralParser.execute(token_els)
+                   when 'def_func' then FuncParser.execute(token_els)
+                   when 'sigma'    then SigmaParser.execute(token_els)
+                   when 'differential'
+                     del_var, formula = token_els
+                     "d/d#{del_var}(#{FormulaParser.execute(formula)})"
+          end
+
           lexed.parsed!(parsed, $2)
 
         when /:LPRN(\d+):CONT(\d+):RPRN(\d+)/
