@@ -24,5 +24,15 @@ class TestLimit < TestInterpreterBase
       '2.7182682371744895',
       'lim[x->oo] (1 + 1/x)^x'
     )
+
+    assert_iq_equal(
+      'oo',
+      'lim[x->oo] x'
+    )
+
+    assert_iq_equal(
+      '0.0',
+      'lim[x->0] x'
+    )
   end
 end

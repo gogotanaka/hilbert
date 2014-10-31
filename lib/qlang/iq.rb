@@ -25,13 +25,17 @@ module Qlang
     end
 
     def self.optimize_output(ruby_obj)
+
       case ruby_obj
       when Matrix, Vector, Dydx::Algebra::Formula
         ruby_obj.to_q
-      when Float::INFINITY
-        'oo'
-      when - Float::INFINITY
-        '-oo'
+      when Numeric
+        # TODO: I know you wanna way..
+        if    ruby_obj > 10000.0            then 'oo'
+        elsif ruby_obj < -10000.0           then '-oo'
+        elsif ruby_obj.abs < Float::EPSILON then '0.0'
+        else                                     ruby_obj.to_s.equalize!
+        end
       else
         str = ruby_obj.to_s
         str.equalize!
