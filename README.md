@@ -22,7 +22,7 @@ Q let you know the sense of mathematics with Keyboard same as with a pen.
 
 ## Demo
 
-Below code is input and output for interpreter of q-lang
+Below codes is input and output for interpreter of q-lang
 
 (you can try it by `qlang -i`)
 
@@ -32,18 +32,17 @@ Below code is input and output for interpreter of q-lang
 d/dx(cos(x))
 => ( - sin( x ) )
 
-d/dx(log(x))
-=> ( 1 / x )
-
 # You can omit parentheses
 
-d/dy y^2                        
-=> ( 2 * y )
+d/dx log(x)
+=> ( 1 / x )
 
 d/dy xy                       
 => ( x )
-```
 
+d/dx e^x
+=> e ^ x
+```
 
 ### Integrate
 
@@ -58,6 +57,21 @@ S(cos(x)dx)[0..pi]
 => 0.0
 ```
 
+### Limit
+
+```
+lim[x->oo] (1 + 1/x)^x
+=> 2.7182682371744895
+
+lim[x->0] 1/x
+=> oo
+```
+
+### Sigma
+```
+∑[x=0,10] x
+=> 55.0
+```
 
 ### Matrix
 
