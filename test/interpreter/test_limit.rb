@@ -5,15 +5,24 @@ class TestLimit < TestInterpreterBase
 
   end
 
+  def assert_iq_equal(output, input)
+    assert_equal(Qlang::Iq.execute(input), output)
+  end
+
   def test_general
     assert_iq_equal(
-      'lim[x->0](1/x)',
-      'oo'
+      'oo',
+      'lim[x->0] 1/x'
     )
 
     assert_iq_equal(
-      'lim[x->10] x',
-      '10.0'
+      '10.0',
+      'lim[x->10] x'
+    )
+
+    assert_iq_equal(
+      '2.7182682371744895',
+      'lim[x->oo] (1 + 1/x)^x'
     )
   end
 end

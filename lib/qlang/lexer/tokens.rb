@@ -6,7 +6,8 @@ module Qlang
       FLO = /[0-9]+\.[0-9]+/
       E = /e/
       PI = /pi/
-      NUM = /(?:#{FLO}|#{INT}|#{E}|#{PI})/
+      INF = /oo/
+      NUM = /(?:#{FLO}|#{INT}|#{E}|#{PI}|#{INF})/
 
       # FUNCTION
       LPRN = /\(/

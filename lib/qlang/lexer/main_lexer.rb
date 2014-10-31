@@ -5,14 +5,13 @@ module Qlang
       rule(/#{ITGRLSYM}#{ANYSP}#{LPRN}(#{ANYSTR})#{RPRN}#{LBRCT}(#{ANYSTR})#{RBRCT}/) { :integral }
       rule(/d\/d(#{VAR}) (#{FORMULA})/) { :differential }
 
-      rule(/lim#{LBRCT}(#{VAR})#{RSARW}(#{VARNUM})#{RBRCT}#{LPRN}(#{FORMULA})#{RPRN}/) { :limit }
       rule(/lim#{LBRCT}(#{VAR})#{RSARW}(#{VARNUM})#{RBRCT} (#{FORMULA})/) { :limit }
 
       rule(/#{LPRN}(#{NUMS_BY_SP})#{RPRN}/) { :vector }
       rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN_OR_NELN})#{RPRN}t/m) { :tmatrix }
       rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN_OR_NELN})#{RPRN}/m) { :matrix }
 
-      rule(/∑#{LBRCT}(#{VAR})=(#{INT}),(#{INT})#{RBRCT}#{LPRN}(#{FORMULA})#{RPRN}/) { :sigma }
+      rule(/∑#{LBRCT}(#{VAR})=(#{INT}),#{ANYSP}(#{INT})#{RBRCT} (#{FORMULA})/) { :sigma }
 
       rule(/#{FUNCCN}/) { :FUNCCN }
 
