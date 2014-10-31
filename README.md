@@ -96,11 +96,15 @@ f(1, 2)
 
 ## How to use
 
-Install qlang gme.
+Install qlang gem.
 
     $ gem install qlang
-    
-    
+
+## Interpreter
+
+    $ qlang -i
+    Q:-> 
+
 ## Use as native language
 
 ### Compile into R
@@ -148,11 +152,6 @@ class ExampleClass
   end
 end
 ```
-
-## Interpreter
-
-    $ qlang -i
-    Q:-> 
 
 ## Contributing
 
