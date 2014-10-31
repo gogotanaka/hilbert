@@ -6,34 +6,16 @@ require 'yaml'
 
 $:.unshift(File.dirname(__FILE__))
 # Q core
+require 'qlang/meta_info'
 require 'qlang/utils/ruby_ext'
 require 'qlang/lexer'
 require 'qlang/parser'
 
 module Qlang
-  # $meta_info indicate what and how to do.
-  class MetaInfo
-    include Singleton
-    attr_accessor :lang, :opts, :mode
-
-    LANGS_HASH = YAML.load_file("./lib/qlang/utils/langs.yml")['langs']
-
-    def _load
-      # compiles into R as default.
-      lang = :r
-    end
-
-    def langs_hash
-      LANGS_HASH
-    end
-
-    def lang_str
-      LANGS_HASH[@lang.to_s]
-    end
-  end
   $meta_info = MetaInfo.instance
 
   class << self
+
     def compile(str)
       lexed = Lexer.execute(str)
       Kconv.tosjis(Parser.execute(lexed))
@@ -48,6 +30,7 @@ module Qlang
     end
 
   end
+
 end
 
 # Make alias as Q
