@@ -6,11 +6,11 @@
 
 #### I believe mathematics is absolutely that one.
 
-## How can we deal such a great mathematics in a discrete world?
+## How can we deal something as great as mathematics in a discrete world?
 
 #### Q-language is the answer.
 
-Q lets you have a sense of mathematics with a keyboard, the same as you would with a pen.
+Q lets you have a sense of mathematics using a keyboard, the same as you would with a pen.
 
 ```
 +---Discrete world---+                    +------Mathematics-------+
@@ -22,7 +22,7 @@ Q lets you have a sense of mathematics with a keyboard, the same as you would wi
 
 ## Demo
 
-The code below is input and output for interpreter of q-lang
+The code below is input and output for the q-lang interpreter
 
 (you can try it by `qlang -i`)
 
@@ -156,4 +156,4 @@ end
 ## Contributing
 
 Any PRs or issues are welcome.
-You can become a commiter, if you commit even once.
+You can become a commiter, even if you only commit once.
