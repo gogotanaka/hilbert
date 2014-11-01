@@ -2,27 +2,27 @@
 
 [![Gem Version](https://badge.fury.io/rb/qlang.svg)](http://badge.fury.io/rb/qlang) [![Build Status](https://travis-ci.org/gogotanaka/Q.svg?branch=master)](https://travis-ci.org/gogotanaka/Q) [![Coverage Status](https://coveralls.io/repos/gogotanaka/Q/badge.png?branch=master)](https://coveralls.io/r/gogotanaka/Q?branch=master) [![Code Climate](https://codeclimate.com/github/gogotanaka/Q/badges/gpa.svg)](https://codeclimate.com/github/gogotanaka/Q) [![Dependency Status](https://gemnasium.com/gogotanaka/Q.svg)](https://gemnasium.com/gogotanaka/Q)
 
-## Do you know one of the best language in this world?
+## Do you know the one best language in this world?
 
-#### I belive mathematics is that one absolutely.
+#### I believe mathematics is absolutely that one.
 
-## How can we deal such a great mathematics in discret world?
+## How can we deal something as great as mathematics in a discrete world?
 
-#### Q-language can be.
+#### Q-language is the answer.
 
-Q let you know the sense of mathematics with Keyboard same as with a pen.
+Q lets you have a sense of mathematics using a keyboard, the same as you would with a pen.
 
 ```
-+---Discret world---+                    +------mathematics-----+
-|        Ruby       |                    |        axiom         |
-|        TeX        |<------   Q  ------>|    Uncountable noun  |
-|       Python      |                    |  real number topology|
-+-------------------+                    +----------------------+
++---Discrete world---+                    +------Mathematics-------+
+|        Ruby        |                    |        axiom           |
+|        TeX         |<------   Q  ------>|    Uncountable noun    |
+|       Python       |                    |  real number topology  |
++--------------------+                    +------------------------+
 ```
 
 ## Demo
 
-Below codes is input and output for interpreter of q-lang
+The code below is input and output for the q-lang interpreter
 
 (you can try it by `qlang -i`)
 
@@ -37,7 +37,7 @@ d/dx(cos(x))
 d/dx log(x)
 => ( 1 / x )
 
-d/dy xy                       
+d/dy xy
 => ( x )
 
 d/dx e^x
@@ -53,7 +53,7 @@ S(log(x)dx)[0..1]
 S(sin(x)dx)[0..pi]
 => 2.0
 
-S(cos(x)dx)[0..pi]                       
+S(cos(x)dx)[0..pi]
 => 0.0
 ```
 
@@ -103,18 +103,18 @@ Install qlang gem.
 ## Interpreter
 
     $ qlang -i
-    Q:-> 
+    Q:->
 
 ## Use as native language
 
 ### Compile into R
 
     $ qlang -r foo.q
-    
+
 ### Compile into Ruby
 
     $ qlang -rb foo.q
-    
+
 ### Compile into Python
 
     $ qlang -py foo.q
@@ -139,7 +139,7 @@ end
 ```
 
     $ qlang -rb example.rb
-    
+
 
 ```rb
 class ExampleClass
@@ -155,5 +155,5 @@ end
 
 ## Contributing
 
-Welcome any your PR or issue.
-You can become commiter, if you commit even once.
+Any PRs or issues are welcome.
+You can become a commiter, even if you only commit once.
