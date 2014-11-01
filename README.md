@@ -16,7 +16,7 @@ Q let you know the sense of mathematics with Keyboard same as with a pen.
 +---Discret world---+                    +------mathematics-----+
 |        Ruby       |                    |        axiom         |
 |        TeX        |<------   Q  ------>|    Uncountable noun  |
-|       Pyhthon     |                    |  real number topology|
+|       Python      |                    |  real number topology|
 +-------------------+                    +----------------------+
 ```
 
