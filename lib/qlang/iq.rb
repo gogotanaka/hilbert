@@ -41,6 +41,5 @@ module Qlang
         str.equalize!
       end
     end
-
   end
 end
