@@ -2,7 +2,6 @@ require 'minitest_helper'
 
 class TestVector < TestInterpreterBase
   def setup
-
   end
 
   def test_integer

@@ -2,7 +2,6 @@ require 'minitest_helper'
 
 class TestMatrix < TestInterpreterBase
   def setup
-
   end
 
   def test_integer

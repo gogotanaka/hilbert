@@ -2,7 +2,6 @@ require 'minitest_helper'
 
 class TestLimit < TestInterpreterBase
   def setup
-
   end
 
   def assert_iq_equal(output, input)

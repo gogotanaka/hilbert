@@ -3,7 +3,6 @@ require 'minitest_helper'
 class TestTokens < MiniTest::Unit::TestCase
   include Qlang::Lexer::Tokens
   def setup
-
   end
 
   def full_match(rgx, str)
