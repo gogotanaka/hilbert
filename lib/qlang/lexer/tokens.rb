@@ -19,14 +19,13 @@ module Qlang
 
       # VARIABLE
       VAR = /(?:[a-d]|[f-z])/
-      #VAR_MUL2 = /(?!pi)#{VAR}{2}/
+      # VAR_MUL2 = /(?!pi)#{VAR}{2}/
       # #VAR_MUL3 = /(?!#{EMBEDDED_FUNC})#{VAR}{3}/
       # # FIX:
-      #VAR_MUL  = /(?!#{EMBEDDED_FUNC})#{VAR_MUL2}/
+      # VAR_MUL  = /(?!#{EMBEDDED_FUNC})#{VAR_MUL2}/
 
       # # TERM
       # TERM = /(#{NUM}|#{VAR_MUL}|#{VAR_MUL})/
-
 
       # OPE
       PLS = /\+/
@@ -40,7 +39,6 @@ module Qlang
       ANYSP = ' *'
       ANYSTR = /.+/
       NONL = /[^\r\n]/
-
 
       PRN = /(?:#{LPRN}|#{RPRN})/
 
@@ -71,7 +69,7 @@ module Qlang
       # TODO: what is better
       class Util
         def self.string_out(str, partition)
-        /#{ANYSP}#{str}(?:#{ANYSP}#{partition}#{ANYSP}#{str})*#{ANYSP}/
+          /#{ANYSP}#{str}(?:#{ANYSP}#{partition}#{ANYSP}#{str})*#{ANYSP}/
         end
 
         def self.func_call(args)
