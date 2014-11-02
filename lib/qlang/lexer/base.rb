@@ -67,15 +67,15 @@ module Qlang
       ## POST(with side effect, without idempotence.)
       def parsed!(parsed, target)
         case target
-          when Range
-            parsed_between!((target.first.to_i)..(target.last.to_i), parsed)
-          else
-            parsed_at!(target.to_i, parsed)
+        when Range
+          parsed_between!((target.first.to_i)..(target.last.to_i), parsed)
+        else
+          parsed_at!(target.to_i, parsed)
         end
       end
 
-      #squash!(range, token: :CONT)
-      def squash!(range, opts={token: :CONT})
+      # squash!(range, token: :CONT)
+      def squash!(range, opts = { token: :CONT })
         token = opts[:token]
         range = (range.first.to_i)..(range.last.to_i)
         value = values[range].join
@@ -89,19 +89,19 @@ module Qlang
       end
 
       private
-        def parsed_at!(token_position, parsed)
-          @lexeds.delete_at(token_position)
-          @lexeds.insert(token_position, { token: :R, value: parsed })
-        end
 
-        def parsed_between!(token_range, parsed)
-          start_pos = token_range.first
-          token_range.count.times do
-            @lexeds.delete_at(start_pos)
-          end
-          @lexeds.insert(start_pos, { token: :R, value: parsed })
-        end
+      def parsed_at!(token_position, parsed)
+        @lexeds.delete_at(token_position)
+        @lexeds.insert(token_position, { token: :R, value: parsed })
+      end
 
+      def parsed_between!(token_range, parsed)
+        start_pos = token_range.first
+        token_range.count.times do
+          @lexeds.delete_at(start_pos)
+        end
+        @lexeds.insert(start_pos, { token: :R, value: parsed })
+      end
     end
   end
 end
