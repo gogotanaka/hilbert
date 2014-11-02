@@ -11,7 +11,10 @@ module Qlang
       rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN_OR_NELN})#{RPRN}t/m) { :tmatrix }
       rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN_OR_NELN})#{RPRN}/m) { :matrix }
 
-      rule(/∑#{LBRCT}(#{VAR})=(#{INT}),#{ANYSP}(#{INT})#{RBRCT} (#{FORMULA})/) { :sigma }
+      if RUBY_VERSION >= '2.0.0'
+        rule(/∑#{LBRCT}(#{VAR})=(#{INT}),#{ANYSP}(#{INT})#{RBRCT} (#{FORMULA})/) { :sigma }
+      end
+      rule(/sigma#{LBRCT}(#{VAR})=(#{INT}),#{ANYSP}(#{INT})#{RBRCT} (#{FORMULA})/) { :sigma }
 
       rule(/#{FUNCCN}/) { :FUNCCN }
 
