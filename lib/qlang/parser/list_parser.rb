@@ -3,7 +3,7 @@ module Qlang
     module ListParser
       include Base
       def execute(lexed)
-        arys = lexed.split(/ *, */).map { |e| e.split(/ *: */).map{|e2|e2.delete(' ')} }
+        arys = lexed.split(/ *, */).map { |e| e.split(/ *: */).map { |e2| e2.delete(' ') } }
         ListApi.execute(arys)
       end
       module_function :execute
