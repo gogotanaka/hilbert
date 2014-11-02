@@ -12,12 +12,12 @@ class MetaInfo
   # TODO: YAML.load_file("./lib/qlang/utils/langs.yml")['langs']
   def langs_hash
     {
-      r:"R",
-      ruby: "Ruby",
-      python: "Pyhton",
-      haskell: "Haskell",
-      scala: "Scala",
-      js: "Javascript"
+      r: 'R',
+      ruby: 'Ruby',
+      python: 'Pyhton',
+      haskell: 'Haskell',
+      scala: 'Scala',
+      js: 'Javascript'
     }
   end
 
