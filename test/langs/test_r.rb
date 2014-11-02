@@ -2,7 +2,6 @@ require 'minitest_helper'
 
 class TestR < TestInterpreterBase
   def setup
-
   end
 
   def assert_r_compl_eq(output, input)

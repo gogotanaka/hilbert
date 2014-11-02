@@ -9,7 +9,6 @@ module Qlang
         else
           fail "List is not implemented for #{$meta_info.lang_str}"
         end
-
       end
       module_function :execute
     end

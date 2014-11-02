@@ -25,25 +25,26 @@ module Qlang
         when /:(vector)(\d+)/, /:(matrix)(\d+)/, /:(tmatrix)(\d+)/, /:(integral)(\d+)/, /:(def_func)(\d+)/, /:(differential)(\d+)/, /:(limit)(\d+)/, /:(sigma)(\d+)/
           token_els = lexed.get_els($2)
 
-          parsed = case $1
-          when 'vector'
-            VectorParser.execute(token_els)
-          when 'matrix'
-            MatrixParser.execute(token_els)
-          when 'tmatrix'
-            MatrixParser.execute(token_els, trans: true)
-          when 'limit'
-            LimitParser.execute(token_els)
-          when 'integral'
-            IntegralParser.execute(token_els)
-          when 'def_func'
-            FuncParser.execute(token_els)
-          when 'sigma'
-            SigmaParser.execute(token_els)
-          when 'differential'
-            del_var, formula = token_els
-            "d/d#{del_var}(#{FormulaParser.execute(formula)})"
-          end
+          parsed =
+            case $1
+            when 'vector'
+              VectorParser.execute(token_els)
+            when 'matrix'
+              MatrixParser.execute(token_els)
+            when 'tmatrix'
+              MatrixParser.execute(token_els, trans: true)
+            when 'limit'
+              LimitParser.execute(token_els)
+            when 'integral'
+              IntegralParser.execute(token_els)
+            when 'def_func'
+              FuncParser.execute(token_els)
+            when 'sigma'
+              SigmaParser.execute(token_els)
+            when 'differential'
+              del_var, formula = token_els
+              "d/d#{del_var}(#{FormulaParser.execute(formula)})"
+            end
           lexed.parsed!(parsed, $2)
 
         when /:LPRN(\d+):CONT(\d+):RPRN(\d+)/
@@ -59,7 +60,8 @@ module Qlang
           tokens_range = $1.to_i..$3.to_i
           token_val = lexed.get_value($2)
 
-          cont = case token_val
+          cont =
+            case token_val
             when /#{ONEHASH}(#{CMA}#{ONEHASH})*/
               ListParser.execute(token_val)
             else
@@ -95,6 +97,5 @@ module Qlang
         end
       end
     end
-
   end
 end

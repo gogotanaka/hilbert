@@ -12,13 +12,13 @@ describe Qlang do
       expect(
         Q.to_r.compile('{key1: 234234, key2: 387342 }')
       ).to eq(
-        "list(key1=234234, key2=387342)"
+        'list(key1=234234, key2=387342)'
       )
 
       expect(
         Q.to_r.compile('{key1:234234,key2:387342,key3:38733242}')
       ).to eq(
-        "list(key1=234234, key2=387342, key3=38733242)"
+        'list(key1=234234, key2=387342, key3=38733242)'
       )
 
       # expect(

@@ -2,7 +2,6 @@ require 'minitest_helper'
 
 class TestIntegral < TestInterpreterBase
   def setup
-
   end
 
   def test_general

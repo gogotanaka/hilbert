@@ -1,3 +1,3 @@
-require "mkmf"
+require 'mkmf'
 
-create_makefile("qlang/qlang")
+create_makefile('qlang/qlang')
