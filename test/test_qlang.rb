@@ -2,7 +2,6 @@ require 'minitest_helper'
 
 class TestQlang < MiniTest::Unit::TestCase
   def setup
-
   end
 
   def assert_to_ruby(input, output)
