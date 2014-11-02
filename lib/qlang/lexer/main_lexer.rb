@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 module Qlang
   module Lexer
     class MainLexer < Base
@@ -11,9 +14,7 @@ module Qlang
       rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN_OR_NELN})#{RPRN}t/m) { :tmatrix }
       rule(/#{LPRN}(#{NUMS_BY_SP_BY_SCLN_OR_NELN})#{RPRN}/m) { :matrix }
 
-      if RUBY_VERSION >= '2.0.0'
-        rule(/∑#{LBRCT}(#{VAR})=(#{INT}),#{ANYSP}(#{INT})#{RBRCT} (#{FORMULA})/) { :sigma }
-      end
+      rule(/∑#{LBRCT}(#{VAR})=(#{INT}),#{ANYSP}(#{INT})#{RBRCT} (#{FORMULA})/) { :sigma }
       rule(/sigma#{LBRCT}(#{VAR})=(#{INT}),#{ANYSP}(#{INT})#{RBRCT} (#{FORMULA})/) { :sigma }
 
       rule(/#{FUNCCN}/) { :FUNCCN }
