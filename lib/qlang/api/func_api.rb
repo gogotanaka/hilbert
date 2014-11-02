@@ -10,7 +10,6 @@ module Qlang
         else
           fail "Function is not implemented for #{$meta_info.lang_str}"
         end
-
       end
       module_function :execute
     end
