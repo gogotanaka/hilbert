@@ -1,59 +1,18 @@
 require 'strscan'
+require 'qlang/lexer/tokens'
 
 module Qlang
   module Lexer
     class Base
-      # FIRST TOKEN
-      NUM = '[0-9]+'
-      VAR = '[a-z]'
-      FUNCV = '[a-zA-Z]'
-      VARNUM = '[0-9a-z]'
-      ANYSP = ' *'
-      ANYSTR = '.+'
-      NONL = '[^\r\n]'
-      LPRN = '\('
-      RPRN = '\)'
-      LBRC = '\{'
-      RBRC = '\}'
-      CLN = '\:'
-      SCLN = ';'
-      CMA = '\,'
-      SP = ' '
-
-      # SECOND TOKEN
-      class ::String
-        def line_by(char)
-          "#{ANYSP}#{self}(#{ANYSP}#{char}#{ANYSP}#{self})*#{ANYSP}"
-        end
-      end
-      NUMS_BY_CMA = NUM.line_by(CMA)
-      VARS_BY_CMA = VAR.line_by(CMA)
-      VARNUMS_BY_CMA = VARNUM.line_by(CMA)
-      NUMS_BY_SP = NUM.line_by(SP)
-
-      # THIRD TOKEN
-      class ::String
-        def func_call
-          "#{FUNCV}#{LPRN}#{ANYSP}#{self}*#{ANYSP}#{RPRN}"
-        end
-      end
-      FUNCCN =  NUMS_BY_CMA.func_call
-      FUNCCV = VARS_BY_CMA.func_call
-      FUNCCVN =  VARNUMS_BY_CMA.func_call
-
-      NUMS_BY_SP_BY_SCLN = NUMS_BY_SP.line_by(SCLN)
-
-
-
-
-
+      attr_accessor :lexeds
+      include Tokens
       class << self
-        attr_reader :token_hash
+        attr_reader :token_rule_hash
 
         def rule(pattern, &token)
           token ||= proc { :NULL }
-          @token_hash ||= {}
-          @token_hash[token.call] = pattern
+          @token_rule_hash ||= {}
+          @token_rule_hash[pattern] = token.call
         end
       end
 
@@ -61,91 +20,88 @@ module Qlang
         ss = StringScanner.new(str)
         @lexeds = []
         until ss.eos?
-          self.class.token_hash.each do |token, patter|
-            if ss.scan(patter)
-              (@lexeds << {token => ss[0]}) unless token == :NULL
-              break
-            end
+          scan_rslt, ss = scan(ss)
+          if scan_rslt
+            @lexeds << scan_rslt unless scan_rslt[:token] == :NULL
+          else
+            fail "I'm so sorry, something wrong. Please feel free to report this."
           end
         end
       end
 
-      def get_value(token_with_num)
-        num = to_num(token_with_num)
-        values[num]
-      end
-
-      def squash_with_prn(token_with_num, value)
-        num = to_num(token_with_num)
-        3.times do
-          @lexeds.delete_at(num - 1)
+      def scan(ss)
+        scan_rslt = nil
+        token_rule_hash.each do |pattern, token|
+          if ss.scan(pattern)
+            scan_rslt = {
+              token: token,
+              value: ss[0],
+              els: 4.times.inject([]) { |s,i|s << ss[i+1] }.compact
+            }
+            break
+          end
         end
-        @lexeds.insert(num - 1, {R: ":%|#{value}|%:"})
+        [scan_rslt, ss]
       end
 
-      def squash_to_cont(token_with_num, count)
-        num = to_num(token_with_num)
-        value = ''
-        count.times do
-          value += values[num]
-          @lexeds.delete_at(num)
-        end
-        @lexeds.insert(num, {CONT: value})
+      # Accessor
+      ## GET(without side effect)
+      def get_value(num)
+        num = num.to_i
+        @lexeds[num][:value]
       end
 
-      def ch_token(token_with_num, token)
-        num = to_num(token_with_num)
-        before_hash = @lexeds.delete_at(num)
-        @lexeds.insert(num, {token => before_hash.values.first})
-      end
-
-      def tokens
-        @lexeds.map { |lexed| lexed.keys.first }
-      end
-
-      def token_with_nums
-        @lexeds.map.with_index { |lexed, i| ":#{lexed.keys.first}#{i}" }
-      end
-
-      def ch_value(token_with_num, value)
-        num = to_num(token_with_num)
-        before_hash = @lexeds.delete_at(num)
-        @lexeds.insert(num, {before_hash.keys.first => value })
-      end
-
-      def values
-        @lexeds.map { |lexed| lexed.values.first }
+      def get_els(num)
+        num = num.to_i
+        @lexeds[num][:els]
       end
 
       def token_str
-        token_with_nums.join
+        @lexeds.map.with_index { |lexed, i| ":#{lexed[:token]}#{i}" }.join
       end
 
-      def [](index)
-        @lexeds[index]
+      def token_rule_hash
+        self.class.token_rule_hash
       end
 
-      def split(separator)
-        values.chunk { |e| e == separator }.reject { |sep, _| sep }.map { |_, ans| ans }
-      end
-
-      def fix_r_txt!
-        @lexeds.map! do |hash|
-          if value = (hash[:R] || hash[:CONT])
-            ary = hash.first
-            ary[1] = value.gsub(/:%\|/,'').gsub(/\|%:/,'')
-            hash = Hash[*ary]
-          end
-          hash
+      ## POST(with side effect, without idempotence.)
+      def parsed!(parsed, target)
+        case target
+        when Range
+          parsed_between!((target.first.to_i)..(target.last.to_i), parsed)
+        else
+          parsed_at!(target.to_i, parsed)
         end
+      end
+
+      # squash!(range, token: :CONT)
+      def squash!(range, opts = { token: :CONT })
+        token = opts[:token]
+        range = (range.first.to_i)..(range.last.to_i)
+        value = values[range].join
+        range.count.times { @lexeds.delete_at(range.first) }
+        @lexeds.insert(range.first, { token: token, value: value })
+      end
+
+      # Legacy Accessor
+      def values
+        @lexeds.map { |lexed| lexed[:value] }
       end
 
       private
 
-        def to_num(token_with_num)
-          token_with_num =~ /\d+/
-          $&.to_i
+      def parsed_at!(token_position, parsed)
+        @lexeds.delete_at(token_position)
+        @lexeds.insert(token_position, { token: :R, value: parsed })
+      end
+
+      def parsed_between!(token_range, parsed)
+        start_pos = token_range.first
+        token_range.count.times do
+          @lexeds.delete_at(start_pos)
         end
+        @lexeds.insert(start_pos, { token: :R, value: parsed })
+      end
     end
   end
 end

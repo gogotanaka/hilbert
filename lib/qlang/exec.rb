@@ -5,15 +5,17 @@ module Qlang
         @args = args
       end
 
-      def parse!
-        ch_compile_type(ARGV.shift)
-        parse
+      def output!
+        ch_compile_type(@args.first)
+        parse_string = parse(@args[1])
+        write!(@args[2], parse_string)
+
       rescue Exception => e
         raise e if @options[:trace] || e.is_a?(SystemExit)
 
         print "#{e.class}: " unless e.class == RuntimeError
         puts "#{e.message}"
-        puts "  Use --trace for backtrace."
+        puts '  Use --trace for backtrace.'
         exit 1
       ensure
         exit 0
@@ -21,34 +23,42 @@ module Qlang
 
       private
 
-        def ch_compile_type(lang)
-          case lang
-          when '-Ruby'
-            Qlang.to_ruby
-          when '-R'
-            Qlang.to_r
-          else
-            print 'Q support Ruby and R now.'
-          end
+      def ch_compile_type(lang)
+        case lang
+        when '-rb'
+          Qlang.to_ruby
+        when '-r'
+          Qlang.to_r
+        when '-py'
+          Qlang.to_python
+        else
+          print 'Q support only Ruby and R now.'
         end
+      end
 
-        def parse
-          raise '#{@args[0]} is unsupported option' unless @args[0] == '-q'
-          filename = @args[1]
-          file = open_file(filename)
-          string = read_file(file)
-          print(Kconv.tosjis(Qlang.compile(string)), '\n')
-          file.close
-        end
+      def parse(file_path)
+        file = open_file(file_path)
+        input_string = read_file(file)
+        file.close
+        input_string.gsub(/(.*)I love mathematics\.(.*)Q\.E\.D(.*)/m) {
+          "#{$1}#{Kconv.tosjis(Qlang.compile($2))}#{$3}"
+        }
+      end
 
-        def open_file(filename, flag = 'r')
-          return if filename.nil?
-          File.open(filename, flag)
+      def write!(output_path, string)
+        open(output_path, 'w') do |f|
+          f.puts string
         end
+      end
 
-        def read_file(file)
-          file.read
-        end
+      def open_file(filename, flag = 'r')
+        return if filename.nil?
+        File.open(filename, flag)
+      end
+
+      def read_file(file)
+        file.read
+      end
     end
   end
 end

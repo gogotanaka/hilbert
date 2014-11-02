@@ -3,13 +3,12 @@ module Qlang
     module IntegralApi
       def execute(func, delta, range)
         a, b = range.split('..')
-        case $type
-        when :R
-          fail 'Integral is not implemented for R'
-        when :Ruby
+        case $meta_info.lang
+        when :ruby
           "S(#{func}, #{delta})[#{a}, #{b}]"
+        else
+          fail "Integral is not implemented for #{$meta_info.lang_str}"
         end
-
       end
       module_function :execute
     end

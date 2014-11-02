@@ -1,10 +1,10 @@
 require 'qlang/lexer/base'
-require 'qlang/lexer/wrap_lexer'
+require 'qlang/lexer/main_lexer'
 
 module Qlang
   module Lexer
     def execute(str)
-      WrapLexer.new(str)
+      MainLexer.new(str)
     end
     module_function :execute
   end
