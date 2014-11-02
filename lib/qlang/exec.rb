@@ -15,7 +15,7 @@ module Qlang
 
         print "#{e.class}: " unless e.class == RuntimeError
         puts "#{e.message}"
-        puts "  Use --trace for backtrace."
+        puts '  Use --trace for backtrace.'
         exit 1
       ensure
         exit 0
@@ -23,42 +23,42 @@ module Qlang
 
       private
 
-        def ch_compile_type(lang)
-          case lang
-          when '-rb'
-            Qlang.to_ruby
-          when '-r'
-            Qlang.to_r
-          when '-py'
-            Qlang.to_python
-          else
-            print 'Q support only Ruby and R now.'
-          end
+      def ch_compile_type(lang)
+        case lang
+        when '-rb'
+          Qlang.to_ruby
+        when '-r'
+          Qlang.to_r
+        when '-py'
+          Qlang.to_python
+        else
+          print 'Q support only Ruby and R now.'
         end
+      end
 
-        def parse(file_path)
-          file = open_file(file_path)
-          input_string = read_file(file)
-          file.close
-          input_string.gsub(/(.*)I love mathematics\.(.*)Q\.E\.D(.*)/m) {
-            "#{$1}#{Kconv.tosjis(Qlang.compile($2))}#{$3}"
-          }
-        end
+      def parse(file_path)
+        file = open_file(file_path)
+        input_string = read_file(file)
+        file.close
+        input_string.gsub(/(.*)I love mathematics\.(.*)Q\.E\.D(.*)/m) {
+          "#{$1}#{Kconv.tosjis(Qlang.compile($2))}#{$3}"
+        }
+      end
 
-        def write!(output_path, string)
-          open(output_path, 'w') do |f|
-            f.puts string
-          end
+      def write!(output_path, string)
+        open(output_path, 'w') do |f|
+          f.puts string
         end
+      end
 
-        def open_file(filename, flag = 'r')
-          return if filename.nil?
-          File.open(filename, flag)
-        end
+      def open_file(filename, flag = 'r')
+        return if filename.nil?
+        File.open(filename, flag)
+      end
 
-        def read_file(file)
-          file.read
-        end
+      def read_file(file)
+        file.read
+      end
     end
   end
 end
