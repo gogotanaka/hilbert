@@ -1,15 +1,15 @@
-require 'qlang/api'
+require 'hilbert/api'
 
-require 'qlang/parser/base'
-require 'qlang/parser/matrix_parser'
-require 'qlang/parser/vector_parser'
-require 'qlang/parser/list_parser'
-require 'qlang/parser/func_parser'
-require 'qlang/parser/integral_parser'
-require 'qlang/parser/limit_parser'
-require 'qlang/parser/sigma_parser'
+require 'hilbert/parser/base'
+require 'hilbert/parser/matrix_parser'
+require 'hilbert/parser/vector_parser'
+require 'hilbert/parser/list_parser'
+require 'hilbert/parser/func_parser'
+require 'hilbert/parser/integral_parser'
+require 'hilbert/parser/limit_parser'
+require 'hilbert/parser/sigma_parser'
 
-require 'qlang/parser/formula_parser'
+require 'hilbert/parser/formula_parser'
 
 module Qlang
   module Parser

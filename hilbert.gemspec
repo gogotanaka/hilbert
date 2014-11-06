@@ -1,14 +1,14 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'qlang/version'
+require 'hilbert/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'qlang'
+  spec.name          = 'hilbert'
   spec.version       = Qlang::VERSION
   spec.authors       = ['gogotanaka']
   spec.email         = ['mail@tanakakazuki.com']
-  spec.extensions    = ['ext/qlang/extconf.rb']
+  spec.extensions    = ['ext/hilbert/extconf.rb']
   spec.summary       = %q{Enjoy MATH!}
   spec.description   = %q{Enjoy MATH!}
   spec.homepage      = 'http://q-language.org/'

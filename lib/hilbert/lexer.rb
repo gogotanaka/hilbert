@@ -1,5 +1,5 @@
-require 'qlang/lexer/base'
-require 'qlang/lexer/main_lexer'
+require 'hilbert/lexer/base'
+require 'hilbert/lexer/main_lexer'
 
 module Qlang
   module Lexer

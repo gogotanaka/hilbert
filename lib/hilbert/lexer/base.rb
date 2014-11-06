@@ -1,5 +1,5 @@
 require 'strscan'
-require 'qlang/lexer/tokens'
+require 'hilbert/lexer/tokens'
 
 module Qlang
   module Lexer

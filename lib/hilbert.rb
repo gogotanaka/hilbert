@@ -6,10 +6,10 @@ require 'yaml'
 
 $:.unshift(File.dirname(__FILE__))
 # Q core
-require 'qlang/meta_info'
-require 'qlang/utils/ruby_ext'
-require 'qlang/lexer'
-require 'qlang/parser'
+require 'hilbert/meta_info'
+require 'hilbert/utils/ruby_ext'
+require 'hilbert/lexer'
+require 'hilbert/parser'
 
 module Qlang
   $meta_info = MetaInfo.instance

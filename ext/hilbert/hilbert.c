@@ -1,4 +1,4 @@
-#include "qlang.h"
+#include "hilbert.h"
 #include <stdio.h>
 #define Need_Float(x) do {if (!RB_TYPE_P(x, T_FLOAT)) {(x) = rb_to_float(x);}} while(0)
 #define GET_FLOAT(x) Need_Float(x);(x) = RFLOAT_VALUE(x)
@@ -49,7 +49,7 @@ execute(VALUE self, VALUE a, VALUE b, VALUE n)
 
 
 void
-Init_qlang(void)
+Init_hilbert(void)
 {
   VALUE rb_mQMatrix = rb_define_class("QMatrix", rb_cObject);
   rb_define_method(rb_mQMatrix, "execute", execute, 3);

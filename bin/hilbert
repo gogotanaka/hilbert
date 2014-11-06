@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
-require 'qlang'
+require 'hilbert'
 
 # Q command line
-require 'qlang/exec'
+require 'hilbert/exec'
 
 # Q interpreter
-require 'qlang/iq'
+require 'hilbert/iq'
 
 # TODO: There are vanch of todo ..
 case ARGV.first

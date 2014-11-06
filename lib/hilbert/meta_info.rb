@@ -9,7 +9,7 @@ class MetaInfo
     lang = :r
   end
 
-  # TODO: YAML.load_file("./lib/qlang/utils/langs.yml")['langs']
+  # TODO: YAML.load_file("./lib/hilbert/utils/langs.yml")['langs']
   def langs_hash
     {
       r: 'R',

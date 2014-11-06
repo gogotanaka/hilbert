@@ -1,4 +1,4 @@
-require 'qlang/lexer/formula_lexer'
+require 'hilbert/lexer/formula_lexer'
 
 module Qlang
   module Parser

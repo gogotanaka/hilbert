@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'qlang'
+require 'hilbert'
 
 require 'minitest/autorun'
 require 'pp'

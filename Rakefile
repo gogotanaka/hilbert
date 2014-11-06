@@ -8,8 +8,8 @@ end
 
 require 'rake/extensiontask'
 
-Rake::ExtensionTask.new('qlang') do |ext|
-  ext.lib_dir = 'lib/qlang'
+Rake::ExtensionTask.new('hilbert') do |ext|
+  ext.lib_dir = 'lib/hilbert'
 end
 
 task :compile_and_test do

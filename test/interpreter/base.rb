@@ -1,4 +1,4 @@
-require 'qlang/iq'
+require 'hilbert/iq'
 
 class TestInterpreterBase < MiniTest::Unit::TestCase
   # TODO: opposite
