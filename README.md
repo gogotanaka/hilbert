@@ -103,7 +103,7 @@ Install hilbert gem.
 ## Interpreter
 
     $ hilbert -i
-    Hilbert:->
+    Enjoy! ->
 
 ## Use as native language
 
