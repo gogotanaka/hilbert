@@ -1,3 +1,3 @@
 module Hilbert
-  VERSION = '0.0.27182124'
+  VERSION = '0.0.2700001'
 end
