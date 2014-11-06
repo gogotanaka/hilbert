@@ -8,21 +8,21 @@
 
 ## How can we deal something as great as mathematics in a discrete world?
 
-#### Q-language is the answer.
+#### Hilbert is the answer.
 
-Q lets you have a sense of mathematics using a keyboard, the same as you would with a pen.
+Hilbert lets you have a sense of mathematics using a keyboard, the same as you would with a pen.
 
 ```
 +---Discrete world---+                    +------Mathematics-------+
 |        Ruby        |                    |        axiom           |
-|        TeX         |<------   Q  ------>|    Uncountable noun    |
+|        TeX         |<----  Hilbert ---->|    Uncountable noun    |
 |       Python       |                    |  real number topology  |
 +--------------------+                    +------------------------+
 ```
 
 ## Demo
 
-The code below is input and output for the q-lang interpreter
+The code below is input and output for the Hilbert interpreter
 
 (you can try it by `hilbert -i`)
 
@@ -103,21 +103,21 @@ Install hilbert gem.
 ## Interpreter
 
     $ hilbert -i
-    Q:->
+    Hilbert:->
 
 ## Use as native language
 
 ### Compile into R
 
-    $ hilbert -r foo.q
+    $ hilbert -r foo.hr
 
 ### Compile into Ruby
 
-    $ hilbert -rb foo.q
+    $ hilbert -rb foo.hr
 
 ### Compile into Python
 
-    $ hilbert -py foo.q
+    $ hilbert -py foo.hr
 
 
 ## Use as math template within other langs
@@ -131,7 +131,7 @@ class ExampleClass
 
 I love mathematics.
   a = (1 3 4)
-  # your Q codes
+  # your Hilbert codes
 Q.E.D
 
   end
