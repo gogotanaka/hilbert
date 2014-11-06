@@ -11,7 +11,7 @@ require 'hilbert/utils/ruby_ext'
 require 'hilbert/lexer'
 require 'hilbert/parser'
 
-module Qlang
+module Hilbert
   $meta_info = MetaInfo.instance
 
   class << self
@@ -25,7 +25,7 @@ module Qlang
       define_method("to_#{lang_name}") do |*opts|
         $meta_info.lang = lang_name.to_sym
         $meta_info.opts = opts
-        Qlang
+        Hilbert
       end
     end
 
@@ -34,4 +34,4 @@ module Qlang
 end
 
 # Make alias as Q
-Q = Qlang
+Q = Hilbert

@@ -1,7 +1,7 @@
 require 'dydx'
 include Dydx
 
-module Qlang
+module Hilbert
   module Iq
     class Dydx::Algebra::Formula
       # FIX:

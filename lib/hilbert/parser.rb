@@ -11,7 +11,7 @@ require 'hilbert/parser/sigma_parser'
 
 require 'hilbert/parser/formula_parser'
 
-module Qlang
+module Hilbert
   module Parser
     include Lexer::Tokens
     SYM = '\w+'

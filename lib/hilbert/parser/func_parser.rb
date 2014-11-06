@@ -1,5 +1,5 @@
 require 'hilbert/lexer/tokens'
-module Qlang
+module Hilbert
   module Parser
     module FuncParser
       include Base

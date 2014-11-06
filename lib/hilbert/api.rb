@@ -6,7 +6,7 @@ require 'hilbert/api/integral_api'
 require 'hilbert/api/limit_api'
 require 'hilbert/api/sigma_api'
 
-module Qlang
+module Hilbert
   module Api
     class ::Matrix
       def to_q

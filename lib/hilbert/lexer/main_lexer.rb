@@ -1,7 +1,7 @@
 #!/bin/env ruby
 # encoding: utf-8
 
-module Qlang
+module Hilbert
   module Lexer
     class MainLexer < Base
       rule(/(#{FUNCCV})#{ANYSP}#{EQL}#{ANYSP}(#{FORMULA})/) { :def_func }

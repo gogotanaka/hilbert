@@ -1,4 +1,4 @@
-module Qlang
+module Hilbert
   module Api
     module LimitApi
       def self.execute(formula, var, close_to)

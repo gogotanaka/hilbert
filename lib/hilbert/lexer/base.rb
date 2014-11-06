@@ -1,7 +1,7 @@
 require 'strscan'
 require 'hilbert/lexer/tokens'
 
-module Qlang
+module Hilbert
   module Lexer
     class Base
       attr_accessor :lexeds

@@ -1,4 +1,4 @@
-module Qlang
+module Hilbert
   module Api
     module IntegralApi
       def execute(func, delta, range)

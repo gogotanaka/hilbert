@@ -1,4 +1,4 @@
-module Qlang
+module Hilbert
   module Parser
     module MatrixParser
       include Base

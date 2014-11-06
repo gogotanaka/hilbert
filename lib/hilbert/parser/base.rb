@@ -1,7 +1,7 @@
-module Qlang
+module Hilbert
   module Parser
     module Base
-      include ::Qlang::Api
+      include ::Hilbert::Api
     end
   end
 end

@@ -5,7 +5,7 @@ class TestLimit < TestInterpreterBase
   end
 
   def assert_iq_equal(output, input)
-    assert_equal(Qlang::Iq.execute(input), output)
+    assert_equal(Hilbert::Iq.execute(input), output)
   end
 
   def test_general

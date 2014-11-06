@@ -1,6 +1,6 @@
 require 'hilbert/lexer/formula_lexer'
 
-module Qlang
+module Hilbert
   module Parser
     module FormulaParser
       include Lexer::Tokens

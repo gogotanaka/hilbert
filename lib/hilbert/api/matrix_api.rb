@@ -1,4 +1,4 @@
-module Qlang
+module Hilbert
   module Api
     module MatrixApi
       def execute(rows)

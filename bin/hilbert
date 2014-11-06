@@ -15,15 +15,15 @@ when '-i'
     print 'Q:-> '
     begin
       input = $stdin.gets
-      output = Qlang::Iq.execute(input)
+      output = Hilbert::Iq.execute(input)
       $stdout.puts output
     rescue => e
       puts e
     end
   end
 when '-v'
-  puts Qlang::VERSION
+  puts Hilbert::VERSION
 when '-r', '-rb', '-py'
-  exec = Qlang::Exec::Compiler.new(ARGV)
+  exec = Hilbert::Exec::Compiler.new(ARGV)
   exec.output!
 end

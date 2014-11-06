@@ -1,4 +1,4 @@
-module Qlang
+module Hilbert
   module Lexer
     class FormulaLexer < Base
       rule(/\^/) { :EXP }

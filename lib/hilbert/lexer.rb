@@ -1,7 +1,7 @@
 require 'hilbert/lexer/base'
 require 'hilbert/lexer/main_lexer'
 
-module Qlang
+module Hilbert
   module Lexer
     def execute(str)
       MainLexer.new(str)

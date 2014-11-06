@@ -1,4 +1,4 @@
-module Qlang
+module Hilbert
   module Exec
     class Compiler
       def initialize(args)
@@ -26,11 +26,11 @@ module Qlang
       def ch_compile_type(lang)
         case lang
         when '-rb'
-          Qlang.to_ruby
+          Hilbert.to_ruby
         when '-r'
-          Qlang.to_r
+          Hilbert.to_r
         when '-py'
-          Qlang.to_python
+          Hilbert.to_python
         else
           print 'Q support only Ruby and R now.'
         end
@@ -41,7 +41,7 @@ module Qlang
         input_string = read_file(file)
         file.close
         input_string.gsub(/(.*)I love mathematics\.(.*)Q\.E\.D(.*)/m) {
-          "#{$1}#{Kconv.tosjis(Qlang.compile($2))}#{$3}"
+          "#{$1}#{Kconv.tosjis(Hilbert.compile($2))}#{$3}"
         }
       end
 

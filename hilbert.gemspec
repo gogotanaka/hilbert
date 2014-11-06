@@ -5,7 +5,7 @@ require 'hilbert/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'hilbert'
-  spec.version       = Qlang::VERSION
+  spec.version       = Hilbert::VERSION
   spec.authors       = ['gogotanaka']
   spec.email         = ['mail@tanakakazuki.com']
   spec.extensions    = ['ext/hilbert/extconf.rb']

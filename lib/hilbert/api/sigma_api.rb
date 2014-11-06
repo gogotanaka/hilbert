@@ -1,4 +1,4 @@
-module Qlang
+module Hilbert
   module Api
     module SigmaApi
       def self.execute(formula, var, from, to)
