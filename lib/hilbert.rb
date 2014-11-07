@@ -15,7 +15,6 @@ module Hilbert
   $meta_info = MetaInfo.instance
 
   class << self
-
     def compile(str)
       lexed = Lexer.execute(str)
       Kconv.tosjis(Parser.execute(lexed))
@@ -28,10 +27,6 @@ module Hilbert
         Hilbert
       end
     end
-
   end
 
 end
-
-# Make alias as Q
-Q = Hilbert
