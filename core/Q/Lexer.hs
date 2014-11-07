@@ -1,9 +1,9 @@
 {- |
-Module      : Language.Q
+Module      : Language.Hilbert
 Copyright   : Kazuki Tanaka (a.k.a gogotanaka)
 Licence     : MIT
 
 q-language.org.
 -}
 
-module Q.Lexer where
+module Hilbert.Lexer where

@@ -5,7 +5,7 @@ class TestR < TestInterpreterBase
   end
 
   def assert_r_compl_eq(output, input)
-    assert_equal(output, Q.to_r.compile(input))
+    assert_equal(output, Hilbert.to_r.compile(input))
   end
 
   def test_function

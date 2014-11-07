@@ -1,6 +1,6 @@
-#ifndef QLANG_H
-#define QLANG_H 1
+#ifndef HilbertLANG_H
+#define HilbertLANG_H 1
 
 #include "ruby.h"
 
-#endif /* QLANG_H */
+#endif /* HilbertLANG_H */

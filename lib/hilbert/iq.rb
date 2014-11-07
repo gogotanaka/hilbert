@@ -12,7 +12,7 @@ module Hilbert
     end
 
     def self.execute(code)
-      ruby_code = Q.to_ruby.compile(code.encode('utf-8'))
+      ruby_code = Hilbert.to_ruby.compile(code.encode('utf-8'))
       ruby_obj = eval(ruby_code)
 
       optimize_output(ruby_obj).encode('utf-8')

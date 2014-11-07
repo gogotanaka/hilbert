@@ -51,15 +51,15 @@ execute(VALUE self, VALUE a, VALUE b, VALUE n)
 void
 Init_hilbert(void)
 {
-  VALUE rb_mQMatrix = rb_define_class("QMatrix", rb_cObject);
-  rb_define_method(rb_mQMatrix, "execute", execute, 3);
-  rb_define_method(rb_mQMatrix, "func", rb_func, 1);
+  VALUE rb_mHilbertMatrix = rb_define_class("HilbertMatrix", rb_cObject);
+  rb_define_method(rb_mHilbertMatrix, "execute", execute, 3);
+  rb_define_method(rb_mHilbertMatrix, "func", rb_func, 1);
 }
 
-// VALUE rb_mQMatrix;
+// VALUE rb_mHilbertMatrix;
 
 // void
 // Init_q_matrix(void)
 // {
-//   rb_mQMatrix = rb_define_module("QMatrix");
+//   rb_mHilbertMatrix = rb_define_module("HilbertMatrix");
 // }

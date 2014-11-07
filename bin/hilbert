@@ -2,10 +2,10 @@
 
 require 'hilbert'
 
-# Q command line
+# Hilbert command line
 require 'hilbert/exec'
 
-# Q interpreter
+# Hilbert interpreter
 require 'hilbert/iq'
 
 # TODO: There are vanch of todo ..

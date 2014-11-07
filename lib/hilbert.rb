@@ -5,7 +5,7 @@ require 'singleton'
 require 'yaml'
 
 $:.unshift(File.dirname(__FILE__))
-# Q core
+# Hilbert core
 require 'hilbert/meta_info'
 require 'hilbert/utils/ruby_ext'
 require 'hilbert/lexer'

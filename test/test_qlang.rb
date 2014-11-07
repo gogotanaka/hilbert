@@ -5,12 +5,11 @@ class TestHilbert < MiniTest::Unit::TestCase
   end
 
   def assert_to_ruby(input, output)
-    assert_equal(Q.to_ruby.compile(input), output)
+    assert_equal(Hilbert.to_ruby.compile(input), output)
   end
 
   def test_basis
     refute_nil ::Hilbert::VERSION
-    assert_equal(Hilbert, Q)
   end
 
   def test_demo_code
@@ -21,4 +20,3 @@ class TestHilbert < MiniTest::Unit::TestCase
     assert_equal(Vector[1, 2, 3].to_q, '(1 2 3)')
   end
 end
-

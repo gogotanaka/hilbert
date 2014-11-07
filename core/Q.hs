@@ -1,19 +1,19 @@
 {- |
-Module      : Language.Q
+Module      : Language.Hilbert
 Copyright   : Kazuki Tanaka (a.k.a gogotanaka)
 Licence     : MIT
 
 q-language.org.
 -}
 
-module Q
-       ( module Q.Lexer
-       , module Q.Parser
+module Hilbert
+       ( module Hilbert.Lexer
+       , module Hilbert.Parser
        , version
        ) where
 
 
-import Q.Lexer
-import Q.Parser
+import Hilbert.Lexer
+import Hilbert.Parser
 
 import Data.Version
