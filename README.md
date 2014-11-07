@@ -1,6 +1,6 @@
-# Qlang
+# Hilbert
 
-[![Gem Version](https://badge.fury.io/rb/qlang.svg)](http://badge.fury.io/rb/qlang) [![Build Status](https://travis-ci.org/gogotanaka/Q.svg?branch=master)](https://travis-ci.org/gogotanaka/Q) [![Coverage Status](https://coveralls.io/repos/gogotanaka/Q/badge.png?branch=master)](https://coveralls.io/r/gogotanaka/Q?branch=master) [![Code Climate](https://codeclimate.com/github/gogotanaka/Q/badges/gpa.svg)](https://codeclimate.com/github/gogotanaka/Q) [![Dependency Status](https://gemnasium.com/gogotanaka/Q.svg)](https://gemnasium.com/gogotanaka/Q)
+[![Gem Version](https://badge.fury.io/rb/hilbert.svg)](http://badge.fury.io/rb/hilbert) [![Build Status](https://travis-ci.org/gogotanaka/Q.svg?branch=master)](https://travis-ci.org/gogotanaka/Q) [![Coverage Status](https://coveralls.io/repos/gogotanaka/Q/badge.png?branch=master)](https://coveralls.io/r/gogotanaka/Q?branch=master) [![Code Climate](https://codeclimate.com/github/gogotanaka/Q/badges/gpa.svg)](https://codeclimate.com/github/gogotanaka/Q) [![Dependency Status](https://gemnasium.com/gogotanaka/Q.svg)](https://gemnasium.com/gogotanaka/Q)
 
 ## Do you know the one best language in this world?
 
@@ -8,23 +8,23 @@
 
 ## How can we deal something as great as mathematics in a discrete world?
 
-#### Q-language is the answer.
+#### Hilbert is the answer.
 
-Q lets you have a sense of mathematics using a keyboard, the same as you would with a pen.
+Hilbert lets you have a sense of mathematics using a keyboard, the same as you would with a pen.
 
 ```
 +---Discrete world---+                    +------Mathematics-------+
 |        Ruby        |                    |        axiom           |
-|        TeX         |<------   Q  ------>|    Uncountable noun    |
+|        TeX         |<----  Hilbert ---->|    Uncountable noun    |
 |       Python       |                    |  real number topology  |
 +--------------------+                    +------------------------+
 ```
 
 ## Demo
 
-The code below is input and output for the q-lang interpreter
+The code below is input and output for the Hilbert interpreter
 
-(you can try it by `qlang -i`)
+(you can try it by `hilbert -i`)
 
 ### Differentiate
 
@@ -96,28 +96,28 @@ f(1, 2)
 
 ## How to use
 
-Install qlang gem.
+Install hilbert gem.
 
-    $ gem install qlang
+    $ gem install hilbert
 
 ## Interpreter
 
-    $ qlang -i
-    Q:->
+    $ hilbert -i
+    Enjoy! ->
 
 ## Use as native language
 
 ### Compile into R
 
-    $ qlang -r foo.q
+    $ hilbert -r foo.hr
 
 ### Compile into Ruby
 
-    $ qlang -rb foo.q
+    $ hilbert -rb foo.hr
 
 ### Compile into Python
 
-    $ qlang -py foo.q
+    $ hilbert -py foo.hr
 
 
 ## Use as math template within other langs
@@ -131,14 +131,14 @@ class ExampleClass
 
 I love mathematics.
   a = (1 3 4)
-  # your Q codes
+  # your Hilbert codes
 Q.E.D
 
   end
 end
 ```
 
-    $ qlang -rb example.rb
+    $ hilbert -rb example.rb
 
 
 ```rb

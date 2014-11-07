@@ -1,7 +1,7 @@
 require 'minitest_helper'
 
 class TestTokens < MiniTest::Unit::TestCase
-  include Qlang::Lexer::Tokens
+  include Hilbert::Lexer::Tokens
   def setup
   end
 

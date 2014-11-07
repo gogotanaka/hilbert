@@ -1,6 +1,6 @@
 require 'minitest_helper'
 
-class TestQlang < MiniTest::Unit::TestCase
+class TestHilbert < MiniTest::Unit::TestCase
   def setup
   end
 
@@ -9,8 +9,8 @@ class TestQlang < MiniTest::Unit::TestCase
   end
 
   def test_basis
-    refute_nil ::Qlang::VERSION
-    assert_equal(Qlang, Q)
+    refute_nil ::Hilbert::VERSION
+    assert_equal(Hilbert, Q)
   end
 
   def test_demo_code

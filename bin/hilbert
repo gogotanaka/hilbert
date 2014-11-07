@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require 'hilbert'
+
+# Q command line
+require 'hilbert/exec'
+
+# Q interpreter
+require 'hilbert/iq'
+
+# TODO: There are vanch of todo ..
+case ARGV.first
+when '-i'
+  loop do
+    print 'Enjoy! -> '
+    begin
+      input = $stdin.gets
+      output = Hilbert::Iq.execute(input)
+      $stdout.puts output
+    rescue => e
+      puts e
+    end
+  end
+when '-v'
+  puts Hilbert::VERSION
+when '-r', '-rb', '-py'
+  exec = Hilbert::Exec::Compiler.new(ARGV)
+  exec.output!
+end

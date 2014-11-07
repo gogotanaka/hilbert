@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Qlang do
+describe Hilbert do
   describe 'Vector' do
     context 'into R' do
       it do
