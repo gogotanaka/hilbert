@@ -1,6 +1,6 @@
 # Hilbert
 
-[![Gem Version](https://badge.fury.io/rb/hilbert.svg)](http://badge.fury.io/rb/hilbert) [![Build Status](https://travis-ci.org/gogotanaka/Q.svg?branch=master)](https://travis-ci.org/gogotanaka/Q) [![Coverage Status](https://coveralls.io/repos/gogotanaka/Q/badge.png?branch=master)](https://coveralls.io/r/gogotanaka/Q?branch=master) [![Code Climate](https://codeclimate.com/github/gogotanaka/Q/badges/gpa.svg)](https://codeclimate.com/github/gogotanaka/Q) [![Dependency Status](https://gemnasium.com/gogotanaka/Q.svg)](https://gemnasium.com/gogotanaka/Q)
+[![Gem Version](https://badge.fury.io/rb/hilbert.svg)](http://badge.fury.io/rb/hilbert) [![Build Status](https://travis-ci.org/gogotanaka/Hilbert.svg?branch=master)](https://travis-ci.org/gogotanaka/Hilbert) [![Coverage Status](https://coveralls.io/repos/gogotanaka/Hilbert/badge.png?branch=master)](https://coveralls.io/r/gogotanaka/Hilbert?branch=master) [![Code Climate](https://codeclimate.com/github/gogotanaka/Hilbert/badges/gpa.svg)](https://codeclimate.com/github/gogotanaka/Hilbert) [![Dependency Status](https://gemnasium.com/gogotanaka/Hilbert.svg)](https://gemnasium.com/gogotanaka/Hilbert)
 
 ## Do you know the one best language in this world?
 
