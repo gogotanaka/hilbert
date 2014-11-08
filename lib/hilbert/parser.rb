@@ -22,18 +22,18 @@ module Hilbert
         fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
-        when /:(vector)(\d+)/, /:(matrix)(\d+)/, /:(tmatrix)(\d+)/, /:(integral)(\d+)/, /:(def_func)(\d+)/, /:(differential)(\d+)/, /:(limit)(\d+)/, /:(sigma)(\d+)/
+        when /:(VECTOR)(\d+)/, /:(MATRIX)(\d+)/, /:(TMATRIX)(\d+)/, /:(INTEGRAL)(\d+)/, /:(DEF_FUNC)(\d+)/, /:(DIFFERENTIAL)(\d+)/, /:(LIMIT)(\d+)/, /:(SIGMA)(\d+)/
           token_els = lexed.get_els($2)
 
           parsed = case $1
-                   when 'vector'   then VectorParser.execute(token_els)
-                   when 'matrix'   then MatrixParser.execute(token_els)
-                   when 'tmatrix'  then MatrixParser.execute(token_els, trans: true)
-                   when 'limit'    then LimitParser.execute(token_els)
-                   when 'integral' then IntegralParser.execute(token_els)
-                   when 'def_func' then FuncParser.execute(token_els)
-                   when 'sigma'    then SigmaParser.execute(token_els)
-                   when 'differential'
+                   when 'VECTOR'   then VectorParser.execute(token_els)
+                   when 'MATRIX'   then MatrixParser.execute(token_els)
+                   when 'TMATRIX'  then MatrixParser.execute(token_els, trans: true)
+                   when 'LIMIT'    then LimitParser.execute(token_els)
+                   when 'INTEGRAL' then IntegralParser.execute(token_els)
+                   when 'DEF_FUNC' then FuncParser.execute(token_els)
+                   when 'SIGMA'    then SigmaParser.execute(token_els)
+                   when 'DIFFERENTIAL'
                      del_var, formula = token_els
                      "d/d#{del_var}(#{FormulaParser.execute(formula)})"
           end
