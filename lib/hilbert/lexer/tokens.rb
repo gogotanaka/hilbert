@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 module Hilbert
   module Lexer
     module Tokens
@@ -26,6 +29,12 @@ module Hilbert
 
       # # TERM
       # TERM = /(#{NUM}|#{VAR_MUL}|#{VAR_MUL})/
+
+      # SYM
+      LIM_SYM = /lim/
+      INTE_SYM = /S/
+      DIFF_SYM = /d\/d/
+      SGM_SYM = /(?:∑|sigma)/
 
       # OPE
       PLS = /\+/
@@ -59,10 +68,9 @@ module Hilbert
       LSARW = '<-'
       RDARW = '=>'
       LDARW = '<='
-      SP = / /
+      SPC = / /
       NLIN = /(\r|\n)/
 
-      ITGRLSYM = 'S'
       # FIXIT
       SCLN_OR_NELN = /(?:#{SCLN}|#{NLIN})/
 
@@ -80,7 +88,7 @@ module Hilbert
       NUMS_BY_CMA = Util.string_out(NUM, CMA)
       VARS_BY_CMA = Util.string_out(VAR, CMA)
       VARNUMS_BY_CMA = Util.string_out(VARNUM, CMA)
-      NUMS_BY_SP = Util.string_out(NUM, SP)
+      NUMS_BY_SP = Util.string_out(NUM, SPC)
 
       FUNCCN =  Util.func_call(NUMS_BY_CMA)
       FUNCCV = Util.func_call(VARS_BY_CMA)
