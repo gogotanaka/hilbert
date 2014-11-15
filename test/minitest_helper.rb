@@ -9,3 +9,4 @@ require 'pp'
 require 'pry'
 
 require 'interpreter/base'
+Hilbert::Iq.execute('postulate zfc_analysis')
