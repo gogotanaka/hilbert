@@ -10,9 +10,11 @@ require 'hilbert/meta_info'
 require 'hilbert/utils/ruby_ext'
 require 'hilbert/lexer'
 require 'hilbert/parser'
+require 'hilbert/world'
 
 module Hilbert
   $meta_info = MetaInfo.instance
+  $world     = World::Entity
 
   class << self
     def compile(str)

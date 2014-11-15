@@ -2,41 +2,20 @@ require 'minitest_helper'
 
 class TestLexer < MiniTest::Unit::TestCase
   def test_general
-    lexeds = Hilbert::Lexer::WorldLexer.new('(A -> B) <-> (C|D)&(E&~R)'.delete(' ')).lexeds
-    assert_equal(17, lexeds.count)
+    lexeds = Hilbert::Lexer::WorldLexer.execute('(A -> B) <-> (C|D)&(E&~R)')
+    assert_equal(22, lexeds.count)
+    Hilbert::Parser::WorldParser.execute(lexeds)
+    assert_equal(
+      "($world.atom(:A)  >=  $world.atom(:B))  <=>  ($world.atom(:C) + $world.atom(:D)) * ($world.atom(:E) *  ~$world.atom(:R))",
+      Hilbert::Parser::WorldParser.parsed_srt
+    )
 
 
-    lexeds.each { |lexed| FuncParser.push(lexed) }
-    FuncParser.parsed_srt
-
-    class Prop
-      attr_accessor :var
-
-      def initialize(var)
-        @var = var
-      end
-
-      def >=(p)
-        self
-      end
-
-      def <=>(p)
-        self
-      end
-
-      def +(p)
-        self
-      end
-
-      def *(p)
-        self
-      end
-
-      def ~@
-        self
-      end
-    end
-
-
+    lexeds = Hilbert::Lexer::WorldLexer.execute('(A & (A -> B)) -> B')
+    Hilbert::Parser::WorldParser.execute(lexeds)
+    assert_equal(
+       "($world.atom(:A)  *  ($world.atom(:A)  >=  $world.atom(:B)))  >=  $world.atom(:B)",
+      Hilbert::Parser::WorldParser.parsed_srt
+    )
   end
 end

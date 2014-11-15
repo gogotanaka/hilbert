@@ -69,7 +69,16 @@ module Hilbert
       RDARW = '=>'
       LDARW = '<='
       SPC = / /
+      SPCS = / +/
       NLIN = /(\r|\n)/
+
+      # World
+      PROVAR = /[A-RT-Z]/
+      CONJ = /\&/
+      DISJ = /\|/
+      NEGA = /\~/
+      COND = /\->/
+      BICO = /<\->/
 
       # FIXIT
       SCLN_OR_NELN = /(?:#{SCLN}|#{NLIN})/

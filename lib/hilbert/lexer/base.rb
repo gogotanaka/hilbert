@@ -14,6 +14,10 @@ module Hilbert
           @token_rule_hash ||= {}
           @token_rule_hash[pattern] = token.call
         end
+
+        def execute(str)
+          new(str).lexeds
+        end
       end
 
       def initialize(str)

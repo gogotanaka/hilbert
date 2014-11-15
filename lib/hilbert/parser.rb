@@ -8,8 +8,10 @@ require 'hilbert/parser/func_parser'
 require 'hilbert/parser/integral_parser'
 require 'hilbert/parser/limit_parser'
 require 'hilbert/parser/sigma_parser'
+require 'hilbert/parser/world_parser'
 
 require 'hilbert/parser/formula_parser'
+require 'hilbert/lexer/world_lexer'
 
 module Hilbert
   module Parser
