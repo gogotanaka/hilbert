@@ -2,16 +2,34 @@ require 'minitest_helper'
 
 class TestPropositionalLogic < TestInterpreterBase
   def setup
+    $world.clear!
   end
 
-  # def test_general
-  #   assert_iq_equal('Defined: A is true', "A")
-  #   assert_iq_equal('Evaluate: B is undefined', "B?")
-  #   assert_iq_equal('Defined: A->B is true', "A->B")
-  #   assert_iq_equal('Evaluate: B is true', "B?")
-  # end
+  # TODO: opposite
+  def assert_iq_equal(output, input)
+    assert_equal(output, Hilbert::Iq.execute(input))
+  end
 
-  def test_legacy
+  def test_general
+    assert_iq_equal('Defined: A is TRUE', 'A')
+    assert_iq_equal('Evaluate: A is TRUE', 'A?')
+    assert_iq_equal('Evaluate: B is UNDEFINED', 'B?')
+    assert_iq_equal('Defined: A->B is TRUE', "A->B")
+    assert_iq_equal('Evaluate: B is TRUE', 'B?')
+  end
+
+  def test_syllogisms
+    assert_iq_equal('Evaluate: A is UNDEFINED', 'A?')
+    assert_iq_equal('Evaluate: A -> C  is UNDEFINED', 'A -> C ?')
+    assert_iq_equal('Defined: A -> B is TRUE', 'A -> B')
+    assert_iq_equal('Defined: B -> C is TRUE', 'B -> C')
+    assert_iq_equal('Evaluate: A -> C  is TRUE', 'A -> C ?')
+  end
+
+  def test_paradox?
+    assert_iq_equal('Defined: A is TRUE', 'A')
+    assert_iq_equal('Defined: ~A is TRUE', '~A')
+  end
     # assert_iq_equal('Defined: P(1) is true', "P(1)")
     # assert_iq_equal('Evaluate: P(1) is true', 'P?(1)')
     # assert_iq_equal('Evaluate: P(2) is undefined', 'P?(2)')
@@ -33,5 +51,4 @@ class TestPropositionalLogic < TestInterpreterBase
     # assert_iq_equal("Evaluate: WillDie('gogo1') is true", "WillDie?('gogo1')")
     # assert_iq_equal("Evaluate: WillDie('gogo2') is undefined", "WillDie?('gogo2')")
     # assert_iq_equal('Evaluate: Q(x) is true', 'Q?(x)')
-  end
 end

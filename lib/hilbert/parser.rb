@@ -17,6 +17,7 @@ module Hilbert
   module Parser
     include Lexer::Tokens
     SYM = '\w+'
+
     ONEHASH = "#{ANYSP}#{SYM}#{CLN}#{ANYSP}#{VARNUM}#{ANYSP}" # sdf: 234
     def execute(lexed)
       time = Time.now
@@ -24,6 +25,24 @@ module Hilbert
         fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
+        when /:(POST_ZFC)(\d+)/
+          Hilbert::Lexer::MainLexer.zfc_analysis!
+          lexed.parsed!('', $2)
+        when /:(DEFLOGIC)(\d+)/
+          value = lexed.get_value($1)
+          lexeds = Lexer::WorldLexer.execute(value)
+          Parser::WorldParser.execute(lexeds)
+          $world << eval(Parser::WorldParser.parsed_srt)
+          rslt = %|"Defined: #{value} is TRUE"|
+          lexed.parsed!(rslt, $2)
+
+        when /:(EVALOGIC)(\d+)/
+          value = lexed.get_value($1).delete('?')
+          lexeds = Lexer::WorldLexer.execute(value)
+          Parser::WorldParser.execute(lexeds)
+          rslt = $world.impl eval(Parser::WorldParser.parsed_srt), value
+          lexed.parsed!(rslt, $2)
+
         when /:(VECTOR)(\d+)/, /:(MATRIX)(\d+)/, /:(TMATRIX)(\d+)/, /:(INTEGRAL)(\d+)/, /:(DEF_FUNC)(\d+)/, /:(DIFFERENTIAL)(\d+)/, /:(LIMIT)(\d+)/, /:(SIGMA)(\d+)/
           token_els = lexed.get_els($2)
 

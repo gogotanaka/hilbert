@@ -54,6 +54,7 @@ class TestPropLogic < MiniTest::Unit::TestCase
   end
 
   def test_tautology
+    assert_to_s("TRUE", ~(~$p) >= $p)
     assert_to_s("TRUE", ($p * ($p >= $q)) >= $q)
     assert_to_s("TRUE", (($p >= $q) * ($q >= $r)) >= ($p >= $r))
     assert_to_s("TRUE", (~$p * ($p + $q)) >= ($q))

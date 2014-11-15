@@ -73,6 +73,9 @@ module Hilbert
       NLIN = /(\r|\n)/
 
       # World
+      ## FIXIT
+      DEFLOGIC = /\A.*[A-RT-Z].*\z/
+      EVALOGIC = /\A.*[A-RT-Z].*\?\z/
       PROVAR = /[A-RT-Z]/
       CONJ = /\&/
       DISJ = /\|/
