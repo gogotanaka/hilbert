@@ -3,8 +3,8 @@ module Hilbert
     class MainLexer < Base
       # TODO: So far so good, but...
       rule(/postulate zfc_analysis/) { :POST_ZFC }
-      rule(/#{EVALOGIC}/) { :EVALOGIC }
-      rule(/#{DEFLOGIC}/) { :DEFLOGIC }
+      rule(/#{EVALOGIC}/m) { :EVALOGIC }
+      rule(/#{DEFLOGIC}/m) { :DEFLOGIC }
       rule(/[ \t\f]/)
 
       rule(/(\r|\n)+/) { :NULL }

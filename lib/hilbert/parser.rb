@@ -29,7 +29,7 @@ module Hilbert
           Hilbert::Lexer::MainLexer.zfc_analysis!
           lexed.parsed!('', $2)
         when /:(DEFLOGIC)(\d+)/
-          value = lexed.get_value($1)
+          value = lexed.get_value($1).delete("\n")
           lexeds = Lexer::WorldLexer.execute(value)
           Parser::WorldParser.execute(lexeds)
           $world << eval(Parser::WorldParser.parsed_srt)
@@ -37,7 +37,7 @@ module Hilbert
           lexed.parsed!(rslt, $2)
 
         when /:(EVALOGIC)(\d+)/
-          value = lexed.get_value($1).delete('?')
+          value = lexed.get_value($1).delete("?\n")
           lexeds = Lexer::WorldLexer.execute(value)
           Parser::WorldParser.execute(lexeds)
           rslt = $world.impl eval(Parser::WorldParser.parsed_srt), value
