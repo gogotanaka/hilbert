@@ -8,13 +8,16 @@ require 'hilbert/parser/func_parser'
 require 'hilbert/parser/integral_parser'
 require 'hilbert/parser/limit_parser'
 require 'hilbert/parser/sigma_parser'
+require 'hilbert/parser/world_parser'
 
 require 'hilbert/parser/formula_parser'
+require 'hilbert/lexer/world_lexer'
 
 module Hilbert
   module Parser
     include Lexer::Tokens
     SYM = '\w+'
+
     ONEHASH = "#{ANYSP}#{SYM}#{CLN}#{ANYSP}#{VARNUM}#{ANYSP}" # sdf: 234
     def execute(lexed)
       time = Time.now
@@ -22,6 +25,22 @@ module Hilbert
         fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
         case lexed.token_str
+        when /:(POST_ZFC)(\d+)/
+          Hilbert::Lexer::MainLexer.zfc_analysis!
+          lexed.parsed!('', $2)
+        when /:(P_PARAD)(\d+)/
+          lexed.parsed!($world.paradox?, $2)
+
+        when /:(DEFLOGIC)(\d+)/
+          value = lexed.get_value($1).delete("\n")
+          rslt = $world << value
+          lexed.parsed!(rslt, $2)
+
+        when /:(EVALOGIC)(\d+)/
+          value = lexed.get_value($1).delete("?\n")
+          rslt = $world.impl value
+          lexed.parsed!(rslt, $2)
+
         when /:(VECTOR)(\d+)/, /:(MATRIX)(\d+)/, /:(TMATRIX)(\d+)/, /:(INTEGRAL)(\d+)/, /:(DEF_FUNC)(\d+)/, /:(DIFFERENTIAL)(\d+)/, /:(LIMIT)(\d+)/, /:(SIGMA)(\d+)/
           token_els = lexed.get_els($2)
 

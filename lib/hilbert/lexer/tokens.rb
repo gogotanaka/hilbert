@@ -69,7 +69,19 @@ module Hilbert
       RDARW = '=>'
       LDARW = '<='
       SPC = / /
+      SPCS = / +/
       NLIN = /(\r|\n)/
+
+      # World
+      ## FIXIT
+      DEFLOGIC = /\A.*[A-RT-Z].*\z/
+      EVALOGIC = /\A.*[A-RT-Z].*\?\z/
+      PROVAR = /[A-RT-Z]/
+      CONJ = /\&/
+      DISJ = /\|/
+      NEGA = /\~/
+      COND = /\->/
+      BICO = /<\->/
 
       # FIXIT
       SCLN_OR_NELN = /(?:#{SCLN}|#{NLIN})/
