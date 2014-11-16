@@ -28,19 +28,17 @@ module Hilbert
         when /:(POST_ZFC)(\d+)/
           Hilbert::Lexer::MainLexer.zfc_analysis!
           lexed.parsed!('', $2)
+        when /:(P_PARAD)(\d+)/
+          lexed.parsed!($world.paradox?, $2)
+
         when /:(DEFLOGIC)(\d+)/
           value = lexed.get_value($1).delete("\n")
-          lexeds = Lexer::WorldLexer.execute(value)
-          Parser::WorldParser.execute(lexeds)
-          $world << eval(Parser::WorldParser.parsed_srt)
-          rslt = %|"Defined: #{value} is TRUE"|
+          rslt = $world << value
           lexed.parsed!(rslt, $2)
 
         when /:(EVALOGIC)(\d+)/
           value = lexed.get_value($1).delete("?\n")
-          lexeds = Lexer::WorldLexer.execute(value)
-          Parser::WorldParser.execute(lexeds)
-          rslt = $world.impl eval(Parser::WorldParser.parsed_srt), value
+          rslt = $world.impl value
           lexed.parsed!(rslt, $2)
 
         when /:(VECTOR)(\d+)/, /:(MATRIX)(\d+)/, /:(TMATRIX)(\d+)/, /:(INTEGRAL)(\d+)/, /:(DEF_FUNC)(\d+)/, /:(DIFFERENTIAL)(\d+)/, /:(LIMIT)(\d+)/, /:(SIGMA)(\d+)/

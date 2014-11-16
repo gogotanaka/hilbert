@@ -3,6 +3,7 @@ module Hilbert
     class MainLexer < Base
       # TODO: So far so good, but...
       rule(/postulate zfc_analysis/) { :POST_ZFC }
+      rule(/paradox\?/) { :P_PARAD }
       rule(/\A.*[A-RT-Z].*\?.*\z/m) { :EVALOGIC }
       rule(/\A.*[A-RT-Z].*\z/m) { :DEFLOGIC }
       rule(/[ \t\f]/)
@@ -15,6 +16,7 @@ module Hilbert
         def zfc_analysis!
           clear!
           rule(/postulate zfc_analysis/) { :POST_ZFC }
+          rule(/paradox\?/) { :P_PARAD }
           rule(/\A.*[A-RT-Z].*\?.*\z/m) { :EVALOGIC }
           rule(/\A.*[A-RT-Z].*\z/m) { :DEFLOGIC }
           rule(/(#{FUNCCV})#{ANYSP}#{EQL}#{ANYSP}(#{FORMULA})/) { :DEF_FUNC }

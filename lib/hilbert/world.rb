@@ -10,21 +10,22 @@ module Hilbert
           @@propositions
         end
 
-        def <<(logic_form)
-          @@propositions << logic_form
+        def <<(logic_str)
+          @@propositions << to_rb_obj(logic_str)
+          %|"Defined: #{logic_str} is TRUE"|
         end
 
-        def impl(logic_form, logic_str)
+        def impl(logic_str)
           # HOTFIX:
-          return %|"Evaluate: #{logic_str} is UNDEFINED"| if @@propositions.empty?
-          str = (!!!!!!!(@@propositions.inject(:*) >= logic_form)).to_s
+          return eval_rslt(logic_str, 'UNDEFINED') if @@propositions.empty?
+          str = (!!!!!!!(@@propositions.inject(:*) >= to_rb_obj(logic_str))).to_s
           case str
           when 'TRUE'
-            %|"Evaluate: #{logic_str} is TRUE"|
+            eval_rslt(logic_str, 'TRUE')
           when 'FALSE'
-            %|"Evaluate: #{logic_str} is FALSE"|
+            eval_rslt(logic_str, 'FALSE')
           else
-            %|"Evaluate: #{logic_str} is UNDEFINED"|
+            eval_rslt(logic_str, 'UNDEFINED')
           end
         end
 
@@ -38,6 +39,29 @@ module Hilbert
         def clear!
           @@propositions = []
         end
+
+        def paradox?
+          return %|"FALSE"| if @@propositions.empty?
+          str = (!!!!!!!(@@propositions.inject(:*) >= (atom(:P) * ~atom(:P)))).to_s
+          case str
+          when 'TRUE'
+            %|"TRUE"|
+          else
+            %|"FALSE"|
+          end
+        end
+
+        # Internal Utils
+        def to_rb_obj(logic_str)
+          lexeds = Lexer::WorldLexer.execute(logic_str)
+          Parser::WorldParser.execute(lexeds)
+          eval Parser::WorldParser.parsed_srt
+        end
+
+        def eval_rslt(logic_str, rslt)
+          %|"Evaluate: #{logic_str} is #{rslt}"|
+        end
+
       end
     end
   end

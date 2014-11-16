@@ -27,8 +27,11 @@ class TestPropositionalLogic < TestInterpreterBase
   end
 
   def test_paradox?
+    assert_iq_equal('FALSE', 'paradox?')
     assert_iq_equal('Defined: A is TRUE', 'A')
+    assert_iq_equal('FALSE', 'paradox?')
     assert_iq_equal('Defined: ~A is TRUE', '~A')
+    assert_iq_equal('TRUE', 'paradox?')
   end
     # assert_iq_equal('Defined: P(1) is true', "P(1)")
     # assert_iq_equal('Evaluate: P(1) is true', 'P?(1)')
