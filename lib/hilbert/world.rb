@@ -6,10 +6,6 @@ module Hilbert
     class Entity
       @@propositions = []
       class << self
-        def tautology
-          @@propositions
-        end
-
         def <<(logic_str)
           @@propositions << to_rb_obj(logic_str)
           %|"Defined: #{logic_str} is TRUE"|
