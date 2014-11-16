@@ -40,5 +40,8 @@ class TestFunction < TestInterpreterBase
 
     assert_def_func('f(x) = log(x)', 'log( x )')
     assert_cal_func('f(e)', '1.0')
+
+    assert_def_func('f(x) = cos(x)', 'cos( x )')
+    assert_cal_func('f(pi/2.0)', '0.0')
   end
 end
