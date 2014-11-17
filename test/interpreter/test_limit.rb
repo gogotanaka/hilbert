@@ -38,6 +38,5 @@ class TestLimit < TestInterpreterBase
       'oo',
       'lim[x->0] 1/x'
     )
-
   end
 end
