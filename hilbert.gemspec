@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'dydx', '~> 0.2.7000000'
+  spec.add_dependency 'dydx', '~> 0.2.7000001'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
