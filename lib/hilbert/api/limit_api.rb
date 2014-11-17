@@ -14,6 +14,7 @@ module Hilbert
              temp_cal_f(#{close_to} + Float::EPSILON ** 20)"
           end
         when :inter
+          Dydx::API.reset!
           Dydx::API.store_func(eval(var), eval(formula), :tmp)
           Dydx::API.eval_func(eval(close_to) + Float::EPSILON ** 20, :tmp)
         else

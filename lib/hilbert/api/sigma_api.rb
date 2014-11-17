@@ -5,6 +5,7 @@ module Hilbert
         case $meta_info.lang
         # TODO: I know what you want to say.
         when :ruby
+          Dydx::API.reset!
           "temp_cal_f(#{var}) <= #{formula};
            (#{from}..#{to}).inject(0) {|sum, i| sum+=temp_cal_f(i) }"
         else
