@@ -13,6 +13,11 @@ class TestSigma < TestInterpreterBase
     )
 
     assert_iq_equal(
+      '∑[i=1, 10] i',
+      '55.0'
+    )
+
+    assert_iq_equal(
       '∑[x=0, 10] x^2',
       '385.0'
     )
@@ -21,5 +26,6 @@ class TestSigma < TestInterpreterBase
       '∑[x=0, 10] x^3',
       '3025.0'
     )
+
   end
 end

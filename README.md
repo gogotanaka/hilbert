@@ -4,7 +4,7 @@
 
 ## Do you know the one best language in this world?
 
-#### I believe mathematics is absolutely that one.
+#### I believe mathematics(logic) is absolutely that one.
 
 ## How can we deal something as great as mathematics in a discrete world?
 
@@ -25,6 +25,19 @@ Hilbert lets you have a sense of mathematics using a keyboard, the same as you w
 The code below is input and output for the Hilbert interpreter
 
 (you can try it by `hilbert -i`)
+
+### Logic
+```coffeescript
+P -> Q 
+Q -> R
+(P -> R)?
+=> TRUE
+
+P | Q # P or Q
+~P    # not P
+Q?    # Q is TURE?
+=> TURE
+```
 
 ### Differentiate
 
@@ -155,5 +168,6 @@ end
 
 ## Contributing
 
-Any PRs or issues are welcome.
+Any PRs or issues are welcome. (Please make to `develop` branch)
+
 You can become a commiter, even if you only commit once.

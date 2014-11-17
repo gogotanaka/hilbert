@@ -27,7 +27,7 @@ module Hilbert
         case lexed.token_str
         when /:(POST_ZFC)(\d+)/
           Hilbert::Lexer::MainLexer.zfc_analysis!
-          lexed.parsed!('', $2)
+          lexed.parsed!('"success! :)"', $2)
         when /:(P_PARAD)(\d+)/
           lexed.parsed!($world.paradox?, $2)
 

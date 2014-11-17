@@ -5,7 +5,7 @@ class TestLimit < TestInterpreterBase
   end
 
   def assert_iq_equal(output, input)
-    assert_equal(Hilbert::Iq.execute(input), output)
+    assert_equal(output, Hilbert::Iq.execute(input))
   end
 
   def test_general
@@ -32,6 +32,11 @@ class TestLimit < TestInterpreterBase
     assert_iq_equal(
       '0.0',
       'lim[x->0] x'
+    )
+
+    assert_iq_equal(
+      'oo',
+      'lim[x->0] 1/x'
     )
   end
 end
