@@ -10,12 +10,18 @@ class TestPropositionalLogic < TestInterpreterBase
     assert_equal(output, Hilbert::Iq.execute(input))
   end
 
-  def test_general
+  def test_ex1
     assert_iq_equal('Defined: A is TRUE', 'A')
     assert_iq_equal('Evaluate: A is TRUE', 'A?')
     assert_iq_equal('Evaluate: B is UNDEFINED', 'B?')
     assert_iq_equal('Defined: A->B is TRUE', "A->B")
     assert_iq_equal('Evaluate: B is TRUE', 'B?')
+  end
+
+  def test_ex2
+    assert_iq_equal('Evaluate: A is UNDEFINED', 'A?')
+    assert_iq_equal('Defined: ~A is TRUE', '~A')
+    assert_iq_equal('Evaluate: A is FALSE', 'A?')
   end
 
   def test_syllogisms

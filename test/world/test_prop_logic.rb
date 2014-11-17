@@ -51,6 +51,7 @@ class TestPropLogic < MiniTest::Unit::TestCase
     assert_to_s("((Q|P)&(R|P))", $p + ($q * $r))
     assert_to_s("(P&Q&R)", $p * ($q * $r))
     assert_to_s("(P&(~P|Q))", $p * ($p >= $q))
+    assert_to_s("P", (~$p >= $p))
   end
 
   def test_tautology
@@ -59,9 +60,11 @@ class TestPropLogic < MiniTest::Unit::TestCase
     assert_to_s("TRUE", (($p >= $q) * ($q >= $r)) >= ($p >= $r))
     assert_to_s("TRUE", (~$p * ($p + $q)) >= ($q))
     assert_to_s("TRUE", (($p >= $q) * ($q >= $r) * $p) >= ($r))
+    assert_to_s("TRUE", ($p * ~$p) >= $r)
   end
 
   def test_no_tautology
     assert_to_s("FALSE", $p * $q * ~$p)
+    assert_to_s("FALSE", ~$p * (~$p >= $p))
   end
 end
