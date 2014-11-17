@@ -11,7 +11,13 @@ require 'hilbert/iq'
 # TODO: There are vanch of todo ..
 case ARGV.first
 when '-i'
-  print %|Hi guys,thank you for using Hilbert.\nYou need to execute "postulate zfc_analysis" if you wanna do real analysis\n\n|
+  if ARGV[1] == '-zfc'
+    Hilbert::Iq.execute('postulate zfc_analysis')
+    print %|Hi guys, your postulating zfc_analysis is success. :) \n\n|
+  else
+    print %|Hi guys,thank you for using Hilbert.\nYou need to execute "postulate zfc_analysis" if you wanna do real analysis.\n\n|
+  end
+
   loop do
     print 'Enjoy! -> '
     begin
