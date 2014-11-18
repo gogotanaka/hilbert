@@ -111,7 +111,7 @@ Install the `hilbert` gem.
 
     $ gem install hilbert
 
-### Note to OS X Users: If the above `gem` command does not work with the stock version of Ruby (due to not being able to build a target indicated in the Makefile), then you will need to install a version of Ruby that includes the appropriate header files. Using [homebrew](http://brew.sh/) (`brew install ruby`) will suffice.
+Note to OS X Users: If the above `gem` command does not work with the stock version of Ruby (due to not being able to build a target indicated in the Makefile), then you will need to install a version of Ruby that includes the appropriate header files. Using [homebrew](http://brew.sh/) (`brew install ruby`) will suffice.
 
 ## Interpreter
 
