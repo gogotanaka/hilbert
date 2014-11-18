@@ -36,7 +36,7 @@ Q -> R
 P | Q # P or Q
 ~P    # not P
 Q?    # Q is TURE?
-=> TURE
+=> TRUE
 ```
 
 ### Differentiate
