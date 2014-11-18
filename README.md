@@ -2,11 +2,11 @@
 
 [![Gem Version](https://badge.fury.io/rb/hilbert.svg)](http://badge.fury.io/rb/hilbert) [![Build Status](https://travis-ci.org/gogotanaka/Hilbert.svg?branch=master)](https://travis-ci.org/gogotanaka/Hilbert) [![Coverage Status](https://coveralls.io/repos/gogotanaka/Hilbert/badge.png?branch=master)](https://coveralls.io/r/gogotanaka/Hilbert?branch=master) [![Code Climate](https://codeclimate.com/github/gogotanaka/Hilbert/badges/gpa.svg)](https://codeclimate.com/github/gogotanaka/Hilbert) [![Dependency Status](https://gemnasium.com/gogotanaka/Hilbert.svg)](https://gemnasium.com/gogotanaka/Hilbert)
 
-## Do you know the one best language in this world?
+### Do you know the one best language in this world?
 
-#### I believe mathematics(logic) is absolutely that one.
+#### I believe mathematics (logic) is absolutely that language.
 
-## How can we deal something as great as mathematics in a discrete world?
+### How can we deal something as great as mathematics in a discrete world?
 
 #### Hilbert is the answer.
 
@@ -22,9 +22,7 @@ Hilbert lets you have a sense of mathematics using a keyboard, the same as you w
 
 ## Demo
 
-The code below is input and output for the Hilbert interpreter
-
-(you can try it by `hilbert -i`)
+The code below is input and output for the Hilbert interpreter. (You can try it with `hilbert -i`.)
 
 ### Logic
 ```coffeescript
@@ -35,8 +33,8 @@ Q -> R
 
 P | Q # P or Q
 ~P    # not P
-Q?    # Q is TURE?
-=> TURE
+Q?    # Q is TRUE?
+=> TRUE
 ```
 
 ### Differentiate
@@ -109,7 +107,7 @@ f(1, 2)
 
 ## How to use
 
-Install hilbert gem.
+Install the `hilbert` gem.
 
     $ gem install hilbert
 
@@ -168,6 +166,6 @@ end
 
 ## Contributing
 
-Any PRs or issues are welcome. (Please make to `develop` branch)
+Any PRs or issues are welcome. (Please make them to [the `develop` branch](https://github.com/gogotanaka/Hilbert/tree/develop).)
 
-You can become a commiter, even if you only commit once.
+You can become a committer, even if you only commit once.
