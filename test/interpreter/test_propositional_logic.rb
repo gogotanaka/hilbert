@@ -30,12 +30,19 @@ class TestPropositionalLogic < TestInterpreterBase
     assert_iq_equal('Evaluate: A is TRUE', 'A?')
   end
 
+  def test_ex4
+    assert_iq_equal('Evaluate: A is UNDEFINED', 'A ?')
+    assert_iq_equal('Defined: ~A is TRUE', '~A')
+    assert_iq_equal('Evaluate: A is FALSE', 'A ?')
+  end
+
+
   def test_syllogisms
     assert_iq_equal('Evaluate: A is UNDEFINED', 'A?')
-    assert_iq_equal('Evaluate: A -> C  is UNDEFINED', 'A -> C ?')
+    assert_iq_equal('Evaluate: A -> C is UNDEFINED', 'A -> C ?')
     assert_iq_equal('Defined: A -> B is TRUE', 'A -> B')
     assert_iq_equal('Defined: B -> C is TRUE', 'B -> C')
-    assert_iq_equal('Evaluate: A -> C  is TRUE', 'A -> C ?')
+    assert_iq_equal('Evaluate: A -> C is TRUE', 'A -> C ?')
   end
 
   def test_paradox?

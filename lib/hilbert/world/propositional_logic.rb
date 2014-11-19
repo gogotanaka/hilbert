@@ -71,6 +71,10 @@ module Hilbert
         def include?(p)
           false
         end
+
+        def dpll!
+          !!!!!!!!!!!!self
+        end
       end
 
       module Base; include Operator; include Utils end

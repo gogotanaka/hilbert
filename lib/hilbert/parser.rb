@@ -37,7 +37,7 @@ module Hilbert
           lexed.parsed!(rslt, $2)
 
         when /:(EVALOGIC)(\d+)/
-          value = lexed.get_value($1).delete("?\n")
+          value = lexed.get_value($1).rm(/ *\?/).delete("\n")
           rslt = $world.impl value
           lexed.parsed!(rslt, $2)
 

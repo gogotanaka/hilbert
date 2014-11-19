@@ -15,19 +15,20 @@ module Hilbert
           # HOTFIX: we need to ..
           return eval_rslt(logic_str, 'UNDEFINED') if @@propositions.empty?
           logic = (@@propositions.inject(:*) >= to_rb_obj(logic_str))
-          str = (!!!!!!!logic).to_s
+          str = logic.dpll!.to_s
           case str
           when 'TRUE'
             eval_rslt(logic_str, 'TRUE')
           when 'FALSE'
             eval_rslt(logic_str, 'FALSE')
           else
-            str = (!!!!!!!(@@propositions.inject(:*) * logic)).to_s
+            logic = (@@propositions.inject(:*) >= (~to_rb_obj(logic_str)))
+            str = logic.dpll!.to_s
             case str
             when 'TRUE'
-              eval_rslt(logic_str, 'TRUE')
-            when 'FALSE'
               eval_rslt(logic_str, 'FALSE')
+            when 'FALSE'
+              eval_rslt(logic_str, 'TRUE')
             else
               eval_rslt(logic_str, 'UNDEFINED')
             end
