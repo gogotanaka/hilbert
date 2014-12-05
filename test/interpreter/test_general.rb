@@ -10,6 +10,9 @@ class TestGeneral < TestInterpreterBase
   end
 
   def test_general
+    assert_iq_equal('1', '1 + 1')
+    assert_iq_equal('3 / 2', '1 + 1/2')
+    assert_iq_equal('1', '1/2 + 1/2')
     assert_iq_equal('2x', '2x')
     assert_iq_equal('2x', 'x + x')
     # assert_iq_equal('xy', 'xy')
