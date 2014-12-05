@@ -1,5 +1,6 @@
 # Ruby stlib
 require 'kconv'
+require 'mathn'
 require 'matrix'
 require 'singleton'
 require 'yaml'
