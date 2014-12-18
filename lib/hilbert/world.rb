@@ -8,25 +8,25 @@ module Hilbert
       class << self
         def <<(logic_str)
           @@propositions << to_rb_obj(logic_str)
-          %|"Defined: #{logic_str} is TRUE"|
+          Messanger.define(logic_str)
         end
 
         def impl(logic_str)
           # HOTFIX: we need to ..
-          return eval_rslt(logic_str, 'UNDEFINED') if @@propositions.empty?
+          return Messanger.evaluate(logic_str, 'UNDEFINED') if @@propositions.empty?
 
           logic = (@@propositions.inject(:*) >= to_rb_obj(logic_str))
           str = logic.dpll!.to_s
           case str
-          when 'TRUE'  then eval_rslt(logic_str, 'TRUE')
-          when 'FALSE' then eval_rslt(logic_str, 'FALSE')
+          when 'TRUE'  then Messanger.evaluate(logic_str, 'TRUE')
+          when 'FALSE' then Messanger.evaluate(logic_str, 'FALSE')
           else
             logic = (@@propositions.inject(:*) >= (~to_rb_obj(logic_str)))
             str = logic.dpll!.to_s
             case str
-            when 'TRUE'  then eval_rslt(logic_str, 'FALSE')
-            when 'FALSE' then eval_rslt(logic_str, 'TRUE')
-            else              eval_rslt(logic_str, 'UNDEFINED')
+            when 'TRUE'  then Messanger.evaluate(logic_str, 'FALSE')
+            when 'FALSE' then Messanger.evaluate(logic_str, 'TRUE')
+            else              Messanger.evaluate(logic_str, 'UNDEFINED')
             end
           end
         end
@@ -43,13 +43,11 @@ module Hilbert
         end
 
         def paradox?
-          return %|"FALSE"| if @@propositions.empty?
-          str = (!!!!!!!(@@propositions.inject(:*) >= (atom(:P) * ~atom(:P)))).to_s
-          case str
-          when 'TRUE'
-            %|"TRUE"|
-          else
-            %|"FALSE"|
+          return Messanger.tell_false if @@propositions.empty?
+
+          case (!!!!!!!(@@propositions.inject(:*) >= (atom(:P) * ~atom(:P)))).to_s
+          when 'TRUE' then Messanger.tell_true
+          else             Messanger.tell_false
           end
         end
 
@@ -59,11 +57,26 @@ module Hilbert
           Parser::WorldParser.execute(lexeds)
           eval Parser::WorldParser.parsed_srt
         end
+      end
 
-        def eval_rslt(logic_str, rslt)
-          %|"Evaluate: #{logic_str} is #{rslt}"|
+      module Messanger
+        class << self
+          def define(logic_str)
+            %|"Defined: #{logic_str} is TRUE"|
+          end
+
+          def evaluate(logic_str, rslt)
+            %|"Evaluate: #{logic_str} is #{rslt}"|
+          end
+
+          def tell_true
+            %|"TRUE"|
+          end
+
+          def tell_false
+            %|"FALSE"|
+          end
         end
-
       end
     end
   end
