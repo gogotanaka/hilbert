@@ -14,23 +14,19 @@ module Hilbert
         def impl(logic_str)
           # HOTFIX: we need to ..
           return eval_rslt(logic_str, 'UNDEFINED') if @@propositions.empty?
+
           logic = (@@propositions.inject(:*) >= to_rb_obj(logic_str))
           str = logic.dpll!.to_s
           case str
-          when 'TRUE'
-            eval_rslt(logic_str, 'TRUE')
-          when 'FALSE'
-            eval_rslt(logic_str, 'FALSE')
+          when 'TRUE'  then eval_rslt(logic_str, 'TRUE')
+          when 'FALSE' then eval_rslt(logic_str, 'FALSE')
           else
             logic = (@@propositions.inject(:*) >= (~to_rb_obj(logic_str)))
             str = logic.dpll!.to_s
             case str
-            when 'TRUE'
-              eval_rslt(logic_str, 'FALSE')
-            when 'FALSE'
-              eval_rslt(logic_str, 'TRUE')
-            else
-              eval_rslt(logic_str, 'UNDEFINED')
+            when 'TRUE'  then eval_rslt(logic_str, 'FALSE')
+            when 'FALSE' then eval_rslt(logic_str, 'TRUE')
+            else              eval_rslt(logic_str, 'UNDEFINED')
             end
           end
         end

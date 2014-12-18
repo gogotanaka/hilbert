@@ -31,5 +31,4 @@ module Hilbert
       end
     end
   end
-
 end
