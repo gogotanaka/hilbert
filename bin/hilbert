@@ -25,6 +25,7 @@ when '-i'
       output = Hilbert::Iq.execute(input)
       $stdout.puts output
     rescue => e
+      break unless input
       puts e
     end
   end
