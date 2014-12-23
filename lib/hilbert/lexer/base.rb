@@ -14,7 +14,7 @@ module Hilbert
           @token_rule_hash ||= {}
           @token_rule_hash[pattern] = token.call
         end
-        
+
         def clear!
           @token_rule_hash = {}
         end
@@ -32,7 +32,7 @@ module Hilbert
           if scan_rslt
             @lexeds << scan_rslt unless scan_rslt[:token] == :NULL
           else
-            fail "I'm so sorry, something wrong. Please feel free to report this."
+            fail "I'm so sorry, something wrong. Please feel free to report this. [DEBUGG CODE30]"
           end
         end
       end
