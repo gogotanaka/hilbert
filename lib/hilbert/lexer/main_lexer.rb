@@ -6,11 +6,11 @@ module Hilbert
       rule(/paradox\?/) { :P_PARAD }
       rule(/\A.*[A-RT-Z].*\?.*\z/m) { :EVALOGIC }
       rule(/\A.*[A-RT-Z].*\z/m) { :DEFLOGIC }
-      rule(/[ \t\f]/)
+      rule(/#{SPC}/)
 
-      rule(/(\r|\n)+/) { :NULL }
+      rule(/#{NLIN}+/) { :NULL }
 
-      rule(/[^\(\)\{\}(\n\n)]+/) { :CONT }
+      rule(/[^\(\)\{\}(\n\n)]+/) { :UNKNOW }
       class << self
         include Tokens
         def zfc_analysis!

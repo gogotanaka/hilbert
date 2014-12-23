@@ -68,7 +68,7 @@ module Hilbert
       LSARW = '<-'
       RDARW = '=>'
       LDARW = '<='
-      SPC = / /
+      SPC = /[ \t\f\v]/
       SPCS = / +/
       NLIN = /(\r|\n)/
 

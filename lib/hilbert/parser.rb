@@ -88,6 +88,8 @@ module Hilbert
 
         when /:CONT(\d+)/
           lexed.parsed!(lexed.get_value($1), $1)
+        when /:UNKNOW(\d+)/
+          raise "#{lexed.get_value($1)} can not be parsed ;("
         end
         lexed.squash!(($1.to_i)..($1.to_i+1)) if lexed.token_str =~ /:(?:CONT|R)(\d+):(?:CONT|R)(\d+)/
       end
