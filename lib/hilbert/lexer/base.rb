@@ -32,7 +32,15 @@ module Hilbert
           if scan_rslt
             @lexeds << scan_rslt unless scan_rslt[:token] == :NULL
           else
-            fail "I'm so sorry, something wrong. Please feel free to report this. [DEBUGG CODE30]"
+            fail <<-ERROR
+I'm so sorry, something wrong. Please feel free to report this. [DEBUG CODE30]
+
+========== DEBUG INFO ==========
+str:       #{str}
+scan_rslt: #{scan_rslt}
+@lexeds:   #{@lexeds}
+
+ERROR
           end
         end
       end

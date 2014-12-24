@@ -9,7 +9,16 @@ module Hilbert
         lexed = Lexer::FormulaLexer.new(str)
         time = Time.now
         loop do
-          fail "I'm so sorry, something wrong. Please feel free to report this. [DEBUGG CODE31]" if Time.now > time + 10
+          if Time.now > time + 10
+            fail <<-ERROR
+I'm so sorry, something wrong. Please feel free to report this. [DEBUG CODE31]
+
+========== DEBUG INFO ==========
+str: #{str}
+lexed.token_str: #{lexed.token_str}
+
+ERROR
+          end
           case lexed.token_str
           when /:EXP(\d+)/
             new_ope = $meta_info.lang == :ruby ? '**' : '^'

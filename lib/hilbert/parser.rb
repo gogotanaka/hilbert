@@ -22,8 +22,16 @@ module Hilbert
     def execute(lexed)
       time = Time.now
       until lexed.token_str =~ /\A:(NLIN|R)\d+\z/
-        fail "I'm so sorry, something wrong. Please feel free to report this." if Time.now > time + 10
 
+if Time.now > time + 10
+fail <<-ERROR
+I'm so sorry, something wrong. Please feel free to report this. [DEBUG CODE:29]
+
+========== DEBUG INFO ==========
+lexed.token_str: #{lexed.token_str}
+$defning_sym:    #{$defning_sym}
+ERROR
+end
         case lexed.token_str
         when /:(POST_ZFC)(\d+)/
           Hilbert::Lexer::MainLexer.zfc_analysis!
