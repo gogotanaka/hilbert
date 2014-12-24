@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'hilbert'
+require 'hilbert/version'
 
 # Hilbert command line
 require 'hilbert/exec'
