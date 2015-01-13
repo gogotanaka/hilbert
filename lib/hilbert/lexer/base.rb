@@ -36,9 +36,11 @@ module Hilbert
 I'm so sorry, something wrong. Please feel free to report this. [DEBUG CODE30]
 
 ========== DEBUG INFO ==========
-str:       #{str}
-scan_rslt: #{scan_rslt}
-@lexeds:   #{@lexeds}
+str:          #{str}
+scan_rslt:    #{scan_rslt}
+@lexeds:      #{@lexeds}
+class:        #{self.class}
+$defning_sym: #{$defning_sym}
 
 ERROR
           end

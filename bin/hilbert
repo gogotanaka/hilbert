@@ -23,6 +23,7 @@ when '-i'
     print 'Enjoy! -> '
     begin
       input = $stdin.gets
+      next if input == "\n"
       output = Hilbert::Iq.execute(input)
       $stdout.puts output
     rescue => e

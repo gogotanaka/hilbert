@@ -52,6 +52,21 @@ class TestPropositionalLogic < TestInterpreterBase
     assert_iq_equal('Defined: ~A is TRUE', '~A')
     assert_iq_equal('TRUE', 'paradox?')
   end
+
+  def test_axiom_sys
+    assert_iq_equal('', 'Axiom MY_AXIOM')
+    assert_iq_equal('', 'def A -> B')
+    assert_iq_equal('', 'end')
+    assert_iq_equal('Defined: A -> B is TRUE', 'postulate MY_AXIOM')
+  end
+
+  def test_axiom_sys2
+    assert_iq_equal('', 'Axiom MY_AXIOM2')
+    assert_iq_equal('', 'def A -> B')
+    assert_iq_equal('', 'def B -> C')
+    assert_iq_equal('', 'end')
+    assert_iq_equal('Defined: B -> C is TRUE', 'postulate MY_AXIOM2')
+  end
     # assert_iq_equal('Defined: P(1) is true', "P(1)")
     # assert_iq_equal('Evaluate: P(1) is true', 'P?(1)')
     # assert_iq_equal('Evaluate: P(2) is undefined', 'P?(2)')

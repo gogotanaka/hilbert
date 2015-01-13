@@ -12,7 +12,8 @@ require 'hilbert/parser/world_parser'
 
 require 'hilbert/parser/formula_parser'
 require 'hilbert/lexer/world_lexer'
-
+require 'hilbert/world/axiom_system'
+require 'pry'
 module Hilbert
   module Parser
     include Lexer::Tokens
@@ -33,6 +34,10 @@ $defning_sym:    #{$defning_sym}
 ERROR
 end
         case lexed.token_str
+        when /:(DEF_AXIOM)(\d+)/
+          token_els = lexed.get_els($2)
+          $defing_sys = Object.const_set(token_els.first, Class.new(World::AxiomSystem))
+          lexed.parsed!('', $2)
         when /:(POST_ZFC)(\d+)/
           Hilbert::Lexer::MainLexer.zfc_analysis!
           lexed.parsed!('"success! :)"', $2)
@@ -96,8 +101,30 @@ end
 
         when /:CONT(\d+)/
           lexed.parsed!(lexed.get_value($1), $1)
+
+
+        # TODO
+        when /:DEF_PROP(\d+)/
+          $defing_sys << lexed.get_els($2).first
+
+          lexed.parsed!('', $2)
+        when /:END(\d+)/
+          if $axioms
+            $axioms << $defing_sys
+          else
+            $axioms = [$defing_sys]
+          end
+          $defing_sys = nil
+          lexed.parsed!('', $2)
+        when /:POST_AXIOM(\d+)/
+          axiom = $axioms.find { |axiom| axiom.to_s == lexed.get_els($2).first }
+          results = axiom.axioms.map do |axiom_str|
+            $world << axiom_str
+          end
+          lexed.parsed!(results.join("\n"), $2)
+
         when /:UNKNOW(\d+)/
-          raise "#{lexed.get_value($1)} can not be parsed ;("
+          raise %|'#{lexed.get_value($1)}' can not be parsed ;(|
         end
         lexed.squash!(($1.to_i)..($1.to_i+1)) if lexed.token_str =~ /:(?:CONT|R)(\d+):(?:CONT|R)(\d+)/
       end

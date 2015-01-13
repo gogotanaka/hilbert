@@ -2,23 +2,29 @@ module Hilbert
   module Lexer
     class MainLexer < Base
       # TODO: So far so good, but...
+      rule(/Axiom +([A-Z_\d]+)/) { :DEF_AXIOM }
       rule(/postulate zfc_analysis/) { :POST_ZFC }
+      rule(/postulate +([A-Z_\d]+)/) { :POST_AXIOM }
       rule(/paradox\?/) { :P_PARAD }
-      rule(/\A.*[A-RT-Z].*\?.*\z/m) { :EVALOGIC }
-      rule(/\A.*[A-RT-Z].*\z/m) { :DEFLOGIC }
+      rule(/\A([A-RT-Z]|#{CONJ}|#{DISJ}|#{NEGA}|#{COND}|#{BICO}|\s)+\? *\z/m) { :EVALOGIC }
+      rule(/\A([A-RT-Z]|#{CONJ}|#{DISJ}|#{NEGA}|#{COND}|#{BICO}|\s)+\z/m) { :DEFLOGIC }
+
       rule(/#{SPC}/)
 
       rule(/#{NLIN}+/) { :NULL }
 
-      rule(/[^\(\)\{\}(\n\n)]+/) { :UNKNOW }
+      rule(/.+/) { :UNKNOW }
       class << self
         include Tokens
+
         def zfc_analysis!
           clear!
+          rule(/Axiom +([A-Z_\d]+)/) { :DEF_AXIOM }
           rule(/postulate zfc_analysis/) { :POST_ZFC }
+          rule(/postulate +([A-Z_\d]+)/) { :POST_AXIOM }
           rule(/paradox\?/) { :P_PARAD }
-          rule(/\A.*[A-RT-Z].*\?.*\z/m) { :EVALOGIC }
-          rule(/\A.*[A-RT-Z].*\z/m) { :DEFLOGIC }
+          rule(/\A([A-RT-Z]|#{CONJ}|#{DISJ}|#{NEGA}|#{COND}|#{BICO}|\s)+\? *\z/m) { :EVALOGIC }
+          rule(/\A([A-RT-Z]|#{CONJ}|#{DISJ}|#{NEGA}|#{COND}|#{BICO}|\s)+\z/m) { :DEFLOGIC }
           rule(/(#{FUNCCV})#{ANYSP}#{EQL}#{ANYSP}(#{FORMULA})/) { :DEF_FUNC }
           rule(/#{INTE_SYM}#{ANYSP}#{LPRN}(#{ANYSTR})#{RPRN}#{LBRCT}(#{ANYSTR})#{RBRCT}/) { :INTEGRAL }
           rule(/#{DIFF_SYM}(#{VAR}) (#{FORMULA})/) { :DIFFERENTIAL }
