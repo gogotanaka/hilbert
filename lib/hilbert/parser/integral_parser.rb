@@ -1,7 +1,7 @@
 module Hilbert
   module Parser
     module IntegralParser
-      include Base
+      include ::Hilbert::Api
       def execute(els)
         integrated, range = els[0], els[1]
 

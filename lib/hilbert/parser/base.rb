@@ -1,7 +1,8 @@
+require 'parslet'
+
 module Hilbert
   module Parser
-    module Base
-      include ::Hilbert::Api
+    class Base < Parslet::Parser
     end
   end
 end

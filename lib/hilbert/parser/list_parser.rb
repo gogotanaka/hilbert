@@ -1,7 +1,7 @@
 module Hilbert
   module Parser
     module ListParser
-      include Base
+      include ::Hilbert::Api
       def execute(lexed)
         arys = lexed.split(/ *, */).map { |e| e.split(/ *: */).map { |e2| e2.delete(' ') } }
         ListApi.execute(arys)

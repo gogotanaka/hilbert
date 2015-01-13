@@ -1,7 +1,7 @@
 module Hilbert
   module Parser
     module VectorParser
-      include Base
+      include ::Hilbert::Api
       def execute(els)
         VectorApi.execute(
           els.first.rm(/\A +/).rm(/ +\z/).split_by_sp

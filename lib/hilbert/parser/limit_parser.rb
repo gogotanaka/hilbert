@@ -1,7 +1,7 @@
 module Hilbert
   module Parser
     module LimitParser
-      include Base
+      include ::Hilbert::Api
       def self.execute(els)
         var, close_to, formula = els
 

@@ -2,7 +2,7 @@ require 'hilbert/lexer/tokens'
 module Hilbert
   module Parser
     module FuncParser
-      include Base
+      include ::Hilbert::Api
       include Lexer::Tokens
       def execute(els)
         def_func, formula = els[0], els[1]

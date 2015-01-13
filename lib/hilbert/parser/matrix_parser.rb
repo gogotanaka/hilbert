@@ -1,7 +1,7 @@
 module Hilbert
   module Parser
     module MatrixParser
-      include Base
+      include ::Hilbert::Api
       def execute(els, opts = { trans: false })
         trans = opts[:trans]
         rows = els.first.split(/ *(?:;|\n) */).map(&:split_by_sp)

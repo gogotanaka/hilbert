@@ -1,7 +1,7 @@
 module Hilbert
   module Parser
     module SigmaParser
-      include Base
+      include ::Hilbert::Api
       def self.execute(els)
         var, from, to, formula = els
 
