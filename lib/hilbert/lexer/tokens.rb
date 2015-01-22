@@ -17,7 +17,7 @@ module Hilbert
       RPRN = /\)/
       EMBEDDED_FUNC = /(?:sin|cos|tan|log)/
       NONE = /[a-d]|[f-z]/
-      NONCS = /[A-R]|[T-Z]/
+      NONCS = /[A-RT-Z]/
       USER_FUNC = /[#{NONE}#{NONCS}]/
       # h(x + y) != h * (x + y)
       FUNCV = /(?:#{EMBEDDED_FUNC}|#{USER_FUNC})(?=#{LPRN})/
