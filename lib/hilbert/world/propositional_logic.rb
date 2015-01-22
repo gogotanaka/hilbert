@@ -7,7 +7,7 @@ module Hilbert
       module Operator
         def ~@
           if    is_neg?  then p
-          elsif is_form? then vars.map { |a|~a }.inject(reope)
+          elsif is_form? then vars.map(&:~).inject(reope)
           else                NEG.new(self)
           end
         end
@@ -47,17 +47,16 @@ module Hilbert
 
       module Utils
         def neg?(p)
-          (is_a?(NEG) && self.p == p) ||
-          (p.is_a?(NEG) && p.p == self)
+          (is_neg? && self.p == p) || (p.is_neg? && p.p == self)
         end
 
         def is_neg?
           is_a?(NEG)
         end
 
-        def is_form?(ope=true)
-          return is_a?(FORM) if ope === true
-          is_a?(FORM) && @ope == ope
+        def is_form?(ope=nil)
+          return is_a?(FORM) && @ope == ope if ope
+          is_a?(FORM)
         end
 
         def is_or?
@@ -101,77 +100,63 @@ module Hilbert
       end
       $utout = UTaut.new
 
-      class Atom
+      class Atom < Struct.new(:p)
         include Base
-        attr_accessor :p
-        def initialize(p); @p = p  end
-        def to_s;          @p.to_s end
-        def !@;            self    end
-        def deep;          1       end
+        def to_s;          p.to_s      end
+        def !@;            self        end
+        def depth;         1           end
       end
       $atoms = []
 
-      class NEG
+      class NEG < Struct.new(:p)
         include Base
-        attr_accessor :p
-        def initialize(p); @p = p     end
-        def to_s;          "~#{@p}"   end
-        def !@;             ~(!p)     end
-        def deep;          p.deep+1   end
+        def to_s;          "~#{p}"      end
+        def !@;             ~(!p)       end
+        def depth;          p.depth+1   end
       end
-
 
       class FORM
         include Base
-        attr_accessor :vars, :ope
+        attr_reader :vars, :ope
         def initialize(vars, ope)
-          vars = vars.map { |var| var.is_form?(ope) ? var.vars : var }.flatten
-          @vars, @ope = vars, ope
+          @vars = vars.map { |var| var.is_form?(ope) ? var.vars : var }.flatten
+          @ope = ope
         end
+
+        def to_s; "(#{vars.map(&:to_s).join(loope)})" end
+
+        def !@
+          if is_or? && (and_form = vars.find { |var| var.is_and? })
+            and_form.vars.map { |a| a + FORM.new((vars - [and_form]), :+) }.inject(:*)
+          elsif are_there_neg?
+            is_or? ? $tout : $utout
+          else
+            vars.map(&:!).inject(ope)
+          end
+        end
+
+        def depth;       [p.depth, q.depth].max+1;     end
 
         def include?(p)
           vars.include?(p)
         end
 
-        def to_s
-          str = vars.each.with_index.inject('(') do |str, (p, i)|
-            str = str + "#{p}#{i < vars.count-1 ? loope : ')'}"
-            str
-          end
-        end
-
         def loope
-          @ope == :* ? '&' : '|'
+          ope == :* ? '&' : '|'
         end
 
         def reope
           is_and? ? :+ : :*
         end
 
-        def are_there_neg?
-          pvars = vars.reject { |var| var.is_neg? }
-          nvars = vars.select { |var| var.is_neg? }
-          pvars.any? { |pvar|
-            nvars.any? { |nvar| nvar.neg?(pvar) }
-          }
-        end
-
-        def !@
-          if is_or?
-            if and_form = vars.find { |var| var.is_and? }
-              and_form.vars.map { |a| a + FORM.new((vars - [and_form]), :+) }.inject(:*)
-            elsif are_there_neg?
-              $tout
-            else
-              vars.map{|a|!a}.inject(@ope)
-            end
-          elsif is_and? && are_there_neg?
-            $utout
-          else
-            vars.map{|a|!a}.inject(@ope)
+        private
+          def are_there_neg?
+            pvars = vars.reject { |var| var.is_neg? }
+            nvars = vars.select { |var| var.is_neg? }
+            pvars.any? { |pvar|
+              nvars.any? { |nvar| nvar.neg?(pvar) }
+            }
           end
-        end
-        def deep;          [p.deep, q.deep].max+1;     end
       end
     end
   end
