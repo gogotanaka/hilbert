@@ -16,12 +16,14 @@ module Hilbert
       LPRN = /\(/
       RPRN = /\)/
       EMBEDDED_FUNC = /(?:sin|cos|tan|log)/
-      USER_FUNC = /[a-zA-Z]/
+      NONE = /[a-d]|[f-z]/
+      NONCS = /[A-R]|[T-Z]/
+      USER_FUNC = /[#{NONE}#{NONCS}]/
       # h(x + y) != h * (x + y)
       FUNCV = /(?:#{EMBEDDED_FUNC}|#{USER_FUNC})(?=#{LPRN})/
 
       # VARIABLE
-      VAR = /(?:[a-d]|[f-z])/
+      VAR = /(?:#{NONE})/
       # VAR_MUL2 = /(?!pi)#{VAR}{2}/
       # #VAR_MUL3 = /(?!#{EMBEDDED_FUNC})#{VAR}{3}/
       # # FIX:
@@ -45,11 +47,12 @@ module Hilbert
       OPE = /(?:#{PLS}|#{SUB}|#{MUL}|#{DIV}|#{EXP})/
 
       VARNUM = /(?:#{NUM}|#{VAR})/
-      ANYSP = ' *'
+      SPC = /[ \t\f\v]/
+      SPCS = /#{SPC}+/
+      ANYSP = /#{SPC}*/
       ANYSTR = /.+/
-      NONL = /[^\r\n]/
-
-      PRN = /(?:#{LPRN}|#{RPRN})/
+      NLIN = /(\r|\n)/
+      NONL = /[^#{NLIN}]/
 
       LBRCT = /\[/
       RBRCT = /\]/
@@ -61,12 +64,6 @@ module Hilbert
       EQL = /\=/
 
       RSARW = '->'
-      LSARW = '<-'
-      RDARW = '=>'
-      LDARW = '<='
-      SPC = /[ \t\f\v]/
-      SPCS = /#{SPC}+/
-      NLIN = /(\r|\n)/
 
       # World
       ## FIXIT
@@ -104,7 +101,7 @@ module Hilbert
 
       NUMS_BY_SP_BY_SCLN_OR_NELN = Util.string_out(NUMS_BY_SP, SCLN_OR_NELN)
 
-      FORMULA = /(?:#{OPE}|#{FUNCV}|#{VAR}|#{NUM}|#{PRN}|#{ANYSP})+/
+      FORMULA = /(?:#{OPE}|#{FUNCV}|#{VAR}|#{NUM}|#{LPRN}|#{RPRN}|#{ANYSP})+/
     end
   end
 end
