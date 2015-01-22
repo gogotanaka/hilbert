@@ -32,9 +32,8 @@ module Hilbert
           rule(/#{FUNCCN}/) { :FUNCCN }
           rule(/#{LPRN}/) { :LPRN }
           rule(/#{RPRN}/) { :RPRN }
-          rule(/#{LBRCS}/) { :LBRCS }
-          rule(/#{RBRCS}/) { :RBRCS }
-          rule(/[ \t\f]/)
+
+          rule(/#{SPCS}/)
 
           rule(/(\r|\n)+/) { :NULL }
 

@@ -18,7 +18,6 @@ module Hilbert
     include Lexer::Tokens
     SYM = '\w+'
 
-    ONEHASH = "#{ANYSP}#{SYM}#{CLN}#{ANYSP}#{VARNUM}#{ANYSP}" # sdf: 234
     def execute(lexed)
       time = Time.now
       until lexed.token_str =~ /\A:(NLIN|R)\d+\z/
@@ -36,6 +35,7 @@ end
         when /:(POST_ZFC)(\d+)/
           Hilbert::Lexer::MainLexer.zfc_analysis!
           lexed.parsed!('"success! :)"', $2)
+
         when /:(P_PARAD)(\d+)/
           lexed.parsed!($world.paradox?, $2)
 
@@ -75,20 +75,6 @@ end
             lexed.get_value($2).parentheses,
             tokens_range
           )
-
-        when /:LBRCS(\d+):CONT(\d+):RBRCS(\d+)/
-          tokens_range = $1.to_i..$3.to_i
-          token_val = lexed.get_value($2)
-
-          cont =
-            case token_val
-            when /#{ONEHASH}(#{CMA}#{ONEHASH})*/
-              ListParser.execute(token_val)
-            else
-              token_val
-            end
-
-          lexed.parsed!(cont, tokens_range)
 
         when /:FUNCCN(\d+)/
           token_val = lexed.get_value($1)

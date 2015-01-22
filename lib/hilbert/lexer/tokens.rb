@@ -51,10 +51,6 @@ module Hilbert
 
       PRN = /(?:#{LPRN}|#{RPRN})/
 
-      LBRCS = /\{/
-      RBRCS = /\}/
-      BRCS = /(?:#{LBRCS}|#{RBRCS})/
-
       LBRCT = /\[/
       RBRCT = /\]/
       BRCT = /(?:#{LBRCT}|#{RBRCT})/
@@ -69,7 +65,7 @@ module Hilbert
       RDARW = '=>'
       LDARW = '<='
       SPC = /[ \t\f\v]/
-      SPCS = / +/
+      SPCS = /#{SPC}+/
       NLIN = /(\r|\n)/
 
       # World
