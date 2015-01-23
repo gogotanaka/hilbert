@@ -1,11 +1,12 @@
-require 'hilbert/world/base'
-require 'hilbert/world/propositional_logic'
+require 'magic_logic'
 
 module Hilbert
   module World
     class Entity
       @@propositions = []
       class << self
+        include MagicLogic
+
         def <<(logic_str)
           @@propositions << to_rb_obj(logic_str)
           Messanger.define(logic_str)
@@ -16,13 +17,13 @@ module Hilbert
           return Messanger.evaluate(logic_str, 'UNDEFINED') if @@propositions.empty?
 
           logic = (@@propositions.inject(:*) >= to_rb_obj(logic_str))
-          str = logic.dpll!.to_s
+          str = logic.dpll.to_s
           case str
           when 'TRUE'  then Messanger.evaluate(logic_str, 'TRUE')
           when 'FALSE' then Messanger.evaluate(logic_str, 'FALSE')
           else
             logic = (@@propositions.inject(:*) >= (~to_rb_obj(logic_str)))
-            str = logic.dpll!.to_s
+            str = logic.dpll.to_s
             case str
             when 'TRUE'  then Messanger.evaluate(logic_str, 'FALSE')
             when 'FALSE' then Messanger.evaluate(logic_str, 'TRUE')
@@ -35,7 +36,7 @@ module Hilbert
           unless sym.to_s == sym.to_s.upcase && sym.to_s.length == 1
             raise 'Proposltionla variable should be capital character'
           end
-          eval "$#{sym} ||= PropositionalLogic::Atom.new(:#{sym})"
+          eval "$#{sym} ||= Atom.new(:#{sym})"
         end
 
         def clear!
