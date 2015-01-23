@@ -36,7 +36,7 @@ module Hilbert
           unless sym.to_s == sym.to_s.upcase && sym.to_s.length == 1
             raise 'Proposltionla variable should be capital character'
           end
-          eval "$#{sym} ||= Atom.new(:#{sym})"
+          eval "$#{sym} ||=P[:#{sym}]"
         end
 
         def clear!
