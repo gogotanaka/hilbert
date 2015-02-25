@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/hilbert.svg)](http://badge.fury.io/rb/hilbert) [![Build Status](https://travis-ci.org/gogotanaka/Hilbert.svg?branch=master)](https://travis-ci.org/gogotanaka/Hilbert) [![Coverage Status](https://coveralls.io/repos/gogotanaka/Hilbert/badge.png?branch=master)](https://coveralls.io/r/gogotanaka/Hilbert?branch=master) [![Code Climate](https://codeclimate.com/github/gogotanaka/Hilbert/badges/gpa.svg)](https://codeclimate.com/github/gogotanaka/Hilbert) [![Dependency Status](https://gemnasium.com/gogotanaka/Hilbert.svg)](https://gemnasium.com/gogotanaka/Hilbert)
 
-有限の有機物の固まりである人間の脳みそが不加算無限を取り扱う時の機構を実装する.
+有限の有機物の固まりである人間の脳みそが非可算無限を取り扱う時の機構を実装する.
 
 ### Do you know the one best language in this world?
 
