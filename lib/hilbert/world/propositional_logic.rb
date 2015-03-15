@@ -106,7 +106,6 @@ module Hilbert
         def !@;            self        end
         def depth;         1           end
       end
-      $atoms = []
 
       class NEG < Struct.new(:p)
         include Base
