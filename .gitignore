@@ -21,3 +21,7 @@ tmp
 *.a
 mkmf.log
 .ruby-version
+*.pyc
+*.out
+core/parsetab.py
+dump.rdb
