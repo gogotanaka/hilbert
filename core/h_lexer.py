@@ -1,13 +1,19 @@
 tokens = (
     'VAR',
+    'FUNC_VARS',
+    'FUNC_SUBS',
     'NUMBER',
     'VAR_MULTI',
+    'DIFF_SYM'
 )
 
-literals = ['=','+','-','*','/', '(',')']
+literals = ['=','+','-','*','/', '(',')', 'f']
 
-t_VAR = r'[a-eg-z]'
-t_VAR_MULTI = r'[a-eg-z][a-eg-z]+'
+t_VAR = r'[a-ceg-z]'
+t_DIFF_SYM = r'd\/d[a-ceg-z]'
+t_FUNC_VARS = r'\(x\)'
+t_FUNC_SUBS = r'\([0-9]\)'
+t_VAR_MULTI = r'[a-ceg-z][a-ceg-z]+'
 
 
 def t_NUMBER(t):

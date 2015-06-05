@@ -11,6 +11,10 @@ import sys
 def check(test_obj, expected):
     test_obj.assertEqual(sys.stdout.getvalue().replace("\n", ""), expected)
 
+def h_eval(output, input, test_obj):
+    h_parser.parser.parse(input)
+    check(test_obj, output)
+
 class TestMainMethods(unittest.TestCase):
     def setUp(self):
         sys.stdout = StringIO.StringIO()
@@ -20,8 +24,7 @@ class TestMainMethods(unittest.TestCase):
         check(self, 'd')
 
     def test_ex2(self):
-        h_parser.parser.parse('2')
-        check(self, '2')
+        h_eval('2', '2', self)
 
     def test_var1(self):
         h_parser.parser.parse('a=1')
@@ -60,9 +63,9 @@ class TestMainMethods(unittest.TestCase):
 
     def test_var_multi2(self):
         h_parser.parser.parse('c=23')
-        h_parser.parser.parse('d=34')
-        h_parser.parser.parse('e=2')
-        h_parser.parser.parse('cde')
+        h_parser.parser.parse('e=34')
+        h_parser.parser.parse('i=2')
+        h_parser.parser.parse('cei')
         check(self, '1564')
 
     # SYM
@@ -81,6 +84,14 @@ class TestMainMethods(unittest.TestCase):
     def test_sym_div2(self):
         h_parser.parser.parse('x/y')
         check(self, 'x/y')
+
+    def test_func_basis(self):
+        h_parser.parser.parse('f(x) = x * x')
+        h_parser.parser.parse('f(3)')
+        check(self, '9')
+
+    def test_diff1(self):
+        h_eval('2*x', 'd/dx(x * x)', self)
 
     def tearDown(self):
         sys.stdout = sys.__stdout__

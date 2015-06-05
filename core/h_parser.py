@@ -1,6 +1,6 @@
 from h_lexer import *
 import re
-from sympy import Symbol
+from sympy import Symbol, diff
 
 precedence = (
     ('left','+','-'),
@@ -8,7 +8,8 @@ precedence = (
     ('right','UMINUS'),
     )
 
-vars = { }
+vars = {}
+funcs = {}
 
 def lookupVars(var):
     try:
@@ -19,6 +20,20 @@ def lookupVars(var):
 def p_statement_assign(p):
     'statement : VAR "=" expression'
     vars[p[1]] = p[3]
+
+def p_statement_def_func(p):
+    'statement : "f" FUNC_VARS "=" expression'
+    funcs['f'] = { 'expr': p[4], 'vars': re.split(r', *', p[2].replace("(", "").replace(")", "")) }
+
+def p_expression_diff_func(p):
+    'expression : DIFF_SYM "(" expression ")"'
+    p[0] = diff(p[3], Symbol(p[1].replace('d/d', '')))
+
+def p_statement_eval_func(p):
+    'expression : "f" FUNC_SUBS'
+    expr = funcs['f']['expr']
+    vs = funcs['f']['vars']
+    p[0] = expr.subs([(Symbol(v), n) for v, n in zip(vs, p[2].replace("(", "").replace(")", ""))])
 
 def p_statement_expr(p):
     'statement : expression'
