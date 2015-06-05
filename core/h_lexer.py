@@ -1,14 +1,14 @@
 tokens = (
     'VAR',
     'NUMBER',
-    'VAR_MULTI'
+    'VAR_MULTI',
 )
 
 literals = ['=','+','-','*','/', '(',')']
 
+t_VAR = r'[a-eg-z]'
+t_VAR_MULTI = r'[a-eg-z][a-eg-z]+'
 
-t_VAR = r'[a-z]'
-t_VAR_MULTI = r'[a-z][a-z]+'
 
 def t_NUMBER(t):
     r'\d+'

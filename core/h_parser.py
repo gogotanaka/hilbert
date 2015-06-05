@@ -1,4 +1,6 @@
 from h_lexer import *
+import re
+from sympy import Symbol
 
 precedence = (
     ('left','+','-'),
@@ -12,7 +14,7 @@ def lookupVars(var):
     try:
         return vars[var]
     except LookupError:
-        print("Undefined name '%s'" % var)
+        return Symbol(var)
 
 def p_statement_assign(p):
     'statement : VAR "=" expression'
@@ -53,6 +55,22 @@ def p_expression_var_multi(p):
     result = 1
     for c in p[1]: result *= lookupVars(c)
     p[0] = result
+
+# def p_expression_eval_py(p):
+#     'expression : EVAL_PY'
+#     print(p[1])
+#     exec(re.sub(r'py:', '', p[1]))
+
+# def p_statement_def_func(p):
+#     'statement : DEF_FUNC'
+#     a = "def %s" % re.sub(r' *= *', ': return ', p[1])
+#     print(a)
+#     exec(a)
+#
+# def p_expression_eval_func(p):
+#     'expression : EVAL_FUNC'
+#     print("Syntax error at")
+#     eval(1)
 
 def p_error(p):
     if p:

@@ -31,8 +31,26 @@ class TestMainMethods(unittest.TestCase):
     def test_var2(self):
         h_parser.parser.parse('a=2')
         h_parser.parser.parse('b=3')
+        h_parser.parser.parse('a + b')
+        check(self, '5')
+
+    def test_var3(self):
+        h_parser.parser.parse('a=2')
+        h_parser.parser.parse('b=3')
+        h_parser.parser.parse('a - b')
+        check(self, '-1')
+
+    def test_var4(self):
+        h_parser.parser.parse('a=2')
+        h_parser.parser.parse('b=3')
         h_parser.parser.parse('a * b')
         check(self, '6')
+
+    def test_var5(self):
+        h_parser.parser.parse('a=2')
+        h_parser.parser.parse('b=3')
+        h_parser.parser.parse('a / b')
+        check(self, '0.6666666666666666')
 
     def test_var_multi1(self):
         h_parser.parser.parse('a=2')
@@ -40,12 +58,29 @@ class TestMainMethods(unittest.TestCase):
         h_parser.parser.parse('ab')
         check(self, '6')
 
-    def test_var_multi1(self):
+    def test_var_multi2(self):
         h_parser.parser.parse('c=23')
         h_parser.parser.parse('d=34')
         h_parser.parser.parse('e=2')
         h_parser.parser.parse('cde')
         check(self, '1564')
+
+    # SYM
+    def test_sym_plus2(self):
+        h_parser.parser.parse('x+y')
+        check(self, 'x + y')
+
+    def test_sym_minus2(self):
+        h_parser.parser.parse('x-y')
+        check(self, 'x - y')
+
+    def test_sym_multi2(self):
+        h_parser.parser.parse('xy')
+        check(self, 'x*y')
+
+    def test_sym_div2(self):
+        h_parser.parser.parse('x/y')
+        check(self, 'x/y')
 
     def tearDown(self):
         sys.stdout = sys.__stdout__
