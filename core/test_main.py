@@ -26,6 +26,9 @@ class TestMainMethods(unittest.TestCase):
     def test_ex2(self):
         h_eval('2', '2', self)
 
+    def test_basis1(self):
+        h_eval('8', '2 ^ 3', self)
+
     def test_var1(self):
         h_parser.parser.parse('a=1')
         h_parser.parser.parse('a')

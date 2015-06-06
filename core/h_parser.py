@@ -22,18 +22,17 @@ def p_statement_assign(p):
     vars[p[1]] = p[3]
 
 def p_statement_def_func(p):
-    'statement : "f" FUNC_VARS "=" expression'
-    funcs['f'] = { 'expr': p[4], 'vars': re.split(r', *', p[2].replace("(", "").replace(")", "")) }
+    'statement : FUNC_VAR "(" VAR ")" "=" expression'
+    funcs[p[1]] = { 'expr': p[6], 'vars': [Symbol(v) for v in re.split(r', *', p[3])] }
+
+def p_statement_eval_func(p):
+    'expression : FUNC_VAR "(" NUMBER ")"'
+    func = funcs[p[1]]
+    p[0] = func['expr'].subs(zip(func['vars'], [p[3]]))
 
 def p_expression_diff_func(p):
     'expression : DIFF_SYM "(" expression ")"'
     p[0] = diff(p[3], Symbol(p[1].replace('d/d', '')))
-
-def p_statement_eval_func(p):
-    'expression : "f" FUNC_SUBS'
-    expr = funcs['f']['expr']
-    vs = funcs['f']['vars']
-    p[0] = expr.subs([(Symbol(v), n) for v, n in zip(vs, p[2].replace("(", "").replace(")", ""))])
 
 def p_statement_expr(p):
     'statement : expression'
@@ -43,11 +42,13 @@ def p_expression_binop(p):
     '''expression : expression '+' expression
                   | expression '-' expression
                   | expression '*' expression
-                  | expression '/' expression'''
+                  | expression '/' expression
+                  | expression '^' expression'''
     if p[2] == '+'  : p[0] = p[1] + p[3]
     elif p[2] == '-': p[0] = p[1] - p[3]
     elif p[2] == '*': p[0] = p[1] * p[3]
     elif p[2] == '/': p[0] = p[1] / p[3]
+    elif p[2] == '^': p[0] = p[1] ** p[3]
 
 def p_expression_uminus(p):
     "expression : '-' expression %prec UMINUS"

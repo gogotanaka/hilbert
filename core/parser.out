@@ -4,41 +4,41 @@ Grammar
 
 Rule 0     S' -> statement
 Rule 1     statement -> VAR = expression
-Rule 2     statement -> f FUNC_VARS = expression
-Rule 3     expression -> DIFF_SYM ( expression )
-Rule 4     expression -> f FUNC_SUBS
+Rule 2     statement -> FUNC_VAR ( VAR ) = expression
+Rule 3     expression -> FUNC_VAR ( NUMBER )
+Rule 4     expression -> DIFF_SYM ( expression )
 Rule 5     statement -> expression
 Rule 6     expression -> expression + expression
 Rule 7     expression -> expression - expression
 Rule 8     expression -> expression * expression
 Rule 9     expression -> expression / expression
-Rule 10    expression -> - expression
-Rule 11    expression -> ( expression )
-Rule 12    expression -> NUMBER
-Rule 13    expression -> VAR
-Rule 14    expression -> VAR_MULTI
+Rule 10    expression -> expression ^ expression
+Rule 11    expression -> - expression
+Rule 12    expression -> ( expression )
+Rule 13    expression -> NUMBER
+Rule 14    expression -> VAR
+Rule 15    expression -> VAR_MULTI
 
 Terminals, with rules where they appear
 
-(                    : 3 11
-)                    : 3 11
+(                    : 2 3 4 12
+)                    : 2 3 4 12
 *                    : 8
 +                    : 6
--                    : 7 10
+-                    : 7 11
 /                    : 9
 =                    : 1 2
-DIFF_SYM             : 3
-FUNC_SUBS            : 4
-FUNC_VARS            : 2
-NUMBER               : 12
-VAR                  : 1 13
-VAR_MULTI            : 14
+DIFF_SYM             : 4
+FUNC_VAR             : 2 3
+NUMBER               : 3 13
+VAR                  : 1 2 14
+VAR_MULTI            : 15
+^                    : 10
 error                : 
-f                    : 2 4
 
 Nonterminals, with rules where they appear
 
-expression           : 1 2 3 5 6 6 7 7 8 8 9 9 10 11
+expression           : 1 2 4 5 6 6 7 7 8 8 9 9 10 10 11 12
 statement            : 0
 
 Parsing method: LALR
@@ -47,486 +47,526 @@ state 0
 
     (0) S' -> . statement
     (1) statement -> . VAR = expression
-    (2) statement -> . f FUNC_VARS = expression
+    (2) statement -> . FUNC_VAR ( VAR ) = expression
     (5) statement -> . expression
-    (3) expression -> . DIFF_SYM ( expression )
-    (4) expression -> . f FUNC_SUBS
+    (3) expression -> . FUNC_VAR ( NUMBER )
+    (4) expression -> . DIFF_SYM ( expression )
     (6) expression -> . expression + expression
     (7) expression -> . expression - expression
     (8) expression -> . expression * expression
     (9) expression -> . expression / expression
-    (10) expression -> . - expression
-    (11) expression -> . ( expression )
-    (12) expression -> . NUMBER
-    (13) expression -> . VAR
-    (14) expression -> . VAR_MULTI
+    (10) expression -> . expression ^ expression
+    (11) expression -> . - expression
+    (12) expression -> . ( expression )
+    (13) expression -> . NUMBER
+    (14) expression -> . VAR
+    (15) expression -> . VAR_MULTI
 
-    VAR             shift and go to state 6
-    f               shift and go to state 1
+    VAR             shift and go to state 7
+    FUNC_VAR        shift and go to state 5
     DIFF_SYM        shift and go to state 2
-    -               shift and go to state 7
-    (               shift and go to state 4
-    NUMBER          shift and go to state 5
+    -               shift and go to state 3
+    (               shift and go to state 1
+    NUMBER          shift and go to state 9
     VAR_MULTI       shift and go to state 8
 
-    statement                      shift and go to state 3
-    expression                     shift and go to state 9
+    statement                      shift and go to state 6
+    expression                     shift and go to state 4
 
 state 1
 
-    (2) statement -> f . FUNC_VARS = expression
-    (4) expression -> f . FUNC_SUBS
+    (12) expression -> ( . expression )
+    (3) expression -> . FUNC_VAR ( NUMBER )
+    (4) expression -> . DIFF_SYM ( expression )
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . expression ^ expression
+    (11) expression -> . - expression
+    (12) expression -> . ( expression )
+    (13) expression -> . NUMBER
+    (14) expression -> . VAR
+    (15) expression -> . VAR_MULTI
 
-    FUNC_VARS       shift and go to state 10
-    FUNC_SUBS       shift and go to state 11
+    FUNC_VAR        shift and go to state 11
+    DIFF_SYM        shift and go to state 2
+    -               shift and go to state 3
+    (               shift and go to state 1
+    NUMBER          shift and go to state 9
+    VAR             shift and go to state 12
+    VAR_MULTI       shift and go to state 8
 
+    expression                     shift and go to state 10
 
 state 2
 
-    (3) expression -> DIFF_SYM . ( expression )
+    (4) expression -> DIFF_SYM . ( expression )
 
-    (               shift and go to state 12
+    (               shift and go to state 13
 
 
 state 3
 
-    (0) S' -> statement .
-
-
-
-state 4
-
-    (11) expression -> ( . expression )
-    (3) expression -> . DIFF_SYM ( expression )
-    (4) expression -> . f FUNC_SUBS
+    (11) expression -> - . expression
+    (3) expression -> . FUNC_VAR ( NUMBER )
+    (4) expression -> . DIFF_SYM ( expression )
     (6) expression -> . expression + expression
     (7) expression -> . expression - expression
     (8) expression -> . expression * expression
     (9) expression -> . expression / expression
-    (10) expression -> . - expression
-    (11) expression -> . ( expression )
-    (12) expression -> . NUMBER
-    (13) expression -> . VAR
-    (14) expression -> . VAR_MULTI
+    (10) expression -> . expression ^ expression
+    (11) expression -> . - expression
+    (12) expression -> . ( expression )
+    (13) expression -> . NUMBER
+    (14) expression -> . VAR
+    (15) expression -> . VAR_MULTI
 
+    FUNC_VAR        shift and go to state 11
     DIFF_SYM        shift and go to state 2
-    f               shift and go to state 13
-    -               shift and go to state 7
-    (               shift and go to state 4
-    NUMBER          shift and go to state 5
-    VAR             shift and go to state 15
+    -               shift and go to state 3
+    (               shift and go to state 1
+    NUMBER          shift and go to state 9
+    VAR             shift and go to state 12
     VAR_MULTI       shift and go to state 8
 
     expression                     shift and go to state 14
 
-state 5
-
-    (12) expression -> NUMBER .
-
-    +               reduce using rule 12 (expression -> NUMBER .)
-    -               reduce using rule 12 (expression -> NUMBER .)
-    *               reduce using rule 12 (expression -> NUMBER .)
-    /               reduce using rule 12 (expression -> NUMBER .)
-    $end            reduce using rule 12 (expression -> NUMBER .)
-    )               reduce using rule 12 (expression -> NUMBER .)
-
-
-state 6
-
-    (1) statement -> VAR . = expression
-    (13) expression -> VAR .
-
-    =               shift and go to state 16
-    +               reduce using rule 13 (expression -> VAR .)
-    -               reduce using rule 13 (expression -> VAR .)
-    *               reduce using rule 13 (expression -> VAR .)
-    /               reduce using rule 13 (expression -> VAR .)
-    $end            reduce using rule 13 (expression -> VAR .)
-
-
-state 7
-
-    (10) expression -> - . expression
-    (3) expression -> . DIFF_SYM ( expression )
-    (4) expression -> . f FUNC_SUBS
-    (6) expression -> . expression + expression
-    (7) expression -> . expression - expression
-    (8) expression -> . expression * expression
-    (9) expression -> . expression / expression
-    (10) expression -> . - expression
-    (11) expression -> . ( expression )
-    (12) expression -> . NUMBER
-    (13) expression -> . VAR
-    (14) expression -> . VAR_MULTI
-
-    DIFF_SYM        shift and go to state 2
-    f               shift and go to state 13
-    -               shift and go to state 7
-    (               shift and go to state 4
-    NUMBER          shift and go to state 5
-    VAR             shift and go to state 15
-    VAR_MULTI       shift and go to state 8
-
-    expression                     shift and go to state 17
-
-state 8
-
-    (14) expression -> VAR_MULTI .
-
-    +               reduce using rule 14 (expression -> VAR_MULTI .)
-    -               reduce using rule 14 (expression -> VAR_MULTI .)
-    *               reduce using rule 14 (expression -> VAR_MULTI .)
-    /               reduce using rule 14 (expression -> VAR_MULTI .)
-    $end            reduce using rule 14 (expression -> VAR_MULTI .)
-    )               reduce using rule 14 (expression -> VAR_MULTI .)
-
-
-state 9
+state 4
 
     (5) statement -> expression .
     (6) expression -> expression . + expression
     (7) expression -> expression . - expression
     (8) expression -> expression . * expression
     (9) expression -> expression . / expression
+    (10) expression -> expression . ^ expression
 
     $end            reduce using rule 5 (statement -> expression .)
-    +               shift and go to state 21
-    -               shift and go to state 20
-    *               shift and go to state 18
+    +               shift and go to state 15
+    -               shift and go to state 18
+    *               shift and go to state 17
     /               shift and go to state 19
+    ^               shift and go to state 16
+
+
+state 5
+
+    (2) statement -> FUNC_VAR . ( VAR ) = expression
+    (3) expression -> FUNC_VAR . ( NUMBER )
+
+    (               shift and go to state 20
+
+
+state 6
+
+    (0) S' -> statement .
+
+
+
+state 7
+
+    (1) statement -> VAR . = expression
+    (14) expression -> VAR .
+
+    =               shift and go to state 21
+    +               reduce using rule 14 (expression -> VAR .)
+    -               reduce using rule 14 (expression -> VAR .)
+    *               reduce using rule 14 (expression -> VAR .)
+    /               reduce using rule 14 (expression -> VAR .)
+    ^               reduce using rule 14 (expression -> VAR .)
+    $end            reduce using rule 14 (expression -> VAR .)
+
+
+state 8
+
+    (15) expression -> VAR_MULTI .
+
+    )               reduce using rule 15 (expression -> VAR_MULTI .)
+    +               reduce using rule 15 (expression -> VAR_MULTI .)
+    -               reduce using rule 15 (expression -> VAR_MULTI .)
+    *               reduce using rule 15 (expression -> VAR_MULTI .)
+    /               reduce using rule 15 (expression -> VAR_MULTI .)
+    ^               reduce using rule 15 (expression -> VAR_MULTI .)
+    $end            reduce using rule 15 (expression -> VAR_MULTI .)
+
+
+state 9
+
+    (13) expression -> NUMBER .
+
+    )               reduce using rule 13 (expression -> NUMBER .)
+    +               reduce using rule 13 (expression -> NUMBER .)
+    -               reduce using rule 13 (expression -> NUMBER .)
+    *               reduce using rule 13 (expression -> NUMBER .)
+    /               reduce using rule 13 (expression -> NUMBER .)
+    ^               reduce using rule 13 (expression -> NUMBER .)
+    $end            reduce using rule 13 (expression -> NUMBER .)
 
 
 state 10
 
-    (2) statement -> f FUNC_VARS . = expression
+    (12) expression -> ( expression . )
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (10) expression -> expression . ^ expression
 
-    =               shift and go to state 22
+    )               shift and go to state 22
+    +               shift and go to state 15
+    -               shift and go to state 18
+    *               shift and go to state 17
+    /               shift and go to state 19
+    ^               shift and go to state 16
 
 
 state 11
 
-    (4) expression -> f FUNC_SUBS .
+    (3) expression -> FUNC_VAR . ( NUMBER )
 
-    +               reduce using rule 4 (expression -> f FUNC_SUBS .)
-    -               reduce using rule 4 (expression -> f FUNC_SUBS .)
-    *               reduce using rule 4 (expression -> f FUNC_SUBS .)
-    /               reduce using rule 4 (expression -> f FUNC_SUBS .)
-    $end            reduce using rule 4 (expression -> f FUNC_SUBS .)
-    )               reduce using rule 4 (expression -> f FUNC_SUBS .)
+    (               shift and go to state 23
 
 
 state 12
 
-    (3) expression -> DIFF_SYM ( . expression )
-    (3) expression -> . DIFF_SYM ( expression )
-    (4) expression -> . f FUNC_SUBS
+    (14) expression -> VAR .
+
+    )               reduce using rule 14 (expression -> VAR .)
+    +               reduce using rule 14 (expression -> VAR .)
+    -               reduce using rule 14 (expression -> VAR .)
+    *               reduce using rule 14 (expression -> VAR .)
+    /               reduce using rule 14 (expression -> VAR .)
+    ^               reduce using rule 14 (expression -> VAR .)
+    $end            reduce using rule 14 (expression -> VAR .)
+
+
+state 13
+
+    (4) expression -> DIFF_SYM ( . expression )
+    (3) expression -> . FUNC_VAR ( NUMBER )
+    (4) expression -> . DIFF_SYM ( expression )
     (6) expression -> . expression + expression
     (7) expression -> . expression - expression
     (8) expression -> . expression * expression
     (9) expression -> . expression / expression
-    (10) expression -> . - expression
-    (11) expression -> . ( expression )
-    (12) expression -> . NUMBER
-    (13) expression -> . VAR
-    (14) expression -> . VAR_MULTI
+    (10) expression -> . expression ^ expression
+    (11) expression -> . - expression
+    (12) expression -> . ( expression )
+    (13) expression -> . NUMBER
+    (14) expression -> . VAR
+    (15) expression -> . VAR_MULTI
 
+    FUNC_VAR        shift and go to state 11
     DIFF_SYM        shift and go to state 2
-    f               shift and go to state 13
-    -               shift and go to state 7
-    (               shift and go to state 4
-    NUMBER          shift and go to state 5
-    VAR             shift and go to state 15
+    -               shift and go to state 3
+    (               shift and go to state 1
+    NUMBER          shift and go to state 9
+    VAR             shift and go to state 12
     VAR_MULTI       shift and go to state 8
 
-    expression                     shift and go to state 23
-
-state 13
-
-    (4) expression -> f . FUNC_SUBS
-
-    FUNC_SUBS       shift and go to state 11
-
+    expression                     shift and go to state 24
 
 state 14
 
-    (11) expression -> ( expression . )
+    (11) expression -> - expression .
     (6) expression -> expression . + expression
     (7) expression -> expression . - expression
     (8) expression -> expression . * expression
     (9) expression -> expression . / expression
+    (10) expression -> expression . ^ expression
 
-    )               shift and go to state 24
-    +               shift and go to state 21
-    -               shift and go to state 20
-    *               shift and go to state 18
-    /               shift and go to state 19
+    )               reduce using rule 11 (expression -> - expression .)
+    +               reduce using rule 11 (expression -> - expression .)
+    -               reduce using rule 11 (expression -> - expression .)
+    *               reduce using rule 11 (expression -> - expression .)
+    /               reduce using rule 11 (expression -> - expression .)
+    ^               reduce using rule 11 (expression -> - expression .)
+    $end            reduce using rule 11 (expression -> - expression .)
+
+  ! +               [ shift and go to state 15 ]
+  ! -               [ shift and go to state 18 ]
+  ! *               [ shift and go to state 17 ]
+  ! /               [ shift and go to state 19 ]
+  ! ^               [ shift and go to state 16 ]
 
 
 state 15
 
-    (13) expression -> VAR .
-
-    +               reduce using rule 13 (expression -> VAR .)
-    -               reduce using rule 13 (expression -> VAR .)
-    *               reduce using rule 13 (expression -> VAR .)
-    /               reduce using rule 13 (expression -> VAR .)
-    $end            reduce using rule 13 (expression -> VAR .)
-    )               reduce using rule 13 (expression -> VAR .)
-
-
-state 16
-
-    (1) statement -> VAR = . expression
-    (3) expression -> . DIFF_SYM ( expression )
-    (4) expression -> . f FUNC_SUBS
+    (6) expression -> expression + . expression
+    (3) expression -> . FUNC_VAR ( NUMBER )
+    (4) expression -> . DIFF_SYM ( expression )
     (6) expression -> . expression + expression
     (7) expression -> . expression - expression
     (8) expression -> . expression * expression
     (9) expression -> . expression / expression
-    (10) expression -> . - expression
-    (11) expression -> . ( expression )
-    (12) expression -> . NUMBER
-    (13) expression -> . VAR
-    (14) expression -> . VAR_MULTI
+    (10) expression -> . expression ^ expression
+    (11) expression -> . - expression
+    (12) expression -> . ( expression )
+    (13) expression -> . NUMBER
+    (14) expression -> . VAR
+    (15) expression -> . VAR_MULTI
 
+    FUNC_VAR        shift and go to state 11
     DIFF_SYM        shift and go to state 2
-    f               shift and go to state 13
-    -               shift and go to state 7
-    (               shift and go to state 4
-    NUMBER          shift and go to state 5
-    VAR             shift and go to state 15
+    -               shift and go to state 3
+    (               shift and go to state 1
+    NUMBER          shift and go to state 9
+    VAR             shift and go to state 12
     VAR_MULTI       shift and go to state 8
 
     expression                     shift and go to state 25
 
-state 17
+state 16
 
-    (10) expression -> - expression .
-    (6) expression -> expression . + expression
-    (7) expression -> expression . - expression
-    (8) expression -> expression . * expression
-    (9) expression -> expression . / expression
-
-    +               reduce using rule 10 (expression -> - expression .)
-    -               reduce using rule 10 (expression -> - expression .)
-    *               reduce using rule 10 (expression -> - expression .)
-    /               reduce using rule 10 (expression -> - expression .)
-    $end            reduce using rule 10 (expression -> - expression .)
-    )               reduce using rule 10 (expression -> - expression .)
-
-  ! +               [ shift and go to state 21 ]
-  ! -               [ shift and go to state 20 ]
-  ! *               [ shift and go to state 18 ]
-  ! /               [ shift and go to state 19 ]
-
-
-state 18
-
-    (8) expression -> expression * . expression
-    (3) expression -> . DIFF_SYM ( expression )
-    (4) expression -> . f FUNC_SUBS
+    (10) expression -> expression ^ . expression
+    (3) expression -> . FUNC_VAR ( NUMBER )
+    (4) expression -> . DIFF_SYM ( expression )
     (6) expression -> . expression + expression
     (7) expression -> . expression - expression
     (8) expression -> . expression * expression
     (9) expression -> . expression / expression
-    (10) expression -> . - expression
-    (11) expression -> . ( expression )
-    (12) expression -> . NUMBER
-    (13) expression -> . VAR
-    (14) expression -> . VAR_MULTI
+    (10) expression -> . expression ^ expression
+    (11) expression -> . - expression
+    (12) expression -> . ( expression )
+    (13) expression -> . NUMBER
+    (14) expression -> . VAR
+    (15) expression -> . VAR_MULTI
 
+    FUNC_VAR        shift and go to state 11
     DIFF_SYM        shift and go to state 2
-    f               shift and go to state 13
-    -               shift and go to state 7
-    (               shift and go to state 4
-    NUMBER          shift and go to state 5
-    VAR             shift and go to state 15
+    -               shift and go to state 3
+    (               shift and go to state 1
+    NUMBER          shift and go to state 9
+    VAR             shift and go to state 12
     VAR_MULTI       shift and go to state 8
 
     expression                     shift and go to state 26
 
-state 19
+state 17
 
-    (9) expression -> expression / . expression
-    (3) expression -> . DIFF_SYM ( expression )
-    (4) expression -> . f FUNC_SUBS
+    (8) expression -> expression * . expression
+    (3) expression -> . FUNC_VAR ( NUMBER )
+    (4) expression -> . DIFF_SYM ( expression )
     (6) expression -> . expression + expression
     (7) expression -> . expression - expression
     (8) expression -> . expression * expression
     (9) expression -> . expression / expression
-    (10) expression -> . - expression
-    (11) expression -> . ( expression )
-    (12) expression -> . NUMBER
-    (13) expression -> . VAR
-    (14) expression -> . VAR_MULTI
+    (10) expression -> . expression ^ expression
+    (11) expression -> . - expression
+    (12) expression -> . ( expression )
+    (13) expression -> . NUMBER
+    (14) expression -> . VAR
+    (15) expression -> . VAR_MULTI
 
+    FUNC_VAR        shift and go to state 11
     DIFF_SYM        shift and go to state 2
-    f               shift and go to state 13
-    -               shift and go to state 7
-    (               shift and go to state 4
-    NUMBER          shift and go to state 5
-    VAR             shift and go to state 15
+    -               shift and go to state 3
+    (               shift and go to state 1
+    NUMBER          shift and go to state 9
+    VAR             shift and go to state 12
     VAR_MULTI       shift and go to state 8
 
     expression                     shift and go to state 27
 
-state 20
+state 18
 
     (7) expression -> expression - . expression
-    (3) expression -> . DIFF_SYM ( expression )
-    (4) expression -> . f FUNC_SUBS
+    (3) expression -> . FUNC_VAR ( NUMBER )
+    (4) expression -> . DIFF_SYM ( expression )
     (6) expression -> . expression + expression
     (7) expression -> . expression - expression
     (8) expression -> . expression * expression
     (9) expression -> . expression / expression
-    (10) expression -> . - expression
-    (11) expression -> . ( expression )
-    (12) expression -> . NUMBER
-    (13) expression -> . VAR
-    (14) expression -> . VAR_MULTI
+    (10) expression -> . expression ^ expression
+    (11) expression -> . - expression
+    (12) expression -> . ( expression )
+    (13) expression -> . NUMBER
+    (14) expression -> . VAR
+    (15) expression -> . VAR_MULTI
 
+    FUNC_VAR        shift and go to state 11
     DIFF_SYM        shift and go to state 2
-    f               shift and go to state 13
-    -               shift and go to state 7
-    (               shift and go to state 4
-    NUMBER          shift and go to state 5
-    VAR             shift and go to state 15
+    -               shift and go to state 3
+    (               shift and go to state 1
+    NUMBER          shift and go to state 9
+    VAR             shift and go to state 12
     VAR_MULTI       shift and go to state 8
 
     expression                     shift and go to state 28
 
-state 21
+state 19
 
-    (6) expression -> expression + . expression
-    (3) expression -> . DIFF_SYM ( expression )
-    (4) expression -> . f FUNC_SUBS
+    (9) expression -> expression / . expression
+    (3) expression -> . FUNC_VAR ( NUMBER )
+    (4) expression -> . DIFF_SYM ( expression )
     (6) expression -> . expression + expression
     (7) expression -> . expression - expression
     (8) expression -> . expression * expression
     (9) expression -> . expression / expression
-    (10) expression -> . - expression
-    (11) expression -> . ( expression )
-    (12) expression -> . NUMBER
-    (13) expression -> . VAR
-    (14) expression -> . VAR_MULTI
+    (10) expression -> . expression ^ expression
+    (11) expression -> . - expression
+    (12) expression -> . ( expression )
+    (13) expression -> . NUMBER
+    (14) expression -> . VAR
+    (15) expression -> . VAR_MULTI
 
+    FUNC_VAR        shift and go to state 11
     DIFF_SYM        shift and go to state 2
-    f               shift and go to state 13
-    -               shift and go to state 7
-    (               shift and go to state 4
-    NUMBER          shift and go to state 5
-    VAR             shift and go to state 15
+    -               shift and go to state 3
+    (               shift and go to state 1
+    NUMBER          shift and go to state 9
+    VAR             shift and go to state 12
     VAR_MULTI       shift and go to state 8
 
     expression                     shift and go to state 29
 
-state 22
+state 20
 
-    (2) statement -> f FUNC_VARS = . expression
-    (3) expression -> . DIFF_SYM ( expression )
-    (4) expression -> . f FUNC_SUBS
+    (2) statement -> FUNC_VAR ( . VAR ) = expression
+    (3) expression -> FUNC_VAR ( . NUMBER )
+
+    VAR             shift and go to state 30
+    NUMBER          shift and go to state 31
+
+
+state 21
+
+    (1) statement -> VAR = . expression
+    (3) expression -> . FUNC_VAR ( NUMBER )
+    (4) expression -> . DIFF_SYM ( expression )
     (6) expression -> . expression + expression
     (7) expression -> . expression - expression
     (8) expression -> . expression * expression
     (9) expression -> . expression / expression
-    (10) expression -> . - expression
-    (11) expression -> . ( expression )
-    (12) expression -> . NUMBER
-    (13) expression -> . VAR
-    (14) expression -> . VAR_MULTI
+    (10) expression -> . expression ^ expression
+    (11) expression -> . - expression
+    (12) expression -> . ( expression )
+    (13) expression -> . NUMBER
+    (14) expression -> . VAR
+    (15) expression -> . VAR_MULTI
 
+    FUNC_VAR        shift and go to state 11
     DIFF_SYM        shift and go to state 2
-    f               shift and go to state 13
-    -               shift and go to state 7
-    (               shift and go to state 4
-    NUMBER          shift and go to state 5
-    VAR             shift and go to state 15
+    -               shift and go to state 3
+    (               shift and go to state 1
+    NUMBER          shift and go to state 9
+    VAR             shift and go to state 12
     VAR_MULTI       shift and go to state 8
 
-    expression                     shift and go to state 30
+    expression                     shift and go to state 32
+
+state 22
+
+    (12) expression -> ( expression ) .
+
+    )               reduce using rule 12 (expression -> ( expression ) .)
+    +               reduce using rule 12 (expression -> ( expression ) .)
+    -               reduce using rule 12 (expression -> ( expression ) .)
+    *               reduce using rule 12 (expression -> ( expression ) .)
+    /               reduce using rule 12 (expression -> ( expression ) .)
+    ^               reduce using rule 12 (expression -> ( expression ) .)
+    $end            reduce using rule 12 (expression -> ( expression ) .)
+
 
 state 23
 
-    (3) expression -> DIFF_SYM ( expression . )
-    (6) expression -> expression . + expression
-    (7) expression -> expression . - expression
-    (8) expression -> expression . * expression
-    (9) expression -> expression . / expression
+    (3) expression -> FUNC_VAR ( . NUMBER )
 
-    )               shift and go to state 31
-    +               shift and go to state 21
-    -               shift and go to state 20
-    *               shift and go to state 18
-    /               shift and go to state 19
+    NUMBER          shift and go to state 31
 
 
 state 24
 
-    (11) expression -> ( expression ) .
-
-    +               reduce using rule 11 (expression -> ( expression ) .)
-    -               reduce using rule 11 (expression -> ( expression ) .)
-    *               reduce using rule 11 (expression -> ( expression ) .)
-    /               reduce using rule 11 (expression -> ( expression ) .)
-    $end            reduce using rule 11 (expression -> ( expression ) .)
-    )               reduce using rule 11 (expression -> ( expression ) .)
-
-
-state 25
-
-    (1) statement -> VAR = expression .
+    (4) expression -> DIFF_SYM ( expression . )
     (6) expression -> expression . + expression
     (7) expression -> expression . - expression
     (8) expression -> expression . * expression
     (9) expression -> expression . / expression
+    (10) expression -> expression . ^ expression
 
-    $end            reduce using rule 1 (statement -> VAR = expression .)
-    +               shift and go to state 21
-    -               shift and go to state 20
-    *               shift and go to state 18
+    )               shift and go to state 33
+    +               shift and go to state 15
+    -               shift and go to state 18
+    *               shift and go to state 17
     /               shift and go to state 19
+    ^               shift and go to state 16
+
+
+state 25
+
+    (6) expression -> expression + expression .
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (10) expression -> expression . ^ expression
+
+    )               reduce using rule 6 (expression -> expression + expression .)
+    +               reduce using rule 6 (expression -> expression + expression .)
+    -               reduce using rule 6 (expression -> expression + expression .)
+    ^               reduce using rule 6 (expression -> expression + expression .)
+    $end            reduce using rule 6 (expression -> expression + expression .)
+    *               shift and go to state 17
+    /               shift and go to state 19
+
+  ! *               [ reduce using rule 6 (expression -> expression + expression .) ]
+  ! /               [ reduce using rule 6 (expression -> expression + expression .) ]
+  ! +               [ shift and go to state 15 ]
+  ! -               [ shift and go to state 18 ]
+  ! ^               [ shift and go to state 16 ]
 
 
 state 26
+
+    (10) expression -> expression ^ expression .
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (10) expression -> expression . ^ expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for ^ resolved as shift
+    )               reduce using rule 10 (expression -> expression ^ expression .)
+    $end            reduce using rule 10 (expression -> expression ^ expression .)
+    +               shift and go to state 15
+    -               shift and go to state 18
+    *               shift and go to state 17
+    /               shift and go to state 19
+    ^               shift and go to state 16
+
+  ! +               [ reduce using rule 10 (expression -> expression ^ expression .) ]
+  ! -               [ reduce using rule 10 (expression -> expression ^ expression .) ]
+  ! *               [ reduce using rule 10 (expression -> expression ^ expression .) ]
+  ! /               [ reduce using rule 10 (expression -> expression ^ expression .) ]
+  ! ^               [ reduce using rule 10 (expression -> expression ^ expression .) ]
+
+
+state 27
 
     (8) expression -> expression * expression .
     (6) expression -> expression . + expression
     (7) expression -> expression . - expression
     (8) expression -> expression . * expression
     (9) expression -> expression . / expression
+    (10) expression -> expression . ^ expression
 
+    )               reduce using rule 8 (expression -> expression * expression .)
     +               reduce using rule 8 (expression -> expression * expression .)
     -               reduce using rule 8 (expression -> expression * expression .)
     *               reduce using rule 8 (expression -> expression * expression .)
     /               reduce using rule 8 (expression -> expression * expression .)
+    ^               reduce using rule 8 (expression -> expression * expression .)
     $end            reduce using rule 8 (expression -> expression * expression .)
-    )               reduce using rule 8 (expression -> expression * expression .)
 
-  ! +               [ shift and go to state 21 ]
-  ! -               [ shift and go to state 20 ]
-  ! *               [ shift and go to state 18 ]
+  ! +               [ shift and go to state 15 ]
+  ! -               [ shift and go to state 18 ]
+  ! *               [ shift and go to state 17 ]
   ! /               [ shift and go to state 19 ]
-
-
-state 27
-
-    (9) expression -> expression / expression .
-    (6) expression -> expression . + expression
-    (7) expression -> expression . - expression
-    (8) expression -> expression . * expression
-    (9) expression -> expression . / expression
-
-    +               reduce using rule 9 (expression -> expression / expression .)
-    -               reduce using rule 9 (expression -> expression / expression .)
-    *               reduce using rule 9 (expression -> expression / expression .)
-    /               reduce using rule 9 (expression -> expression / expression .)
-    $end            reduce using rule 9 (expression -> expression / expression .)
-    )               reduce using rule 9 (expression -> expression / expression .)
-
-  ! +               [ shift and go to state 21 ]
-  ! -               [ shift and go to state 20 ]
-  ! *               [ shift and go to state 18 ]
-  ! /               [ shift and go to state 19 ]
+  ! ^               [ shift and go to state 16 ]
 
 
 state 28
@@ -536,64 +576,158 @@ state 28
     (7) expression -> expression . - expression
     (8) expression -> expression . * expression
     (9) expression -> expression . / expression
+    (10) expression -> expression . ^ expression
 
+    )               reduce using rule 7 (expression -> expression - expression .)
     +               reduce using rule 7 (expression -> expression - expression .)
     -               reduce using rule 7 (expression -> expression - expression .)
+    ^               reduce using rule 7 (expression -> expression - expression .)
     $end            reduce using rule 7 (expression -> expression - expression .)
-    )               reduce using rule 7 (expression -> expression - expression .)
-    *               shift and go to state 18
+    *               shift and go to state 17
     /               shift and go to state 19
 
   ! *               [ reduce using rule 7 (expression -> expression - expression .) ]
   ! /               [ reduce using rule 7 (expression -> expression - expression .) ]
-  ! +               [ shift and go to state 21 ]
-  ! -               [ shift and go to state 20 ]
+  ! +               [ shift and go to state 15 ]
+  ! -               [ shift and go to state 18 ]
+  ! ^               [ shift and go to state 16 ]
 
 
 state 29
 
-    (6) expression -> expression + expression .
+    (9) expression -> expression / expression .
     (6) expression -> expression . + expression
     (7) expression -> expression . - expression
     (8) expression -> expression . * expression
     (9) expression -> expression . / expression
+    (10) expression -> expression . ^ expression
 
-    +               reduce using rule 6 (expression -> expression + expression .)
-    -               reduce using rule 6 (expression -> expression + expression .)
-    $end            reduce using rule 6 (expression -> expression + expression .)
-    )               reduce using rule 6 (expression -> expression + expression .)
-    *               shift and go to state 18
-    /               shift and go to state 19
+    )               reduce using rule 9 (expression -> expression / expression .)
+    +               reduce using rule 9 (expression -> expression / expression .)
+    -               reduce using rule 9 (expression -> expression / expression .)
+    *               reduce using rule 9 (expression -> expression / expression .)
+    /               reduce using rule 9 (expression -> expression / expression .)
+    ^               reduce using rule 9 (expression -> expression / expression .)
+    $end            reduce using rule 9 (expression -> expression / expression .)
 
-  ! *               [ reduce using rule 6 (expression -> expression + expression .) ]
-  ! /               [ reduce using rule 6 (expression -> expression + expression .) ]
-  ! +               [ shift and go to state 21 ]
-  ! -               [ shift and go to state 20 ]
+  ! +               [ shift and go to state 15 ]
+  ! -               [ shift and go to state 18 ]
+  ! *               [ shift and go to state 17 ]
+  ! /               [ shift and go to state 19 ]
+  ! ^               [ shift and go to state 16 ]
 
 
 state 30
 
-    (2) statement -> f FUNC_VARS = expression .
-    (6) expression -> expression . + expression
-    (7) expression -> expression . - expression
-    (8) expression -> expression . * expression
-    (9) expression -> expression . / expression
+    (2) statement -> FUNC_VAR ( VAR . ) = expression
 
-    $end            reduce using rule 2 (statement -> f FUNC_VARS = expression .)
-    +               shift and go to state 21
-    -               shift and go to state 20
-    *               shift and go to state 18
-    /               shift and go to state 19
+    )               shift and go to state 34
 
 
 state 31
 
-    (3) expression -> DIFF_SYM ( expression ) .
+    (3) expression -> FUNC_VAR ( NUMBER . )
 
-    +               reduce using rule 3 (expression -> DIFF_SYM ( expression ) .)
-    -               reduce using rule 3 (expression -> DIFF_SYM ( expression ) .)
-    *               reduce using rule 3 (expression -> DIFF_SYM ( expression ) .)
-    /               reduce using rule 3 (expression -> DIFF_SYM ( expression ) .)
-    $end            reduce using rule 3 (expression -> DIFF_SYM ( expression ) .)
-    )               reduce using rule 3 (expression -> DIFF_SYM ( expression ) .)
+    )               shift and go to state 35
 
+
+state 32
+
+    (1) statement -> VAR = expression .
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (10) expression -> expression . ^ expression
+
+    $end            reduce using rule 1 (statement -> VAR = expression .)
+    +               shift and go to state 15
+    -               shift and go to state 18
+    *               shift and go to state 17
+    /               shift and go to state 19
+    ^               shift and go to state 16
+
+
+state 33
+
+    (4) expression -> DIFF_SYM ( expression ) .
+
+    )               reduce using rule 4 (expression -> DIFF_SYM ( expression ) .)
+    +               reduce using rule 4 (expression -> DIFF_SYM ( expression ) .)
+    -               reduce using rule 4 (expression -> DIFF_SYM ( expression ) .)
+    *               reduce using rule 4 (expression -> DIFF_SYM ( expression ) .)
+    /               reduce using rule 4 (expression -> DIFF_SYM ( expression ) .)
+    ^               reduce using rule 4 (expression -> DIFF_SYM ( expression ) .)
+    $end            reduce using rule 4 (expression -> DIFF_SYM ( expression ) .)
+
+
+state 34
+
+    (2) statement -> FUNC_VAR ( VAR ) . = expression
+
+    =               shift and go to state 36
+
+
+state 35
+
+    (3) expression -> FUNC_VAR ( NUMBER ) .
+
+    )               reduce using rule 3 (expression -> FUNC_VAR ( NUMBER ) .)
+    +               reduce using rule 3 (expression -> FUNC_VAR ( NUMBER ) .)
+    -               reduce using rule 3 (expression -> FUNC_VAR ( NUMBER ) .)
+    *               reduce using rule 3 (expression -> FUNC_VAR ( NUMBER ) .)
+    /               reduce using rule 3 (expression -> FUNC_VAR ( NUMBER ) .)
+    ^               reduce using rule 3 (expression -> FUNC_VAR ( NUMBER ) .)
+    $end            reduce using rule 3 (expression -> FUNC_VAR ( NUMBER ) .)
+
+
+state 36
+
+    (2) statement -> FUNC_VAR ( VAR ) = . expression
+    (3) expression -> . FUNC_VAR ( NUMBER )
+    (4) expression -> . DIFF_SYM ( expression )
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . expression ^ expression
+    (11) expression -> . - expression
+    (12) expression -> . ( expression )
+    (13) expression -> . NUMBER
+    (14) expression -> . VAR
+    (15) expression -> . VAR_MULTI
+
+    FUNC_VAR        shift and go to state 11
+    DIFF_SYM        shift and go to state 2
+    -               shift and go to state 3
+    (               shift and go to state 1
+    NUMBER          shift and go to state 9
+    VAR             shift and go to state 12
+    VAR_MULTI       shift and go to state 8
+
+    expression                     shift and go to state 37
+
+state 37
+
+    (2) statement -> FUNC_VAR ( VAR ) = expression .
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (10) expression -> expression . ^ expression
+
+    $end            reduce using rule 2 (statement -> FUNC_VAR ( VAR ) = expression .)
+    +               shift and go to state 15
+    -               shift and go to state 18
+    *               shift and go to state 17
+    /               shift and go to state 19
+    ^               shift and go to state 16
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for + in state 26 resolved as shift
+WARNING: shift/reduce conflict for - in state 26 resolved as shift
+WARNING: shift/reduce conflict for * in state 26 resolved as shift
+WARNING: shift/reduce conflict for / in state 26 resolved as shift
+WARNING: shift/reduce conflict for ^ in state 26 resolved as shift
