@@ -3,7 +3,9 @@ tokens = (
     'FUNC_VAR',
     'NUMBER',
     'VAR_MULTI',
-    'DIFF_SYM'
+    'DIFF_SYM',
+    'INTE_SYM',
+    'INTE_D_DYM'
 )
 
 literals = ['=','+','-','*','/', '^', '(',')']
@@ -11,6 +13,8 @@ literals = ['=','+','-','*','/', '^', '(',')']
 t_VAR = r'[a-cei-z]'
 t_FUNC_VAR = r'[f-h]'
 t_DIFF_SYM = r'd\/d{0}'.format(t_VAR)
+t_INTE_SYM = r'S'
+t_INTE_D_DYM = r' d{0}'.format(t_VAR)
 t_VAR_MULTI = r'{0}{0}+'.format(t_VAR)
 # a, b, c, j, k, ... z:
 # f, g, h:

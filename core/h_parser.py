@@ -1,6 +1,6 @@
 from h_lexer import *
 import re
-from sympy import Symbol, diff
+from sympy import Symbol, diff, integrate
 
 precedence = (
     ('left','+','-'),
@@ -33,6 +33,11 @@ def p_statement_eval_func(p):
 def p_expression_diff_func(p):
     'expression : DIFF_SYM "(" expression ")"'
     p[0] = diff(p[3], Symbol(p[1].replace('d/d', '')))
+
+def p_expression_inte_func(p):
+    'expression : INTE_SYM "(" expression INTE_D_DYM ")"'
+    x = Symbol(p[4].replace('d', ''))
+    p[0] = integrate(p[3], x)
 
 def p_statement_expr(p):
     'statement : expression'

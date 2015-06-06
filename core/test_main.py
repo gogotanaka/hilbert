@@ -96,6 +96,9 @@ class TestMainMethods(unittest.TestCase):
     def test_diff1(self):
         h_eval('2*x', 'd/dx(x * x)', self)
 
+    def test_inte1(self):
+        h_eval('x**2/2', 'S(x dx)', self)
+
     def tearDown(self):
         sys.stdout = sys.__stdout__
 
