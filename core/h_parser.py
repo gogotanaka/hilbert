@@ -40,8 +40,7 @@ def p_expression_inte_func(p):
     p[0] = integrate(p[3], x)
 
 def p_expression_build_in_func(p):
-    'expression : BUILD_IN_FUNC "(" expression ")"'
-
+    'expression : BUILD_IN_FUNC'
     p[0] = 1
 
 def p_statement_expr(p):
