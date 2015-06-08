@@ -16,7 +16,7 @@ t_FUNC_VAR = r'[f-h]'
 t_DIFF_SYM = r'd\/d{0}'.format(t_VAR)
 t_INTE_SYM = r'S'
 t_INTE_D_DYM = r' d{0}'.format(t_VAR)
-t_BUILD_IN_FUNC = r'cos'
+t_BUILD_IN_FUNC = r'(sin|cos|tan|log)'
 t_VAR_MULTI = r'(?!(sin|cos|tan|log))[abcijklmnpqrstuvwxyz]{2,}'
 
 # a, b, c, j, k, ... z:

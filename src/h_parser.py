@@ -1,6 +1,6 @@
 from h_lexer import *
 import re
-from sympy import Symbol, diff, integrate
+from sympy import Symbol, diff, integrate, sin, cos, tan, log
 
 precedence = (
     ('left','+','-'),
@@ -40,8 +40,9 @@ def p_expression_inte_func(p):
     p[0] = integrate(p[3], x)
 
 def p_expression_build_in_func(p):
-    'expression : BUILD_IN_FUNC'
-    p[0] = 1
+    'expression : BUILD_IN_FUNC "(" VAR ")"'
+    func = eval(p[1])
+    p[0] = func(p[3])
 
 def p_statement_expr(p):
     'statement : expression'
