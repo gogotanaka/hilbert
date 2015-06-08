@@ -39,6 +39,11 @@ def p_expression_inte_func(p):
     x = Symbol(p[4].replace('d', ''))
     p[0] = integrate(p[3], x)
 
+def p_expression_build_in_func(p):
+    'expression : BUILD_IN_FUNC "(" expression ")"'
+
+    p[0] = 1
+
 def p_statement_expr(p):
     'statement : expression'
     print(p[1])

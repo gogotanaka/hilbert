@@ -66,9 +66,9 @@ class TestMainMethods(unittest.TestCase):
 
     def test_var_multi2(self):
         h_parser.parser.parse('c=23')
-        h_parser.parser.parse('e=34')
-        h_parser.parser.parse('i=2')
-        h_parser.parser.parse('cei')
+        h_parser.parser.parse('i=34')
+        h_parser.parser.parse('j=2')
+        h_parser.parser.parse('cij')
         check(self, '1564')
 
     # SYM
@@ -98,6 +98,9 @@ class TestMainMethods(unittest.TestCase):
 
     def test_inte1(self):
         h_eval('x**2/2', 'S(x dx)', self)
+
+    def test_build_in_func1(self):
+        h_eval('x**2/2', 'cos(x)', self)
 
     def tearDown(self):
         sys.stdout = sys.__stdout__
