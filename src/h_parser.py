@@ -1,6 +1,7 @@
 from h_lexer import *
 import re
-from sympy import Symbol, diff, integrate, sin, cos, tan, log
+from sympy import Symbol, diff, integrate, sin, cos, tan, log, oo
+from math import e, pi
 
 precedence = (
     ('left','+','-'),
@@ -43,6 +44,10 @@ def p_expression_build_in_func(p):
     'expression : BUILD_IN_FUNC "(" VAR ")"'
     func = eval(p[1])
     p[0] = func(p[3])
+
+def p_expression_constants(p):
+    'expression : CONSTANTS'
+    p[0] = eval(p[1])
 
 def p_statement_expr(p):
     'statement : expression'

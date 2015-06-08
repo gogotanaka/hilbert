@@ -98,10 +98,16 @@ class TestMainMethods(unittest.TestCase):
 
     def test_inte1(self):          h_eval('x**2/2', 'S(x dx)', self)
     def test_inte2(self):          h_eval('sin(x)', 'S(cos(x) dx)', self)
+    def test_inte3(self):          h_eval('cos(x)', 'd/dx(S(cos(x) dx))', self)
 
     def test_build_in_func1(self): h_eval('cos(x)',  'cos(x)',       self)
     def test_build_in_func2(self): h_eval('-sin(x)', 'd/dx(cos(x))', self)
     def test_build_in_func3(self): h_eval('0',       'd/dy(cos(x))', self)
+
+    def test_constants1(self): h_eval('2.718281828459045',  'e',  self)
+    def test_constants2(self): h_eval('3.141592653589793', 'pi', self)
+    def test_constants3(self): h_eval('oo', 'oo', self)
+
 
     def tearDown(self):
         sys.stdout = sys.__stdout__

@@ -6,18 +6,20 @@ tokens = (
     'DIFF_SYM',
     'INTE_SYM',
     'INTE_D_DYM',
-    'BUILD_IN_FUNC'
+    'BUILD_IN_FUNC',
+    'CONSTANTS'
 )
 
 literals = ['=','+','-','*','/', '^', '(',')',]
 
-t_VAR = r'(?!(sin|cos|tan|log))[abcijklmnpqrstuvwxyz]'
+t_VAR = r'(?!(sin|cos|tan|log|oo|e|pi))[abcijklmnpqrstuvwxyz]'
 t_FUNC_VAR = r'[f-h]'
 t_DIFF_SYM = r'd\/d{0}'.format(t_VAR)
 t_INTE_SYM = r'S'
 t_INTE_D_DYM = r' d{0}'.format(t_VAR)
 t_BUILD_IN_FUNC = r'(sin|cos|tan|log)'
-t_VAR_MULTI = r'(?!(sin|cos|tan|log))[abcijklmnpqrstuvwxyz]{2,}'
+t_VAR_MULTI = r'(?!(sin|cos|tan|log|oo|e|pi))[abcijklmnpqrstuvwxyz]{2,}'
+t_CONSTANTS = r'(oo|e|pi)'
 
 # a, b, c, j, k, ... z:
 # f, g, h:
