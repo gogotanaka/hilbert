@@ -5,9 +5,9 @@ _tabversion = '3.5'
 
 _lr_method = 'LALR'
 
-_lr_signature = '6903C0F2DEC0ABE824375316E2F06E2B'
+_lr_signature = 'E1BF381F2809BFE8AD1799712BD969FF'
     
-_lr_action_items = {'(':([0,1,2,5,9,10,12,13,17,18,19,20,21,23,24,25,49,50,],[1,1,16,1,23,24,26,27,1,1,1,1,1,1,1,1,1,1,]),'$end':([3,4,6,7,8,11,15,22,28,33,34,35,36,37,40,42,43,46,48,51,52,53,],[-10,-18,0,-20,-9,-19,-19,-16,-17,-12,-15,-11,-14,-13,-1,-5,-4,-6,-8,-7,-3,-2,]),'FUNC_VAR':([0,1,5,17,18,19,20,21,23,24,25,49,50,],[2,13,13,13,13,13,13,13,13,13,13,13,13,]),'NUMBER':([0,1,5,16,17,18,19,20,21,23,24,25,27,49,50,],[4,4,4,30,4,4,4,4,4,4,4,4,30,4,4,]),'VARS_WITH_CLN':([16,],[31,]),'=':([11,44,45,],[25,49,50,]),'INTE_D_DYM':([4,7,8,15,22,28,33,34,35,36,37,39,42,43,46,48,51,],[-18,-20,-9,-19,-16,-17,-12,-15,-11,-14,-13,47,-5,-4,-6,-8,-7,]),'/':([3,4,7,8,11,14,15,22,28,33,34,35,36,37,38,39,40,42,43,46,48,51,52,53,],[20,-18,-20,-9,-19,20,-19,-16,-17,20,20,20,-14,-13,20,20,20,-5,-4,-6,-8,-7,20,20,]),'+':([3,4,7,8,11,14,15,22,28,33,34,35,36,37,38,39,40,42,43,46,48,51,52,53,],[19,-18,-20,-9,-19,19,-19,-16,-17,-12,19,-11,-14,-13,19,19,19,-5,-4,-6,-8,-7,19,19,]),'NUMS_WITH_CLN':([16,27,],[29,29,]),'-':([0,1,3,4,5,7,8,11,14,15,17,18,19,20,21,22,23,24,25,28,33,34,35,36,37,38,39,40,42,43,46,48,49,50,51,52,53,],[5,5,17,-18,5,-20,-9,-19,17,-19,5,5,5,5,5,-16,5,5,5,-17,-12,17,-11,-14,-13,17,17,17,-5,-4,-6,-8,5,5,-7,17,17,]),'^':([3,4,7,8,11,14,15,22,28,33,34,35,36,37,38,39,40,42,43,46,48,51,52,53,],[18,-18,-20,-9,-19,18,-19,-16,-17,-12,18,-11,-14,-13,18,18,18,-5,-4,-6,-8,-7,18,18,]),'*':([3,4,7,8,11,14,15,22,28,33,34,35,36,37,38,39,40,42,43,46,48,51,52,53,],[21,-18,-20,-9,-19,21,-19,-16,-17,21,21,21,-14,-13,21,21,21,-5,-4,-6,-8,-7,21,21,]),'CONSTANTS':([0,1,5,17,18,19,20,21,23,24,25,49,50,],[8,8,8,8,8,8,8,8,8,8,8,8,8,]),'DIFF_SYM':([0,1,5,17,18,19,20,21,23,24,25,49,50,],[9,9,9,9,9,9,9,9,9,9,9,9,9,]),'INTE_SYM':([0,1,5,17,18,19,20,21,23,24,25,49,50,],[10,10,10,10,10,10,10,10,10,10,10,10,10,]),'VAR':([0,1,5,16,17,18,19,20,21,23,24,25,26,49,50,],[11,15,15,32,15,15,15,15,15,15,15,15,41,15,15,]),')':([4,7,8,14,15,22,28,29,30,31,32,33,34,35,36,37,38,41,42,43,46,47,48,51,],[-18,-20,-9,28,-19,-16,-17,42,43,44,45,-12,-15,-11,-14,-13,46,48,-5,-4,-6,51,-8,-7,]),'VAR_MULTI':([0,1,5,17,18,19,20,21,23,24,25,49,50,],[7,7,7,7,7,7,7,7,7,7,7,7,7,]),'BUILD_IN_FUNC':([0,1,5,17,18,19,20,21,23,24,25,49,50,],[12,12,12,12,12,12,12,12,12,12,12,12,12,]),}
+_lr_action_items = {'DIFF_SYM':([0,7,8,13,15,16,17,18,19,20,26,51,53,],[3,3,3,3,3,3,3,3,3,3,3,3,3,]),'FUNC_VAR':([0,7,8,13,15,16,17,18,19,20,26,51,53,],[4,21,21,21,21,21,21,21,21,21,21,21,21,]),'INTE_SYM':([0,7,8,13,15,16,17,18,19,20,26,51,53,],[12,12,12,12,12,12,12,12,12,12,12,12,12,]),'INTE_D_DYM':([1,9,11,22,23,32,33,34,35,36,39,41,42,47,48,49,55,],[-22,-20,-11,-18,-21,-17,-15,-13,-16,-14,-19,50,-8,-6,-7,-10,-9,]),')':([1,9,11,22,23,24,27,28,29,30,31,32,33,34,35,36,39,40,42,47,48,49,50,52,54,55,],[-22,-20,-11,-18,-21,39,42,43,45,47,48,-17,-15,-13,-16,-14,-19,49,-8,-6,-7,-10,55,-2,-3,-9,]),'VAR':([0,7,8,13,14,15,16,17,18,19,20,25,26,44,51,53,],[6,23,23,23,29,23,23,23,23,23,23,40,23,52,23,23,]),'+':([1,5,6,9,11,22,23,24,27,32,33,34,35,36,37,39,41,42,47,48,49,55,56,57,],[-22,17,-21,-20,-11,-18,-21,17,17,17,-15,-13,-16,-14,17,-19,17,-8,-6,-7,-10,-9,17,17,]),'/':([1,5,6,9,11,22,23,24,27,32,33,34,35,36,37,39,41,42,47,48,49,55,56,57,],[-22,18,-21,-20,-11,-18,-21,18,18,18,-15,18,-16,18,18,-19,18,-8,-6,-7,-10,-9,18,18,]),'^':([1,5,6,9,11,22,23,24,27,32,33,34,35,36,37,39,41,42,47,48,49,55,56,57,],[-22,15,-21,-20,-11,-18,-21,15,15,15,-15,-13,-16,-14,15,-19,15,-8,-6,-7,-10,-9,15,15,]),'-':([0,1,5,6,7,8,9,11,13,15,16,17,18,19,20,22,23,24,26,27,32,33,34,35,36,37,39,41,42,47,48,49,51,53,55,56,57,],[7,-22,19,-21,7,7,-20,-11,7,7,7,7,7,7,7,-18,-21,19,7,19,19,-15,-13,-16,-14,19,-19,19,-8,-6,-7,-10,7,7,-9,19,19,]),'(':([0,3,4,7,8,10,12,13,15,16,17,18,19,20,21,26,51,53,],[8,13,14,8,8,25,26,8,8,8,8,8,8,8,38,8,8,8,]),'NUMBER':([0,7,8,13,14,15,16,17,18,19,20,26,38,46,51,53,],[9,9,9,9,30,9,9,9,9,9,9,9,30,54,9,9,]),'BUILD_IN_FUNC':([0,7,8,13,15,16,17,18,19,20,26,51,53,],[10,10,10,10,10,10,10,10,10,10,10,10,10,]),'$end':([1,2,5,6,9,11,22,23,32,33,34,35,36,37,39,42,47,48,49,55,56,57,],[-22,0,-12,-21,-20,-11,-18,-21,-17,-15,-13,-16,-14,-1,-19,-8,-6,-7,-10,-9,-5,-4,]),',':([29,30,],[44,46,]),'CONSTANTS':([0,7,8,13,15,16,17,18,19,20,26,51,53,],[11,11,11,11,11,11,11,11,11,11,11,11,11,]),'*':([1,5,6,9,11,22,23,24,27,32,33,34,35,36,37,39,41,42,47,48,49,55,56,57,],[-22,16,-21,-20,-11,-18,-21,16,16,16,-15,16,-16,16,16,-19,16,-8,-6,-7,-10,-9,16,16,]),'VAR_MULTI':([0,7,8,13,15,16,17,18,19,20,26,51,53,],[1,1,1,1,1,1,1,1,1,1,1,1,1,]),'=':([6,43,45,],[20,51,53,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'statement':([0,],[6,]),'expression':([0,1,5,17,18,19,20,21,23,24,25,49,50,],[3,14,22,33,34,35,36,37,38,39,40,52,53,]),}
+_lr_goto_items = {'statement':([0,],[2,]),'expression':([0,7,8,13,15,16,17,18,19,20,26,51,53,],[5,22,24,27,32,33,34,35,36,37,41,56,57,]),'vars_with_cln':([14,],[28,]),'nums_with_cln':([14,38,],[31,31,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,23 +27,25 @@ del _lr_goto_items
 _lr_productions = [
   ("S' -> statement","S'",1,None,None,None),
   ('statement -> VAR = expression','statement',3,'p_statement_assign','h_parser.py',22),
-  ('statement -> FUNC_VAR ( VAR ) = expression','statement',6,'p_statement_def_func','h_parser.py',26),
-  ('statement -> FUNC_VAR ( VARS_WITH_CLN ) = expression','statement',6,'p_statement_def_func2','h_parser.py',30),
-  ('expression -> FUNC_VAR ( NUMBER )','expression',4,'p_statement_eval_func','h_parser.py',34),
-  ('expression -> FUNC_VAR ( NUMS_WITH_CLN )','expression',4,'p_statement_eval_func2','h_parser.py',39),
-  ('expression -> DIFF_SYM ( expression )','expression',4,'p_expression_diff_func','h_parser.py',44),
-  ('expression -> INTE_SYM ( expression INTE_D_DYM )','expression',5,'p_expression_inte_func','h_parser.py',48),
-  ('expression -> BUILD_IN_FUNC ( VAR )','expression',4,'p_expression_build_in_func','h_parser.py',53),
-  ('expression -> CONSTANTS','expression',1,'p_expression_constants','h_parser.py',58),
-  ('statement -> expression','statement',1,'p_statement_expr','h_parser.py',62),
-  ('expression -> expression + expression','expression',3,'p_expression_binop','h_parser.py',66),
-  ('expression -> expression - expression','expression',3,'p_expression_binop','h_parser.py',67),
-  ('expression -> expression * expression','expression',3,'p_expression_binop','h_parser.py',68),
-  ('expression -> expression / expression','expression',3,'p_expression_binop','h_parser.py',69),
-  ('expression -> expression ^ expression','expression',3,'p_expression_binop','h_parser.py',70),
-  ('expression -> - expression','expression',2,'p_expression_uminus','h_parser.py',78),
-  ('expression -> ( expression )','expression',3,'p_expression_group','h_parser.py',82),
-  ('expression -> NUMBER','expression',1,'p_expression_number','h_parser.py',86),
-  ('expression -> VAR','expression',1,'p_expression_var','h_parser.py',90),
-  ('expression -> VAR_MULTI','expression',1,'p_expression_var_multi','h_parser.py',94),
+  ('vars_with_cln -> VAR , VAR','vars_with_cln',3,'p_expression_vars_with_cln','h_parser.py',26),
+  ('nums_with_cln -> NUMBER , NUMBER','nums_with_cln',3,'p_expression_num_with_cln','h_parser.py',30),
+  ('statement -> FUNC_VAR ( VAR ) = expression','statement',6,'p_statement_def_func','h_parser.py',34),
+  ('statement -> FUNC_VAR ( vars_with_cln ) = expression','statement',6,'p_statement_def_func2','h_parser.py',38),
+  ('expression -> FUNC_VAR ( NUMBER )','expression',4,'p_statement_eval_func','h_parser.py',42),
+  ('expression -> FUNC_VAR ( nums_with_cln )','expression',4,'p_statement_eval_func2','h_parser.py',47),
+  ('expression -> DIFF_SYM ( expression )','expression',4,'p_expression_diff_func','h_parser.py',52),
+  ('expression -> INTE_SYM ( expression INTE_D_DYM )','expression',5,'p_expression_inte_func','h_parser.py',56),
+  ('expression -> BUILD_IN_FUNC ( VAR )','expression',4,'p_expression_build_in_func','h_parser.py',61),
+  ('expression -> CONSTANTS','expression',1,'p_expression_constants','h_parser.py',66),
+  ('statement -> expression','statement',1,'p_statement_expr','h_parser.py',70),
+  ('expression -> expression + expression','expression',3,'p_expression_binop','h_parser.py',74),
+  ('expression -> expression - expression','expression',3,'p_expression_binop','h_parser.py',75),
+  ('expression -> expression * expression','expression',3,'p_expression_binop','h_parser.py',76),
+  ('expression -> expression / expression','expression',3,'p_expression_binop','h_parser.py',77),
+  ('expression -> expression ^ expression','expression',3,'p_expression_binop','h_parser.py',78),
+  ('expression -> - expression','expression',2,'p_expression_uminus','h_parser.py',86),
+  ('expression -> ( expression )','expression',3,'p_expression_group','h_parser.py',90),
+  ('expression -> NUMBER','expression',1,'p_expression_number','h_parser.py',94),
+  ('expression -> VAR','expression',1,'p_expression_var','h_parser.py',98),
+  ('expression -> VAR_MULTI','expression',1,'p_expression_var_multi','h_parser.py',102),
 ]

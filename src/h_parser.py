@@ -22,13 +22,21 @@ def p_statement_assign(p):
     'statement : VAR "=" expression'
     vars[p[1]] = p[3]
 
+def p_expression_vars_with_cln(p):
+    'vars_with_cln : VAR "," VAR'
+    p[0] = [Symbol(p[1]), Symbol(p[3])]
+
+def p_expression_num_with_cln(p):
+    'nums_with_cln : NUMBER "," NUMBER'
+    p[0] = [p[1], p[3]]
+
 def p_statement_def_func(p):
     'statement : FUNC_VAR "(" VAR ")" "=" expression'
     funcs[p[1]] = { 'expr': p[6], 'vars': [Symbol(p[3])] }
 
 def p_statement_def_func2(p):
-    'statement : FUNC_VAR "(" VARS_WITH_CLN ")" "=" expression'
-    funcs[p[1]] = { 'expr': p[6], 'vars': [Symbol(v) for v in re.split(r', *', p[3])] }
+    'statement : FUNC_VAR "(" vars_with_cln ")" "=" expression'
+    funcs[p[1]] = { 'expr': p[6], 'vars': p[3] }
 
 def p_statement_eval_func(p):
     'expression : FUNC_VAR "(" NUMBER ")"'
@@ -36,9 +44,9 @@ def p_statement_eval_func(p):
     p[0] = func['expr'].subs(zip(func['vars'], [p[3]]))
 
 def p_statement_eval_func2(p):
-    'expression : FUNC_VAR "(" NUMS_WITH_CLN ")"'
+    'expression : FUNC_VAR "(" nums_with_cln ")"'
     func = funcs[p[1]]
-    p[0] = func['expr'].subs(zip(func['vars'], re.split(r', *', p[3])))
+    p[0] = func['expr'].subs(zip(func['vars'], p[3]))
 
 def p_expression_diff_func(p):
     'expression : DIFF_SYM "(" expression ")"'
