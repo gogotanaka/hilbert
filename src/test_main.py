@@ -93,6 +93,11 @@ class TestMainMethods(unittest.TestCase):
         h_parser.parser.parse('f(3)')
         check(self, '9')
 
+    def test_func_basis1(self):
+        h_parser.parser.parse('f(x,y) = xy')
+        h_parser.parser.parse('f(3,2)')
+        check(self, '6')
+
     def test_diff1(self):          h_eval('2*x', 'd/dx(x * x)', self)
     def test_diff2(self):          h_eval('0', 'd/dy(x * x)', self)
 

@@ -24,12 +24,21 @@ def p_statement_assign(p):
 
 def p_statement_def_func(p):
     'statement : FUNC_VAR "(" VAR ")" "=" expression'
+    funcs[p[1]] = { 'expr': p[6], 'vars': [Symbol(p[3])] }
+
+def p_statement_def_func2(p):
+    'statement : FUNC_VAR "(" VARS_WITH_CLN ")" "=" expression'
     funcs[p[1]] = { 'expr': p[6], 'vars': [Symbol(v) for v in re.split(r', *', p[3])] }
 
 def p_statement_eval_func(p):
     'expression : FUNC_VAR "(" NUMBER ")"'
     func = funcs[p[1]]
     p[0] = func['expr'].subs(zip(func['vars'], [p[3]]))
+
+def p_statement_eval_func2(p):
+    'expression : FUNC_VAR "(" NUMS_WITH_CLN ")"'
+    func = funcs[p[1]]
+    p[0] = func['expr'].subs(zip(func['vars'], re.split(r', *', p[3])))
 
 def p_expression_diff_func(p):
     'expression : DIFF_SYM "(" expression ")"'
