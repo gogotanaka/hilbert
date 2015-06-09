@@ -101,6 +101,11 @@ class TestMainMethods(unittest.TestCase):
         h_parser.parser.parse('f(3,2)')
         check(self, '6')
 
+    def test_func_basis2(self):
+        h_parser.parser.parse('g(x,  y,  z) = xyz')
+        h_parser.parser.parse('g(3,2,3)')
+        check(self, '18')
+
     def test_diff1(self):          h_eval('2*x', 'd/dx(x * x)', self)
     def test_diff2(self):          h_eval('0', 'd/dy(x * x)', self)
 
@@ -111,6 +116,7 @@ class TestMainMethods(unittest.TestCase):
     def test_build_in_func1(self): h_eval('cos(x)',  'cos(x)',       self)
     def test_build_in_func2(self): h_eval('-sin(x)', 'd/dx(cos(x))', self)
     def test_build_in_func3(self): h_eval('0',       'd/dy(cos(x))', self)
+    def test_build_in_func4(self): h_eval('cos(1)',  'cos(1)',       self)
 
     def test_constants1(self): h_eval('2.718281828459045',  'e',  self)
     def test_constants2(self): h_eval('3.141592653589793', 'pi', self)

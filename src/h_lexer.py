@@ -1,32 +1,27 @@
+from sympy import sin, cos, tan, log
+
 tokens = (
     'VAR',
     'FUNC_VAR',
     'NUMBER',
-    'DIFF_SYM',
-    'INTE_SYM',
-    'INTE_D_DYM',
     'BUILD_IN_FUNC',
     'CONSTANTS'
 )
 
-literals = ['=','+','-','*','/', '^', '(',')', ',']
+literals = ['=','+','-','*','/', '^', '(',')', ',', 'd', 'S']
 
-var = r'(?!(sin|cos|tan|log|oo|e|pi))[abcijklmnpqrstuvwxyz]'
-t_VAR = r'{0}'.format(var)
+t_VAR = r'(?!(sin|cos|tan|log|oo|e|pi))[abcijklmnpqrstuvwxyz]'
 t_FUNC_VAR = r'[f-h]'
-t_DIFF_SYM = r'd\/d{0}'.format(var)
-t_INTE_SYM = r'S'
-t_INTE_D_DYM = r' d{0}'.format(var)
-t_BUILD_IN_FUNC = r'(sin|cos|tan|log)'
 t_CONSTANTS = r'(oo|e|pi)'
-
-# a, b, c, j, k, ... z:
-# f, g, h:
-# e:
 
 def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
+    return t
+
+def t_BUILD_IN_FUNC(t):
+    r'(sin|cos|tan|log)'
+    t.value = eval(t.value)
     return t
 
 t_ignore = " \t"

@@ -1,6 +1,6 @@
 from h_lexer import *
 import re
-from sympy import Symbol, diff, integrate, sin, cos, tan, log, oo
+from sympy import Symbol, diff, integrate, oo
 from math import e, pi
 
 precedence = (
@@ -19,51 +19,57 @@ def lookupVars(var):
         return Symbol(var)
 
 def p_statement_assign(p):
-    'statement : VAR "=" expression'
+    'statement : VAR "=" term'
     vars[p[1]] = p[3]
 
 def p_expression_vars_with_cln(p):
     'vars_with_cln : VAR "," VAR'
     p[0] = [Symbol(p[1]), Symbol(p[3])]
 
+def p_expression_vars_with_cln2(p):
+    'vars_with_cln : vars_with_cln "," VAR'
+    p[0] = p[1] + [Symbol(p[3])]
+
 def p_expression_num_with_cln(p):
     'nums_with_cln : NUMBER "," NUMBER'
     p[0] = [p[1], p[3]]
 
+def p_expression_num_with_cln2(p):
+    'nums_with_cln : nums_with_cln "," NUMBER'
+    p[0] = p[1] + [p[3]]
+
 def p_statement_def_func(p):
-    'statement : FUNC_VAR "(" VAR ")" "=" expression'
+    'statement : FUNC_VAR "(" VAR ")" "=" term'
     funcs[p[1]] = { 'expr': p[6], 'vars': [Symbol(p[3])] }
 
 def p_statement_def_func2(p):
-    'statement : FUNC_VAR "(" vars_with_cln ")" "=" expression'
+    'statement : FUNC_VAR "(" vars_with_cln ")" "=" term'
     funcs[p[1]] = { 'expr': p[6], 'vars': p[3] }
 
 def p_statement_eval_func(p):
-    'expression : FUNC_VAR "(" NUMBER ")"'
+    'term : FUNC_VAR "(" NUMBER ")"'
     func = funcs[p[1]]
     p[0] = func['expr'].subs(zip(func['vars'], [p[3]]))
 
 def p_statement_eval_func2(p):
-    'expression : FUNC_VAR "(" nums_with_cln ")"'
+    'term : FUNC_VAR "(" nums_with_cln ")"'
     func = funcs[p[1]]
     p[0] = func['expr'].subs(zip(func['vars'], p[3]))
 
 def p_expression_diff_func(p):
-    'expression : DIFF_SYM "(" expression ")"'
-    p[0] = diff(p[3], Symbol(p[1].replace('d/d', '')))
+    'term : "d" "/" "d" VAR "(" term ")"'
+    p[0] = diff(p[6], Symbol(p[4]))
 
 def p_expression_inte_func(p):
-    'expression : INTE_SYM "(" expression INTE_D_DYM ")"'
-    x = Symbol(p[4].replace('d', ''))
-    p[0] = integrate(p[3], x)
+    'term : "S" "(" term "d" VAR ")"'
+    p[0] = integrate(p[3], Symbol(p[5]))
 
 def p_expression_build_in_func(p):
-    'expression : BUILD_IN_FUNC "(" VAR ")"'
-    func = eval(p[1])
-    p[0] = func(p[3])
+    'term : BUILD_IN_FUNC "(" term ")"'
+    p[0] = p[1](p[3])
 
 def p_expression_constants(p):
-    'expression : CONSTANTS'
+    'term : CONSTANTS'
     p[0] = eval(p[1])
 
 def p_statement_expr(p):
@@ -71,11 +77,11 @@ def p_statement_expr(p):
     print(p[1])
 
 def p_expression_binop(p):
-    '''expression : expression '+' expression
-                  | expression '-' expression
-                  | expression '*' expression
-                  | expression '/' expression
-                  | expression '^' expression'''
+    '''term : term '+' term
+            | term '-' term
+            | term '*' term
+            | term '/' term
+            | term '^' term'''
     if p[2] == '+'  : p[0] = p[1] + p[3]
     elif p[2] == '-': p[0] = p[1] - p[3]
     elif p[2] == '*': p[0] = p[1] * p[3]
@@ -83,24 +89,32 @@ def p_expression_binop(p):
     elif p[2] == '^': p[0] = p[1] ** p[3]
 
 def p_expression_uminus(p):
-    "expression : '-' expression %prec UMINUS"
+    "term : '-' term %prec UMINUS"
     p[0] = -p[2]
 
 def p_expression_group(p):
-    "expression : '(' expression ')'"
+    "term : '(' term ')'"
     p[0] = p[2]
 
-def p_expression_number(p):
-    "expression : NUMBER"
+def p_term_number(p):
+    "term : NUMBER"
     p[0] = p[1]
 
-def p_expression_var(p):
-    "expression : VAR"
+def p_term_var(p):
+    "term : VAR"
     p[0] = lookupVars(p[1])
 
-def p_expression_var_multi(p):
-    "expression : expression VAR"
+def p_term_var_multi(p):
+    "term : term VAR"
     p[0] = p[1] * lookupVars(p[2])
+
+def p_expression_term(p):
+    "expression : term"
+    p[0] = p[1]
+
+def p_expression_func(p):
+    "expression : FUNC_VAR"
+    p[0] = funcs[p[1]]
 
 # def p_expression_eval_py(p):
 #     'expression : EVAL_PY'
