@@ -71,6 +71,9 @@ class TestMainMethods(unittest.TestCase):
         h_parser.parser.parse('cij')
         check(self, '1564')
 
+    def test_var_multi3(self):
+        h_eval('2*x', '2x', self)
+
     # SYM
     def test_sym_plus2(self):
         h_parser.parser.parse('x+y')

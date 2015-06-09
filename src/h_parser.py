@@ -99,10 +99,8 @@ def p_expression_var(p):
     p[0] = lookupVars(p[1])
 
 def p_expression_var_multi(p):
-    "expression : VAR_MULTI"
-    result = 1
-    for c in p[1]: result *= lookupVars(c)
-    p[0] = result
+    "expression : expression VAR"
+    p[0] = p[1] * lookupVars(p[2])
 
 # def p_expression_eval_py(p):
 #     'expression : EVAL_PY'
