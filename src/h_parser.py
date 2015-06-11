@@ -74,7 +74,12 @@ def p_expression_constants(p):
 
 def p_statement_expr(p):
     'statement : expression'
-    print(p[1])
+    # .replace("*", "")
+    output = str(p[1]).replace("**", "^")
+    if ("*" in output):
+        output = "".join([("(%s)" % x if (len(x) > 1) else x) for x in output.split("*")])
+
+    print(output)
 
 def p_expression_binop(p):
     '''term : term '+' term

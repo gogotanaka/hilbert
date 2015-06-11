@@ -72,7 +72,10 @@ class TestMainMethods(unittest.TestCase):
         check(self, '1564')
 
     def test_var_multi3(self):
-        h_eval('2*x', '2x', self)
+        h_eval('2x', '2x', self)
+
+    def test_var_multi4(self):
+        h_eval('(x^6)(y^3)(z^2)', 'xxxxyyyxxzz', self)
 
     # SYM
     def test_sym_plus2(self):
@@ -85,7 +88,7 @@ class TestMainMethods(unittest.TestCase):
 
     def test_sym_multi2(self):
         h_parser.parser.parse('xy')
-        check(self, 'x*y')
+        check(self, 'xy')
 
     def test_sym_div2(self):
         h_parser.parser.parse('x/y')
@@ -106,10 +109,11 @@ class TestMainMethods(unittest.TestCase):
         h_parser.parser.parse('g(3,2,3)')
         check(self, '18')
 
-    def test_diff1(self):          h_eval('2*x', 'd/dx(x * x)', self)
+    def test_diff1(self):          h_eval('2x', 'd/dx(x * x)', self)
     def test_diff2(self):          h_eval('0', 'd/dy(x * x)', self)
+    def test_diff2(self):          h_eval('2xy', 'd/dx(xxy)', self)
 
-    def test_inte1(self):          h_eval('x**2/2', 'S(x dx)', self)
+    def test_inte1(self):          h_eval('x^2/2', 'S(x dx)', self)
     def test_inte2(self):          h_eval('sin(x)', 'S(cos(x) dx)', self)
     def test_inte3(self):          h_eval('cos(x)', 'd/dx(S(cos(x) dx))', self)
 
