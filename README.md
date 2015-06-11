@@ -1,6 +1,6 @@
 # Hilbert
 
-[![Gem Version](https://badge.fury.io/rb/hilbert.svg)](http://badge.fury.io/rb/hilbert) [![Build Status](https://travis-ci.org/gogotanaka/Hilbert.svg?branch=master)](https://travis-ci.org/gogotanaka/Hilbert) [![Coverage Status](https://coveralls.io/repos/gogotanaka/Hilbert/badge.png?branch=master)](https://coveralls.io/r/gogotanaka/Hilbert?branch=master) [![Code Climate](https://codeclimate.com/github/gogotanaka/Hilbert/badges/gpa.svg)](https://codeclimate.com/github/gogotanaka/Hilbert) [![Dependency Status](https://gemnasium.com/gogotanaka/Hilbert.svg)](https://gemnasium.com/gogotanaka/Hilbert)
+[![Gem Version](https://badge.fury.io/rb/hilbert.svg)](http://badge.fury.io/rb/hilbert) [![Build Status](https://travis-ci.org/gogotanaka/hilbert.svg?branch=master)](https://travis-ci.org/gogotanaka/hilbert) [![Coverage Status](https://coveralls.io/repos/gogotanaka/Hilbert/badge.png?branch=master)](https://coveralls.io/r/gogotanaka/Hilbert?branch=master) [![Code Climate](https://codeclimate.com/github/gogotanaka/Hilbert/badges/gpa.svg)](https://codeclimate.com/github/gogotanaka/Hilbert) [![Dependency Status](https://gemnasium.com/gogotanaka/Hilbert.svg)](https://gemnasium.com/gogotanaka/Hilbert)
 
 Hilbert lets you have a sense of mathematics using a keyboard, the same as you would with a pen.
 
@@ -31,33 +31,35 @@ Hilbert lets you have a sense of mathematics using a keyboard, the same as you w
 
 The code below is input and output for the Hilbert interpreter. (You can try it with typing `hilbert`.)
 
+```
+xxxxyyyxxzz
+=> (x^6)(y^3)(z^2)
+```
+
 ### Differentiate
 
 ```
 d/dx(cos(x))
-=> ( - sin( x ) )
+=> -sin(x)
 
-d/dy xy
-=> ( x )
+d/dy(xy)
+=> x
 
-d/dx e^x
-=> e ^ x
+d/dx(e^x)
+=> e^x
 ```
 
 ### Integrate
 
 ```
-S(log(x)dx)[0..1]
-=> - oo
+S(log(x)dx)
+=> x*log(x) - x
 
-S(sin(x)dx)[0..pi]
-=> 2.0
-
-S(cos(x)dx)[0..pi]
-=> 0.0
+S(sin(x)dx)
+=> -cos(x)
 ```
 
-### Limit
+<!-- ### Limit
 
 ```
 lim[x->oo] (1 + 1/x)^x
@@ -84,7 +86,7 @@ lim[x->0] 1/x
 
 (1 2 3; 4 5 6) * (1 2 3)
 => (14 32)
-```
+``` -->
 
 ### Function
 ```
