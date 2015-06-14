@@ -1,6 +1,6 @@
 # Hilbert
 
-[![Gem Version](https://badge.fury.io/rb/hilbert.svg)](http://badge.fury.io/rb/hilbert) [![Build Status](https://travis-ci.org/gogotanaka/hilbert.svg?branch=master)](https://travis-ci.org/gogotanaka/hilbert) [![Coverage Status](https://coveralls.io/repos/gogotanaka/Hilbert/badge.png?branch=master)](https://coveralls.io/r/gogotanaka/Hilbert?branch=master) [![Code Climate](https://codeclimate.com/github/gogotanaka/Hilbert/badges/gpa.svg)](https://codeclimate.com/github/gogotanaka/Hilbert) [![Dependency Status](https://gemnasium.com/gogotanaka/Hilbert.svg)](https://gemnasium.com/gogotanaka/Hilbert)
+[![Build Status](https://travis-ci.org/gogotanaka/hilbert.svg?branch=master)](https://travis-ci.org/gogotanaka/hilbert) [![Coverage Status](https://coveralls.io/repos/gogotanaka/Hilbert/badge.png?branch=master)](https://coveralls.io/r/gogotanaka/Hilbert?branch=master) [![Code Climate](https://codeclimate.com/github/gogotanaka/Hilbert/badges/gpa.svg)](https://codeclimate.com/github/gogotanaka/Hilbert) [![Dependency Status](https://gemnasium.com/gogotanaka/Hilbert.svg)](https://gemnasium.com/gogotanaka/Hilbert)
 
 Hilbert lets you have a sense of mathematics using a keyboard, the same as you would with a pen.
 

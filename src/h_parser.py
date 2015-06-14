@@ -22,41 +22,39 @@ def p_statement_assign(p):
     'statement : VAR "=" term'
     vars[p[1]] = p[3]
 
-def p_expression_vars_with_cln(p):
-    '''vars_with_cln : VAR "," VAR
-                     | vars_with_cln "," VAR'''
-
-    if type(p[1]) is list:
-        p[0] = p[1] + [Symbol(p[3])]
-    else:
-        p[0] = [Symbol(p[1]), Symbol(p[3])]
-
-def p_expression_num_with_cln(p):
-    '''nums_with_cln : NUMBER "," NUMBER
-                     | nums_with_cln "," NUMBER'''
-
-    if type(p[1]) is list:
-        p[0] = p[1] + [p[3]]
-    else:
-        p[0] = [p[1], p[3]]
+def p_statement_expr(p):
+    'statement : expression'
+    output = str(p[1]).replace("**", "^")
+    if ("*" in output):
+        output = "".join([("(%s)" % x if (len(x) > 1) else x) for x in output.split("*")])
+    print(output)
 
 def p_statement_def_func(p):
-    'statement : FUNC_VAR "(" VAR ")" "=" term'
-    funcs[p[1]] = { 'expr': p[6], 'vars': [Symbol(p[3])] }
+    '''statement : FUNC_VAR "(" VAR ")" "=" term
+                 | FUNC_VAR "(" vars_with_cln ")" "=" term'''
 
-def p_statement_def_func2(p):
-    'statement : FUNC_VAR "(" vars_with_cln ")" "=" term'
-    funcs[p[1]] = { 'expr': p[6], 'vars': p[3] }
+    if type(p[3]) is list:
+        funcs[p[1]] = { 'expr': p[6], 'vars': p[3] }
+    else:
+        funcs[p[1]] = { 'expr': p[6], 'vars': [Symbol(p[3])] }
+
+def p_expression_term(p):
+    "expression : term"
+    p[0] = p[1]
+
+def p_expression_func(p):
+    "expression : FUNC_VAR"
+    p[0] = funcs[p[1]]
 
 def p_statement_eval_func(p):
-    'term : FUNC_VAR "(" NUMBER ")"'
-    func = funcs[p[1]]
-    p[0] = func['expr'].subs(zip(func['vars'], [p[3]]))
+    '''term : FUNC_VAR "(" NUMBER ")"
+            | FUNC_VAR "(" nums_with_cln ")"'''
 
-def p_statement_eval_func2(p):
-    'term : FUNC_VAR "(" nums_with_cln ")"'
     func = funcs[p[1]]
-    p[0] = func['expr'].subs(zip(func['vars'], p[3]))
+    if type(p[3]) is list:
+        p[0] = func['expr'].subs(zip(func['vars'], p[3]))
+    else:
+        p[0] = func['expr'].subs(zip(func['vars'], [p[3]]))
 
 def p_expression_diff_func(p):
     'term : "d" "/" "d" VAR "(" term ")"'
@@ -73,15 +71,6 @@ def p_expression_build_in_func(p):
 def p_expression_constants(p):
     'term : CONSTANTS'
     p[0] = eval(p[1])
-
-def p_statement_expr(p):
-    'statement : expression'
-    # .replace("*", "")
-    output = str(p[1]).replace("**", "^")
-    if ("*" in output):
-        output = "".join([("(%s)" % x if (len(x) > 1) else x) for x in output.split("*")])
-
-    print(output)
 
 def p_expression_binop(p):
     '''term : term '+' term
@@ -115,29 +104,23 @@ def p_term_var_multi(p):
     "term : term VAR"
     p[0] = p[1] * lookupVars(p[2])
 
-def p_expression_term(p):
-    "expression : term"
-    p[0] = p[1]
+def p_expression_vars_with_cln(p):
+    '''vars_with_cln : VAR "," VAR
+                     | vars_with_cln "," VAR'''
 
-def p_expression_func(p):
-    "expression : FUNC_VAR"
-    p[0] = funcs[p[1]]
+    if type(p[1]) is list:
+        p[0] = p[1] + [Symbol(p[3])]
+    else:
+        p[0] = [Symbol(p[1]), Symbol(p[3])]
 
-# def p_expression_eval_py(p):
-#     'expression : EVAL_PY'
-#     print(p[1])
-#     exec(re.sub(r'py:', '', p[1]))
+def p_expression_num_with_cln(p):
+    '''nums_with_cln : NUMBER "," NUMBER
+                     | nums_with_cln "," NUMBER'''
 
-# def p_statement_def_func(p):
-#     'statement : DEF_FUNC'
-#     a = "def %s" % re.sub(r' *= *', ': return ', p[1])
-#     print(a)
-#     exec(a)
-#
-# def p_expression_eval_func(p):
-#     'expression : EVAL_FUNC'
-#     print("Syntax error at")
-#     eval(1)
+    if type(p[1]) is list:
+        p[0] = p[1] + [p[3]]
+    else:
+        p[0] = [p[1], p[3]]
 
 def p_error(p):
     if p:
