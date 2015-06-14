@@ -8,11 +8,11 @@ tokens = (
     'CONSTANTS'
 )
 
-literals = ['=','+','-','*','/', '^', '(',')', ',', 'd', 'S']
+literals = ['=','+','-','*','/', '^', '(',')', ',', 'd', 'S', 'e']
 
 t_VAR = r'(?!(sin|cos|tan|log|oo|e|pi))[abcijklmnpqrstuvwxyz]'
 t_FUNC_VAR = r'[f-h]'
-t_CONSTANTS = r'(oo|e|pi)'
+t_CONSTANTS = r'(oo|pi)'
 
 def t_NUMBER(t):
     r'\d+'

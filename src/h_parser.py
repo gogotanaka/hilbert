@@ -1,7 +1,7 @@
 from h_lexer import *
 import re
-from sympy import Symbol, diff, integrate, oo
-from math import e, pi
+from sympy import Symbol, diff, integrate, oo, exp
+from math import pi
 
 precedence = (
     ('left','+','-'),
@@ -27,6 +27,9 @@ def p_statement_expr(p):
     output = str(p[1]).replace("**", "^")
     if ("*" in output):
         output = "".join([("(%s)" % x if (len(x) > 1) else x) for x in output.split("*")])
+
+    output = output.replace("E", "e")
+    output = re.sub(r"exp\((.+)\)", r"e^\1", output)
     print(output)
 
 def p_statement_def_func(p):
@@ -95,6 +98,10 @@ def p_expression_group(p):
 def p_term_number(p):
     "term : NUMBER"
     p[0] = p[1]
+
+def p_term_exponential(p):
+    "term : 'e'"
+    p[0] = exp(1)
 
 def p_term_var(p):
     "term : VAR"

@@ -122,9 +122,13 @@ class TestMainMethods(unittest.TestCase):
     def test_build_in_func3(self): h_eval('0',       'd/dy(cos(x))', self)
     def test_build_in_func4(self): h_eval('cos(1)',  'cos(1)',       self)
 
-    def test_constants1(self): h_eval('2.718281828459045',  'e',  self)
+    def test_constants1(self): h_eval('e',  'e',  self)
     def test_constants2(self): h_eval('3.141592653589793', 'pi', self)
     def test_constants3(self): h_eval('oo', 'oo', self)
+    def test_constants4(self): h_eval('e^3',  'e^3',  self)
+    def test_constants4(self): h_eval('e^x',  'e^x',  self)
+    def test_constants4(self): h_eval('e^x',  'd/dx(e^x)',  self)
+
 
 
     def tearDown(self):
