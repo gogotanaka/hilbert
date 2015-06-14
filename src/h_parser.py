@@ -1,6 +1,6 @@
 from h_lexer import *
 import re
-from sympy import Symbol, diff, integrate, oo, exp
+from sympy import Symbol, diff, integrate, oo, exp, limit
 from math import pi
 
 precedence = (
@@ -110,6 +110,10 @@ def p_term_var(p):
 def p_term_var_multi(p):
     "term : term VAR"
     p[0] = p[1] * lookupVars(p[2])
+
+def p_term_limit(p):
+    "term : LIMIT_SYM '[' term R_ARROW term ']' '(' term ')'"
+    p[0] = limit(p[8], p[3], p[5])
 
 def p_expression_vars_with_cln(p):
     '''vars_with_cln : VAR "," VAR

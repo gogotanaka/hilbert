@@ -126,8 +126,10 @@ class TestMainMethods(unittest.TestCase):
     def test_constants2(self): h_eval('3.141592653589793', 'pi', self)
     def test_constants3(self): h_eval('oo', 'oo', self)
     def test_constants4(self): h_eval('e^3',  'e^3',  self)
-    def test_constants4(self): h_eval('e^x',  'e^x',  self)
-    def test_constants4(self): h_eval('e^x',  'd/dx(e^x)',  self)
+    def test_constants5(self): h_eval('e^x',  'e^x',  self)
+    def test_constants6(self): h_eval('e^x',  'd/dx(e^x)',  self)
+
+    def test_lim1(self): h_eval('1', 'lim[x->1](x)', self)
 
 
 

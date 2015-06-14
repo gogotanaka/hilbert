@@ -5,14 +5,18 @@ tokens = (
     'FUNC_VAR',
     'NUMBER',
     'BUILD_IN_FUNC',
-    'CONSTANTS'
+    'CONSTANTS',
+    'LIMIT_SYM',
+    'R_ARROW'
 )
 
-literals = ['=','+','-','*','/', '^', '(',')', ',', 'd', 'S', 'e']
+literals = ['=','+','-','*','/', '^', '(',')', ',', 'd', 'S', 'e', '[', ']']
 
-t_VAR = r'(?!(sin|cos|tan|log|oo|e|pi))[abcijklmnpqrstuvwxyz]'
+t_VAR = r'(?!(sin|cos|tan|log|oo|pi|lim))[abcijklmnpqrstuvwxyz]'
 t_FUNC_VAR = r'[f-h]'
 t_CONSTANTS = r'(oo|pi)'
+t_LIMIT_SYM = r'lim'
+t_R_ARROW = r'->'
 
 def t_NUMBER(t):
     r'\d+'
