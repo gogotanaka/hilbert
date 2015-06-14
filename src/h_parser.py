@@ -23,20 +23,22 @@ def p_statement_assign(p):
     vars[p[1]] = p[3]
 
 def p_expression_vars_with_cln(p):
-    'vars_with_cln : VAR "," VAR'
-    p[0] = [Symbol(p[1]), Symbol(p[3])]
+    '''vars_with_cln : VAR "," VAR
+                     | vars_with_cln "," VAR'''
 
-def p_expression_vars_with_cln2(p):
-    'vars_with_cln : vars_with_cln "," VAR'
-    p[0] = p[1] + [Symbol(p[3])]
+    if type(p[1]) is list:
+        p[0] = p[1] + [Symbol(p[3])]
+    else:
+        p[0] = [Symbol(p[1]), Symbol(p[3])]
 
 def p_expression_num_with_cln(p):
-    'nums_with_cln : NUMBER "," NUMBER'
-    p[0] = [p[1], p[3]]
+    '''nums_with_cln : NUMBER "," NUMBER
+                     | nums_with_cln "," NUMBER'''
 
-def p_expression_num_with_cln2(p):
-    'nums_with_cln : nums_with_cln "," NUMBER'
-    p[0] = p[1] + [p[3]]
+    if type(p[1]) is list:
+        p[0] = p[1] + [p[3]]
+    else:
+        p[0] = [p[1], p[3]]
 
 def p_statement_def_func(p):
     'statement : FUNC_VAR "(" VAR ")" "=" term'

@@ -86,93 +86,21 @@ state 0
     (23) term -> . VAR
     (24) term -> . term VAR
 
-    VAR             shift and go to state 1
-    FUNC_VAR        shift and go to state 7
-    d               shift and go to state 11
+    VAR             shift and go to state 12
+    FUNC_VAR        shift and go to state 6
+    d               shift and go to state 4
     S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
     NUMBER          shift and go to state 8
 
-    statement                      shift and go to state 2
-    expression                     shift and go to state 12
-    term                           shift and go to state 4
+    statement                      shift and go to state 5
+    term                           shift and go to state 2
+    expression                     shift and go to state 3
 
 state 1
-
-    (1) statement -> VAR . = term
-    (23) term -> VAR .
-
-    =               shift and go to state 13
-    +               reduce using rule 23 (term -> VAR .)
-    -               reduce using rule 23 (term -> VAR .)
-    *               reduce using rule 23 (term -> VAR .)
-    /               reduce using rule 23 (term -> VAR .)
-    ^               reduce using rule 23 (term -> VAR .)
-    VAR             reduce using rule 23 (term -> VAR .)
-    $end            reduce using rule 23 (term -> VAR .)
-
-
-state 2
-
-    (0) S' -> statement .
-
-
-
-state 3
-
-    (21) term -> ( . term )
-    (8) term -> . FUNC_VAR ( NUMBER )
-    (9) term -> . FUNC_VAR ( nums_with_cln )
-    (10) term -> . d / d VAR ( term )
-    (11) term -> . S ( term d VAR )
-    (12) term -> . BUILD_IN_FUNC ( term )
-    (13) term -> . CONSTANTS
-    (15) term -> . term + term
-    (16) term -> . term - term
-    (17) term -> . term * term
-    (18) term -> . term / term
-    (19) term -> . term ^ term
-    (20) term -> . - term
-    (21) term -> . ( term )
-    (22) term -> . NUMBER
-    (23) term -> . VAR
-    (24) term -> . term VAR
-
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
-    S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
-    NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
-
-    term                           shift and go to state 15
-
-state 4
-
-    (25) expression -> term .
-    (15) term -> term . + term
-    (16) term -> term . - term
-    (17) term -> term . * term
-    (18) term -> term . / term
-    (19) term -> term . ^ term
-    (24) term -> term . VAR
-
-    $end            reduce using rule 25 (expression -> term .)
-    +               shift and go to state 20
-    -               shift and go to state 19
-    *               shift and go to state 18
-    /               shift and go to state 21
-    ^               shift and go to state 22
-    VAR             shift and go to state 17
-
-
-state 5
 
     (20) term -> - . term
     (8) term -> . FUNC_VAR ( NUMBER )
@@ -192,34 +120,58 @@ state 5
     (23) term -> . VAR
     (24) term -> . term VAR
 
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
     S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
     NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
+    VAR             shift and go to state 15
 
-    term                           shift and go to state 23
+    term                           shift and go to state 13
+
+state 2
+
+    (25) expression -> term .
+    (15) term -> term . + term
+    (16) term -> term . - term
+    (17) term -> term . * term
+    (18) term -> term . / term
+    (19) term -> term . ^ term
+    (24) term -> term . VAR
+
+    $end            reduce using rule 25 (expression -> term .)
+    +               shift and go to state 18
+    -               shift and go to state 16
+    *               shift and go to state 21
+    /               shift and go to state 20
+    ^               shift and go to state 17
+    VAR             shift and go to state 19
+
+
+state 3
+
+    (14) statement -> expression .
+
+    $end            reduce using rule 14 (statement -> expression .)
+
+
+state 4
+
+    (10) term -> d . / d VAR ( term )
+
+    /               shift and go to state 22
+
+
+state 5
+
+    (0) S' -> statement .
+
+
 
 state 6
-
-    (13) term -> CONSTANTS .
-
-    +               reduce using rule 13 (term -> CONSTANTS .)
-    -               reduce using rule 13 (term -> CONSTANTS .)
-    *               reduce using rule 13 (term -> CONSTANTS .)
-    /               reduce using rule 13 (term -> CONSTANTS .)
-    ^               reduce using rule 13 (term -> CONSTANTS .)
-    VAR             reduce using rule 13 (term -> CONSTANTS .)
-    $end            reduce using rule 13 (term -> CONSTANTS .)
-    )               reduce using rule 13 (term -> CONSTANTS .)
-    d               reduce using rule 13 (term -> CONSTANTS .)
-
-
-state 7
 
     (6) statement -> FUNC_VAR . ( VAR ) = term
     (7) statement -> FUNC_VAR . ( vars_with_cln ) = term
@@ -227,8 +179,15 @@ state 7
     (8) term -> FUNC_VAR . ( NUMBER )
     (9) term -> FUNC_VAR . ( nums_with_cln )
 
-    (               shift and go to state 24
+    (               shift and go to state 23
     $end            reduce using rule 26 (expression -> FUNC_VAR .)
+
+
+state 7
+
+    (12) term -> BUILD_IN_FUNC . ( term )
+
+    (               shift and go to state 24
 
 
 state 8
@@ -255,28 +214,7 @@ state 9
 
 state 10
 
-    (12) term -> BUILD_IN_FUNC . ( term )
-
-    (               shift and go to state 26
-
-
-state 11
-
-    (10) term -> d . / d VAR ( term )
-
-    /               shift and go to state 27
-
-
-state 12
-
-    (14) statement -> expression .
-
-    $end            reduce using rule 14 (statement -> expression .)
-
-
-state 13
-
-    (1) statement -> VAR = . term
+    (21) term -> ( . term )
     (8) term -> . FUNC_VAR ( NUMBER )
     (9) term -> . FUNC_VAR ( nums_with_cln )
     (10) term -> . d / d VAR ( term )
@@ -294,22 +232,39 @@ state 13
     (23) term -> . VAR
     (24) term -> . term VAR
 
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
     S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
     NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
+    VAR             shift and go to state 15
 
-    term                           shift and go to state 28
+    term                           shift and go to state 26
 
-state 14
+state 11
 
+    (13) term -> CONSTANTS .
+
+    +               reduce using rule 13 (term -> CONSTANTS .)
+    -               reduce using rule 13 (term -> CONSTANTS .)
+    *               reduce using rule 13 (term -> CONSTANTS .)
+    /               reduce using rule 13 (term -> CONSTANTS .)
+    ^               reduce using rule 13 (term -> CONSTANTS .)
+    VAR             reduce using rule 13 (term -> CONSTANTS .)
+    $end            reduce using rule 13 (term -> CONSTANTS .)
+    )               reduce using rule 13 (term -> CONSTANTS .)
+    d               reduce using rule 13 (term -> CONSTANTS .)
+
+
+state 12
+
+    (1) statement -> VAR . = term
     (23) term -> VAR .
 
+    =               shift and go to state 27
     +               reduce using rule 23 (term -> VAR .)
     -               reduce using rule 23 (term -> VAR .)
     *               reduce using rule 23 (term -> VAR .)
@@ -317,213 +272,9 @@ state 14
     ^               reduce using rule 23 (term -> VAR .)
     VAR             reduce using rule 23 (term -> VAR .)
     $end            reduce using rule 23 (term -> VAR .)
-    )               reduce using rule 23 (term -> VAR .)
-    d               reduce using rule 23 (term -> VAR .)
 
 
-state 15
-
-    (21) term -> ( term . )
-    (15) term -> term . + term
-    (16) term -> term . - term
-    (17) term -> term . * term
-    (18) term -> term . / term
-    (19) term -> term . ^ term
-    (24) term -> term . VAR
-
-    )               shift and go to state 29
-    +               shift and go to state 20
-    -               shift and go to state 19
-    *               shift and go to state 18
-    /               shift and go to state 21
-    ^               shift and go to state 22
-    VAR             shift and go to state 17
-
-
-state 16
-
-    (8) term -> FUNC_VAR . ( NUMBER )
-    (9) term -> FUNC_VAR . ( nums_with_cln )
-
-    (               shift and go to state 30
-
-
-state 17
-
-    (24) term -> term VAR .
-
-    +               reduce using rule 24 (term -> term VAR .)
-    -               reduce using rule 24 (term -> term VAR .)
-    *               reduce using rule 24 (term -> term VAR .)
-    /               reduce using rule 24 (term -> term VAR .)
-    ^               reduce using rule 24 (term -> term VAR .)
-    VAR             reduce using rule 24 (term -> term VAR .)
-    $end            reduce using rule 24 (term -> term VAR .)
-    )               reduce using rule 24 (term -> term VAR .)
-    d               reduce using rule 24 (term -> term VAR .)
-
-
-state 18
-
-    (17) term -> term * . term
-    (8) term -> . FUNC_VAR ( NUMBER )
-    (9) term -> . FUNC_VAR ( nums_with_cln )
-    (10) term -> . d / d VAR ( term )
-    (11) term -> . S ( term d VAR )
-    (12) term -> . BUILD_IN_FUNC ( term )
-    (13) term -> . CONSTANTS
-    (15) term -> . term + term
-    (16) term -> . term - term
-    (17) term -> . term * term
-    (18) term -> . term / term
-    (19) term -> . term ^ term
-    (20) term -> . - term
-    (21) term -> . ( term )
-    (22) term -> . NUMBER
-    (23) term -> . VAR
-    (24) term -> . term VAR
-
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
-    S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
-    NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
-
-    term                           shift and go to state 31
-
-state 19
-
-    (16) term -> term - . term
-    (8) term -> . FUNC_VAR ( NUMBER )
-    (9) term -> . FUNC_VAR ( nums_with_cln )
-    (10) term -> . d / d VAR ( term )
-    (11) term -> . S ( term d VAR )
-    (12) term -> . BUILD_IN_FUNC ( term )
-    (13) term -> . CONSTANTS
-    (15) term -> . term + term
-    (16) term -> . term - term
-    (17) term -> . term * term
-    (18) term -> . term / term
-    (19) term -> . term ^ term
-    (20) term -> . - term
-    (21) term -> . ( term )
-    (22) term -> . NUMBER
-    (23) term -> . VAR
-    (24) term -> . term VAR
-
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
-    S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
-    NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
-
-    term                           shift and go to state 32
-
-state 20
-
-    (15) term -> term + . term
-    (8) term -> . FUNC_VAR ( NUMBER )
-    (9) term -> . FUNC_VAR ( nums_with_cln )
-    (10) term -> . d / d VAR ( term )
-    (11) term -> . S ( term d VAR )
-    (12) term -> . BUILD_IN_FUNC ( term )
-    (13) term -> . CONSTANTS
-    (15) term -> . term + term
-    (16) term -> . term - term
-    (17) term -> . term * term
-    (18) term -> . term / term
-    (19) term -> . term ^ term
-    (20) term -> . - term
-    (21) term -> . ( term )
-    (22) term -> . NUMBER
-    (23) term -> . VAR
-    (24) term -> . term VAR
-
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
-    S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
-    NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
-
-    term                           shift and go to state 33
-
-state 21
-
-    (18) term -> term / . term
-    (8) term -> . FUNC_VAR ( NUMBER )
-    (9) term -> . FUNC_VAR ( nums_with_cln )
-    (10) term -> . d / d VAR ( term )
-    (11) term -> . S ( term d VAR )
-    (12) term -> . BUILD_IN_FUNC ( term )
-    (13) term -> . CONSTANTS
-    (15) term -> . term + term
-    (16) term -> . term - term
-    (17) term -> . term * term
-    (18) term -> . term / term
-    (19) term -> . term ^ term
-    (20) term -> . - term
-    (21) term -> . ( term )
-    (22) term -> . NUMBER
-    (23) term -> . VAR
-    (24) term -> . term VAR
-
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
-    S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
-    NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
-
-    term                           shift and go to state 34
-
-state 22
-
-    (19) term -> term ^ . term
-    (8) term -> . FUNC_VAR ( NUMBER )
-    (9) term -> . FUNC_VAR ( nums_with_cln )
-    (10) term -> . d / d VAR ( term )
-    (11) term -> . S ( term d VAR )
-    (12) term -> . BUILD_IN_FUNC ( term )
-    (13) term -> . CONSTANTS
-    (15) term -> . term + term
-    (16) term -> . term - term
-    (17) term -> . term * term
-    (18) term -> . term / term
-    (19) term -> . term ^ term
-    (20) term -> . - term
-    (21) term -> . ( term )
-    (22) term -> . NUMBER
-    (23) term -> . VAR
-    (24) term -> . term VAR
-
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
-    S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
-    NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
-
-    term                           shift and go to state 35
-
-state 23
+state 13
 
     (20) term -> - term .
     (15) term -> term . + term
@@ -543,15 +294,220 @@ state 23
     )               reduce using rule 20 (term -> - term .)
     d               reduce using rule 20 (term -> - term .)
 
-  ! +               [ shift and go to state 20 ]
-  ! -               [ shift and go to state 19 ]
-  ! *               [ shift and go to state 18 ]
-  ! /               [ shift and go to state 21 ]
-  ! ^               [ shift and go to state 22 ]
-  ! VAR             [ shift and go to state 17 ]
+  ! +               [ shift and go to state 18 ]
+  ! -               [ shift and go to state 16 ]
+  ! *               [ shift and go to state 21 ]
+  ! /               [ shift and go to state 20 ]
+  ! ^               [ shift and go to state 17 ]
+  ! VAR             [ shift and go to state 19 ]
 
 
-state 24
+state 14
+
+    (8) term -> FUNC_VAR . ( NUMBER )
+    (9) term -> FUNC_VAR . ( nums_with_cln )
+
+    (               shift and go to state 28
+
+
+state 15
+
+    (23) term -> VAR .
+
+    +               reduce using rule 23 (term -> VAR .)
+    -               reduce using rule 23 (term -> VAR .)
+    *               reduce using rule 23 (term -> VAR .)
+    /               reduce using rule 23 (term -> VAR .)
+    ^               reduce using rule 23 (term -> VAR .)
+    VAR             reduce using rule 23 (term -> VAR .)
+    $end            reduce using rule 23 (term -> VAR .)
+    )               reduce using rule 23 (term -> VAR .)
+    d               reduce using rule 23 (term -> VAR .)
+
+
+state 16
+
+    (16) term -> term - . term
+    (8) term -> . FUNC_VAR ( NUMBER )
+    (9) term -> . FUNC_VAR ( nums_with_cln )
+    (10) term -> . d / d VAR ( term )
+    (11) term -> . S ( term d VAR )
+    (12) term -> . BUILD_IN_FUNC ( term )
+    (13) term -> . CONSTANTS
+    (15) term -> . term + term
+    (16) term -> . term - term
+    (17) term -> . term * term
+    (18) term -> . term / term
+    (19) term -> . term ^ term
+    (20) term -> . - term
+    (21) term -> . ( term )
+    (22) term -> . NUMBER
+    (23) term -> . VAR
+    (24) term -> . term VAR
+
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
+    S               shift and go to state 9
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
+    NUMBER          shift and go to state 8
+    VAR             shift and go to state 15
+
+    term                           shift and go to state 29
+
+state 17
+
+    (19) term -> term ^ . term
+    (8) term -> . FUNC_VAR ( NUMBER )
+    (9) term -> . FUNC_VAR ( nums_with_cln )
+    (10) term -> . d / d VAR ( term )
+    (11) term -> . S ( term d VAR )
+    (12) term -> . BUILD_IN_FUNC ( term )
+    (13) term -> . CONSTANTS
+    (15) term -> . term + term
+    (16) term -> . term - term
+    (17) term -> . term * term
+    (18) term -> . term / term
+    (19) term -> . term ^ term
+    (20) term -> . - term
+    (21) term -> . ( term )
+    (22) term -> . NUMBER
+    (23) term -> . VAR
+    (24) term -> . term VAR
+
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
+    S               shift and go to state 9
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
+    NUMBER          shift and go to state 8
+    VAR             shift and go to state 15
+
+    term                           shift and go to state 30
+
+state 18
+
+    (15) term -> term + . term
+    (8) term -> . FUNC_VAR ( NUMBER )
+    (9) term -> . FUNC_VAR ( nums_with_cln )
+    (10) term -> . d / d VAR ( term )
+    (11) term -> . S ( term d VAR )
+    (12) term -> . BUILD_IN_FUNC ( term )
+    (13) term -> . CONSTANTS
+    (15) term -> . term + term
+    (16) term -> . term - term
+    (17) term -> . term * term
+    (18) term -> . term / term
+    (19) term -> . term ^ term
+    (20) term -> . - term
+    (21) term -> . ( term )
+    (22) term -> . NUMBER
+    (23) term -> . VAR
+    (24) term -> . term VAR
+
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
+    S               shift and go to state 9
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
+    NUMBER          shift and go to state 8
+    VAR             shift and go to state 15
+
+    term                           shift and go to state 31
+
+state 19
+
+    (24) term -> term VAR .
+
+    +               reduce using rule 24 (term -> term VAR .)
+    -               reduce using rule 24 (term -> term VAR .)
+    *               reduce using rule 24 (term -> term VAR .)
+    /               reduce using rule 24 (term -> term VAR .)
+    ^               reduce using rule 24 (term -> term VAR .)
+    VAR             reduce using rule 24 (term -> term VAR .)
+    $end            reduce using rule 24 (term -> term VAR .)
+    )               reduce using rule 24 (term -> term VAR .)
+    d               reduce using rule 24 (term -> term VAR .)
+
+
+state 20
+
+    (18) term -> term / . term
+    (8) term -> . FUNC_VAR ( NUMBER )
+    (9) term -> . FUNC_VAR ( nums_with_cln )
+    (10) term -> . d / d VAR ( term )
+    (11) term -> . S ( term d VAR )
+    (12) term -> . BUILD_IN_FUNC ( term )
+    (13) term -> . CONSTANTS
+    (15) term -> . term + term
+    (16) term -> . term - term
+    (17) term -> . term * term
+    (18) term -> . term / term
+    (19) term -> . term ^ term
+    (20) term -> . - term
+    (21) term -> . ( term )
+    (22) term -> . NUMBER
+    (23) term -> . VAR
+    (24) term -> . term VAR
+
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
+    S               shift and go to state 9
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
+    NUMBER          shift and go to state 8
+    VAR             shift and go to state 15
+
+    term                           shift and go to state 32
+
+state 21
+
+    (17) term -> term * . term
+    (8) term -> . FUNC_VAR ( NUMBER )
+    (9) term -> . FUNC_VAR ( nums_with_cln )
+    (10) term -> . d / d VAR ( term )
+    (11) term -> . S ( term d VAR )
+    (12) term -> . BUILD_IN_FUNC ( term )
+    (13) term -> . CONSTANTS
+    (15) term -> . term + term
+    (16) term -> . term - term
+    (17) term -> . term * term
+    (18) term -> . term / term
+    (19) term -> . term ^ term
+    (20) term -> . - term
+    (21) term -> . ( term )
+    (22) term -> . NUMBER
+    (23) term -> . VAR
+    (24) term -> . term VAR
+
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
+    S               shift and go to state 9
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
+    NUMBER          shift and go to state 8
+    VAR             shift and go to state 15
+
+    term                           shift and go to state 33
+
+state 22
+
+    (10) term -> d / . d VAR ( term )
+
+    d               shift and go to state 34
+
+
+state 23
 
     (6) statement -> FUNC_VAR ( . VAR ) = term
     (7) statement -> FUNC_VAR ( . vars_with_cln ) = term
@@ -562,11 +518,43 @@ state 24
     (4) nums_with_cln -> . NUMBER , NUMBER
     (5) nums_with_cln -> . nums_with_cln , NUMBER
 
-    VAR             shift and go to state 37
-    NUMBER          shift and go to state 38
+    VAR             shift and go to state 38
+    NUMBER          shift and go to state 36
 
-    vars_with_cln                  shift and go to state 36
-    nums_with_cln                  shift and go to state 39
+    nums_with_cln                  shift and go to state 35
+    vars_with_cln                  shift and go to state 37
+
+state 24
+
+    (12) term -> BUILD_IN_FUNC ( . term )
+    (8) term -> . FUNC_VAR ( NUMBER )
+    (9) term -> . FUNC_VAR ( nums_with_cln )
+    (10) term -> . d / d VAR ( term )
+    (11) term -> . S ( term d VAR )
+    (12) term -> . BUILD_IN_FUNC ( term )
+    (13) term -> . CONSTANTS
+    (15) term -> . term + term
+    (16) term -> . term - term
+    (17) term -> . term * term
+    (18) term -> . term / term
+    (19) term -> . term ^ term
+    (20) term -> . - term
+    (21) term -> . ( term )
+    (22) term -> . NUMBER
+    (23) term -> . VAR
+    (24) term -> . term VAR
+
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
+    S               shift and go to state 9
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
+    NUMBER          shift and go to state 8
+    VAR             shift and go to state 15
+
+    term                           shift and go to state 39
 
 state 25
 
@@ -588,21 +576,40 @@ state 25
     (23) term -> . VAR
     (24) term -> . term VAR
 
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
     S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
     NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
+    VAR             shift and go to state 15
 
     term                           shift and go to state 40
 
 state 26
 
-    (12) term -> BUILD_IN_FUNC ( . term )
+    (21) term -> ( term . )
+    (15) term -> term . + term
+    (16) term -> term . - term
+    (17) term -> term . * term
+    (18) term -> term . / term
+    (19) term -> term . ^ term
+    (24) term -> term . VAR
+
+    )               shift and go to state 41
+    +               shift and go to state 18
+    -               shift and go to state 16
+    *               shift and go to state 21
+    /               shift and go to state 20
+    ^               shift and go to state 17
+    VAR             shift and go to state 19
+
+
+state 27
+
+    (1) statement -> VAR = . term
     (8) term -> . FUNC_VAR ( NUMBER )
     (9) term -> . FUNC_VAR ( nums_with_cln )
     (10) term -> . d / d VAR ( term )
@@ -620,99 +627,30 @@ state 26
     (23) term -> . VAR
     (24) term -> . term VAR
 
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
     S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
     NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
+    VAR             shift and go to state 15
 
-    term                           shift and go to state 41
-
-state 27
-
-    (10) term -> d / . d VAR ( term )
-
-    d               shift and go to state 42
-
+    term                           shift and go to state 42
 
 state 28
-
-    (1) statement -> VAR = term .
-    (15) term -> term . + term
-    (16) term -> term . - term
-    (17) term -> term . * term
-    (18) term -> term . / term
-    (19) term -> term . ^ term
-    (24) term -> term . VAR
-
-    $end            reduce using rule 1 (statement -> VAR = term .)
-    +               shift and go to state 20
-    -               shift and go to state 19
-    *               shift and go to state 18
-    /               shift and go to state 21
-    ^               shift and go to state 22
-    VAR             shift and go to state 17
-
-
-state 29
-
-    (21) term -> ( term ) .
-
-    +               reduce using rule 21 (term -> ( term ) .)
-    -               reduce using rule 21 (term -> ( term ) .)
-    *               reduce using rule 21 (term -> ( term ) .)
-    /               reduce using rule 21 (term -> ( term ) .)
-    ^               reduce using rule 21 (term -> ( term ) .)
-    VAR             reduce using rule 21 (term -> ( term ) .)
-    $end            reduce using rule 21 (term -> ( term ) .)
-    )               reduce using rule 21 (term -> ( term ) .)
-    d               reduce using rule 21 (term -> ( term ) .)
-
-
-state 30
 
     (8) term -> FUNC_VAR ( . NUMBER )
     (9) term -> FUNC_VAR ( . nums_with_cln )
     (4) nums_with_cln -> . NUMBER , NUMBER
     (5) nums_with_cln -> . nums_with_cln , NUMBER
 
-    NUMBER          shift and go to state 38
+    NUMBER          shift and go to state 36
 
-    nums_with_cln                  shift and go to state 39
+    nums_with_cln                  shift and go to state 35
 
-state 31
-
-    (17) term -> term * term .
-    (15) term -> term . + term
-    (16) term -> term . - term
-    (17) term -> term . * term
-    (18) term -> term . / term
-    (19) term -> term . ^ term
-    (24) term -> term . VAR
-
-    +               reduce using rule 17 (term -> term * term .)
-    -               reduce using rule 17 (term -> term * term .)
-    *               reduce using rule 17 (term -> term * term .)
-    /               reduce using rule 17 (term -> term * term .)
-    ^               reduce using rule 17 (term -> term * term .)
-    VAR             reduce using rule 17 (term -> term * term .)
-    $end            reduce using rule 17 (term -> term * term .)
-    )               reduce using rule 17 (term -> term * term .)
-    d               reduce using rule 17 (term -> term * term .)
-
-  ! +               [ shift and go to state 20 ]
-  ! -               [ shift and go to state 19 ]
-  ! *               [ shift and go to state 18 ]
-  ! /               [ shift and go to state 21 ]
-  ! ^               [ shift and go to state 22 ]
-  ! VAR             [ shift and go to state 17 ]
-
-
-state 32
+state 29
 
     (16) term -> term - term .
     (15) term -> term . + term
@@ -729,18 +667,52 @@ state 32
     $end            reduce using rule 16 (term -> term - term .)
     )               reduce using rule 16 (term -> term - term .)
     d               reduce using rule 16 (term -> term - term .)
-    *               shift and go to state 18
-    /               shift and go to state 21
+    *               shift and go to state 21
+    /               shift and go to state 20
 
   ! *               [ reduce using rule 16 (term -> term - term .) ]
   ! /               [ reduce using rule 16 (term -> term - term .) ]
-  ! +               [ shift and go to state 20 ]
-  ! -               [ shift and go to state 19 ]
-  ! ^               [ shift and go to state 22 ]
-  ! VAR             [ shift and go to state 17 ]
+  ! +               [ shift and go to state 18 ]
+  ! -               [ shift and go to state 16 ]
+  ! ^               [ shift and go to state 17 ]
+  ! VAR             [ shift and go to state 19 ]
 
 
-state 33
+state 30
+
+    (19) term -> term ^ term .
+    (15) term -> term . + term
+    (16) term -> term . - term
+    (17) term -> term . * term
+    (18) term -> term . / term
+    (19) term -> term . ^ term
+    (24) term -> term . VAR
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for ^ resolved as shift
+  ! shift/reduce conflict for VAR resolved as shift
+    $end            reduce using rule 19 (term -> term ^ term .)
+    )               reduce using rule 19 (term -> term ^ term .)
+    d               reduce using rule 19 (term -> term ^ term .)
+    +               shift and go to state 18
+    -               shift and go to state 16
+    *               shift and go to state 21
+    /               shift and go to state 20
+    ^               shift and go to state 17
+    VAR             shift and go to state 19
+
+  ! +               [ reduce using rule 19 (term -> term ^ term .) ]
+  ! -               [ reduce using rule 19 (term -> term ^ term .) ]
+  ! *               [ reduce using rule 19 (term -> term ^ term .) ]
+  ! /               [ reduce using rule 19 (term -> term ^ term .) ]
+  ! ^               [ reduce using rule 19 (term -> term ^ term .) ]
+  ! VAR             [ reduce using rule 19 (term -> term ^ term .) ]
+
+
+state 31
 
     (15) term -> term + term .
     (15) term -> term . + term
@@ -757,18 +729,18 @@ state 33
     $end            reduce using rule 15 (term -> term + term .)
     )               reduce using rule 15 (term -> term + term .)
     d               reduce using rule 15 (term -> term + term .)
-    *               shift and go to state 18
-    /               shift and go to state 21
+    *               shift and go to state 21
+    /               shift and go to state 20
 
   ! *               [ reduce using rule 15 (term -> term + term .) ]
   ! /               [ reduce using rule 15 (term -> term + term .) ]
-  ! +               [ shift and go to state 20 ]
-  ! -               [ shift and go to state 19 ]
-  ! ^               [ shift and go to state 22 ]
-  ! VAR             [ shift and go to state 17 ]
+  ! +               [ shift and go to state 18 ]
+  ! -               [ shift and go to state 16 ]
+  ! ^               [ shift and go to state 17 ]
+  ! VAR             [ shift and go to state 19 ]
 
 
-state 34
+state 32
 
     (18) term -> term / term .
     (15) term -> term . + term
@@ -788,17 +760,17 @@ state 34
     )               reduce using rule 18 (term -> term / term .)
     d               reduce using rule 18 (term -> term / term .)
 
-  ! +               [ shift and go to state 20 ]
-  ! -               [ shift and go to state 19 ]
-  ! *               [ shift and go to state 18 ]
-  ! /               [ shift and go to state 21 ]
-  ! ^               [ shift and go to state 22 ]
-  ! VAR             [ shift and go to state 17 ]
+  ! +               [ shift and go to state 18 ]
+  ! -               [ shift and go to state 16 ]
+  ! *               [ shift and go to state 21 ]
+  ! /               [ shift and go to state 20 ]
+  ! ^               [ shift and go to state 17 ]
+  ! VAR             [ shift and go to state 19 ]
 
 
-state 35
+state 33
 
-    (19) term -> term ^ term .
+    (17) term -> term * term .
     (15) term -> term . + term
     (16) term -> term . - term
     (17) term -> term . * term
@@ -806,64 +778,84 @@ state 35
     (19) term -> term . ^ term
     (24) term -> term . VAR
 
-  ! shift/reduce conflict for + resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-  ! shift/reduce conflict for ^ resolved as shift
-  ! shift/reduce conflict for VAR resolved as shift
-    $end            reduce using rule 19 (term -> term ^ term .)
-    )               reduce using rule 19 (term -> term ^ term .)
-    d               reduce using rule 19 (term -> term ^ term .)
-    +               shift and go to state 20
-    -               shift and go to state 19
-    *               shift and go to state 18
-    /               shift and go to state 21
-    ^               shift and go to state 22
-    VAR             shift and go to state 17
+    +               reduce using rule 17 (term -> term * term .)
+    -               reduce using rule 17 (term -> term * term .)
+    *               reduce using rule 17 (term -> term * term .)
+    /               reduce using rule 17 (term -> term * term .)
+    ^               reduce using rule 17 (term -> term * term .)
+    VAR             reduce using rule 17 (term -> term * term .)
+    $end            reduce using rule 17 (term -> term * term .)
+    )               reduce using rule 17 (term -> term * term .)
+    d               reduce using rule 17 (term -> term * term .)
 
-  ! +               [ reduce using rule 19 (term -> term ^ term .) ]
-  ! -               [ reduce using rule 19 (term -> term ^ term .) ]
-  ! *               [ reduce using rule 19 (term -> term ^ term .) ]
-  ! /               [ reduce using rule 19 (term -> term ^ term .) ]
-  ! ^               [ reduce using rule 19 (term -> term ^ term .) ]
-  ! VAR             [ reduce using rule 19 (term -> term ^ term .) ]
+  ! +               [ shift and go to state 18 ]
+  ! -               [ shift and go to state 16 ]
+  ! *               [ shift and go to state 21 ]
+  ! /               [ shift and go to state 20 ]
+  ! ^               [ shift and go to state 17 ]
+  ! VAR             [ shift and go to state 19 ]
 
 
-state 36
+state 34
 
-    (7) statement -> FUNC_VAR ( vars_with_cln . ) = term
-    (3) vars_with_cln -> vars_with_cln . , VAR
+    (10) term -> d / d . VAR ( term )
 
-    )               shift and go to state 43
+    VAR             shift and go to state 43
+
+
+state 35
+
+    (9) term -> FUNC_VAR ( nums_with_cln . )
+    (5) nums_with_cln -> nums_with_cln . , NUMBER
+
+    )               shift and go to state 45
     ,               shift and go to state 44
 
 
-state 37
-
-    (6) statement -> FUNC_VAR ( VAR . ) = term
-    (2) vars_with_cln -> VAR . , VAR
-
-    )               shift and go to state 45
-    ,               shift and go to state 46
-
-
-state 38
+state 36
 
     (8) term -> FUNC_VAR ( NUMBER . )
     (4) nums_with_cln -> NUMBER . , NUMBER
 
     )               shift and go to state 47
+    ,               shift and go to state 46
+
+
+state 37
+
+    (7) statement -> FUNC_VAR ( vars_with_cln . ) = term
+    (3) vars_with_cln -> vars_with_cln . , VAR
+
+    )               shift and go to state 49
     ,               shift and go to state 48
+
+
+state 38
+
+    (6) statement -> FUNC_VAR ( VAR . ) = term
+    (2) vars_with_cln -> VAR . , VAR
+
+    )               shift and go to state 51
+    ,               shift and go to state 50
 
 
 state 39
 
-    (9) term -> FUNC_VAR ( nums_with_cln . )
-    (5) nums_with_cln -> nums_with_cln . , NUMBER
+    (12) term -> BUILD_IN_FUNC ( term . )
+    (15) term -> term . + term
+    (16) term -> term . - term
+    (17) term -> term . * term
+    (18) term -> term . / term
+    (19) term -> term . ^ term
+    (24) term -> term . VAR
 
-    )               shift and go to state 49
-    ,               shift and go to state 50
+    )               shift and go to state 52
+    +               shift and go to state 18
+    -               shift and go to state 16
+    *               shift and go to state 21
+    /               shift and go to state 20
+    ^               shift and go to state 17
+    VAR             shift and go to state 19
 
 
 state 40
@@ -876,18 +868,33 @@ state 40
     (19) term -> term . ^ term
     (24) term -> term . VAR
 
-    d               shift and go to state 51
-    +               shift and go to state 20
-    -               shift and go to state 19
-    *               shift and go to state 18
-    /               shift and go to state 21
-    ^               shift and go to state 22
-    VAR             shift and go to state 17
+    d               shift and go to state 53
+    +               shift and go to state 18
+    -               shift and go to state 16
+    *               shift and go to state 21
+    /               shift and go to state 20
+    ^               shift and go to state 17
+    VAR             shift and go to state 19
 
 
 state 41
 
-    (12) term -> BUILD_IN_FUNC ( term . )
+    (21) term -> ( term ) .
+
+    +               reduce using rule 21 (term -> ( term ) .)
+    -               reduce using rule 21 (term -> ( term ) .)
+    *               reduce using rule 21 (term -> ( term ) .)
+    /               reduce using rule 21 (term -> ( term ) .)
+    ^               reduce using rule 21 (term -> ( term ) .)
+    VAR             reduce using rule 21 (term -> ( term ) .)
+    $end            reduce using rule 21 (term -> ( term ) .)
+    )               reduce using rule 21 (term -> ( term ) .)
+    d               reduce using rule 21 (term -> ( term ) .)
+
+
+state 42
+
+    (1) statement -> VAR = term .
     (15) term -> term . + term
     (16) term -> term . - term
     (17) term -> term . * term
@@ -895,48 +902,49 @@ state 41
     (19) term -> term . ^ term
     (24) term -> term . VAR
 
-    )               shift and go to state 52
-    +               shift and go to state 20
-    -               shift and go to state 19
-    *               shift and go to state 18
-    /               shift and go to state 21
-    ^               shift and go to state 22
-    VAR             shift and go to state 17
-
-
-state 42
-
-    (10) term -> d / d . VAR ( term )
-
-    VAR             shift and go to state 53
+    $end            reduce using rule 1 (statement -> VAR = term .)
+    +               shift and go to state 18
+    -               shift and go to state 16
+    *               shift and go to state 21
+    /               shift and go to state 20
+    ^               shift and go to state 17
+    VAR             shift and go to state 19
 
 
 state 43
 
-    (7) statement -> FUNC_VAR ( vars_with_cln ) . = term
+    (10) term -> d / d VAR . ( term )
 
-    =               shift and go to state 54
+    (               shift and go to state 54
 
 
 state 44
 
-    (3) vars_with_cln -> vars_with_cln , . VAR
+    (5) nums_with_cln -> nums_with_cln , . NUMBER
 
-    VAR             shift and go to state 55
+    NUMBER          shift and go to state 55
 
 
 state 45
 
-    (6) statement -> FUNC_VAR ( VAR ) . = term
+    (9) term -> FUNC_VAR ( nums_with_cln ) .
 
-    =               shift and go to state 56
+    +               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
+    -               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
+    *               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
+    /               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
+    ^               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
+    VAR             reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
+    $end            reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
+    )               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
+    d               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
 
 
 state 46
 
-    (2) vars_with_cln -> VAR , . VAR
+    (4) nums_with_cln -> NUMBER , . NUMBER
 
-    VAR             shift and go to state 57
+    NUMBER          shift and go to state 56
 
 
 state 47
@@ -956,38 +964,30 @@ state 47
 
 state 48
 
-    (4) nums_with_cln -> NUMBER , . NUMBER
+    (3) vars_with_cln -> vars_with_cln , . VAR
 
-    NUMBER          shift and go to state 58
+    VAR             shift and go to state 57
 
 
 state 49
 
-    (9) term -> FUNC_VAR ( nums_with_cln ) .
+    (7) statement -> FUNC_VAR ( vars_with_cln ) . = term
 
-    +               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
-    -               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
-    *               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
-    /               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
-    ^               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
-    VAR             reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
-    $end            reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
-    )               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
-    d               reduce using rule 9 (term -> FUNC_VAR ( nums_with_cln ) .)
+    =               shift and go to state 58
 
 
 state 50
 
-    (5) nums_with_cln -> nums_with_cln , . NUMBER
+    (2) vars_with_cln -> VAR , . VAR
 
-    NUMBER          shift and go to state 59
+    VAR             shift and go to state 59
 
 
 state 51
 
-    (11) term -> S ( term d . VAR )
+    (6) statement -> FUNC_VAR ( VAR ) . = term
 
-    VAR             shift and go to state 60
+    =               shift and go to state 60
 
 
 state 52
@@ -1007,115 +1007,12 @@ state 52
 
 state 53
 
-    (10) term -> d / d VAR . ( term )
+    (11) term -> S ( term d . VAR )
 
-    (               shift and go to state 61
+    VAR             shift and go to state 61
 
 
 state 54
-
-    (7) statement -> FUNC_VAR ( vars_with_cln ) = . term
-    (8) term -> . FUNC_VAR ( NUMBER )
-    (9) term -> . FUNC_VAR ( nums_with_cln )
-    (10) term -> . d / d VAR ( term )
-    (11) term -> . S ( term d VAR )
-    (12) term -> . BUILD_IN_FUNC ( term )
-    (13) term -> . CONSTANTS
-    (15) term -> . term + term
-    (16) term -> . term - term
-    (17) term -> . term * term
-    (18) term -> . term / term
-    (19) term -> . term ^ term
-    (20) term -> . - term
-    (21) term -> . ( term )
-    (22) term -> . NUMBER
-    (23) term -> . VAR
-    (24) term -> . term VAR
-
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
-    S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
-    NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
-
-    term                           shift and go to state 62
-
-state 55
-
-    (3) vars_with_cln -> vars_with_cln , VAR .
-
-    )               reduce using rule 3 (vars_with_cln -> vars_with_cln , VAR .)
-    ,               reduce using rule 3 (vars_with_cln -> vars_with_cln , VAR .)
-
-
-state 56
-
-    (6) statement -> FUNC_VAR ( VAR ) = . term
-    (8) term -> . FUNC_VAR ( NUMBER )
-    (9) term -> . FUNC_VAR ( nums_with_cln )
-    (10) term -> . d / d VAR ( term )
-    (11) term -> . S ( term d VAR )
-    (12) term -> . BUILD_IN_FUNC ( term )
-    (13) term -> . CONSTANTS
-    (15) term -> . term + term
-    (16) term -> . term - term
-    (17) term -> . term * term
-    (18) term -> . term / term
-    (19) term -> . term ^ term
-    (20) term -> . - term
-    (21) term -> . ( term )
-    (22) term -> . NUMBER
-    (23) term -> . VAR
-    (24) term -> . term VAR
-
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
-    S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
-    NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
-
-    term                           shift and go to state 63
-
-state 57
-
-    (2) vars_with_cln -> VAR , VAR .
-
-    )               reduce using rule 2 (vars_with_cln -> VAR , VAR .)
-    ,               reduce using rule 2 (vars_with_cln -> VAR , VAR .)
-
-
-state 58
-
-    (4) nums_with_cln -> NUMBER , NUMBER .
-
-    )               reduce using rule 4 (nums_with_cln -> NUMBER , NUMBER .)
-    ,               reduce using rule 4 (nums_with_cln -> NUMBER , NUMBER .)
-
-
-state 59
-
-    (5) nums_with_cln -> nums_with_cln , NUMBER .
-
-    )               reduce using rule 5 (nums_with_cln -> nums_with_cln , NUMBER .)
-    ,               reduce using rule 5 (nums_with_cln -> nums_with_cln , NUMBER .)
-
-
-state 60
-
-    (11) term -> S ( term d VAR . )
-
-    )               shift and go to state 64
-
-
-state 61
 
     (10) term -> d / d VAR ( . term )
     (8) term -> . FUNC_VAR ( NUMBER )
@@ -1135,19 +1032,141 @@ state 61
     (23) term -> . VAR
     (24) term -> . term VAR
 
-    FUNC_VAR        shift and go to state 16
-    d               shift and go to state 11
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
     S               shift and go to state 9
-    BUILD_IN_FUNC   shift and go to state 10
-    CONSTANTS       shift and go to state 6
-    -               shift and go to state 5
-    (               shift and go to state 3
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
     NUMBER          shift and go to state 8
-    VAR             shift and go to state 14
+    VAR             shift and go to state 15
 
-    term                           shift and go to state 65
+    term                           shift and go to state 62
+
+state 55
+
+    (5) nums_with_cln -> nums_with_cln , NUMBER .
+
+    )               reduce using rule 5 (nums_with_cln -> nums_with_cln , NUMBER .)
+    ,               reduce using rule 5 (nums_with_cln -> nums_with_cln , NUMBER .)
+
+
+state 56
+
+    (4) nums_with_cln -> NUMBER , NUMBER .
+
+    )               reduce using rule 4 (nums_with_cln -> NUMBER , NUMBER .)
+    ,               reduce using rule 4 (nums_with_cln -> NUMBER , NUMBER .)
+
+
+state 57
+
+    (3) vars_with_cln -> vars_with_cln , VAR .
+
+    )               reduce using rule 3 (vars_with_cln -> vars_with_cln , VAR .)
+    ,               reduce using rule 3 (vars_with_cln -> vars_with_cln , VAR .)
+
+
+state 58
+
+    (7) statement -> FUNC_VAR ( vars_with_cln ) = . term
+    (8) term -> . FUNC_VAR ( NUMBER )
+    (9) term -> . FUNC_VAR ( nums_with_cln )
+    (10) term -> . d / d VAR ( term )
+    (11) term -> . S ( term d VAR )
+    (12) term -> . BUILD_IN_FUNC ( term )
+    (13) term -> . CONSTANTS
+    (15) term -> . term + term
+    (16) term -> . term - term
+    (17) term -> . term * term
+    (18) term -> . term / term
+    (19) term -> . term ^ term
+    (20) term -> . - term
+    (21) term -> . ( term )
+    (22) term -> . NUMBER
+    (23) term -> . VAR
+    (24) term -> . term VAR
+
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
+    S               shift and go to state 9
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
+    NUMBER          shift and go to state 8
+    VAR             shift and go to state 15
+
+    term                           shift and go to state 63
+
+state 59
+
+    (2) vars_with_cln -> VAR , VAR .
+
+    )               reduce using rule 2 (vars_with_cln -> VAR , VAR .)
+    ,               reduce using rule 2 (vars_with_cln -> VAR , VAR .)
+
+
+state 60
+
+    (6) statement -> FUNC_VAR ( VAR ) = . term
+    (8) term -> . FUNC_VAR ( NUMBER )
+    (9) term -> . FUNC_VAR ( nums_with_cln )
+    (10) term -> . d / d VAR ( term )
+    (11) term -> . S ( term d VAR )
+    (12) term -> . BUILD_IN_FUNC ( term )
+    (13) term -> . CONSTANTS
+    (15) term -> . term + term
+    (16) term -> . term - term
+    (17) term -> . term * term
+    (18) term -> . term / term
+    (19) term -> . term ^ term
+    (20) term -> . - term
+    (21) term -> . ( term )
+    (22) term -> . NUMBER
+    (23) term -> . VAR
+    (24) term -> . term VAR
+
+    FUNC_VAR        shift and go to state 14
+    d               shift and go to state 4
+    S               shift and go to state 9
+    BUILD_IN_FUNC   shift and go to state 7
+    CONSTANTS       shift and go to state 11
+    -               shift and go to state 1
+    (               shift and go to state 10
+    NUMBER          shift and go to state 8
+    VAR             shift and go to state 15
+
+    term                           shift and go to state 64
+
+state 61
+
+    (11) term -> S ( term d VAR . )
+
+    )               shift and go to state 65
+
 
 state 62
+
+    (10) term -> d / d VAR ( term . )
+    (15) term -> term . + term
+    (16) term -> term . - term
+    (17) term -> term . * term
+    (18) term -> term . / term
+    (19) term -> term . ^ term
+    (24) term -> term . VAR
+
+    )               shift and go to state 66
+    +               shift and go to state 18
+    -               shift and go to state 16
+    *               shift and go to state 21
+    /               shift and go to state 20
+    ^               shift and go to state 17
+    VAR             shift and go to state 19
+
+
+state 63
 
     (7) statement -> FUNC_VAR ( vars_with_cln ) = term .
     (15) term -> term . + term
@@ -1158,15 +1177,15 @@ state 62
     (24) term -> term . VAR
 
     $end            reduce using rule 7 (statement -> FUNC_VAR ( vars_with_cln ) = term .)
-    +               shift and go to state 20
-    -               shift and go to state 19
-    *               shift and go to state 18
-    /               shift and go to state 21
-    ^               shift and go to state 22
-    VAR             shift and go to state 17
+    +               shift and go to state 18
+    -               shift and go to state 16
+    *               shift and go to state 21
+    /               shift and go to state 20
+    ^               shift and go to state 17
+    VAR             shift and go to state 19
 
 
-state 63
+state 64
 
     (6) statement -> FUNC_VAR ( VAR ) = term .
     (15) term -> term . + term
@@ -1177,15 +1196,15 @@ state 63
     (24) term -> term . VAR
 
     $end            reduce using rule 6 (statement -> FUNC_VAR ( VAR ) = term .)
-    +               shift and go to state 20
-    -               shift and go to state 19
-    *               shift and go to state 18
-    /               shift and go to state 21
-    ^               shift and go to state 22
-    VAR             shift and go to state 17
+    +               shift and go to state 18
+    -               shift and go to state 16
+    *               shift and go to state 21
+    /               shift and go to state 20
+    ^               shift and go to state 17
+    VAR             shift and go to state 19
 
 
-state 64
+state 65
 
     (11) term -> S ( term d VAR ) .
 
@@ -1198,25 +1217,6 @@ state 64
     $end            reduce using rule 11 (term -> S ( term d VAR ) .)
     )               reduce using rule 11 (term -> S ( term d VAR ) .)
     d               reduce using rule 11 (term -> S ( term d VAR ) .)
-
-
-state 65
-
-    (10) term -> d / d VAR ( term . )
-    (15) term -> term . + term
-    (16) term -> term . - term
-    (17) term -> term . * term
-    (18) term -> term . / term
-    (19) term -> term . ^ term
-    (24) term -> term . VAR
-
-    )               shift and go to state 66
-    +               shift and go to state 20
-    -               shift and go to state 19
-    *               shift and go to state 18
-    /               shift and go to state 21
-    ^               shift and go to state 22
-    VAR             shift and go to state 17
 
 
 state 66
@@ -1236,9 +1236,9 @@ state 66
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for + in state 35 resolved as shift
-WARNING: shift/reduce conflict for - in state 35 resolved as shift
-WARNING: shift/reduce conflict for * in state 35 resolved as shift
-WARNING: shift/reduce conflict for / in state 35 resolved as shift
-WARNING: shift/reduce conflict for ^ in state 35 resolved as shift
-WARNING: shift/reduce conflict for VAR in state 35 resolved as shift
+WARNING: shift/reduce conflict for + in state 30 resolved as shift
+WARNING: shift/reduce conflict for - in state 30 resolved as shift
+WARNING: shift/reduce conflict for * in state 30 resolved as shift
+WARNING: shift/reduce conflict for / in state 30 resolved as shift
+WARNING: shift/reduce conflict for ^ in state 30 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 30 resolved as shift
