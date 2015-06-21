@@ -1,1 +1,4 @@
 __pycache__
+dist
+lib/hilbert/*.pyc
+lib/hilbert.egg-info/
