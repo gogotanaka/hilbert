@@ -38,7 +38,7 @@ def p_statement_expr(p):
 
     output = output.replace("E", "e")
     output = re.sub(r"exp\((.+)\)", r"e^\1", output)
-    print(output)
+    print(str(output))
 
 def p_statement_def_func(p):
     '''statement : FUNC_VAR "(" VAR ")" "=" term

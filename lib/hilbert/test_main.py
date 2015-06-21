@@ -1,18 +1,18 @@
 import unittest
 import h_parser
-import io
+from io import BytesIO as StringIO
 import sys
 
 def hAssertEqual(test_obj, output, input):
     h_parser.parser.parse(input)
     test_obj.assertEqual(sys.stdout.getvalue().replace("\n", ""), output)
     sys.stdout = sys.__stdout__
-    sys.stdout = io.StringIO()
+    sys.stdout = StringIO()
 
 
 class TestMainMethods(unittest.TestCase):
     def setUp(self):
-        sys.stdout = io.StringIO()
+        sys.stdout = StringIO()
 
     def test_basis(self):
         hAssertEqual(self, 'a', 'a')
