@@ -33,7 +33,7 @@ class TestMainMethods(unittest.TestCase):
         hAssertEqual(self, '-1', 'a-b')
         hAssertEqual(self, '6', 'a*b')
         hAssertEqual(self, '6', 'ab')
-        hAssertEqual(self, '0.6666666666666666', 'a/b')
+        hAssertEqual(self, '0.66666667', 'a/b')
 
         h_parser.parser.parse('c=23')
         h_parser.parser.parse('i=34')
@@ -74,7 +74,8 @@ class TestMainMethods(unittest.TestCase):
 
     def test_constants(self):
         hAssertEqual(self, 'e', 'e')
-        hAssertEqual(self, '3.141592653589793', 'pi')
+        hAssertEqual(self, 'pi', 'pi')
+        hAssertEqual(self, '0', 'sin(pi)')
         hAssertEqual(self, 'oo', 'oo')
         hAssertEqual(self, 'e^3', 'e^3')
         hAssertEqual(self, 'e^x', 'e^x')

@@ -1,7 +1,6 @@
 from h_lexer import *
 import re
-from sympy import Symbol, diff, integrate, oo, exp, limit
-from math import pi
+from sympy import Symbol, diff, integrate, oo, exp, limit, core, pi
 
 precedence = (
     ('left','+','-'),
@@ -24,7 +23,16 @@ def p_statement_assign(p):
 
 def p_statement_expr(p):
     'statement : expression'
-    output = str(p[1]).replace("**", "^")
+    output = p[1]
+
+    if isinstance(output, (int, float, complex)):
+        if (int(output) == output):
+            output = int(output)
+        else:
+            output = round(float(output), 8)
+
+
+    output = str(output).replace("**", "^")
     if ("*" in output):
         output = "".join([("(%s)" % x if (len(x) > 1) else x) for x in output.split("*")])
 
