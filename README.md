@@ -117,10 +117,12 @@ Install the `hilbert` gem.
 Note to OS X Users: If the above `gem` command does not work with the stock version of Ruby (due to not being able to build a target indicated in the Makefile), then you will need to install a version of Ruby that includes the appropriate header files. Using [homebrew](http://brew.sh/) (`brew install ruby`) will suffice. -->
 
 ## Develop
+#### Run test
+    pip install ply sympy
+    python lib/hilbert/test_main.py
 
-    cd src
-    pip3 install ply sympy
-    python3 test_main.py
+#### Try
+    ./bin/hilbert
 
 Any PRs or issues are welcome. (Please make them to [the `develop` branch](https://github.com/gogotanaka/Hilbert/tree/develop).)
 
