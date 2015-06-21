@@ -41,7 +41,7 @@ class TestMainMethods(unittest.TestCase):
         hAssertEqual(self, '1564', 'cij')
 
         hAssertEqual(self, '2x', '2x')
-        #h_eval('(x^6)(y^3)(z^2)', 'xxxxyyyxxzz', self)
+        hAssertEqual(self, '(x^6)(y^3)(z^2)', 'xxxxyyyxxzz')
         # hAssertEqual(self, )
         # hAssertEqual(self, )
 
@@ -61,10 +61,16 @@ class TestMainMethods(unittest.TestCase):
         hAssertEqual(self, '0', 'd/dy(x * x)')
         hAssertEqual(self, '2xy', 'd/dx(xxy)')
 
+        h_parser.parser.parse('f(x)=xxxxxxx')
+        hAssertEqual(self, '7(x^6)', 'df/dx')
+
     def test_intg(self):
         hAssertEqual(self, 'x^2/2', 'S(x dx)')
         hAssertEqual(self, 'sin(x)', 'S(cos(x) dx)')
         hAssertEqual(self, 'cos(x)', 'd/dx(S(cos(x) dx))')
+
+        h_parser.parser.parse('f(x)=xxxxxxx')
+        hAssertEqual(self, 'x^8/8', 'S(f dx)')
 
     def test_buildin_func(self):
         hAssertEqual(self, 'cos(x)', 'cos(x)')

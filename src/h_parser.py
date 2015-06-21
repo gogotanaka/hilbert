@@ -71,9 +71,17 @@ def p_expression_diff_func(p):
     'term : "d" "/" "d" VAR "(" term ")"'
     p[0] = diff(p[6], Symbol(p[4]))
 
+def p_expression_diff_direct_func(p):
+    'term : "d" FUNC_VAR "/" "d" VAR'
+    p[0] = diff(funcs[p[2]]['expr'], Symbol(p[5]))
+
 def p_expression_inte_func(p):
     'term : "S" "(" term "d" VAR ")"'
     p[0] = integrate(p[3], Symbol(p[5]))
+
+def p_expression_inte_direct_func(p):
+    'term : "S" "(" FUNC_VAR "d" VAR ")"'
+    p[0] = integrate(funcs[p[3]]['expr'], Symbol(p[5]))
 
 def p_expression_build_in_func(p):
     'term : BUILD_IN_FUNC "(" term ")"'

@@ -29,11 +29,22 @@ Hilbert lets you have a sense of mathematics using a keyboard, the same as you w
 
 ## Demo
 
-The code below is input and output for the Hilbert interpreter. (You can try it with typing `hilbert`.)
-
 ```
 xxxxyyyxxzz
 => (x^6)(y^3)(z^2)
+
+f(x)=xxxxxxxx
+f(2)
+=> 256
+
+df/dx
+=>8(x^7)
+
+S(f dx)
+=>x^8/8
+
+lim[x->0](1/x)
+=> oo
 ```
 
 ### Differentiate
@@ -59,17 +70,14 @@ S(sin(x)dx)
 => -cos(x)
 ```
 
-<!-- ### Limit
+### Limit
 
 ```
-lim[x->oo] (1 + 1/x)^x
-=> 2.7182682371744895
-
-lim[x->0] 1/x
+lim[x->0](1/x)
 => oo
 ```
 
-### Sigma
+<!-- ### Sigma
 ```
 ∑[x=0,10] x
 => 55.0
