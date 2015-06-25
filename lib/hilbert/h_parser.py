@@ -1,5 +1,6 @@
 from h_lexer import *
 import re
+import h_env
 from sympy import Symbol, diff, integrate, oo, exp, limit, core, pi
 
 precedence = (
@@ -8,21 +9,11 @@ precedence = (
     ('right','UMINUS'),
     )
 
-vars_table = {}
-funcs_table = {}
-
-def lookupVars(var):
-    try:
-        return vars_table[var]
-    except LookupError:
-        return Symbol(var)
-
 def wrapTerm(term_or_terms):
     if type(term_or_terms) is list:
         return term_or_terms
     else:
         return [term_or_terms]
-
 
 def p_statement_expr(p):
     'statement : expression'
@@ -45,16 +36,16 @@ def p_statement_expr(p):
 
 def p_statement_assign(p):
     'statement : VAR "=" term'
-    vars_table[p[1]] = p[3]
+    h_env.setVar(p[1], p[3])
 
 def p_statement_def_func(p):
     '''statement : FUNC_VAR "(" VAR ")" "=" term
                  | FUNC_VAR "(" vars_with_cln ")" "=" term'''
 
     if type(p[3]) is list:
-        funcs_table[p[1]] = { 'expr': p[6], 'vars': p[3] }
+        h_env.setFunc(p[1], { 'expr': p[6], 'vars': p[3] })
     else:
-        funcs_table[p[1]] = { 'expr': p[6], 'vars': [Symbol(p[3])] }
+        h_env.setFunc(p[1], { 'expr': p[6], 'vars': [Symbol(p[3])] })
 
 def p_expression_term(p):
     "expression : term"
@@ -62,13 +53,13 @@ def p_expression_term(p):
 
 def p_expression_func(p):
     "expression : FUNC_VAR"
-    p[0] = funcs_table[p[1]]
+    p[0] = h_env.getFunc(p[1])
 
 def p_term_eval_func(p):
     '''term : FUNC_VAR "(" NUMBER ")"
             | FUNC_VAR "(" nums_with_cln ")"'''
 
-    func = funcs_table[p[1]]
+    func = h_env.getFunc(p[1])
     p[0] = func['expr'].subs(zip(func['vars'], wrapTerm(p[3])))
 
 def p_term_diff_func(p):
@@ -77,7 +68,7 @@ def p_term_diff_func(p):
 
 def p_term_diff_direct_func(p):
     'term : "d" FUNC_VAR "/" "d" VAR'
-    p[0] = diff(funcs_table[p[2]]['expr'], Symbol(p[5]))
+    p[0] = diff(h_env.getFunc(p[2])['expr'], Symbol(p[5]))
 
 def p_term_inte_func(p):
     'term : "S" "(" term "d" VAR ")"'
@@ -85,7 +76,7 @@ def p_term_inte_func(p):
 
 def p_term_inte_direct_func(p):
     'term : "S" "(" FUNC_VAR "d" VAR ")"'
-    p[0] = integrate(funcs_table[p[3]]['expr'], Symbol(p[5]))
+    p[0] = integrate(h_env.getFunc(p[3])['expr'], Symbol(p[5]))
 
 def p_term_build_in_func(p):
     'term : BUILD_IN_FUNC "(" term ")"'
@@ -121,11 +112,11 @@ def p_term_number(p):
 
 def p_term_var(p):
     "term : VAR"
-    p[0] = lookupVars(p[1])
+    p[0] = h_env.getVar(p[1])
 
 def p_term_var_multi(p):
     "term : term VAR"
-    p[0] = p[1] * lookupVars(p[2])
+    p[0] = p[1] * h_env.getVar(p[2])
 
 def p_term_limit(p):
     "term : LIMIT_SYM '[' term R_ARROW term ']' '(' term ')'"
