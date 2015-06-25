@@ -47,6 +47,20 @@ lim[x->0](1/x)
 => oo
 ```
 
+### Basic algebra
+```
+f(x,y)=xy
+f(3,2)
+#=> 6
+
+f(s,t)
+#=> st
+
+g(s)=f(s,2)
+g(u)
+#=> 2u
+```
+
 ### Differentiate
 
 ```
