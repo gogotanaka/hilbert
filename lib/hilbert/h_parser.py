@@ -39,13 +39,10 @@ def p_statement_assign(p):
     h_env.setVar(p[1], p[3])
 
 def p_statement_def_func(p):
-    '''statement : FUNC_VAR "(" VAR ")" "=" term
-                 | FUNC_VAR "(" vars_with_cln ")" "=" term'''
+    '''statement : FUNC_VAR "(" term ")" "=" term
+                 | FUNC_VAR "(" terms_with_cln ")" "=" term'''
 
-    if type(p[3]) is list:
-        h_env.setFunc(p[1], { 'expr': p[6], 'vars': p[3] })
-    else:
-        h_env.setFunc(p[1], { 'expr': p[6], 'vars': [Symbol(p[3])] })
+    h_env.setFunc(p[1], { 'expr': p[6], 'vars': wrapTerm(p[3]) })
 
 def p_expression_term(p):
     "expression : term"
@@ -56,8 +53,8 @@ def p_expression_func(p):
     p[0] = h_env.getFunc(p[1])
 
 def p_term_eval_func(p):
-    '''term : FUNC_VAR "(" NUMBER ")"
-            | FUNC_VAR "(" nums_with_cln ")"'''
+    '''term : FUNC_VAR "(" term ")"
+            | FUNC_VAR "(" terms_with_cln ")"'''
 
     func = h_env.getFunc(p[1])
     p[0] = func['expr'].subs(zip(func['vars'], wrapTerm(p[3])))
@@ -102,9 +99,9 @@ def p_term_uminus(p):
     "term : '-' term %prec UMINUS"
     p[0] = -p[2]
 
-def p_term_group(p):
-    "term : '(' term ')'"
-    p[0] = p[2]
+# def p_term_group(p):
+#     "term : '(' term ')'"
+#     p[0] = p[2]
 
 def p_term_number(p):
     "term : NUMBER"
@@ -122,18 +119,9 @@ def p_term_limit(p):
     "term : LIMIT_SYM '[' term R_ARROW term ']' '(' term ')'"
     p[0] = limit(p[8], p[3], p[5])
 
-def p_expression_vars_with_cln(p):
-    '''vars_with_cln : VAR "," VAR
-                     | vars_with_cln "," VAR'''
-
-    if type(p[1]) is list:
-        p[0] = p[1] + [Symbol(p[3])]
-    else:
-        p[0] = [Symbol(p[1]), Symbol(p[3])]
-
-def p_expression_num_with_cln(p):
-    '''nums_with_cln : NUMBER "," NUMBER
-                     | nums_with_cln "," NUMBER'''
+def p_terms_with_cln(p):
+    '''terms_with_cln : term "," term
+                      | terms_with_cln "," term'''
 
     p[0] = wrapTerm(p[1]) + [p[3]]
 

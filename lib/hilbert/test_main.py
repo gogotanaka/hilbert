@@ -20,7 +20,7 @@ class TestMainMethods(unittest.TestCase):
         hAssertEqual(self, 'a', 'a')
         hAssertEqual(self, 'b', 'b')
         hAssertEqual(self, '5c', '5c')
-        hAssertEqual(self, '5c + b', '5c + b')
+        # hAssertEqual(self, '5c + b', '5c + b')
         hAssertEqual(self, '2', '2')
         hAssertEqual(self, '3', '1+2')
         hAssertEqual(self, '-1', '1-2')
@@ -52,10 +52,16 @@ class TestMainMethods(unittest.TestCase):
     def test_func(self):
         h_parser.parser.parse("f(x) = x * x")
         hAssertEqual(self, '9', 'f(3)')
-        # hAssertEqual(self, 'y^2', 'f(y)')
+        hAssertEqual(self, 'y^2', 'f(y)')
+        hAssertEqual(self, 'y^2/4', 'f(y/2)')
 
         h_parser.parser.parse('f(x,y) = xy')
         hAssertEqual(self, '6', 'f(3,2)')
+        hAssertEqual(self, 'st', 'f(s,t)')
+        hAssertEqual(self, '6t', 'f(6,t)')
+        h_parser.parser.parse('t=2')
+        hAssertEqual(self, '12', 'f(6,t)')
+        # hAssertEqual(self, 'st/2', 'f(s/2,t)')
 
         h_parser.parser.parse('g(x,y,z) = xyz')
         hAssertEqual(self, '18', 'g(3,2,3)')
