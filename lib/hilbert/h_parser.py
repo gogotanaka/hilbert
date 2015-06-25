@@ -8,18 +8,21 @@ precedence = (
     ('right','UMINUS'),
     )
 
-vars = {}
-funcs = {}
+vars_table = {}
+funcs_table = {}
 
 def lookupVars(var):
     try:
-        return vars[var]
+        return vars_table[var]
     except LookupError:
         return Symbol(var)
 
-def p_statement_assign(p):
-    'statement : VAR "=" term'
-    vars[p[1]] = p[3]
+def wrapTerm(term_or_terms):
+    if type(term_or_terms) is list:
+        return term_or_terms
+    else:
+        return [term_or_terms]
+
 
 def p_statement_expr(p):
     'statement : expression'
@@ -40,14 +43,18 @@ def p_statement_expr(p):
     output = re.sub(r"exp\((.+)\)", r"e^\1", output)
     print(str(output))
 
+def p_statement_assign(p):
+    'statement : VAR "=" term'
+    vars_table[p[1]] = p[3]
+
 def p_statement_def_func(p):
     '''statement : FUNC_VAR "(" VAR ")" "=" term
                  | FUNC_VAR "(" vars_with_cln ")" "=" term'''
 
     if type(p[3]) is list:
-        funcs[p[1]] = { 'expr': p[6], 'vars': p[3] }
+        funcs_table[p[1]] = { 'expr': p[6], 'vars': p[3] }
     else:
-        funcs[p[1]] = { 'expr': p[6], 'vars': [Symbol(p[3])] }
+        funcs_table[p[1]] = { 'expr': p[6], 'vars': [Symbol(p[3])] }
 
 def p_expression_term(p):
     "expression : term"
@@ -55,43 +62,40 @@ def p_expression_term(p):
 
 def p_expression_func(p):
     "expression : FUNC_VAR"
-    p[0] = funcs[p[1]]
+    p[0] = funcs_table[p[1]]
 
-def p_statement_eval_func(p):
+def p_term_eval_func(p):
     '''term : FUNC_VAR "(" NUMBER ")"
             | FUNC_VAR "(" nums_with_cln ")"'''
 
-    func = funcs[p[1]]
-    if type(p[3]) is list:
-        p[0] = func['expr'].subs(zip(func['vars'], p[3]))
-    else:
-        p[0] = func['expr'].subs(zip(func['vars'], [p[3]]))
+    func = funcs_table[p[1]]
+    p[0] = func['expr'].subs(zip(func['vars'], wrapTerm(p[3])))
 
-def p_expression_diff_func(p):
+def p_term_diff_func(p):
     'term : "d" "/" "d" VAR "(" term ")"'
     p[0] = diff(p[6], Symbol(p[4]))
 
-def p_expression_diff_direct_func(p):
+def p_term_diff_direct_func(p):
     'term : "d" FUNC_VAR "/" "d" VAR'
-    p[0] = diff(funcs[p[2]]['expr'], Symbol(p[5]))
+    p[0] = diff(funcs_table[p[2]]['expr'], Symbol(p[5]))
 
-def p_expression_inte_func(p):
+def p_term_inte_func(p):
     'term : "S" "(" term "d" VAR ")"'
     p[0] = integrate(p[3], Symbol(p[5]))
 
-def p_expression_inte_direct_func(p):
+def p_term_inte_direct_func(p):
     'term : "S" "(" FUNC_VAR "d" VAR ")"'
-    p[0] = integrate(funcs[p[3]]['expr'], Symbol(p[5]))
+    p[0] = integrate(funcs_table[p[3]]['expr'], Symbol(p[5]))
 
-def p_expression_build_in_func(p):
+def p_term_build_in_func(p):
     'term : BUILD_IN_FUNC "(" term ")"'
     p[0] = p[1](p[3])
 
-def p_expression_constants(p):
+def p_term_constants(p):
     'term : CONSTANTS'
-    p[0] = eval(p[1])
+    p[0] = (exp(1) if p[1] == 'e' else eval(p[1]))
 
-def p_expression_binop(p):
+def p_term_binop(p):
     '''term : term '+' term
             | term '-' term
             | term '*' term
@@ -103,21 +107,17 @@ def p_expression_binop(p):
     elif p[2] == '/': p[0] = p[1] / p[3]
     elif p[2] == '^': p[0] = p[1] ** p[3]
 
-def p_expression_uminus(p):
+def p_term_uminus(p):
     "term : '-' term %prec UMINUS"
     p[0] = -p[2]
 
-def p_expression_group(p):
+def p_term_group(p):
     "term : '(' term ')'"
     p[0] = p[2]
 
 def p_term_number(p):
     "term : NUMBER"
     p[0] = p[1]
-
-def p_term_exponential(p):
-    "term : 'e'"
-    p[0] = exp(1)
 
 def p_term_var(p):
     "term : VAR"
@@ -144,10 +144,7 @@ def p_expression_num_with_cln(p):
     '''nums_with_cln : NUMBER "," NUMBER
                      | nums_with_cln "," NUMBER'''
 
-    if type(p[1]) is list:
-        p[0] = p[1] + [p[3]]
-    else:
-        p[0] = [p[1], p[3]]
+    p[0] = wrapTerm(p[1]) + [p[3]]
 
 def p_error(p):
     if p:

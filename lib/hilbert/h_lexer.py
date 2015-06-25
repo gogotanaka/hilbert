@@ -10,11 +10,11 @@ tokens = (
     'R_ARROW'
 )
 
-literals = ['=','+','-','*','/', '^', '(',')', ',', 'd', 'S', 'e', '[', ']']
+literals = ['=','+','-','*','/', '^', '(',')', ',', 'd', 'S', '[', ']']
 
 t_VAR = r'(?!(sin|cos|tan|log|oo|pi|lim))[abcijklmnpqrstuvwxyz]'
 t_FUNC_VAR = r'[f-h]'
-t_CONSTANTS = r'(oo|pi)'
+t_CONSTANTS = r'(oo|pi|e)'
 t_LIMIT_SYM = r'lim'
 t_R_ARROW = r'->'
 
