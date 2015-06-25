@@ -19,6 +19,8 @@ class TestMainMethods(unittest.TestCase):
     def test_basis(self):
         hAssertEqual(self, 'a', 'a')
         hAssertEqual(self, 'b', 'b')
+        hAssertEqual(self, '5c', '5c')
+        hAssertEqual(self, '5c + b', '5c + b')
         hAssertEqual(self, '2', '2')
         hAssertEqual(self, '3', '1+2')
         hAssertEqual(self, '-1', '1-2')
