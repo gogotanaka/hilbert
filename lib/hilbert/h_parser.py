@@ -1,6 +1,6 @@
 from h_lexer import *
-import re
 import h_env
+import h_decorator
 from sympy import Symbol, diff, integrate, oo, exp, limit, core, pi
 
 precedence = (
@@ -25,14 +25,7 @@ def p_statement_expr(p):
         else:
             output = round(float(output), 8)
 
-
-    output = str(output).replace("**", "^")
-    if ("*" in output):
-        output = "".join([("(%s)" % x if (len(x) > 1) else x) for x in output.split("*")])
-
-    output = output.replace("E", "e")
-    output = re.sub(r"exp\((.+)\)", r"e^\1", output)
-    print(str(output))
+    print(str(h_decorator.execute(output)))
 
 def p_statement_assign(p):
     'statement : VAR "=" term'
