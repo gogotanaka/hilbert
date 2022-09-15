@@ -1,26 +1,17 @@
-#! /usr/bin/env python
-from __future__ import (absolute_import)
-__metaclass__ = type
-
-__requires__ = ['hilbert']
-try:
-    import pkg_resources
-except Exception:
-    pass
-
+#! /usr/bin/env python3
+import sympy
 import sys
 import os
-sys.path.insert(0, os.path.abspath('lib'))
+sys.path.insert(0, os.path.abspath('src'))
 
-from hilbert import h_parser
+from hilbert.CalcExecuter import CalcExecuter
 
-if sys.version_info[0] >= 3:
-    raw_input = input
+executer = CalcExecuter()
 
-while 1:
+while True:
     try:
-        s = raw_input('enjoy! > ')
+        text = input('enjoy! > ')
     except EOFError:
         break
-    if not s: continue
-    h_parser.parser.parse(s)
+    if text:
+        executer.call(text)
