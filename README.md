@@ -132,8 +132,9 @@ Note to OS X Users: If the above `gem` command does not work with the stock vers
 
 ## Develop
 #### Run test
-    pip install ply sympy
-    python lib/hilbert/test_main.py
+    poetry shell
+    poetry install
+    pytest
 
 #### Try
     ./bin/hilbert
